@@ -1,0 +1,74 @@
+[
+  {
+    "id": "amazon-smile-sale",
+    "month": "1 月",
+    "title": "Amazon 初卖和 Smile Sale",
+    "platform": "Amazon Japan",
+    "bestFor": "适合补纸尿裤、湿巾、洗护和妈妈护理用品。活动前先把常用品加入购物车，活动当天看券后价和定期便价。",
+    "reminder": "先比单片价和历史好价，不要因为满减买不需要的玩具和小家电。",
+    "tags": ["纸尿裤", "湿巾", "洗护"]
+  },
+  {
+    "id": "rakuten-marathon-monthly",
+    "month": "每月",
+    "title": "乐天买回 Marathon",
+    "platform": "Rakuten Ichiba",
+    "bestFor": "适合需要多店铺补货的家庭，比如纸尿裤、辅食、棉柔巾、妈妈用品一起买。",
+    "reminder": "乐天要看积分回馈后的实际价，也要留意店铺运费门槛。",
+    "tags": ["积分", "囤货", "多品类"]
+  },
+  {
+    "id": "paypay-sunday",
+    "month": "周末",
+    "title": "PayPay / Yahoo! Shopping 回馈日",
+    "platform": "Yahoo! Shopping",
+    "bestFor": "适合购买大件或箱购消耗品，尤其是有 PayPay 回馈活动时。",
+    "reminder": "回馈上限很关键，买前确认本次活动的付与上限和到账时间。",
+    "tags": ["PayPay", "箱购", "大件"]
+  },
+  {
+    "id": "drugstore-coupon",
+    "month": "每周",
+    "title": "药妆店 App 优惠券日",
+    "platform": "Matsukiyo / Welcia / Sundrug",
+    "bestFor": "适合买婴儿洗护、退热贴、妈妈日用品和少量应急用品。",
+    "reminder": "线下药妆店常见单品价不一定最低，但临时补货方便，适合搭配优惠券。",
+    "tags": ["药妆店", "优惠券", "应急"]
+  },
+  {
+    "id": "akachan-point-day",
+    "month": "不定期",
+    "title": "赤ちゃん本舗积分和会员日",
+    "platform": "Akachan Honpo",
+    "bestFor": "适合看实物后购买奶瓶、推车配件、宝宝餐具和新生儿准备品。",
+    "reminder": "实体店体验感好，但大件和消耗品仍建议和电商价格对比。",
+    "tags": ["实体店", "新生儿", "餐具"]
+  },
+  {
+    "id": "summer-sale",
+    "month": "6-7 月",
+    "title": "夏季换季和梅雨用品补货",
+    "platform": "综合",
+    "bestFor": "适合补防晒、驱蚊、汗疹护理、薄款睡袋和外出用品。",
+    "reminder": "季节用品别买太早太多，宝宝成长快，衣物和鞋子尤其要控制数量。",
+    "tags": ["夏季", "外出", "换季"]
+  },
+  {
+    "id": "black-friday",
+    "month": "11 月",
+    "title": "Black Friday",
+    "platform": "Amazon / Rakuten / Yahoo",
+    "bestFor": "适合补全年常用品，也适合买安全座椅、婴儿监控器等预算较高的用品。",
+    "reminder": "大促前先列清单和好价线，避免被限时倒计时带着买。",
+    "tags": ["大促", "大件", "年度囤货"]
+  },
+  {
+    "id": "year-end",
+    "month": "12 月",
+    "title": "年末积分清理和福袋季",
+    "platform": "综合",
+    "bestFor": "适合用即将过期积分补刚需，也可以关注童装、绘本和玩具福袋。",
+    "reminder": "福袋不确定性高，刚需消耗品优先级高于惊喜型购物。",
+    "tags": ["积分", "福袋", "年末"]
+  }
+]
