@@ -23,6 +23,16 @@ npm run dev
 npm run build
 ```
 
+## GitHub Pages
+
+推送到 `main` 后会通过 GitHub Actions 导出静态站点并发布到：
+
+```text
+https://fengchuanli.github.io/mama-save-jp/
+```
+
+如果第一次发布未生效，请在 GitHub 仓库的 `Settings -> Pages` 中确认 Source 选择 `GitHub Actions`。
+
 ## 数据位置
 
 - `data/deals.json`
