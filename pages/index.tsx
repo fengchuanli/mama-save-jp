@@ -110,6 +110,36 @@ export default function Home({ deals, calendarEvents, guides }: HomeProps) {
           ))}
         </div>
       </section>
+
+      <section className="bg-linen">
+        <div className="mx-auto max-w-6xl px-5 py-12">
+          <div className="grid gap-6 md:grid-cols-[1fr_0.85fr] md:items-center">
+            <div>
+              <p className="text-sm font-semibold text-tea">分享给同在日本的宝妈/宝爸</p>
+              <h2 className="mt-2 text-2xl font-semibold tracking-normal text-ink md:text-3xl">
+                下次群里问“哪里买尿不湿划算”，可以直接发这一页。
+              </h2>
+              <p className="mt-3 max-w-2xl leading-7 text-stone-600">
+                先收藏本站，遇到楽天买回、西松屋活动或纸尿裤补货前，打开本周值得买和省钱日历快速确认适不适合自己。
+              </p>
+            </div>
+            <div className="flex flex-col gap-3 rounded-lg border border-stone-200 bg-white p-5 shadow-soft sm:flex-row md:flex-col">
+              <Link
+                href="/deals"
+                className="flex-1 rounded-full bg-ink px-5 py-3 text-center text-sm font-medium text-white"
+              >
+                收藏本周值得买
+              </Link>
+              <Link
+                href="/guides"
+                className="flex-1 rounded-full border border-stone-300 bg-white px-5 py-3 text-center text-sm font-medium text-ink"
+              >
+                发给新手先读攻略
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
     </Layout>
   );
 }
