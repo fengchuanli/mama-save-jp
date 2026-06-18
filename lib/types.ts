@@ -18,12 +18,13 @@ export type Deal = {
 
 export type CalendarEvent = {
   id: string;
-  month: string;
-  title: string;
-  platform: string;
-  bestFor: string;
+  store: string;
+  eventName: string;
+  days: string;
+  benefit: string;
   reminder: string;
-  tags: string[];
+  suitableItems: string[];
+  difficulty: "easy" | "normal" | "hard";
 };
 
 export type GuideMeta = {

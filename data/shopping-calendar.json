@@ -1,74 +1,82 @@
 [
   {
     "id": "amazon-smile-sale",
-    "month": "1 月",
-    "title": "Amazon 初卖和 Smile Sale",
-    "platform": "Amazon Japan",
-    "bestFor": "适合补纸尿裤、湿巾、洗护和妈妈护理用品。活动前先把常用品加入购物车，活动当天看券后价和定期便价。",
-    "reminder": "先比单片价和历史好价，不要因为满减买不需要的玩具和小家电。",
-    "tags": ["纸尿裤", "湿巾", "洗护"]
+    "store": "Amazon",
+    "eventName": "Smile Sale / 季节促销",
+    "days": "不定期，常见于月末、季节换购和大型促销前后",
+    "benefit": "部分母婴用品会出现限时券、定期便折扣或满额积分回馈。",
+    "reminder": "Amazon 的价格变化比较快，先把常买的纸尿裤、湿巾加入购物车，活动当天再看是否真的低于平时价。不要只因为页面写着 Sale 就下单。",
+    "suitableItems": ["尿不湿箱购", "湿巾", "棉柔巾", "婴儿洗护", "妈妈护理用品"],
+    "difficulty": "easy"
   },
   {
-    "id": "rakuten-marathon-monthly",
-    "month": "每月",
-    "title": "乐天买回 Marathon",
-    "platform": "Rakuten Ichiba",
-    "bestFor": "适合需要多店铺补货的家庭，比如纸尿裤、辅食、棉柔巾、妈妈用品一起买。",
-    "reminder": "乐天要看积分回馈后的实际价，也要留意店铺运费门槛。",
-    "tags": ["积分", "囤货", "多品类"]
+    "id": "amazon-black-friday",
+    "store": "Amazon",
+    "eventName": "Black Friday / Prime Day",
+    "days": "Prime Day 多在夏季，Black Friday 多在 11 月",
+    "benefit": "全年级别的大促，适合看大件和全年稳定消耗品。",
+    "reminder": "大促前先写清单和心理价位。安全座椅、监控器、吸奶器这类大件可以关注，但宝宝可能挑口味或挑品牌的东西不要盲目囤。",
+    "suitableItems": ["安全座椅", "婴儿监控器", "吸奶器", "尿不湿", "湿巾"],
+    "difficulty": "normal"
   },
   {
-    "id": "paypay-sunday",
-    "month": "周末",
-    "title": "PayPay / Yahoo! Shopping 回馈日",
-    "platform": "Yahoo! Shopping",
-    "bestFor": "适合购买大件或箱购消耗品，尤其是有 PayPay 回馈活动时。",
-    "reminder": "回馈上限很关键，买前确认本次活动的付与上限和到账时间。",
-    "tags": ["PayPay", "箱购", "大件"]
+    "id": "rakuten-marathon",
+    "store": "楽天",
+    "eventName": "お買い物マラソン / 买回活动",
+    "days": "通常每月 1-2 次，具体日期以楽天活动页为准",
+    "benefit": "在多个店铺购物后，积分倍率会提高，适合把本月刚需集中购买。",
+    "reminder": "新手不要被积分倍率绕晕。先看商品本身价格、运费、积分上限和积分有效期，再判断实质价格。为了凑店铺数买不需要的东西，反而不省钱。",
+    "suitableItems": ["尿不湿", "辅食", "棉柔巾", "保育园姓名贴", "妈妈用品"],
+    "difficulty": "hard"
   },
   {
-    "id": "drugstore-coupon",
-    "month": "每周",
-    "title": "药妆店 App 优惠券日",
-    "platform": "Matsukiyo / Welcia / Sundrug",
-    "bestFor": "适合买婴儿洗护、退热贴、妈妈日用品和少量应急用品。",
-    "reminder": "线下药妆店常见单品价不一定最低，但临时补货方便，适合搭配优惠券。",
-    "tags": ["药妆店", "优惠券", "应急"]
+    "id": "rakuten-5-0-day",
+    "store": "楽天",
+    "eventName": "5 和 0 结尾日",
+    "days": "每月 5 日 / 10 日 / 15 日 / 20 日 / 25 日 / 30 日",
+    "benefit": "满足条件时会有额外积分回馈，适合和买回活动叠加观察。",
+    "reminder": "需要提前确认是否要报名参加活动，以及支付方式是否满足条件。不要只看积分倍率，也要看券后价格。",
+    "suitableItems": ["日用品补货", "辅食", "纸尿裤", "湿巾"],
+    "difficulty": "normal"
+  },
+  {
+    "id": "nishimatsuya-season-sale",
+    "store": "西松屋",
+    "eventName": "换季清仓 / 门店折扣区",
+    "days": "多见于夏末、冬末和季节切换前后",
+    "benefit": "童装、睡袋、小件育儿用品会出现比较明显的清仓价。",
+    "reminder": "西松屋适合看基础款和消耗型小物。童装不要跨太多尺码囤，鞋子和外套尤其容易买错季节。",
+    "suitableItems": ["童装基础款", "睡袋", "围嘴", "保育园备用衣物", "吸管杯配件"],
+    "difficulty": "easy"
   },
   {
     "id": "akachan-point-day",
-    "month": "不定期",
-    "title": "赤ちゃん本舗积分和会员日",
-    "platform": "Akachan Honpo",
-    "bestFor": "适合看实物后购买奶瓶、推车配件、宝宝餐具和新生儿准备品。",
-    "reminder": "实体店体验感好，但大件和消耗品仍建议和电商价格对比。",
-    "tags": ["实体店", "新生儿", "餐具"]
+    "store": "赤ちゃん本舗",
+    "eventName": "会员积分日 / 店铺活动",
+    "days": "不定期，常见于周末、会员活动和季节促销",
+    "benefit": "适合看实物、比较尺寸和触感，再结合会员积分购买。",
+    "reminder": "赤ちゃん本舗的优势是体验和安心感。大件和长期消耗品仍建议和 Amazon、楽天价格对比后再买。",
+    "suitableItems": ["奶瓶", "宝宝餐具", "推车配件", "新生儿准备品", "辅食"],
+    "difficulty": "easy"
   },
   {
-    "id": "summer-sale",
-    "month": "6-7 月",
-    "title": "夏季换季和梅雨用品补货",
-    "platform": "综合",
-    "bestFor": "适合补防晒、驱蚊、汗疹护理、薄款睡袋和外出用品。",
-    "reminder": "季节用品别买太早太多，宝宝成长快，衣物和鞋子尤其要控制数量。",
-    "tags": ["夏季", "外出", "换季"]
+    "id": "matsukiyo-coupon",
+    "store": "药妆店",
+    "eventName": "App 优惠券 / 会员日",
+    "days": "每周或不定期，常见于 Matsukiyo、Welcia、Sundrug 等 App",
+    "benefit": "常见为单品折扣、全场部分品类折扣或积分回馈。",
+    "reminder": "药妆店适合临时补货和小件刚需，不一定适合大量箱购。买前看优惠券适用范围，有些母婴品类可能被排除。",
+    "suitableItems": ["婴儿洗护", "退热贴", "妈妈日用品", "湿巾小包装", "外出应急用品"],
+    "difficulty": "easy"
   },
   {
-    "id": "black-friday",
-    "month": "11 月",
-    "title": "Black Friday",
-    "platform": "Amazon / Rakuten / Yahoo",
-    "bestFor": "适合补全年常用品，也适合买安全座椅、婴儿监控器等预算较高的用品。",
-    "reminder": "大促前先列清单和好价线，避免被限时倒计时带着买。",
-    "tags": ["大促", "大件", "年度囤货"]
-  },
-  {
-    "id": "year-end",
-    "month": "12 月",
-    "title": "年末积分清理和福袋季",
-    "platform": "综合",
-    "bestFor": "适合用即将过期积分补刚需，也可以关注童装、绘本和玩具福袋。",
-    "reminder": "福袋不确定性高，刚需消耗品优先级高于惊喜型购物。",
-    "tags": ["积分", "福袋", "年末"]
+    "id": "paypay-yahoo-campaign",
+    "store": "Yahoo!ショッピング",
+    "eventName": "PayPay 回馈活动",
+    "days": "周末和不定期活动较多，具体以 PayPay / Yahoo 活动页为准",
+    "benefit": "通过 PayPay 支付或指定活动可获得回馈，适合看箱购和大件。",
+    "reminder": "一定要看回馈上限和到账时间。回馈不是立刻减现金，预算紧的时候不要把积分当现金乱花。",
+    "suitableItems": ["尿不湿箱购", "湿巾箱购", "儿童家具", "婴儿车配件", "大包装日用品"],
+    "difficulty": "normal"
   }
 ]
