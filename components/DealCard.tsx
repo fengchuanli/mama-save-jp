@@ -10,36 +10,36 @@ export function DealCard({ deal }: { deal: Deal }) {
   const hasPrice = Boolean(deal.originalPrice || deal.salePrice || deal.effectivePrice);
   const content = (
     <>
-      <div className="mb-4 flex flex-wrap items-center gap-2">
-        <span className="rounded-full bg-linen px-3 py-1 text-xs font-medium text-stone-700">
+      <div className="mb-3 flex flex-wrap items-center gap-1.5 sm:gap-2">
+        <span className="rounded-full bg-linen px-2.5 py-1 text-xs font-medium text-stone-700 sm:px-3">
           {deal.category}
         </span>
-        <span className="rounded-full bg-mist px-3 py-1 text-xs font-medium text-stone-700">
+        <span className="rounded-full bg-mist px-2.5 py-1 text-xs font-medium text-stone-700 sm:px-3">
           {deal.platform}
         </span>
-        <span className="rounded-full bg-tea px-3 py-1 text-xs font-medium text-white">
+        <span className="rounded-full bg-tea px-2.5 py-1 text-xs font-medium text-white sm:px-3">
           {priorityLabel[deal.priority]}
         </span>
         {!hasPrice ? (
-          <span className="rounded-full bg-peach px-3 py-1 text-xs font-medium text-ink">
+          <span className="rounded-full bg-peach px-2.5 py-1 text-xs font-medium text-ink sm:px-3">
             攻略型推荐
           </span>
         ) : null}
       </div>
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+      <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
         <div>
-          <h3 className="text-lg font-semibold text-ink">{deal.title}</h3>
-          <p className="mt-2 text-sm text-stone-500">更新 {deal.updatedAt}</p>
+          <h3 className="text-base font-semibold leading-7 text-ink sm:text-lg">{deal.title}</h3>
+          <p className="mt-1 text-xs text-stone-500 sm:text-sm">更新 {deal.updatedAt}</p>
         </div>
         {deal.url ? (
-          <span className="rounded-full border border-stone-200 px-3 py-2 text-xs font-semibold text-tea">
+          <span className="text-xs font-semibold text-tea sm:rounded-full sm:border sm:border-stone-200 sm:px-3 sm:py-2">
             查看来源
           </span>
         ) : null}
       </div>
 
       {hasPrice ? (
-        <div className="mt-5 grid gap-3 rounded-lg bg-cream p-3 text-sm sm:grid-cols-3">
+        <div className="mt-4 grid grid-cols-2 gap-3 rounded-lg bg-cream p-3 text-sm sm:mt-5 sm:grid-cols-3">
           <div>
             <p className="text-stone-500">原价</p>
             <p className="mt-1 font-semibold text-stone-700">{deal.originalPrice || "未标注"}</p>
@@ -54,22 +54,26 @@ export function DealCard({ deal }: { deal: Deal }) {
           </div>
         </div>
       ) : (
-        <div className="mt-5 rounded-lg bg-cream p-4 text-sm leading-6 text-stone-700">
+        <div className="mt-4 rounded-lg bg-cream p-3 text-sm leading-6 text-stone-700 sm:mt-5 sm:p-4">
           暂无固定价格，适合作为购买时机和避坑清单参考。
         </div>
       )}
 
-      <div className="mt-5 rounded-lg border border-peach bg-linen p-4">
+      <div className="mt-4 rounded-lg border border-peach bg-linen p-3 sm:mt-5 sm:p-4">
         <p className="text-sm font-semibold text-ink">为什么值得买</p>
-        <p className="mt-2 leading-7 text-stone-700">{deal.whyWorthBuying}</p>
+        <p className="mt-2 text-sm leading-6 text-stone-700 sm:text-base sm:leading-7">
+          {deal.whyWorthBuying}
+        </p>
       </div>
 
-      <div className="mt-3 rounded-lg border border-stone-200 bg-white p-4">
+      <div className="mt-3 rounded-lg border border-stone-200 bg-white p-3 sm:p-4">
         <p className="text-sm font-semibold text-ink">什么情况不适合买</p>
-        <p className="mt-2 leading-7 text-stone-700">{deal.skipWhen}</p>
+        <p className="mt-2 text-sm leading-6 text-stone-700 sm:text-base sm:leading-7">
+          {deal.skipWhen}
+        </p>
       </div>
 
-      <dl className="mt-5 grid gap-4 text-sm md:grid-cols-2">
+      <dl className="mt-4 grid gap-3 text-sm sm:mt-5 sm:gap-4 md:grid-cols-2">
         <div>
           <dt className="font-semibold text-ink">优惠条件</dt>
           <dd className="mt-1 leading-6 text-stone-600">{deal.condition}</dd>
@@ -91,7 +95,7 @@ export function DealCard({ deal }: { deal: Deal }) {
   );
 
   return (
-    <article className="rounded-lg border border-stone-200 bg-white p-5 shadow-soft">
+    <article className="rounded-lg border border-stone-200 bg-white p-4 shadow-soft sm:p-5">
       {deal.url ? (
         <a href={deal.url} target="_blank" rel="noreferrer" className="block">
           {content}

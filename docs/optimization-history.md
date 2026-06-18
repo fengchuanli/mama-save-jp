@@ -2,6 +2,23 @@
 
 ## 2026-06-19
 
+- 时间：2026-06-19 06:03 JST
+- 当前优化方向：06:00 移动端体验。
+- 目标：收紧优惠卡片在手机端的垂直占用和标签宽度，让新增“为什么值得买 / 什么情况不适合买”后仍然便于扫读。
+- 修改文件：
+  - `components/DealCard.tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content` 校验攻略、优惠和日历数据。
+  - `npm run sitemap` 生成 `public/sitemap.xml`。
+  - `git diff --check` 检查空白和补丁格式。
+  - 尝试执行 `npm run build`。
+- 结果：优惠卡片在移动端减少标签、标题、价格区、决策区和详情列表的间距；价格信息在手机端改为两列展示，桌面端保持三列；来源入口在手机端改为更轻的文字样式，减少卡片头部拥挤。
+- 构建结果：`npm run build` 先成功执行 `prebuild` 并生成 13 个 sitemap URL，但主构建仍未通过环境验证，当前工作区没有可用的 `next` 命令，报 `sh: next: command not found`；npm 日志写入用户目录也因权限受限失败。未安装依赖，避免提交 `node_modules` 或缓存。
+- 是否提交：是，提交说明为“优化优惠卡片移动端布局”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：07:00 增长准备方向可补充轻量分享或收藏引导，优先选择不需要表单和后端的一处入口。
+
 - 时间：2026-06-19 05:03 JST
 - 当前优化方向：05:00 代码质量。
 - 目标：把内容数据校验沉淀为可重复运行的脚本，并让 sitemap 生成脚本复用同一套 MDX frontmatter 解析工具，减少后续人工校验和脚本解析规则漂移。
