@@ -7,40 +7,93 @@ const priorityLabel = {
 };
 
 export function DealCard({ deal }: { deal: Deal }) {
-  return (
-    <article className="rounded-lg border border-stone-200 bg-white p-5 shadow-soft">
+  const hasPrice = Boolean(deal.originalPrice || deal.salePrice || deal.effectivePrice);
+  const content = (
+    <>
       <div className="mb-4 flex flex-wrap items-center gap-2">
         <span className="rounded-full bg-linen px-3 py-1 text-xs font-medium text-stone-700">
           {deal.category}
         </span>
         <span className="rounded-full bg-mist px-3 py-1 text-xs font-medium text-stone-700">
-          {deal.babyAge}
+          {deal.platform}
         </span>
         <span className="rounded-full bg-tea px-3 py-1 text-xs font-medium text-white">
           {priorityLabel[deal.priority]}
         </span>
+        {!hasPrice ? (
+          <span className="rounded-full bg-peach px-3 py-1 text-xs font-medium text-ink">
+            攻略型推荐
+          </span>
+        ) : null}
       </div>
-      <h3 className="text-lg font-semibold text-ink">{deal.title}</h3>
-      <p className="mt-2 text-sm text-stone-500">{deal.platform} · 更新 {deal.updatedAt}</p>
-      <div className="mt-5 grid grid-cols-3 gap-3 rounded-lg bg-cream p-3 text-sm">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
         <div>
-          <p className="text-stone-500">平时价</p>
-          <p className="mt-1 font-semibold text-stone-700">{deal.regularPrice}</p>
+          <h3 className="text-lg font-semibold text-ink">{deal.title}</h3>
+          <p className="mt-2 text-sm text-stone-500">更新 {deal.updatedAt}</p>
         </div>
-        <div>
-          <p className="text-stone-500">好价线</p>
-          <p className="mt-1 font-semibold text-stone-700">{deal.goodPrice}</p>
-        </div>
-        <div>
-          <p className="text-stone-500">本周价</p>
-          <p className="mt-1 font-semibold text-ink">{deal.currentPrice}</p>
-        </div>
+        {deal.url ? (
+          <span className="rounded-full border border-stone-200 px-3 py-2 text-xs font-semibold text-tea">
+            查看来源
+          </span>
+        ) : null}
       </div>
-      <p className="mt-4 leading-7 text-stone-700">{deal.reason}</p>
-      <p className="mt-3 rounded-lg bg-linen px-4 py-3 text-sm leading-6 text-stone-700">
-        {deal.savingTip}
-      </p>
-      <p className="mt-3 text-sm leading-6 text-stone-500">{deal.caution}</p>
+
+      {hasPrice ? (
+        <div className="mt-5 grid gap-3 rounded-lg bg-cream p-3 text-sm sm:grid-cols-3">
+          <div>
+            <p className="text-stone-500">原价</p>
+            <p className="mt-1 font-semibold text-stone-700">{deal.originalPrice || "未标注"}</p>
+          </div>
+          <div>
+            <p className="text-stone-500">优惠价</p>
+            <p className="mt-1 font-semibold text-ink">{deal.salePrice || "看活动"}</p>
+          </div>
+          <div>
+            <p className="text-stone-500">实质价格</p>
+            <p className="mt-1 font-semibold text-ink">{deal.effectivePrice || "按积分计算"}</p>
+          </div>
+        </div>
+      ) : (
+        <div className="mt-5 rounded-lg bg-cream p-4 text-sm leading-6 text-stone-700">
+          暂无固定价格，适合作为购买时机和避坑清单参考。
+        </div>
+      )}
+
+      <div className="mt-5 rounded-lg border border-peach bg-linen p-4">
+        <p className="text-sm font-semibold text-ink">为什么值得买</p>
+        <p className="mt-2 leading-7 text-stone-700">{deal.whyWorthBuying}</p>
+      </div>
+
+      <dl className="mt-5 grid gap-4 text-sm md:grid-cols-2">
+        <div>
+          <dt className="font-semibold text-ink">优惠条件</dt>
+          <dd className="mt-1 leading-6 text-stone-600">{deal.condition}</dd>
+        </div>
+        <div>
+          <dt className="font-semibold text-ink">适合买入时间</dt>
+          <dd className="mt-1 leading-6 text-stone-600">{deal.bestTime}</dd>
+        </div>
+        <div>
+          <dt className="font-semibold text-ink">适合人群</dt>
+          <dd className="mt-1 leading-6 text-stone-600">{deal.targetUser}</dd>
+        </div>
+        <div>
+          <dt className="font-semibold text-ink">备注</dt>
+          <dd className="mt-1 leading-6 text-stone-600">{deal.note}</dd>
+        </div>
+      </dl>
+    </>
+  );
+
+  return (
+    <article className="rounded-lg border border-stone-200 bg-white p-5 shadow-soft">
+      {deal.url ? (
+        <a href={deal.url} target="_blank" rel="noreferrer" className="block">
+          {content}
+        </a>
+      ) : (
+        content
+      )}
     </article>
   );
 }
