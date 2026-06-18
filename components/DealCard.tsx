@@ -64,6 +64,11 @@ export function DealCard({ deal }: { deal: Deal }) {
         <p className="mt-2 leading-7 text-stone-700">{deal.whyWorthBuying}</p>
       </div>
 
+      <div className="mt-3 rounded-lg border border-stone-200 bg-white p-4">
+        <p className="text-sm font-semibold text-ink">什么情况不适合买</p>
+        <p className="mt-2 leading-7 text-stone-700">{deal.skipWhen}</p>
+      </div>
+
       <dl className="mt-5 grid gap-4 text-sm md:grid-cols-2">
         <div>
           <dt className="font-semibold text-ink">优惠条件</dt>

@@ -12,6 +12,7 @@ export type Deal = {
   note: string;
   url?: string;
   whyWorthBuying: string;
+  skipWhen: string;
   updatedAt: string;
   priority: "high" | "medium" | "low";
 };

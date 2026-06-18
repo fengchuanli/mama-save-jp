@@ -2,6 +2,24 @@
 
 ## 2026-06-19
 
+- 时间：2026-06-19 01:03 JST
+- 当前优化方向：01:00 优惠数据。
+- 目标：补齐优惠数据里的“不适合买”决策信息，让宝妈不只看到好处，也能判断哪些情况下应该跳过。
+- 修改文件：
+  - `data/deals.json`
+  - `lib/types.ts`
+  - `components/DealCard.tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `node` 解析 `data/deals.json` 和 `data/shopping-calendar.json`。
+  - `node` 检查 8 条优惠均包含 `whyWorthBuying`、`skipWhen`、`condition`、`targetUser`，并检查优惠 `id` 无重复。
+  - 尝试执行 `npm run build`。
+- 结果：8 条优惠和攻略型推荐均新增 `skipWhen` 字段，优惠卡片新增“什么情况不适合买”区块，提升购买决策的谨慎度和可信度。
+- 构建结果：`npm run build` 未通过环境验证，当前工作区没有可用的 `next` 命令，报 `sh: next: command not found`；npm 日志写入用户目录也因权限受限失败。未安装依赖，避免提交 `node_modules` 或缓存。
+- 是否提交：是，提交说明为“补齐优惠避坑决策信息”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：继续扩充优惠数据时，保持每条都同时写清“为什么值得买”和“什么情况不适合买”；下一个 02:00 方向可检查省钱日历活动解释是否同样包含避坑提醒。
+
 - 时间：2026-06-19 00:03 JST
 - 当前优化方向：00:00 内容结构。
 - 目标：优化攻略入口的信息结构，让新手宝妈打开攻略列表后能按“先买什么、再怎么买、最后看平台规则”的顺序阅读。
