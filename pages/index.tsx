@@ -18,7 +18,10 @@ type HomeProps = {
 
 export default function Home({ deals, calendarEvents, guides }: HomeProps) {
   return (
-    <Layout>
+    <Layout
+      title="日本母婴省钱日历"
+      description="面向在日华人宝妈的日本母婴省钱信息站，整理尿不湿、保育园用品、楽天、Amazon、西松屋、赤ちゃん本舗等购物攻略和省钱日历。"
+    >
       <section className="bg-linen">
         <div className="mx-auto grid max-w-6xl gap-8 px-5 py-14 md:grid-cols-[1.1fr_0.9fr] md:items-center">
           <div>
@@ -26,10 +29,10 @@ export default function Home({ deals, calendarEvents, guides }: HomeProps) {
               在日华人宝妈/宝爸的日本母婴省钱日历
             </p>
             <h1 className="max-w-3xl text-4xl font-semibold leading-tight tracking-normal text-ink md:text-5xl">
-              知道什么时候买、在哪里买、怎么买更划算。
+              日本母婴省钱，从尿不湿和保育园用品开始。
             </h1>
             <p className="mt-5 max-w-2xl leading-8 text-stone-700">
-              面向 0-3 岁宝宝家庭，整理日本母婴用品的好价线、促销节奏和购物攻略。先从刚需消耗品开始，帮你少踩坑、少囤错。
+              面向在日华人宝妈，整理 Amazon、楽天、西松屋、赤ちゃん本舗等平台的母婴用品购买节奏、优惠条件和新手攻略，帮 0-3 岁宝宝家庭少踩坑、少囤错。
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link href="/deals" className="rounded-full bg-ink px-5 py-3 text-sm font-medium text-white">
@@ -67,7 +70,7 @@ export default function Home({ deals, calendarEvents, guides }: HomeProps) {
           <SectionHeader
             eyebrow="Deals"
             title="本周值得买"
-            description="先放示例数据，后续可以人工维护每周好价，不需要爬虫。"
+            description="人工整理尿不湿、湿巾、童装和保育园用品的优惠信息，先看为什么值得买，再看价格。"
           />
           <Link href="/deals" className="mb-6 text-sm font-semibold text-tea">
             查看全部
@@ -85,7 +88,7 @@ export default function Home({ deals, calendarEvents, guides }: HomeProps) {
           <SectionHeader
             eyebrow="Calendar"
             title="最近要关注的省钱节点"
-            description="把日本平台活动、药妆店优惠券和季节性采购节奏放到同一个日历里。"
+            description="把 Amazon、楽天、西松屋、赤ちゃん本舗和药妆店的活动，用新手宝妈能看懂的中文放到同一个日历里。"
           />
           <div className="grid gap-5 md:grid-cols-3">
             {calendarEvents.map((event) => (

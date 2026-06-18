@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://fengchuanli.github.io/mama-save-jp/sitemap.xml

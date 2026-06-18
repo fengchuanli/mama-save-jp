@@ -20,7 +20,10 @@ export default function Calendar({ events }: CalendarProps) {
   }, {});
 
   return (
-    <Layout title="省钱日历 - 母婴省钱日历">
+    <Layout
+      title="省钱日历"
+      description="日本母婴购物省钱日历，按 Amazon、楽天、西松屋、赤ちゃん本舗、药妆店等平台整理适合买什么和注意事项。"
+    >
       <section className="mx-auto max-w-6xl px-5 py-12">
         <SectionHeader
           eyebrow="省钱日历"

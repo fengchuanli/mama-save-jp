@@ -11,7 +11,10 @@ type GuidesProps = {
 
 export default function Guides({ guides }: GuidesProps) {
   return (
-    <Layout title="攻略列表 - 母婴省钱日历">
+    <Layout
+      title="攻略列表"
+      description="面向在日华人宝妈的日本母婴省钱攻略，解释尿不湿、楽天积分、西松屋、赤ちゃん本舗、保育园用品和童装尺码。"
+    >
       <section className="mx-auto max-w-6xl px-5 py-12">
         <SectionHeader
           eyebrow="攻略列表"

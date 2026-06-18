@@ -10,6 +10,8 @@ const navItems = [
   { href: "/guides", label: "攻略" }
 ];
 
+const siteUrl = "https://fengchuanli.github.io/mama-save-jp";
+
 type LayoutProps = {
   title?: string;
   description?: string;
@@ -22,13 +24,23 @@ export function Layout({
   children
 }: LayoutProps) {
   const router = useRouter();
+  const pageTitle = title.includes("母婴省钱日历") ? title : `${title} - 母婴省钱日历`;
+  const canonicalPath = router.asPath === "/" ? "" : router.asPath.split("?")[0];
+  const canonicalUrl = `${siteUrl}${canonicalPath}`;
 
   return (
     <>
       <Head>
-        <title>{title}</title>
+        <title>{pageTitle}</title>
         <meta name="description" content={description} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="canonical" href={canonicalUrl} />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={description} />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:site_name" content="母婴省钱日历" />
+        <meta name="twitter:card" content="summary" />
       </Head>
       <div className="min-h-screen bg-cream">
         <header className="border-b border-stone-200 bg-cream/95">

@@ -41,7 +41,10 @@ export default function Deals({ deals }: DealsProps) {
   };
 
   return (
-    <Layout title="本周值得买 - 母婴省钱日历">
+    <Layout
+      title="本周值得买"
+      description="在日华人宝妈可参考的日本母婴优惠列表，按尿不湿、湿巾、童装、保育园用品和 Amazon、楽天、西松屋、赤ちゃん本舗等平台筛选。"
+    >
       <section className="mx-auto max-w-6xl px-5 py-12">
         <SectionHeader
           eyebrow="本周值得买"

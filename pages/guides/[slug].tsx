@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Head from "next/head";
 import type { GetStaticPaths, GetStaticProps } from "next";
 import { Layout } from "@/components/Layout";
 import { MarkdownContent } from "@/components/MarkdownContent";
@@ -12,7 +13,15 @@ type GuideDetailProps = {
 
 export default function GuideDetail({ guide, relatedGuides }: GuideDetailProps) {
   return (
-    <Layout title={`${guide.title} - 母婴省钱日历`} description={guide.description}>
+    <Layout title={guide.title} description={guide.description}>
+      <Head>
+        <meta name="keywords" content={guide.tags.join(",")} />
+        <meta property="article:published_time" content={guide.publishedAt} />
+        <meta property="article:section" content={guide.category} />
+        {guide.tags.map((tag) => (
+          <meta key={tag} property="article:tag" content={tag} />
+        ))}
+      </Head>
       <article className="mx-auto max-w-3xl px-5 py-12">
         <Link href="/guides" className="text-sm font-semibold text-tea">
           返回攻略列表
