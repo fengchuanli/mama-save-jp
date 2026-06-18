@@ -24,6 +24,16 @@ function parseFrontmatter(fileContent: string) {
   return { data, content: match[2].trim() };
 }
 
+function parseTags(value?: string) {
+  if (!value) return [];
+
+  return value
+    .replace(/^\[|\]$/g, "")
+    .split(",")
+    .map((tag) => tag.trim().replace(/^"|"$/g, ""))
+    .filter(Boolean);
+}
+
 export function getGuideSlugs() {
   return fs
     .readdirSync(guidesDirectory)
@@ -43,7 +53,9 @@ export function getGuideBySlug(slug: string): Guide {
     category: data.category ?? "攻略",
     babyAge: data.babyAge ?? "0-3 岁",
     readingTime: data.readingTime ?? "3 分钟",
-    updatedAt: data.updatedAt ?? "",
+    updatedAt: data.updatedAt ?? data.publishedAt ?? "",
+    publishedAt: data.publishedAt ?? data.updatedAt ?? "",
+    tags: parseTags(data.tags),
     content
   };
 }
@@ -54,5 +66,5 @@ export function getAllGuides(): GuideMeta[] {
       const { content: _content, ...meta } = getGuideBySlug(slug);
       return meta;
     })
-    .sort((a, b) => b.updatedAt.localeCompare(a.updatedAt));
+    .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
 }

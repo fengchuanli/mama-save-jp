@@ -22,14 +22,16 @@ export default function GuideDetail({ guide, relatedGuides }: GuideDetailProps) 
             <span className="rounded-full bg-linen px-3 py-1 text-xs text-stone-700">
               {guide.category}
             </span>
-            <span className="rounded-full bg-mist px-3 py-1 text-xs text-stone-700">
-              {guide.babyAge}
-            </span>
+            {(guide.tags.length ? guide.tags : [guide.babyAge]).map((tag) => (
+              <span key={tag} className="rounded-full bg-mist px-3 py-1 text-xs text-stone-700">
+                {tag}
+              </span>
+            ))}
           </div>
           <h1 className="text-3xl font-semibold leading-tight text-ink">{guide.title}</h1>
           <p className="mt-4 leading-7 text-stone-600">{guide.description}</p>
           <p className="mt-4 text-sm text-stone-500">
-            {guide.readingTime} · 更新 {guide.updatedAt}
+            {guide.readingTime} · 发布 {guide.publishedAt || guide.updatedAt}
           </p>
         </div>
         <div className="prose prose-stone mt-8 max-w-none rounded-lg border border-stone-200 bg-white p-6 shadow-soft">

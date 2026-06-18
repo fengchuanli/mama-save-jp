@@ -35,6 +35,8 @@ export type GuideMeta = {
   babyAge: string;
   readingTime: string;
   updatedAt: string;
+  publishedAt: string;
+  tags: string[];
 };
 
 export type Guide = GuideMeta & {
