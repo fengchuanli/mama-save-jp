@@ -16,8 +16,8 @@
 - 验证方式：官方页面人工核对；`node` 校验 `data/shopping-calendar.json` 和 `data/deals.json` 可解析；尝试 `npm run build`。
 - 结果：已把楽天 6 月下旬买回活动和西松屋 6/18 起活动更新到省钱日历；西松屋未确认单品价格仅记录为信号，未新增商品优惠。
 - 构建结果：未通过环境验证，当前工作区没有 `node_modules` / `package-lock.json`，`npm run build` 报 `next: command not found`；未安装依赖，避免提交依赖目录或缓存。
-- 是否提交：是，提交说明为“整理6月下旬母婴省钱活动”。
-- 是否推送：提交后推送到 `origin main`。
+- 是否提交：是，提交 `3e293b4`，说明为“整理6月下旬母婴省钱活动”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
 - 下一步：继续观察 Amazon Japan、赤ちゃん本舗、Yahoo!ショッピング和药妆店官方活动页，只有价格、条件和适用人群明确时再更新 `data/deals.json`。
 
 - 目标：建立产品短期/中期目标和未来 30 天优化方案。
