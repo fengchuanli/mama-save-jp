@@ -1,5 +1,23 @@
 # 优化记录
 
+## 2026-06-19
+
+- 时间：2026-06-19 00:03 JST
+- 当前优化方向：00:00 内容结构。
+- 目标：优化攻略入口的信息结构，让新手宝妈打开攻略列表后能按“先买什么、再怎么买、最后看平台规则”的顺序阅读。
+- 修改文件：
+  - `pages/guides/index.tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `node` 解析 `data/deals.json` 和 `data/shopping-calendar.json`。
+  - `node` 检查新手路线中的 3 个攻略 slug 均有对应 MDX 文件，并已出现在 `pages/guides/index.tsx`。
+  - 尝试执行 `npm run build`。
+- 结果：攻略列表页新增“新手宝妈必读路线”，串联新生儿准备清单、尿不湿买法和楽天 5/0 日平台攻略，降低新用户不知道先读哪篇的理解成本。
+- 构建结果：`npm run build` 未通过环境验证，当前工作区没有可用的 `next` 命令，报 `sh: next: command not found`；npm 日志写入用户目录也因权限受限失败。未安装依赖，避免提交 `node_modules` 或缓存。
+- 是否提交：是，提交说明为“优化攻略新手阅读路线”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：继续优化首页或攻略详情页的内部链接，把新手路线从首页和相关攻略中进一步串起来。
+
 ## 2026-06-18
 
 - 目标：整理 2026-06-18 16:30 前后最新日本母婴省钱消息，优先官方来源，避免把未确认价格写成确定优惠。
