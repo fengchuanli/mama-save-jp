@@ -25,6 +25,9 @@ export type CalendarEvent = {
   reminder: string;
   suitableItems: string[];
   difficulty: "easy" | "normal" | "hard";
+  sourceName?: string;
+  sourceUrl?: string;
+  updatedAt?: string;
 };
 
 export type GuideMeta = {

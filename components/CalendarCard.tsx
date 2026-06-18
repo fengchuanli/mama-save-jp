@@ -26,6 +26,19 @@ export function CalendarCard({ event }: { event: CalendarEvent }) {
         </span>
       </div>
       <h3 className="text-lg font-semibold text-ink">{event.eventName}</h3>
+      {(event.sourceName || event.updatedAt) && (
+        <p className="mt-2 text-xs leading-5 text-stone-500">
+          {event.sourceName && event.sourceUrl ? (
+            <a className="underline underline-offset-2" href={event.sourceUrl}>
+              来源：{event.sourceName}
+            </a>
+          ) : event.sourceName ? (
+            <>来源：{event.sourceName}</>
+          ) : null}
+          {event.sourceName && event.updatedAt ? " · " : ""}
+          {event.updatedAt ? `更新：${event.updatedAt}` : ""}
+        </p>
+      )}
       <p className="mt-3 leading-7 text-stone-700">{event.benefit}</p>
 
       <div className="mt-5 rounded-lg bg-cream p-4">
