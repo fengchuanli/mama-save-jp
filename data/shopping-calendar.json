@@ -85,12 +85,15 @@
   {
     "id": "paypay-yahoo-campaign",
     "store": "Yahoo!ショッピング",
-    "eventName": "PayPay 回馈活动",
-    "days": "周末和不定期活动较多，具体以 PayPay / Yahoo 活动页为准",
-    "benefit": "通过 PayPay 支付或指定活动可获得回馈，适合看箱购和大件。",
-    "reminder": "一定要看回馈上限和到账时间。回馈不是立刻减现金，预算紧的时候不要把积分当现金乱花。",
-    "checkBeforeBuying": ["确认 PayPay 或 Yahoo 活动是否需要事前报名", "看清回馈上限、到账时间和有效期", "箱购先算含运费后的单片价或单包价"],
+    "eventName": "5のつく日 / 指定支付 +4%",
+    "days": "下一次官方页面显示为 2026/6/25 00:00 - 23:59；同类活动通常在 5 日、15 日、25 日出现",
+    "benefit": "官方规则为エントリー后，使用 PayPayクレジット、PayPay残高等、PayPayカード、PayPayカード ゴールド或ヤフーショッピング商品券等指定支付方式，对対象金額付与 +4% PayPayポイント（期間限定），上限 1,000 円相当。",
+    "reminder": "适合在 6/25 看纸尿裤、湿巾箱购、婴儿洗护和儿童家具等本来要买的东西。必须先エントリー再下单；対象金額按税抜商品价扣除优惠券后计算，不含送料和手数料。期間限定ポイント不是现金，付与翌日后最短 30 日以后的月末到期。",
+    "checkBeforeBuying": ["先确认 6/25 当天已エントリー，且用同一 Yahoo! JAPAN ID 下单", "确认支付方式属于官方指定范围，エントリー前订单不计入", "看清 1,000 円相当上限、付与日和期間限定ポイント有效期", "箱购先算含运费后的单片价或单包价，别只看 +4%"],
     "suitableItems": ["尿不湿箱购", "湿巾箱购", "儿童家具", "婴儿车配件", "大包装日用品"],
-    "difficulty": "normal"
+    "difficulty": "normal",
+    "sourceName": "Yahoo!ショッピング 5のつく日官方活动页",
+    "sourceUrl": "https://shopping.yahoo.co.jp/promotion/campaign/5day/",
+    "updatedAt": "2026-06-19 07:32 JST"
   }
 ]
