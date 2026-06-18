@@ -1,51 +1,11 @@
 import fs from "node:fs";
 import path from "node:path";
+import { maxDate, readGuides, toDateOnly } from "./content-utils.mjs";
 
 const siteUrl = "https://fengchuanli.github.io/mama-save-jp";
 const rootDir = process.cwd();
 const guidesDir = path.join(rootDir, "content", "guides");
 const sitemapPath = path.join(rootDir, "public", "sitemap.xml");
-
-function toDateOnly(value) {
-  if (!value) return "";
-  return String(value).slice(0, 10);
-}
-
-function maxDate(values) {
-  return values.map(toDateOnly).filter(Boolean).sort().at(-1) ?? "";
-}
-
-function parseFrontmatter(fileContent) {
-  const match = fileContent.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
-  if (!match) return {};
-
-  return match[1].split("\n").reduce((data, line) => {
-    const separatorIndex = line.indexOf(":");
-    if (separatorIndex === -1) return data;
-
-    const key = line.slice(0, separatorIndex).trim();
-    const value = line.slice(separatorIndex + 1).trim().replace(/^"|"$/g, "");
-    data[key] = value;
-    return data;
-  }, {});
-}
-
-function readGuides() {
-  return fs
-    .readdirSync(guidesDir)
-    .filter((fileName) => fileName.endsWith(".mdx"))
-    .sort()
-    .map((fileName) => {
-      const slug = fileName.replace(/\.mdx$/, "");
-      const fileContent = fs.readFileSync(path.join(guidesDir, fileName), "utf8");
-      const data = parseFrontmatter(fileContent);
-
-      return {
-        slug,
-        lastmod: toDateOnly(data.updatedAt ?? data.publishedAt)
-      };
-    });
-}
 
 function readJsonDates(relativePath, fieldName) {
   const fileContent = fs.readFileSync(path.join(rootDir, relativePath), "utf8");
@@ -72,7 +32,10 @@ function renderUrl({ path: urlPath, lastmod, changefreq, priority }) {
   ].join("\n");
 }
 
-const guides = readGuides();
+const guides = readGuides(guidesDir).map((guide) => ({
+  slug: guide.slug,
+  lastmod: toDateOnly(guide.data.updatedAt ?? guide.data.publishedAt)
+}));
 const latestGuideDate = maxDate(guides.map((guide) => guide.lastmod));
 const latestDealDate = maxDate(readJsonDates("data/deals.json", "updatedAt"));
 const latestCalendarDate = maxDate(readJsonDates("data/shopping-calendar.json", "updatedAt"));

@@ -2,6 +2,26 @@
 
 ## 2026-06-19
 
+- 时间：2026-06-19 05:03 JST
+- 当前优化方向：05:00 代码质量。
+- 目标：把内容数据校验沉淀为可重复运行的脚本，并让 sitemap 生成脚本复用同一套 MDX frontmatter 解析工具，减少后续人工校验和脚本解析规则漂移。
+- 修改文件：
+  - `scripts/content-utils.mjs`
+  - `scripts/validate-content.mjs`
+  - `scripts/generate-sitemap.mjs`
+  - `package.json`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content` 校验攻略 frontmatter、正文长度、优惠字段、日历字段、日期格式和重复 id。
+  - `npm run sitemap` 生成 `public/sitemap.xml`。
+  - `git diff --check` 检查空白和补丁格式。
+  - 尝试执行 `npm run build`。
+- 结果：新增 `validate:content` 脚本，当前 9 篇攻略、8 条优惠、8 个日历活动校验通过；新增 `scripts/content-utils.mjs`，`scripts/generate-sitemap.mjs` 已复用共享日期和 frontmatter 工具。
+- 构建结果：`npm run build` 先成功执行 `prebuild` 并生成 13 个 sitemap URL，但主构建仍未通过环境验证，当前工作区没有可用的 `next` 命令，报 `sh: next: command not found`；npm 日志写入用户目录也因权限受限失败。未安装依赖，避免提交 `node_modules` 或缓存。
+- 是否提交：是，提交说明为“新增内容质量校验脚本”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：06:00 移动端体验方向可检查优惠卡片和日历卡片在小屏上的信息密度，优先优化一处不会影响数据结构的展示细节。
+
 - 时间：2026-06-19 04:02 JST
 - 当前优化方向：04:00 SEO。
 - 目标：把手写 sitemap 改为可重复生成的静态 SEO 文件，降低新增或更新攻略后忘记同步 `lastmod` 和 URL 的风险。
