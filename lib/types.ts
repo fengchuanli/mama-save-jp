@@ -24,6 +24,7 @@ export type CalendarEvent = {
   days: string;
   benefit: string;
   reminder: string;
+  checkBeforeBuying: string[];
   suitableItems: string[];
   difficulty: "easy" | "normal" | "hard";
   sourceName?: string;

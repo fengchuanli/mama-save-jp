@@ -2,6 +2,24 @@
 
 ## 2026-06-19
 
+- 时间：2026-06-19 02:03 JST
+- 当前优化方向：02:00 省钱日历。
+- 目标：为省钱日历补充统一的“下单前确认”检查项，让活动解释从“适合买什么”进一步落到用户下单前的判断动作。
+- 修改文件：
+  - `data/shopping-calendar.json`
+  - `lib/types.ts`
+  - `components/CalendarCard.tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `node` 解析 `data/shopping-calendar.json` 和 `data/deals.json`。
+  - `node` 检查 8 个日历活动均包含至少 3 条 `checkBeforeBuying`，并检查日历活动 `id` 无重复。
+  - 尝试执行 `npm run build`。
+- 结果：8 个省钱日历活动均新增“下单前确认”清单，日历卡片会在“适合买什么”和“注意什么”之间展示具体检查动作，帮助新手宝妈确认价格、报名、积分上限、运费、库存和尺码风险。
+- 构建结果：`npm run build` 未通过环境验证，当前工作区没有可用的 `next` 命令，报 `sh: next: command not found`；npm 日志写入用户目录也因权限受限失败。未安装依赖，避免提交 `node_modules` 或缓存。
+- 是否提交：是，提交说明为“补充省钱日历下单检查项”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续 03:00 攻略内容方向可把日历中的楽天买回、药妆店优惠券或西松屋活动拆成更详细攻略，并从日历卡片内部链接过去。
+
 - 时间：2026-06-19 01:03 JST
 - 当前优化方向：01:00 优惠数据。
 - 目标：补齐优惠数据里的“不适合买”决策信息，让宝妈不只看到好处，也能判断哪些情况下应该跳过。

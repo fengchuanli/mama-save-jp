@@ -52,6 +52,18 @@ export function CalendarCard({ event }: { event: CalendarEvent }) {
         </div>
       </div>
 
+      <div className="mt-4 rounded-lg border border-stone-200 bg-white p-4">
+        <p className="text-sm font-semibold text-ink">下单前确认</p>
+        <ul className="mt-3 space-y-2 text-sm leading-6 text-stone-700">
+          {event.checkBeforeBuying.map((item) => (
+            <li key={item} className="flex gap-2">
+              <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-tea" />
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
       <div className="mt-4 rounded-lg border border-peach bg-linen p-4">
         <p className="text-sm font-semibold text-ink">注意什么</p>
         <p className="mt-2 text-sm leading-6 text-stone-700">{event.reminder}</p>
