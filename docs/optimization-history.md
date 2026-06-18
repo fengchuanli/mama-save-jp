@@ -2,6 +2,26 @@
 
 ## 2026-06-19
 
+- 时间：2026-06-19 04:02 JST
+- 当前优化方向：04:00 SEO。
+- 目标：把手写 sitemap 改为可重复生成的静态 SEO 文件，降低新增或更新攻略后忘记同步 `lastmod` 和 URL 的风险。
+- 修改文件：
+  - `scripts/generate-sitemap.mjs`
+  - `package.json`
+  - `public/sitemap.xml`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run sitemap` 生成 `public/sitemap.xml`。
+  - `node` 解析 `public/sitemap.xml`，检查 URL 数量、重复 URL、攻略 URL 是否覆盖全部 `content/guides/*.mdx`。
+  - `node` 解析所有 `content/guides/*.mdx` 的 frontmatter。
+  - `node` 解析 `data/deals.json` 和 `data/shopping-calendar.json`。
+  - 尝试执行 `npm run build`。
+- 结果：新增 sitemap 生成脚本，构建前会通过 `prebuild` 自动刷新静态 sitemap；首页和攻略列表的 `lastmod` 会跟随内容最新日期，单篇攻略页会读取对应 MDX 的 `updatedAt` 或 `publishedAt`。
+- 构建结果：`npm run build` 先成功执行 `prebuild` 并生成 13 个 sitemap URL，但主构建仍未通过环境验证，当前工作区没有可用的 `next` 命令，报 `sh: next: command not found`；npm 日志写入用户目录也因权限受限失败。未安装依赖，避免提交 `node_modules` 或缓存。
+- 是否提交：是，提交说明为“自动生成站点地图”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续可继续检查攻略详情页的结构化数据和 Open Graph 类型，使文章页与普通页面的 SEO 元信息更一致。
+
 - 时间：2026-06-19 03:01 JST
 - 当前优化方向：03:00 攻略内容。
 - 目标：把较薄的药妆店优惠券攻略补成完整决策型文章，让新手宝妈能判断药妆店优惠券适合买什么、怎么买、哪些情况不要买。
