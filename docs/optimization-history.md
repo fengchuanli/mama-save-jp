@@ -2,6 +2,24 @@
 
 ## 2026-06-19
 
+- 时间：2026-06-19 03:01 JST
+- 当前优化方向：03:00 攻略内容。
+- 目标：把较薄的药妆店优惠券攻略补成完整决策型文章，让新手宝妈能判断药妆店优惠券适合买什么、怎么买、哪些情况不要买。
+- 修改文件：
+  - `content/guides/drugstore-coupon.mdx`
+  - `public/sitemap.xml`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `node` 解析所有 `content/guides/*.mdx` 的 frontmatter，检查标题、描述和正文存在。
+  - `node` 检查 `drugstore-coupon` 攻略正文包含“适合谁”“怎么买”“买前检查清单”“不建议”。
+  - `node` 解析 `data/deals.json` 和 `data/shopping-calendar.json`。
+  - 尝试执行 `npm run build`。
+- 结果：药妆店优惠券攻略从简短说明扩展为约 5 分钟阅读内容，新增适用人群、适合买的品类、下单前检查清单和避免为优惠券凑单的提醒；同步更新 sitemap 中该攻略的 `lastmod`。
+- 构建结果：`npm run build` 未通过环境验证，当前工作区没有可用的 `next` 命令，报 `sh: next: command not found`；npm 日志写入用户目录也因权限受限失败。未安装依赖，避免提交 `node_modules` 或缓存。
+- 是否提交：是，提交说明为“完善药妆店优惠券攻略”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续 04:00 SEO 方向可检查攻略详情页的 canonical、结构化数据或 sitemap 是否需要自动生成，避免新增攻略时遗漏。
+
 - 时间：2026-06-19 02:03 JST
 - 当前优化方向：02:00 省钱日历。
 - 目标：为省钱日历补充统一的“下单前确认”检查项，让活动解释从“适合买什么”进一步落到用户下单前的判断动作。
