@@ -1,5 +1,24 @@
 # 优化记录
 
+## 2026-06-20
+
+- 时间：2026-06-20 00:02 JST
+- 当前优化方向：00:00 内容结构。
+- 目标：把首页攻略区从普通文章列表改成明确的新手三步阅读入口，承接 `/guides` 已有的新手路线，让第一次访问的宝妈更快知道先读哪几篇。
+- 修改文件：
+  - `pages/index.tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `npm run sitemap`
+  - `git diff --check`
+  - `npm run build`
+- 结果：首页攻略区固定展示“准备清单 / 高频消耗品 / 平台规则”三步路线，分别链接新生儿准备清单、在日本买尿不湿、楽天 5と0のつく日三篇现有攻略，并新增“查看全部攻略”入口；本次未修改 `data/deals.json`。
+- 构建结果：`npm run validate:content` 通过，当前 9 篇攻略、8 条优惠、13 个日历活动校验通过；`npm run sitemap` 生成 13 个 URL；`git diff --check` 通过；`npm run build` 先成功执行 `prebuild`，但主构建仍因当前工作区没有可用的 `next` 命令失败，报 `sh: next: command not found`。npm 日志写入用户目录仍因权限受限失败，未安装依赖，避免提交 `node_modules` 或缓存。
+- 是否提交：是，提交说明为“优化首页新手攻略入口”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：网络恢复后先推送本地提交；后续内容结构方向可继续检查攻略详情页之间的内部链接，优先把尿不湿、楽天和纸尿裤好价线三篇互相串联。
+
 ## 2026-06-19
 
 - 时间：2026-06-19 20:15 JST

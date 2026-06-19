@@ -17,6 +17,8 @@ type HomeProps = {
 };
 
 export default function Home({ deals, calendarEvents, guides }: HomeProps) {
+  const guideSteps = ["准备清单", "高频消耗品", "平台规则"];
+
   return (
     <Layout
       title="日本母婴省钱日历"
@@ -99,14 +101,24 @@ export default function Home({ deals, calendarEvents, guides }: HomeProps) {
       </section>
 
       <section className="mx-auto max-w-6xl px-5 py-12">
-        <SectionHeader
-          eyebrow="Guides"
-          title="新手也能看懂的购物攻略"
-          description="用中文解释日本平台、积分、优惠券和母婴品类的判断方式。"
-        />
+        <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
+          <SectionHeader
+            eyebrow="Guides"
+            title="新手先按这 3 步读"
+            description="第一次在日本准备母婴用品时，先控制购买范围，再看高频消耗品和平台规则。"
+          />
+          <Link href="/guides" className="mb-6 text-sm font-semibold text-tea">
+            查看全部攻略
+          </Link>
+        </div>
         <div className="grid gap-5 md:grid-cols-3">
-          {guides.map((guide) => (
-            <GuideCard key={guide.slug} guide={guide} />
+          {guides.map((guide, index) => (
+            <div key={guide.slug} className="space-y-3">
+              <p className="text-sm font-semibold text-tea">
+                第 {index + 1} 步 · {guideSteps[index]}
+              </p>
+              <GuideCard guide={guide} />
+            </div>
           ))}
         </div>
       </section>
@@ -145,11 +157,21 @@ export default function Home({ deals, calendarEvents, guides }: HomeProps) {
 }
 
 export const getStaticProps: GetStaticProps<HomeProps> = async () => {
+  const allGuides = getAllGuides();
+  const beginnerGuideSlugs = [
+    "newborn-shopping-list",
+    "buy-diapers-japan",
+    "rakuten-5-0-mama-shopping"
+  ];
+  const beginnerGuides = beginnerGuideSlugs
+    .map((slug) => allGuides.find((guide) => guide.slug === slug))
+    .filter((guide): guide is GuideMeta => Boolean(guide));
+
   return {
     props: {
       deals: (dealsData as Deal[]).slice(0, 2),
       calendarEvents: (calendarData as CalendarEvent[]).slice(0, 3),
-      guides: getAllGuides().slice(0, 3)
+      guides: beginnerGuides
     }
   };
 };
