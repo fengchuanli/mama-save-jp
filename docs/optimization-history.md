@@ -2,6 +2,28 @@
 
 ## 2026-06-20
 
+- 时间：2026-06-20 01:02 JST
+- 当前优化方向：01:00 优惠数据。
+- 目标：为每条优惠补充结构化“下单前核价”动作，让用户不只看到价格和适合买/不适合买，也能在下单前逐项确认单价、规格、库存、尺码或适用条件。
+- 已核验优惠复查：本次修改 `data/deals.json` 前检查到当前 8 条优惠均为 `dataStatus: "sample"`，`dataStatus: "verified"` 数量为 0，因此没有需要复查商品页有效性的已核验优惠。
+- 修改文件：
+  - `data/deals.json`
+  - `lib/types.ts`
+  - `components/DealCard.tsx`
+  - `scripts/validate-content.mjs`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `node` 检查 `data/deals.json` 中 verified 数量和 `checkBeforeBuying` 完整度
+  - `npm run validate:content`
+  - `npm run sitemap`
+  - `git diff --check`
+  - `npm run build`
+- 结果：8 条优惠/攻略型推荐均新增至少 3 条 `checkBeforeBuying`；优惠卡片新增“下单前核价”清单；内容校验脚本要求每条优惠必须包含至少 3 条核价项，避免后续新增优惠遗漏关键决策信息。
+- 构建结果：`npm run validate:content` 通过，当前 9 篇攻略、8 条优惠、13 个日历活动校验通过；`npm run sitemap` 生成 13 个 URL；`git diff --check` 通过；`npm run build` 先成功执行 `prebuild`，但主构建仍因当前工作区没有可用的 `next` 命令失败，报 `sh: next: command not found`。npm 日志写入用户目录仍因权限受限失败，未安装依赖，避免提交 `node_modules` 或缓存。
+- 是否提交：是，提交说明为“补充优惠下单前核价清单”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：如果后续继续优惠数据方向，可优先把 1-2 条样例优惠替换成可核验的官方活动页或商品页数据，并按已核验优惠规则填写 `url`、`sourceName` 和明确的 `availabilityStatus`。
+
 - 时间：2026-06-20 00:02 JST
 - 当前优化方向：00:00 内容结构。
 - 目标：把首页攻略区从普通文章列表改成明确的新手三步阅读入口，承接 `/guides` 已有的新手路线，让第一次访问的宝妈更快知道先读哪几篇。

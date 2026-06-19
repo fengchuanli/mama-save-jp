@@ -16,6 +16,7 @@ export type Deal = {
   availabilityStatus: "unknown" | "active" | "expired" | "unavailable";
   whyWorthBuying: string;
   skipWhen: string;
+  checkBeforeBuying: string[];
   updatedAt: string;
   priority: "high" | "medium" | "low";
 };

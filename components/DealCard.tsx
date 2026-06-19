@@ -113,6 +113,18 @@ export function DealCard({ deal }: { deal: Deal }) {
         </p>
       </div>
 
+      <div className="mt-3 rounded-lg border border-stone-200 bg-white p-3 sm:p-4">
+        <p className="text-sm font-semibold text-ink">下单前核价</p>
+        <ul className="mt-2 space-y-2 text-sm leading-6 text-stone-700 sm:text-base sm:leading-7">
+          {deal.checkBeforeBuying.map((item) => (
+            <li key={item} className="flex gap-2">
+              <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-tea" />
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
       <dl className="mt-4 grid gap-3 text-sm sm:mt-5 sm:gap-4 md:grid-cols-2">
         <div>
           <dt className="font-semibold text-ink">优惠条件</dt>

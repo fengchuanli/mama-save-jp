@@ -71,6 +71,7 @@ for (const deal of deals) {
     "note",
     "whyWorthBuying",
     "skipWhen",
+    "checkBeforeBuying",
     "dataStatus",
     "availabilityStatus",
     "updatedAt",
@@ -86,6 +87,10 @@ for (const deal of deals) {
   assert(
     ["unknown", "active", "expired", "unavailable"].includes(deal.availabilityStatus),
     `${label} availabilityStatus 只能是 unknown / active / expired / unavailable`
+  );
+  assert(
+    Array.isArray(deal.checkBeforeBuying) && deal.checkBeforeBuying.length >= 3,
+    `${label} checkBeforeBuying 至少需要 3 项`
   );
   if (deal.dataStatus === "verified") {
     assert(deal.url, `${label} 已核验优惠必须提供具体商品页或活动页 url`);
