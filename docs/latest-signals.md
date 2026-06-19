@@ -41,3 +41,12 @@
 是否已更新到站点：否；仅作为待确认信号。楽天 6/20 买回活动的开场优惠券细节已更新到 data/shopping-calendar.json。
 下一步：下次优先查看赤ちゃん本舗活动页或商品页是否出现明确价格/积分条件；继续跟进 Yahoo! 7/10 活动官方细则，确认报名、支付、上限、付与日和対象外条件后再更新。
 ```
+
+```text
+日期时间：2026-06-20 07:32 JST
+来源：PayPay 官方キャンペーン页 https://paypay.ne.jp/event/；PayPayスクラッチ官方页 https://paypay.ne.jp/event/matsuri202606-paypay-scratch/；スギ薬局×ドトール PayPay 联动页 https://paypay.ne.jp/event/sugi-doutor-20260601/
+主题：PayPay 官方页确认 2026/6/19 - 7/31 超PayPay祭 / PayPayスクラッチ 开始；スギ薬局×ドトール联动第 2 弾购物期间为 2026/6/16 - 6/30，后日可获得跨店 PayPay クーポン。
+可能影响：可提醒宝妈在药妆店、超市或线上日用品渠道购买宝宝洗护、湿巾小包装、妈妈用品前顺手确认 PayPay 活动；但 PayPayスクラッチ是抽选，スギ薬局联动不是直接母婴商品降价，不能写成确定好价。
+是否已更新到站点：已更新 data/shopping-calendar.json 的 PayPay 官方活动检查；未更新 data/deals.json。
+下一步：后续如果确认某个药妆店或线上平台的母婴商品本身降价、且可叠加 PayPay 条件，再核对具体商品页和券后价后写入优惠数据。
+```
