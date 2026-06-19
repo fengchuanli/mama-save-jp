@@ -6,6 +6,16 @@ const priorityLabel = {
   low: "按需买"
 };
 
+const dataStatusLabel = {
+  sample: "示例数据",
+  verified: "已核验优惠"
+};
+
+const dataStatusClass = {
+  sample: "bg-stone-100 text-stone-600",
+  verified: "bg-tea text-white"
+};
+
 export function DealCard({ deal }: { deal: Deal }) {
   const hasPrice = Boolean(deal.originalPrice || deal.salePrice || deal.effectivePrice);
   const content = (
@@ -20,6 +30,11 @@ export function DealCard({ deal }: { deal: Deal }) {
         <span className="rounded-full bg-tea px-2.5 py-1 text-xs font-medium text-white sm:px-3">
           {priorityLabel[deal.priority]}
         </span>
+        <span
+          className={`rounded-full px-2.5 py-1 text-xs font-medium sm:px-3 ${dataStatusClass[deal.dataStatus]}`}
+        >
+          {dataStatusLabel[deal.dataStatus]}
+        </span>
         {!hasPrice ? (
           <span className="rounded-full bg-peach px-2.5 py-1 text-xs font-medium text-ink sm:px-3">
             攻略型推荐
@@ -33,9 +48,13 @@ export function DealCard({ deal }: { deal: Deal }) {
         </div>
         {deal.url ? (
           <span className="text-xs font-semibold text-tea sm:rounded-full sm:border sm:border-stone-200 sm:px-3 sm:py-2">
-            查看来源
+            查看商品页
           </span>
-        ) : null}
+        ) : (
+          <span className="text-xs font-semibold text-stone-400 sm:rounded-full sm:border sm:border-stone-200 sm:px-3 sm:py-2">
+            商品页待确认
+          </span>
+        )}
       </div>
 
       {hasPrice ? (

@@ -11,6 +11,8 @@ export type Deal = {
   targetUser: string;
   note: string;
   url?: string;
+  sourceName?: string;
+  dataStatus: "sample" | "verified";
   whyWorthBuying: string;
   skipWhen: string;
   updatedAt: string;
