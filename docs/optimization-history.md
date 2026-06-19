@@ -2,6 +2,31 @@
 
 ## 2026-06-20
 
+- 时间：2026-06-20 05:03 JST
+- 当前优化方向：05:00 代码质量。
+- 目标：把攻略 frontmatter 从“能被解析”提升到“稳定满足展示层依赖”，避免攻略卡片、详情页 SEO 和标签展示继续依赖默认兜底值。
+- 修改文件：
+  - `scripts/validate-content.mjs`
+  - `content/guides/buy-diapers-japan.mdx`
+  - `content/guides/choose-baby-stores-japan.mdx`
+  - `content/guides/diaper-price-line.mdx`
+  - `content/guides/kids-clothes-size-80-90-100.mdx`
+  - `content/guides/newborn-shopping-list.mdx`
+  - `content/guides/nursery-entry-budget-items.mdx`
+  - `content/guides/rakuten-5-0-mama-shopping.mdx`
+  - `public/sitemap.xml`
+- 验证方式：
+  - `npm run validate:content`
+  - `npm run sitemap`
+  - `node` 检查 9 篇攻略均包含 `babyAge`、`readingTime` 和 `tags`
+  - `git diff --check`
+  - `npm run build`
+- 结果：内容校验脚本新增攻略展示字段约束，要求每篇攻略必须包含 `babyAge`、`readingTime`、`tags`，且 `readingTime` 使用“数字 分钟”、`tags` 至少 3 个；补齐 7 篇攻略缺失的展示/SEO frontmatter，并重新生成 sitemap。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 9 篇攻略、8 条优惠、13 个日历活动校验通过；`npm run sitemap` 生成 13 个 URL；`node` 检查 9 篇攻略展示 frontmatter 完整；`git diff --check` 通过；`npm run build` 先成功执行 `prebuild`，但主构建仍因当前工作区没有可用的 `next` 命令失败，报 `sh: next: command not found`。npm 日志写入用户目录仍因权限受限失败，未安装依赖，避免提交 `node_modules` 或缓存。
+- 是否提交：是，提交说明为“加强攻略元数据校验”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续代码质量方向可继续减少 `lib/guides.tsx` 和脚本侧 frontmatter 解析规则重复；网络恢复后先推送本地领先提交。
+
 - 时间：2026-06-20 04:03 JST
 - 当前优化方向：04:00 SEO。
 - 目标：让攻略详情页从普通网站页面升级为文章页 SEO 元信息，补充 `article` Open Graph 和 Article JSON-LD，帮助搜索引擎更清楚识别攻略标题、发布时间、更新时间、标签和目标读者。

@@ -32,17 +32,28 @@ function assertUniqueIds(items, label) {
   }
 }
 
+function parseListField(value) {
+  if (!value) return [];
+
+  return String(value)
+    .replace(/^\[|\]$/g, "")
+    .split(",")
+    .map((item) => item.trim().replace(/^"|"$/g, ""))
+    .filter(Boolean);
+}
+
 const guides = readGuides(guidesDir);
 assert(guides.length > 0, "content/guides 至少需要 1 篇攻略");
 
 for (const guide of guides) {
   const label = `content/guides/${guide.fileName}`;
-  const requiredFields = ["title", "description", "category"];
+  const requiredFields = ["title", "description", "category", "babyAge", "readingTime", "tags"];
 
   for (const field of requiredFields) {
     assert(guide.data[field], `${label} 缺少 frontmatter 字段：${field}`);
   }
 
+  const tags = parseListField(guide.data.tags);
   const publishedAt = toDateOnly(guide.data.publishedAt);
   const updatedAt = toDateOnly(guide.data.updatedAt);
   assert(publishedAt || updatedAt, `${label} publishedAt 和 updatedAt 至少需要 1 个日期`);
@@ -52,6 +63,8 @@ for (const guide of guides) {
   if (guide.data.updatedAt) {
     assert(datePattern.test(updatedAt), `${label} updatedAt 需要使用 YYYY-MM-DD`);
   }
+  assert(/^\d+\s*分钟$/.test(guide.data.readingTime ?? ""), `${label} readingTime 需要使用“数字 分钟”`);
+  assert(tags.length >= 3, `${label} tags 至少需要 3 个标签`);
   assert(guide.content.length >= 200, `${label} 正文过短，可能还不是完整攻略`);
 }
 
