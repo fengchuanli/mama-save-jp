@@ -2,6 +2,25 @@
 
 ## 2026-06-20
 
+- 时间：2026-06-20 04:03 JST
+- 当前优化方向：04:00 SEO。
+- 目标：让攻略详情页从普通网站页面升级为文章页 SEO 元信息，补充 `article` Open Graph 和 Article JSON-LD，帮助搜索引擎更清楚识别攻略标题、发布时间、更新时间、标签和目标读者。
+- 修改文件：
+  - `components/Layout.tsx`
+  - `pages/guides/[slug].tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `node` 静态检查攻略详情页是否输出 `ogType="article"`、Article JSON-LD 和 `article:modified_time`
+  - `npm run validate:content`
+  - `npm run sitemap`
+  - `git diff --check`
+  - `npm run build`
+- 结果：`Layout` 新增可配置的 `ogType`，默认页面仍为 `website`；攻略详情页改为 `article`，并基于现有 MDX frontmatter 输出 Article JSON-LD、发布时间、更新时间、分类和标签。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 9 篇攻略、8 条优惠、13 个日历活动校验通过；`node` SEO 元信息静态检查通过；`npm run sitemap` 生成 13 个 URL；`git diff --check` 通过；`npm run build` 先成功执行 `prebuild`，但主构建仍因当前工作区没有可用的 `next` 命令失败，报 `sh: next: command not found`。npm 日志写入用户目录仍因权限受限失败，未安装依赖，避免提交 `node_modules` 或缓存。
+- 是否提交：是，提交说明为“补充攻略文章SEO结构化数据”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续 SEO 方向可继续检查 Open Graph 图片、面包屑结构化数据或攻略内链锚文本；网络恢复后先推送本地领先提交。
+
 - 时间：2026-06-20 03:02 JST
 - 当前优化方向：03:00 攻略内容。
 - 目标：把偏薄的楽天积分入门攻略扩展成可执行的新手决策文章，帮助在日华人宝妈判断买回活动里哪些母婴用品适合买、怎么核对积分规则，以及什么时候应该跳过。

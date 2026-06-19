@@ -15,12 +15,14 @@ const siteUrl = "https://fengchuanli.github.io/mama-save-jp";
 type LayoutProps = {
   title?: string;
   description?: string;
+  ogType?: "website" | "article";
   children: ReactNode;
 };
 
 export function Layout({
   title = "在日华人宝妈母婴省钱日历",
   description = "整理日本母婴用品促销节奏、购买渠道和省钱攻略，帮助 0-3 岁宝宝家庭少踩坑、会囤货。",
+  ogType = "website",
   children
 }: LayoutProps) {
   const router = useRouter();
@@ -35,7 +37,7 @@ export function Layout({
         <meta name="description" content={description} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="canonical" href={canonicalUrl} />
-        <meta property="og:type" content="website" />
+        <meta property="og:type" content={ogType} />
         <meta property="og:title" content={pageTitle} />
         <meta property="og:description" content={description} />
         <meta property="og:url" content={canonicalUrl} />

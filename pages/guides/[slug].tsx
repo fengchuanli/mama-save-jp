@@ -12,15 +12,44 @@ type GuideDetailProps = {
 };
 
 export default function GuideDetail({ guide, relatedGuides }: GuideDetailProps) {
+  const siteUrl = "https://fengchuanli.github.io/mama-save-jp";
+  const guideUrl = `${siteUrl}/guides/${guide.slug}`;
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: guide.title,
+    description: guide.description,
+    url: guideUrl,
+    datePublished: guide.publishedAt || guide.updatedAt,
+    dateModified: guide.updatedAt || guide.publishedAt,
+    articleSection: guide.category,
+    keywords: guide.tags,
+    inLanguage: "zh-CN",
+    isPartOf: {
+      "@type": "WebSite",
+      name: "母婴省钱日历",
+      url: siteUrl
+    },
+    audience: {
+      "@type": "Audience",
+      audienceType: "在日华人宝妈/宝爸"
+    }
+  };
+
   return (
-    <Layout title={guide.title} description={guide.description}>
+    <Layout title={guide.title} description={guide.description} ogType="article">
       <Head>
         <meta name="keywords" content={guide.tags.join(",")} />
         <meta property="article:published_time" content={guide.publishedAt} />
+        <meta property="article:modified_time" content={guide.updatedAt || guide.publishedAt} />
         <meta property="article:section" content={guide.category} />
         {guide.tags.map((tag) => (
           <meta key={tag} property="article:tag" content={tag} />
         ))}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+        />
       </Head>
       <article className="mx-auto max-w-3xl px-5 py-12">
         <Link href="/guides" className="text-sm font-semibold text-tea">
