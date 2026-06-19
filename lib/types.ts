@@ -13,6 +13,7 @@ export type Deal = {
   url?: string;
   sourceName?: string;
   dataStatus: "sample" | "verified";
+  availabilityStatus: "unknown" | "active" | "expired" | "unavailable";
   whyWorthBuying: string;
   skipWhen: string;
   updatedAt: string;

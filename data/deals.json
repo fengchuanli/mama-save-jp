@@ -15,7 +15,8 @@
     "skipWhen": "宝宝接近换码、当前品牌容易红屁屁，或家里已经有超过 1 个月库存时先不要囤。",
     "updatedAt": "2026-06-18",
     "priority": "high",
-    "dataStatus": "sample"
+    "dataStatus": "sample",
+    "availabilityStatus": "unknown"
   },
   {
     "id": "wipes-rakuten-marathon",
@@ -33,7 +34,8 @@
     "skipWhen": "如果单片偏薄、连抽体验差，或为了凑店铺数买超过 2 个月用量，就不算真正省钱。",
     "updatedAt": "2026-06-18",
     "priority": "high",
-    "dataStatus": "sample"
+    "dataStatus": "sample",
+    "availabilityStatus": "unknown"
   },
   {
     "id": "cotton-towel-paypay",
@@ -51,7 +53,8 @@
     "skipWhen": "第一次尝试新材质、家里收纳空间紧张，或单包抽数和尺寸比常用品小很多时不建议多买。",
     "updatedAt": "2026-06-18",
     "priority": "medium",
-    "dataStatus": "sample"
+    "dataStatus": "sample",
+    "availabilityStatus": "unknown"
   },
   {
     "id": "baby-soap-drugstore",
@@ -69,7 +72,8 @@
     "skipWhen": "宝宝皮肤状态不稳定、准备换季换品牌，或补充装无法确认适配现有瓶身时先不要买。",
     "updatedAt": "2026-06-17",
     "priority": "medium",
-    "dataStatus": "sample"
+    "dataStatus": "sample",
+    "availabilityStatus": "unknown"
   },
   {
     "id": "baby-food-akachan",
@@ -87,7 +91,8 @@
     "skipWhen": "宝宝还没试过该口味、过敏原不确定，或保质期覆盖不了计划使用时间时不要按箱囤。",
     "updatedAt": "2026-06-16",
     "priority": "low",
-    "dataStatus": "sample"
+    "dataStatus": "sample",
+    "availabilityStatus": "unknown"
   },
   {
     "id": "straw-cup-nishimatsuya",
@@ -105,7 +110,8 @@
     "skipWhen": "杯子本体已经漏水、宝宝快过渡到直饮杯，或型号和现有杯盖不一致时不适合买。",
     "updatedAt": "2026-06-16",
     "priority": "medium",
-    "dataStatus": "sample"
+    "dataStatus": "sample",
+    "availabilityStatus": "unknown"
   },
   {
     "id": "nursery-name-sticker-guide",
@@ -120,7 +126,8 @@
     "skipWhen": "保育园尚未发正式物品清单，或园方要求手写、指定尺寸和材质时先等清单确认。",
     "updatedAt": "2026-06-15",
     "priority": "medium",
-    "dataStatus": "sample"
+    "dataStatus": "sample",
+    "availabilityStatus": "unknown"
   },
   {
     "id": "toddler-clothes-season-guide",
@@ -135,6 +142,7 @@
     "skipWhen": "宝宝身高增长很快、季节跨度超过半年，或款式不适合保育园日常清洗时不要为了低价买。",
     "updatedAt": "2026-06-15",
     "priority": "low",
-    "dataStatus": "sample"
+    "dataStatus": "sample",
+    "availabilityStatus": "unknown"
   }
 ]

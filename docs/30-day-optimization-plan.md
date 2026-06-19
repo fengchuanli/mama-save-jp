@@ -57,12 +57,14 @@
 - 有平台活动规则：更新 `data/shopping-calendar.json`。
 - 有长期解释价值：新增或优化 `content/guides/*.mdx`。
 - 信息不够确定：只记录到 `docs/latest-signals.md`，不直接写成确定推荐。
+- 每次更新 `data/deals.json` 前，必须先复查现有 `dataStatus: "verified"` 的优惠：如果商品页失效、优惠结束、价格不再成立或商品下架，要及时把 `availabilityStatus` 改为 `expired` 或 `unavailable`，并修改 `note`、`whyWorthBuying`、`skipWhen`，避免用户继续把它当作有效优惠。
 
 ## 自动化执行规则
 
 1. 每次只做一项清晰、有边界的优化。
 2. 修改后必须更新 `docs/optimization-history.md`。
 3. 如果涉及最新优惠或活动，必须注明信息来源和更新时间。
-4. 不要提交素材、缓存、日志、`node_modules`。
-5. 优先保证 `npm run build` 可通过；如果环境无法安装依赖，至少做 JSON/MDX/静态文件校验并记录原因。
-6. 提交说明使用中文，推送到 `origin main`。
+4. 已核验优惠必须有具体商品页或活动页 `url`、`sourceName`、`updatedAt` 和明确的 `availabilityStatus`。
+5. 不要提交素材、缓存、日志、`node_modules`。
+6. 优先保证 `npm run build` 可通过；如果环境无法安装依赖，至少做 JSON/MDX/静态文件校验并记录原因。
+7. 提交说明使用中文，推送到 `origin main`。

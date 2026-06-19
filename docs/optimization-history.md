@@ -2,6 +2,24 @@
 
 ## 2026-06-19
 
+- 时间：2026-06-19 19:56 JST
+- 当前优化方向：优惠数据可信度规则。
+- 目标：确保已核验优惠不会在商品下架或活动结束后继续误导用户。
+- 修改文件：
+  - `lib/types.ts`
+  - `components/DealCard.tsx`
+  - `data/deals.json`
+  - `scripts/validate-content.mjs`
+  - `docs/30-day-optimization-plan.md`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+- 结果：优惠数据新增 `availabilityStatus`，支持 `unknown`、`active`、`expired`、`unavailable`；卡片会展示“待确认 / 进行中 / 已过期 / 已下架”；内容校验要求已核验优惠必须有具体商品页或活动页、来源和明确有效状态；自动化提示词已更新，要求每次消息整理优先复查已有已核验优惠是否仍有效。
+- 构建结果：`npm run validate:content` 通过，当前 9 篇攻略、8 条优惠、13 个日历活动校验通过。
+- 是否提交：待提交。
+- 是否推送：待推送。
+- 下一步：开始添加第一批已核验优惠时，必须同时填写 `dataStatus: "verified"`、`availabilityStatus: "active"`、具体 `url` 和 `sourceName`；优惠结束或商品下架时及时改为 `expired` 或 `unavailable`。
+
 - 时间：2026-06-19 16:31 JST
 - 当前优化方向：16:30 最新日本母婴省钱消息整理。
 - 目标：继续核对官方来源，只把规则明确、对在日华人宝妈有实际决策价值的信息写入日历；价格或条件不足的信息只记录为信号。

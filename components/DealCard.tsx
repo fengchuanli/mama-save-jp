@@ -16,6 +16,20 @@ const dataStatusClass = {
   verified: "bg-tea text-white"
 };
 
+const availabilityStatusLabel = {
+  unknown: "待确认",
+  active: "进行中",
+  expired: "已过期",
+  unavailable: "已下架"
+};
+
+const availabilityStatusClass = {
+  unknown: "bg-stone-100 text-stone-600",
+  active: "bg-linen text-stone-700",
+  expired: "bg-amber-100 text-amber-800",
+  unavailable: "bg-rose-100 text-rose-800"
+};
+
 export function DealCard({ deal }: { deal: Deal }) {
   const hasPrice = Boolean(deal.originalPrice || deal.salePrice || deal.effectivePrice);
   const content = (
@@ -34,6 +48,11 @@ export function DealCard({ deal }: { deal: Deal }) {
           className={`rounded-full px-2.5 py-1 text-xs font-medium sm:px-3 ${dataStatusClass[deal.dataStatus]}`}
         >
           {dataStatusLabel[deal.dataStatus]}
+        </span>
+        <span
+          className={`rounded-full px-2.5 py-1 text-xs font-medium sm:px-3 ${availabilityStatusClass[deal.availabilityStatus]}`}
+        >
+          {availabilityStatusLabel[deal.availabilityStatus]}
         </span>
         {!hasPrice ? (
           <span className="rounded-full bg-peach px-2.5 py-1 text-xs font-medium text-ink sm:px-3">
@@ -79,7 +98,9 @@ export function DealCard({ deal }: { deal: Deal }) {
       )}
 
       <div className="mt-4 rounded-lg border border-peach bg-linen p-3 sm:mt-5 sm:p-4">
-        <p className="text-sm font-semibold text-ink">为什么值得买</p>
+        <p className="text-sm font-semibold text-ink">
+          {deal.availabilityStatus === "active" ? "为什么值得买" : "参考价值"}
+        </p>
         <p className="mt-2 text-sm leading-6 text-stone-700 sm:text-base sm:leading-7">
           {deal.whyWorthBuying}
         </p>

@@ -71,6 +71,8 @@ for (const deal of deals) {
     "note",
     "whyWorthBuying",
     "skipWhen",
+    "dataStatus",
+    "availabilityStatus",
     "updatedAt",
     "priority"
   ];
@@ -80,6 +82,19 @@ for (const deal of deals) {
   }
 
   assert(["high", "medium", "low"].includes(deal.priority), `${label} priority 只能是 high / medium / low`);
+  assert(["sample", "verified"].includes(deal.dataStatus), `${label} dataStatus 只能是 sample / verified`);
+  assert(
+    ["unknown", "active", "expired", "unavailable"].includes(deal.availabilityStatus),
+    `${label} availabilityStatus 只能是 unknown / active / expired / unavailable`
+  );
+  if (deal.dataStatus === "verified") {
+    assert(deal.url, `${label} 已核验优惠必须提供具体商品页或活动页 url`);
+    assert(deal.sourceName, `${label} 已核验优惠必须提供 sourceName`);
+    assert(
+      deal.availabilityStatus !== "unknown",
+      `${label} 已核验优惠必须明确 active / expired / unavailable`
+    );
+  }
   assert(datePattern.test(toDateOnly(deal.updatedAt)), `${label} updatedAt 需要使用 YYYY-MM-DD`);
 }
 
