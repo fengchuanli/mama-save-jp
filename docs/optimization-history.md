@@ -2,6 +2,24 @@
 
 ## 2026-06-20
 
+- 时间：2026-06-20 06:03 JST
+- 当前优化方向：06:00 移动端体验。
+- 目标：收紧省钱日历在手机端的卡片间距、标签宽度和说明区块占用，让新增行动标签、适合买什么和下单前确认清单在小屏上更容易扫读。
+- 修改文件：
+  - `components/CalendarCard.tsx`
+  - `pages/calendar.tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `npm run sitemap`
+  - `git diff --check`
+  - `npm run build`
+- 结果：日历卡片在手机端改为更紧凑的 `p-4`、更小的标签水平内边距、较短的区块间距和列表间距；平台分组、页面外边距和新手提示卡片也增加响应式间距，桌面端继续保持原有宽松布局。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 9 篇攻略、8 条优惠、13 个日历活动校验通过；`npm run sitemap` 生成 13 个 URL；`git diff --check` 通过；`npm run build` 先成功执行 `prebuild`，但主构建仍因当前工作区没有可用的 `next` 命令失败，报 `sh: next: command not found`。npm 日志写入用户目录仍因权限受限失败，未安装依赖，避免提交 `node_modules` 或缓存。
+- 是否提交：是，提交说明为“优化省钱日历移动端布局”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续移动端体验方向可继续检查攻略卡片和攻略详情页正文在手机端的标签换行、标题长度和段落密度；网络恢复后先推送本地领先提交。
+
 - 时间：2026-06-20 05:03 JST
 - 当前优化方向：05:00 代码质量。
 - 目标：把攻略 frontmatter 从“能被解析”提升到“稳定满足展示层依赖”，避免攻略卡片、详情页 SEO 和标签展示继续依赖默认兜底值。
