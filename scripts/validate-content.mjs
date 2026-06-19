@@ -109,7 +109,7 @@ assertUniqueIds(calendarEvents, "data/shopping-calendar.json");
 
 for (const event of calendarEvents) {
   const label = `data/shopping-calendar.json#${event.id ?? "unknown"}`;
-  const requiredFields = ["store", "eventName", "days", "benefit", "reminder", "difficulty"];
+  const requiredFields = ["store", "eventName", "days", "benefit", "reminder", "buyingTiming", "difficulty"];
 
   for (const field of requiredFields) {
     assert(event[field], `${label} 缺少字段：${field}`);
@@ -119,6 +119,10 @@ for (const event of calendarEvents) {
   assert(
     Array.isArray(event.checkBeforeBuying) && event.checkBeforeBuying.length >= 3,
     `${label} checkBeforeBuying 至少需要 3 项`
+  );
+  assert(
+    ["prepare", "same-day", "watch"].includes(event.buyingTiming),
+    `${label} buyingTiming 只能是 prepare / same-day / watch`
   );
   assert(["easy", "normal", "hard"].includes(event.difficulty), `${label} difficulty 只能是 easy / normal / hard`);
   if (event.updatedAt) {

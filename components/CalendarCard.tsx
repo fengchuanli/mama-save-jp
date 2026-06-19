@@ -12,12 +12,29 @@ const difficultyClass = {
   hard: "bg-peach text-ink"
 };
 
+const buyingTimingLabel = {
+  prepare: "适合提前准备",
+  "same-day": "当天确认再买",
+  watch: "先观察价格"
+};
+
+const buyingTimingClass = {
+  prepare: "bg-ink text-white",
+  "same-day": "bg-tea text-white",
+  watch: "bg-mist text-stone-700"
+};
+
 export function CalendarCard({ event }: { event: CalendarEvent }) {
   return (
     <article className="rounded-lg border border-stone-200 bg-white p-5 shadow-soft">
       <div className="mb-4 flex flex-wrap items-center gap-2">
         <span className="rounded-full bg-mist px-3 py-1 text-xs font-medium text-stone-700">
           {event.days}
+        </span>
+        <span
+          className={`rounded-full px-3 py-1 text-xs font-medium ${buyingTimingClass[event.buyingTiming]}`}
+        >
+          {buyingTimingLabel[event.buyingTiming]}
         </span>
         <span
           className={`rounded-full px-3 py-1 text-xs font-medium ${difficultyClass[event.difficulty]}`}

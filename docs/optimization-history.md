@@ -2,6 +2,27 @@
 
 ## 2026-06-20
 
+- 时间：2026-06-20 02:01 JST
+- 当前优化方向：02:00 省钱日历。
+- 目标：为省钱日历活动补充“适合提前准备 / 当天确认再买 / 先观察价格”的决策标签，让用户扫读时先判断活动是否值得现在行动。
+- 修改文件：
+  - `data/shopping-calendar.json`
+  - `lib/types.ts`
+  - `components/CalendarCard.tsx`
+  - `scripts/validate-content.mjs`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `node` 统计 `data/shopping-calendar.json` 中 `buyingTiming` 覆盖和分布
+  - `npm run validate:content`
+  - `npm run sitemap`
+  - `git diff --check`
+  - `npm run build`
+- 结果：13 个日历活动均新增 `buyingTiming` 字段，其中 2 个适合提前准备、5 个当天确认再买、6 个先观察价格；日历卡片顶部新增决策标签；内容校验脚本要求每个日历活动必须使用合法的 `buyingTiming` 值，避免后续新增活动遗漏行动判断。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 9 篇攻略、8 条优惠、13 个日历活动校验通过；`npm run sitemap` 生成 13 个 URL；`git diff --check` 通过；`npm run build` 先成功执行 `prebuild`，但主构建仍因当前工作区没有可用的 `next` 命令失败，报 `sh: next: command not found`。npm 日志写入用户目录仍因权限受限失败，未安装依赖，避免提交 `node_modules` 或缓存。
+- 是否提交：是，提交说明为“补充省钱日历行动标签”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续 03:00 攻略内容方向可优先新增或扩展一篇与省钱日历强相关的攻略，例如把楽天买回活动或支付平台返点拆成新手可执行的中文步骤。
+
 - 时间：2026-06-20 01:02 JST
 - 当前优化方向：01:00 优惠数据。
 - 目标：为每条优惠补充结构化“下单前核价”动作，让用户不只看到价格和适合买/不适合买，也能在下单前逐项确认单价、规格、库存、尺码或适用条件。

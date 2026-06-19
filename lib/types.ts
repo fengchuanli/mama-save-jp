@@ -28,6 +28,7 @@ export type CalendarEvent = {
   days: string;
   benefit: string;
   reminder: string;
+  buyingTiming: "prepare" | "same-day" | "watch";
   checkBeforeBuying: string[];
   suitableItems: string[];
   difficulty: "easy" | "normal" | "hard";
