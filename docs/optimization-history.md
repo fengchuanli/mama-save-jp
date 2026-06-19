@@ -2,6 +2,25 @@
 
 ## 2026-06-20
 
+- 时间：2026-06-20 03:02 JST
+- 当前优化方向：03:00 攻略内容。
+- 目标：把偏薄的楽天积分入门攻略扩展成可执行的新手决策文章，帮助在日华人宝妈判断买回活动里哪些母婴用品适合买、怎么核对积分规则，以及什么时候应该跳过。
+- 修改文件：
+  - `content/guides/rakuten-points-basics.mdx`
+  - `public/sitemap.xml`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `node` 检查 `rakuten-points-basics` 正文长度和核心章节
+  - `npm run validate:content`
+  - `npm run sitemap`
+  - `git diff --check`
+  - `npm run build`
+- 结果：`rakuten-points-basics` 从简短提示扩展为约 6 分钟阅读攻略，新增“适合谁”“适合买什么”“怎么买”“下单前检查清单”“注意事项”，并补充 tags、readingTime 和 updatedAt；sitemap 中首页、攻略列表和该攻略的 `lastmod` 已更新到 2026-06-20。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 9 篇攻略、8 条优惠、13 个日历活动校验通过；`node` 检查该攻略正文 1523 字符且核心章节完整；`npm run sitemap` 生成 13 个 URL；`git diff --check` 通过；`npm run build` 先成功执行 `prebuild`，但主构建仍因当前工作区没有可用的 `next` 命令失败，报 `sh: next: command not found`。npm 日志写入用户目录仍因权限受限失败，未安装依赖，避免提交 `node_modules` 或缓存。
+- 是否提交：是，提交说明为“完善楽天积分入门攻略”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续 04:00 SEO 方向可继续检查攻略详情页 canonical、Open Graph 或结构化数据；网络恢复后先推送本地领先提交。
+
 - 时间：2026-06-20 02:01 JST
 - 当前优化方向：02:00 省钱日历。
 - 目标：为省钱日历活动补充“适合提前准备 / 当天确认再买 / 先观察价格”的决策标签，让用户扫读时先判断活动是否值得现在行动。
