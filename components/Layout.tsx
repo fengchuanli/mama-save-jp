@@ -82,10 +82,15 @@ export function Layout({
         </header>
         <main>{children}</main>
         <footer className="border-t border-stone-200 bg-white">
-          <div className="mx-auto grid max-w-6xl gap-4 px-5 py-8 text-sm text-stone-600 md:grid-cols-[1.2fr_0.8fr]">
-            <p>
-              本站只做省钱信息整理和购物节奏提醒，不替代医生、营养师或专业育儿建议。宝宝用品请结合家庭情况谨慎选择。
-            </p>
+          <div className="mx-auto grid max-w-6xl gap-4 px-5 py-8 text-sm leading-6 text-stone-600 md:grid-cols-[1.4fr_0.6fr]">
+            <div className="space-y-2">
+              <p>
+                本站仅整理公开活动信息与购物攻略。活动内容、价格、库存、积分规则可能随时变化，购买前请以官方页面、结算页面及门店公告为准。
+              </p>
+              <p>
+                本站与楽天、Amazon、西松屋、赤ちゃん本舗等品牌无隶属关系；部分链接未来可能为联盟链接。宝宝用品请结合家庭情况谨慎选择。
+              </p>
+            </div>
             <p className="md:text-right">适合在日华人宝妈/宝爸的轻量母婴购物参考。</p>
           </div>
         </footer>

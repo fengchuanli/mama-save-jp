@@ -5,6 +5,7 @@ import { readGuides, toDateOnly } from "./content-utils.mjs";
 const rootDir = process.cwd();
 const guidesDir = path.join(rootDir, "content", "guides");
 const datePattern = /^\d{4}-\d{2}-\d{2}$/;
+const sourceLevels = ["official", "authorized", "community", "signal", "unknown"];
 const errors = [];
 
 function assert(condition, message) {
@@ -105,9 +106,16 @@ for (const deal of deals) {
     Array.isArray(deal.checkBeforeBuying) && deal.checkBeforeBuying.length >= 3,
     `${label} checkBeforeBuying 至少需要 3 项`
   );
+  if (deal.sourceLevel) {
+    assert(sourceLevels.includes(deal.sourceLevel), `${label} sourceLevel 不合法`);
+  }
   if (deal.dataStatus === "verified") {
     assert(deal.url, `${label} 已核验优惠必须提供具体商品页或活动页 url`);
     assert(deal.sourceName, `${label} 已核验优惠必须提供 sourceName`);
+    assert(
+      ["official", "authorized"].includes(deal.sourceLevel),
+      `${label} 已核验优惠 sourceLevel 必须是 official 或 authorized`
+    );
     assert(
       Array.isArray(deal.participationSteps) && deal.participationSteps.length >= 3,
       `${label} 已核验优惠必须提供至少 3 项 participationSteps`
@@ -144,6 +152,7 @@ for (const event of calendarEvents) {
     ["prepare", "same-day", "watch"].includes(event.buyingTiming),
     `${label} buyingTiming 只能是 prepare / same-day / watch`
   );
+  assert(sourceLevels.includes(event.sourceLevel), `${label} sourceLevel 不合法或缺失`);
   assert(
     Array.isArray(event.participationSteps) && event.participationSteps.length >= 3,
     `${label} participationSteps 至少需要 3 项`

@@ -1,3 +1,5 @@
+export type SourceLevel = "official" | "authorized" | "community" | "signal" | "unknown";
+
 export type Deal = {
   id: string;
   title: string;
@@ -12,6 +14,7 @@ export type Deal = {
   note: string;
   url?: string;
   sourceName?: string;
+  sourceLevel?: SourceLevel;
   dataStatus: "sample" | "verified";
   availabilityStatus: "unknown" | "active" | "expired" | "unavailable";
   verificationScope?: string;
@@ -41,6 +44,7 @@ export type CalendarEvent = {
   difficulty: "easy" | "normal" | "hard";
   sourceName?: string;
   sourceUrl?: string;
+  sourceLevel?: SourceLevel;
   updatedAt?: string;
 };
 

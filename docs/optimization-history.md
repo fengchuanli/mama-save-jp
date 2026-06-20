@@ -1,5 +1,20 @@
 # 优化记录
 
+## 2026-06-21 合规规则补充
+
+- 时间：2026-06-21 JST
+- 当前优化方向：数据与版权合规边界。
+- 目标：补齐图片版权、内容版权、来源等级、联盟链接、AI 生成内容和用户可见免责声明规则，避免后续优惠自动化或内容更新越界。
+- 修改文件：
+  - `docs/compliance-rules.md`
+  - `components/Layout.tsx`
+  - `lib/types.ts`
+  - `data/deals.json`
+  - `data/shopping-calendar.json`
+  - `scripts/validate-content.mjs`
+  - `docs/optimization-history.md`
+- 结果：新增图片使用规则、内容版权规则、`sourceLevel` 来源等级、联盟链接规则、AI 生成内容规则和 Footer 免责声明；已核验优惠现在必须来自 `official` 或 `authorized` 来源等级。页面 Footer 已提示价格、库存、积分规则以官方页面、结算页面和门店公告为准，并声明本站与相关品牌无隶属关系。
+
 ## 2026-06-21
 
 - 时间：2026-06-21 01:03 JST
