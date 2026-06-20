@@ -5,6 +5,7 @@ import { GuideCard } from "@/components/GuideCard";
 import { Layout } from "@/components/Layout";
 import { SectionHeader } from "@/components/SectionHeader";
 import { getAllGuides } from "@/lib/guides";
+import { siteConfig } from "@/lib/site";
 import type { GuideMeta } from "@/lib/types";
 
 type GuidesProps = {
@@ -12,8 +13,7 @@ type GuidesProps = {
 };
 
 export default function Guides({ guides }: GuidesProps) {
-  const siteUrl = "https://fengchuanli.github.io/mama-save-jp";
-  const guidesUrl = `${siteUrl}/guides`;
+  const guidesUrl = `${siteConfig.siteUrl}/guides`;
   const beginnerGuideSlugs = [
     "newborn-shopping-list",
     "buy-diapers-japan",
@@ -32,8 +32,8 @@ export default function Guides({ guides }: GuidesProps) {
     inLanguage: "zh-CN",
     isPartOf: {
       "@type": "WebSite",
-      name: "母婴省钱日历",
-      url: siteUrl
+      name: siteConfig.siteName,
+      url: siteConfig.siteUrl
     },
     audience: {
       "@type": "Audience",
@@ -58,7 +58,7 @@ export default function Guides({ guides }: GuidesProps) {
         "@type": "ListItem",
         position: 1,
         name: "首页",
-        item: siteUrl
+        item: siteConfig.siteUrl
       },
       {
         "@type": "ListItem",

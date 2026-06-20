@@ -4,6 +4,7 @@ import type { GetStaticPaths, GetStaticProps } from "next";
 import { Layout } from "@/components/Layout";
 import { MarkdownContent } from "@/components/MarkdownContent";
 import { getAllGuides, getGuideBySlug, getGuideSlugs } from "@/lib/guides";
+import { siteConfig } from "@/lib/site";
 import type { Guide, GuideMeta } from "@/lib/types";
 
 type GuideDetailProps = {
@@ -35,8 +36,7 @@ function getRelatedGuides(guide: Guide, guides: GuideMeta[]) {
 }
 
 export default function GuideDetail({ guide, relatedGuides }: GuideDetailProps) {
-  const siteUrl = "https://fengchuanli.github.io/mama-save-jp";
-  const guideUrl = `${siteUrl}/guides/${guide.slug}`;
+  const guideUrl = `${siteConfig.siteUrl}/guides/${guide.slug}`;
   const articleJsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -50,8 +50,8 @@ export default function GuideDetail({ guide, relatedGuides }: GuideDetailProps) 
     inLanguage: "zh-CN",
     isPartOf: {
       "@type": "WebSite",
-      name: "母婴省钱日历",
-      url: siteUrl
+      name: siteConfig.siteName,
+      url: siteConfig.siteUrl
     },
     audience: {
       "@type": "Audience",

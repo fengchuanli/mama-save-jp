@@ -1,5 +1,31 @@
 # 优化记录
 
+## 2026-06-21 站点配置集中管理
+
+- 时间：2026-06-21 05:02 JST
+- 当前优化方向：05:00 代码质量。
+- 目标：把站点名称和站点 URL 从 Layout、攻略 JSON-LD 和 sitemap 脚本中的局部常量收敛到共享配置，降低 canonical、Open Graph、结构化数据和 sitemap URL 后续漂移风险。
+- 修改文件：
+  - `data/site-config.json`
+  - `lib/site.ts`
+  - `components/Layout.tsx`
+  - `pages/guides/index.tsx`
+  - `pages/guides/[slug].tsx`
+  - `scripts/generate-sitemap.mjs`
+  - `scripts/validate-content.mjs`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `npm run sitemap`
+  - `node` 静态检查核心代码不再硬编码站点 URL，且 `data/site-config.json` 的 `siteUrl` 可被解析为合法 URL
+  - `git diff --check`
+  - `npm run build`
+- 结果：新增 `data/site-config.json` 作为站点名称和站点 URL 的单一配置来源；页面侧通过 `lib/site.ts` 复用该配置，sitemap 生成脚本直接读取同一份 JSON；内容校验脚本新增站点配置必填和 HTTPS URL 校验。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、6 条优惠、13 个日历活动校验通过；`npm run sitemap` 生成 14 个 URL；`node` 静态检查通过；`git diff --check` 通过；`npm run build` 先成功执行 `prebuild`，但主构建仍因当前工作区没有可用的 `next` 命令失败，报 `sh: next: command not found`。npm 日志写入用户目录仍因权限受限失败，未安装依赖，避免提交 `node_modules` 或缓存。
+- 是否提交：是，提交说明为“集中管理站点基础配置”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：网络恢复后先推送本地领先提交；后续代码质量方向可继续把 robots.txt 的 Sitemap URL 也纳入可生成流程，或补充页面 SEO 配置的集中管理。
+
 ## 2026-06-21 攻略列表 SEO 结构化数据
 
 - 时间：2026-06-21 04:01 JST

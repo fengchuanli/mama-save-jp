@@ -2,6 +2,7 @@ import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import type { ReactNode } from "react";
+import { siteConfig } from "@/lib/site";
 
 const navItems = [
   { href: "/", label: "首页" },
@@ -9,8 +10,6 @@ const navItems = [
   { href: "/calendar", label: "省钱日历" },
   { href: "/guides", label: "攻略" }
 ];
-
-const siteUrl = "https://fengchuanli.github.io/mama-save-jp";
 
 type LayoutProps = {
   title?: string;
@@ -26,9 +25,9 @@ export function Layout({
   children
 }: LayoutProps) {
   const router = useRouter();
-  const pageTitle = title.includes("母婴省钱日历") ? title : `${title} - 母婴省钱日历`;
+  const pageTitle = title.includes(siteConfig.siteName) ? title : `${title} - ${siteConfig.siteName}`;
   const canonicalPath = router.asPath === "/" ? "" : router.asPath.split("?")[0];
-  const canonicalUrl = `${siteUrl}${canonicalPath}`;
+  const canonicalUrl = `${siteConfig.siteUrl}${canonicalPath}`;
 
   return (
     <>
@@ -41,7 +40,7 @@ export function Layout({
         <meta property="og:title" content={pageTitle} />
         <meta property="og:description" content={description} />
         <meta property="og:url" content={canonicalUrl} />
-        <meta property="og:site_name" content="母婴省钱日历" />
+        <meta property="og:site_name" content={siteConfig.siteName} />
         <meta name="twitter:card" content="summary" />
       </Head>
       <div className="min-h-screen bg-cream">

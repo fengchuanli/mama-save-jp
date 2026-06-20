@@ -2,10 +2,12 @@ import fs from "node:fs";
 import path from "node:path";
 import { maxDate, readGuides, toDateOnly } from "./content-utils.mjs";
 
-const siteUrl = "https://fengchuanli.github.io/mama-save-jp";
 const rootDir = process.cwd();
 const guidesDir = path.join(rootDir, "content", "guides");
 const sitemapPath = path.join(rootDir, "public", "sitemap.xml");
+const siteConfig = JSON.parse(
+  fs.readFileSync(path.join(rootDir, "data", "site-config.json"), "utf8")
+);
 
 function readJsonDates(relativePath, fieldName) {
   const fileContent = fs.readFileSync(path.join(rootDir, relativePath), "utf8");
@@ -24,7 +26,7 @@ function escapeXml(value) {
 function renderUrl({ path: urlPath, lastmod, changefreq, priority }) {
   return [
     "  <url>",
-    `    <loc>${escapeXml(`${siteUrl}${urlPath}`)}</loc>`,
+    `    <loc>${escapeXml(`${siteConfig.siteUrl}${urlPath}`)}</loc>`,
     `    <lastmod>${lastmod}</lastmod>`,
     `    <changefreq>${changefreq}</changefreq>`,
     `    <priority>${priority}</priority>`,

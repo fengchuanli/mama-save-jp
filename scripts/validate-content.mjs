@@ -43,6 +43,18 @@ function parseListField(value) {
     .filter(Boolean);
 }
 
+const siteConfig = readJson("data/site-config.json");
+assert(typeof siteConfig.siteName === "string" && siteConfig.siteName.length > 0, "data/site-config.json 缺少 siteName");
+assert(typeof siteConfig.siteUrl === "string" && siteConfig.siteUrl.length > 0, "data/site-config.json 缺少 siteUrl");
+if (siteConfig.siteUrl) {
+  try {
+    const url = new URL(siteConfig.siteUrl);
+    assert(url.protocol === "https:", "data/site-config.json siteUrl 需要使用 https");
+  } catch {
+    assert(false, "data/site-config.json siteUrl 不是合法 URL");
+  }
+}
+
 const guides = readGuides(guidesDir);
 assert(guides.length > 0, "content/guides 至少需要 1 篇攻略");
 
