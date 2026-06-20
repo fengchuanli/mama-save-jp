@@ -1,5 +1,26 @@
 # 优化记录
 
+## 2026-06-21 攻略详情页移动端阅读优化
+
+- 时间：2026-06-21 06:02 JST
+- 当前优化方向：06:00 移动端体验。
+- 目标：收紧攻略详情页在手机端的首屏信息密度和正文阅读节奏，减少长标签、标题区和正文卡片占用过多竖向空间。
+- 修改文件：
+  - `pages/guides/[slug].tsx`
+  - `components/MarkdownContent.tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `npm run sitemap`
+  - `node` 静态检查攻略详情页移动端 padding、标签折叠、标题字号和正文行高
+  - `git diff --check`
+  - `npm run build`
+- 结果：攻略详情页在手机端减少页面上下留白、标题卡片和正文卡片 padding；标签移动端优先显示前 3 个并用数量提示折叠剩余标签，桌面端继续展示完整标签；正文二级标题、段落和列表在手机端使用更紧凑的间距与行高；相关推荐卡片在手机端同步收紧。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、6 条优惠、13 个日历活动校验通过；`npm run sitemap` 生成 14 个 URL；`node` 静态检查通过；`git diff --check` 通过；`npm run build` 先成功执行 `prebuild`，但主构建仍因当前工作区没有可用的 `next` 命令失败，报 `sh: next: command not found`。npm 日志写入用户目录仍因权限受限失败，未安装依赖，避免提交 `node_modules` 或缓存。
+- 是否提交：是，提交说明为“优化攻略详情页移动端阅读”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续移动端体验方向可继续检查攻略列表的新手路线卡片在 360px 宽度下是否需要进一步压缩；网络恢复后先推送本地领先提交。
+
 ## 2026-06-21 站点配置集中管理
 
 - 时间：2026-06-21 05:02 JST

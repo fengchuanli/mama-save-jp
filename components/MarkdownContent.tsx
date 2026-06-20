@@ -10,7 +10,7 @@ export function MarkdownContent({ content }: { content: string }) {
 
         if (trimmed.startsWith("## ")) {
           return (
-            <h2 key={index} className="mt-8 text-2xl font-semibold text-ink">
+            <h2 key={index} className="mt-7 text-xl font-semibold text-ink sm:mt-8 sm:text-2xl">
               {trimmed.replace("## ", "")}
             </h2>
           );
@@ -26,14 +26,14 @@ export function MarkdownContent({ content }: { content: string }) {
 
         if (trimmed.startsWith("- ")) {
           return (
-            <li key={index} className="ml-6 list-disc leading-8 text-stone-700">
+            <li key={index} className="ml-5 list-disc leading-7 text-stone-700 sm:ml-6 sm:leading-8">
               {trimmed.replace("- ", "")}
             </li>
           );
         }
 
         return (
-          <p key={index} className="leading-8 text-stone-700">
+          <p key={index} className="leading-7 text-stone-700 sm:leading-8">
             {trimmed}
           </p>
         );

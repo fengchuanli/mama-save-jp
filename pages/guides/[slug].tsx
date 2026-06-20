@@ -37,6 +37,9 @@ function getRelatedGuides(guide: Guide, guides: GuideMeta[]) {
 
 export default function GuideDetail({ guide, relatedGuides }: GuideDetailProps) {
   const guideUrl = `${siteConfig.siteUrl}/guides/${guide.slug}`;
+  const detailTags = guide.tags.length ? guide.tags : [guide.babyAge];
+  const primaryTags = detailTags.slice(0, 3);
+  const secondaryTags = detailTags.slice(3);
   const articleJsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -74,47 +77,66 @@ export default function GuideDetail({ guide, relatedGuides }: GuideDetailProps) 
           dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
         />
       </Head>
-      <article className="mx-auto max-w-3xl px-5 py-12">
+      <article className="mx-auto max-w-3xl px-4 py-8 sm:px-5 sm:py-12">
         <Link href="/guides" className="text-sm font-semibold text-tea">
           返回攻略列表
         </Link>
-        <div className="mt-6 rounded-lg border border-stone-200 bg-white p-6 shadow-soft">
-          <div className="mb-4 flex flex-wrap gap-2">
-            <span className="rounded-full bg-linen px-3 py-1 text-xs text-stone-700">
+        <div className="mt-5 rounded-lg border border-stone-200 bg-white p-4 shadow-soft sm:mt-6 sm:p-6">
+          <div className="mb-3 flex flex-wrap gap-1.5 sm:mb-4 sm:gap-2">
+            <span className="rounded-full bg-linen px-2.5 py-1 text-xs text-stone-700 sm:px-3">
               {guide.category}
             </span>
-            {(guide.tags.length ? guide.tags : [guide.babyAge]).map((tag) => (
-              <span key={tag} className="rounded-full bg-mist px-3 py-1 text-xs text-stone-700">
+            {primaryTags.map((tag) => (
+              <span key={tag} className="rounded-full bg-mist px-2.5 py-1 text-xs text-stone-700 sm:px-3">
                 {tag}
               </span>
             ))}
+            {secondaryTags.map((tag) => (
+              <span
+                key={tag}
+                className="hidden rounded-full bg-mist px-3 py-1 text-xs text-stone-700 sm:inline-flex"
+              >
+                {tag}
+              </span>
+            ))}
+            {secondaryTags.length > 0 ? (
+              <span className="rounded-full bg-mist px-2.5 py-1 text-xs text-stone-700 sm:hidden">
+                +{secondaryTags.length}
+              </span>
+            ) : null}
           </div>
-          <h1 className="text-3xl font-semibold leading-tight text-ink">{guide.title}</h1>
-          <p className="mt-4 leading-7 text-stone-600">{guide.description}</p>
-          <p className="mt-4 text-sm text-stone-500">
+          <h1 className="text-2xl font-semibold leading-tight text-ink sm:text-3xl">
+            {guide.title}
+          </h1>
+          <p className="mt-3 text-sm leading-6 text-stone-600 sm:mt-4 sm:text-base sm:leading-7">
+            {guide.description}
+          </p>
+          <p className="mt-3 text-sm text-stone-500 sm:mt-4">
             {guide.readingTime} · 发布 {guide.publishedAt || guide.updatedAt}
           </p>
         </div>
-        <div className="prose prose-stone mt-8 max-w-none rounded-lg border border-stone-200 bg-white p-6 shadow-soft">
+        <div className="prose prose-stone mt-6 max-w-none rounded-lg border border-stone-200 bg-white p-4 shadow-soft sm:mt-8 sm:p-6">
           <MarkdownContent content={guide.content} />
         </div>
       </article>
 
-      <section className="mx-auto max-w-6xl px-5 pb-12">
-        <div className="mb-5">
+      <section className="mx-auto max-w-6xl px-4 pb-10 sm:px-5 sm:pb-12">
+        <div className="mb-4 sm:mb-5">
           <p className="text-sm font-semibold text-tea">按主题继续读</p>
-          <h2 className="mt-2 text-2xl font-semibold text-ink">相关攻略</h2>
+          <h2 className="mt-1.5 text-xl font-semibold text-ink sm:mt-2 sm:text-2xl">相关攻略</h2>
         </div>
         <div className="grid gap-4 md:grid-cols-3">
           {relatedGuides.map((item) => (
             <Link
               key={item.slug}
               href={`/guides/${item.slug}`}
-              className="rounded-lg border border-stone-200 bg-white p-5 shadow-soft"
+              className="rounded-lg border border-stone-200 bg-white p-4 shadow-soft sm:p-5"
             >
               <p className="text-sm text-tea">{item.category}</p>
               <h3 className="mt-2 font-semibold text-ink">{item.title}</h3>
-              <p className="mt-2 text-sm leading-6 text-stone-600">{item.description}</p>
+              <p className="mt-2 text-sm leading-6 text-stone-600 sm:leading-7">
+                {item.description}
+              </p>
             </Link>
           ))}
         </div>
