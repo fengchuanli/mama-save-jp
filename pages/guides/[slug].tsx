@@ -11,6 +11,29 @@ type GuideDetailProps = {
   relatedGuides: GuideMeta[];
 };
 
+function getRelatedGuides(guide: Guide, guides: GuideMeta[]) {
+  return guides
+    .filter((item) => item.slug !== guide.slug)
+    .map((item) => {
+      const sharedTags = item.tags.filter((tag) => guide.tags.includes(tag)).length;
+      const categoryScore = item.category === guide.category ? 3 : 0;
+      const ageScore = item.babyAge === guide.babyAge ? 1 : 0;
+
+      return {
+        guide: item,
+        score: sharedTags * 2 + categoryScore + ageScore
+      };
+    })
+    .sort((a, b) => {
+      if (b.score !== a.score) return b.score - a.score;
+      const aDate = a.guide.updatedAt || a.guide.publishedAt;
+      const bDate = b.guide.updatedAt || b.guide.publishedAt;
+      return bDate.localeCompare(aDate);
+    })
+    .slice(0, 3)
+    .map(({ guide: item }) => item);
+}
+
 export default function GuideDetail({ guide, relatedGuides }: GuideDetailProps) {
   const siteUrl = "https://fengchuanli.github.io/mama-save-jp";
   const guideUrl = `${siteUrl}/guides/${guide.slug}`;
@@ -78,7 +101,10 @@ export default function GuideDetail({ guide, relatedGuides }: GuideDetailProps) 
       </article>
 
       <section className="mx-auto max-w-6xl px-5 pb-12">
-        <h2 className="mb-5 text-2xl font-semibold text-ink">继续阅读</h2>
+        <div className="mb-5">
+          <p className="text-sm font-semibold text-tea">按主题继续读</p>
+          <h2 className="mt-2 text-2xl font-semibold text-ink">相关攻略</h2>
+        </div>
         <div className="grid gap-4 md:grid-cols-3">
           {relatedGuides.map((item) => (
             <Link
@@ -107,9 +133,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps<GuideDetailProps> = async ({ params }) => {
   const slug = String(params?.slug);
   const guide = getGuideBySlug(slug);
-  const relatedGuides = getAllGuides()
-    .filter((item) => item.slug !== slug)
-    .slice(0, 3);
+  const relatedGuides = getRelatedGuides(guide, getAllGuides());
 
   return {
     props: {

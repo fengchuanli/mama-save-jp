@@ -1,5 +1,25 @@
 # 优化记录
 
+## 2026-06-21
+
+- 时间：2026-06-21 00:03 JST
+- 当前优化方向：00:00 内容结构。
+- 目标：让攻略详情页的“相关攻略”按主题关联，而不是简单展示最新文章，帮助用户从尿不湿、楽天、线下购物等主题继续阅读。
+- 修改文件：
+  - `pages/guides/[slug].tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `npm run sitemap`
+  - `node` 静态检查攻略详情页包含相关推荐打分逻辑和新版标题
+  - `git diff --check`
+  - `npm run build`
+- 结果：攻略详情页新增 `getRelatedGuides`，按同分类、共享标签和相同月龄为候选文章打分，并在同分时按更新时间/发布时间排序；页面文案从笼统的“继续阅读”改为“按主题继续读 / 相关攻略”。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 9 篇攻略、8 条优惠、13 个日历活动校验通过；`npm run sitemap` 生成 13 个 URL；`node` 静态检查通过；`git diff --check` 通过；`npm run build` 先成功执行 `prebuild`，但主构建仍因当前工作区没有可用的 `next` 命令失败，报 `sh: next: command not found`。npm 日志写入用户目录仍因权限受限失败，未安装依赖，避免提交 `node_modules` 或缓存。
+- 是否提交：是，提交说明为“优化攻略相关内容推荐”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续内容结构方向可继续检查攻略列表是否需要按主题分组；网络恢复后先推送本地领先提交。
+
 ## 2026-06-20
 
 - 时间：2026-06-20 16:31 JST
