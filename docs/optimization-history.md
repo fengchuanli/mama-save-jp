@@ -1,5 +1,18 @@
 # 优化记录
 
+## 2026-06-21 支付返点展示提前
+
+- 时间：2026-06-21 JST
+- 当前优化方向：支付返点入口。
+- 目标：把 PayPay、Yahoo!ショッピング、楽天ペイ、d払い、au PAY 等支付返点从省钱日历底部提升为用户优先看到的决策入口。
+- 修改文件：
+  - `lib/payment-rebates.ts`
+  - `components/PaymentRebateSpotlight.tsx`
+  - `pages/calendar.tsx`
+  - `pages/index.tsx`
+  - `docs/optimization-history.md`
+- 结果：`/calendar` 顶部新增「本周先看：支付返点」区块，展示 5 条重点支付返点；首页新增「出门前先看支付返点」模块，展示 3 条重点支付返点并引导查看省钱日历。省钱日历原有按平台分组保留，支付平台不再只出现在页面底部。
+
 ## 2026-06-21 合规规则补充
 
 - 时间：2026-06-21 JST

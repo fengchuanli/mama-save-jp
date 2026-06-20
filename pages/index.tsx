@@ -4,8 +4,10 @@ import { CalendarCard } from "@/components/CalendarCard";
 import { DealCard } from "@/components/DealCard";
 import { GuideCard } from "@/components/GuideCard";
 import { Layout } from "@/components/Layout";
+import { PaymentRebateSpotlight } from "@/components/PaymentRebateSpotlight";
 import { SectionHeader } from "@/components/SectionHeader";
 import { getAllGuides } from "@/lib/guides";
+import { getPaymentRebateEvents } from "@/lib/payment-rebates";
 import type { CalendarEvent, Deal, GuideMeta } from "@/lib/types";
 import dealsData from "@/data/deals.json";
 import calendarData from "@/data/shopping-calendar.json";
@@ -13,10 +15,11 @@ import calendarData from "@/data/shopping-calendar.json";
 type HomeProps = {
   deals: Deal[];
   calendarEvents: CalendarEvent[];
+  paymentRebateEvents: CalendarEvent[];
   guides: GuideMeta[];
 };
 
-export default function Home({ deals, calendarEvents, guides }: HomeProps) {
+export default function Home({ deals, calendarEvents, paymentRebateEvents, guides }: HomeProps) {
   const guideSteps = ["准备清单", "高频消耗品", "平台规则"];
 
   return (
@@ -82,6 +85,17 @@ export default function Home({ deals, calendarEvents, guides }: HomeProps) {
           {deals.map((deal) => (
             <DealCard key={deal.id} deal={deal} />
           ))}
+        </div>
+      </section>
+
+      <section className="bg-cream">
+        <div className="mx-auto max-w-6xl px-5 py-12">
+          <PaymentRebateSpotlight
+            events={paymentRebateEvents}
+            title="出门前先看支付返点"
+            eyebrow="出门前检查"
+            showAllLink
+          />
         </div>
       </section>
 
@@ -171,6 +185,7 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => {
     props: {
       deals: (dealsData as Deal[]).slice(0, 2),
       calendarEvents: (calendarData as CalendarEvent[]).slice(0, 3),
+      paymentRebateEvents: getPaymentRebateEvents(calendarData as CalendarEvent[], 3),
       guides: beginnerGuides
     }
   };

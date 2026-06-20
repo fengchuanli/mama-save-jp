@@ -1,7 +1,9 @@
 import type { GetStaticProps } from "next";
 import { CalendarStoreGroup } from "@/components/CalendarCard";
 import { Layout } from "@/components/Layout";
+import { PaymentRebateSpotlight } from "@/components/PaymentRebateSpotlight";
 import { SectionHeader } from "@/components/SectionHeader";
+import { getPaymentRebateEvents } from "@/lib/payment-rebates";
 import type { CalendarEvent } from "@/lib/types";
 import calendarData from "@/data/shopping-calendar.json";
 
@@ -10,6 +12,7 @@ type CalendarProps = {
 };
 
 export default function Calendar({ events }: CalendarProps) {
+  const paymentRebateEvents = getPaymentRebateEvents(events);
   const groupedEvents = events.reduce<Record<string, CalendarEvent[]>>((groups, event) => {
     if (!groups[event.store]) {
       groups[event.store] = [];
@@ -41,6 +44,8 @@ export default function Calendar({ events }: CalendarProps) {
             <p>再看“注意什么”，尤其是积分上限、运费门槛和不要为了凑单乱买。</p>
           </div>
         </div>
+
+        <PaymentRebateSpotlight events={paymentRebateEvents} />
 
         <div className="space-y-5 sm:space-y-7">
           {Object.entries(groupedEvents).map(([store, storeEvents]) => (
