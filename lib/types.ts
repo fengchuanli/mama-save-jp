@@ -36,6 +36,7 @@ export type CalendarEvent = {
   benefit: string;
   reminder: string;
   buyingTiming: "prepare" | "same-day" | "watch";
+  decisionHint: string;
   checkBeforeBuying: string[];
   suitableItems: string[];
   participationSteps?: string[];

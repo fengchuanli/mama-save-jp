@@ -56,6 +56,9 @@ export function CalendarCard({ event }: { event: CalendarEvent }) {
         </span>
       </div>
       <h3 className="text-base font-semibold leading-7 text-ink sm:text-lg">{event.eventName}</h3>
+      <p className="mt-2 rounded-lg border border-tea/20 bg-mist px-3 py-2 text-sm font-medium leading-6 text-ink">
+        先这样判断：{event.decisionHint}
+      </p>
       {(event.sourceName || event.updatedAt) && (
         <p className="mt-1.5 text-xs leading-5 text-stone-500 sm:mt-2">
           {event.sourceName && event.sourceUrl ? (

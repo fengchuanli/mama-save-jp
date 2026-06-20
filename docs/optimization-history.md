@@ -1,5 +1,28 @@
 # 优化记录
 
+## 2026-06-21 省钱日历决策提示
+
+- 时间：2026-06-21 02:03 JST
+- 当前优化方向：02:00 省钱日历。
+- 目标：给每个省钱日历活动补一条短的“先这样判断”提示，让用户在长规则、返点和注意事项前先知道是否值得行动。
+- 修改文件：
+  - `data/shopping-calendar.json`
+  - `components/CalendarCard.tsx`
+  - `lib/types.ts`
+  - `scripts/validate-content.mjs`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `npm run sitemap`
+  - `node` 检查 13 个日历活动均有 `decisionHint` 且长度在 12-80 字
+  - `git diff --check`
+  - `npm run build`
+- 结果：13 个日历活动均新增 `decisionHint`，覆盖 Amazon、楽天、西松屋、赤ちゃん本舗、药妆店、Yahoo!ショッピング和支付返点活动；日历卡片在标题下展示“先这样判断”，帮助用户先判断是提前准备、当天核价还是只观察线索。内容校验脚本已要求所有日历活动必须提供短判断提示。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 9 篇攻略、6 条优惠、13 个日历活动校验通过；`npm run sitemap` 生成 13 个 URL；`node` 检查 13 个日历活动均有 `decisionHint`；`git diff --check` 通过；`npm run build` 先成功执行 `prebuild`，但主构建仍因当前工作区没有可用的 `next` 命令失败，报 `sh: next: command not found`。npm 日志写入用户目录仍因权限受限失败，未安装依赖，避免提交 `node_modules` 或缓存。
+- 是否提交：是，提交说明为“补充省钱日历决策提示”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续省钱日历方向可继续检查活动排序或把即将到来的日期单独标记；网络恢复后先推送本地领先提交。
+
 ## 2026-06-21 支付返点展示提前
 
 - 时间：2026-06-21 JST

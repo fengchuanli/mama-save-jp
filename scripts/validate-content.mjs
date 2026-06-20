@@ -137,7 +137,16 @@ assertUniqueIds(calendarEvents, "data/shopping-calendar.json");
 
 for (const event of calendarEvents) {
   const label = `data/shopping-calendar.json#${event.id ?? "unknown"}`;
-  const requiredFields = ["store", "eventName", "days", "benefit", "reminder", "buyingTiming", "difficulty"];
+  const requiredFields = [
+    "store",
+    "eventName",
+    "days",
+    "benefit",
+    "reminder",
+    "buyingTiming",
+    "decisionHint",
+    "difficulty"
+  ];
 
   for (const field of requiredFields) {
     assert(event[field], `${label} 缺少字段：${field}`);
@@ -151,6 +160,10 @@ for (const event of calendarEvents) {
   assert(
     ["prepare", "same-day", "watch"].includes(event.buyingTiming),
     `${label} buyingTiming 只能是 prepare / same-day / watch`
+  );
+  assert(
+    typeof event.decisionHint === "string" && event.decisionHint.length >= 12 && event.decisionHint.length <= 80,
+    `${label} decisionHint 需要是 12-80 字的短判断提示`
   );
   assert(sourceLevels.includes(event.sourceLevel), `${label} sourceLevel 不合法或缺失`);
   assert(
