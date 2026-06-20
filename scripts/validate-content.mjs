@@ -109,6 +109,12 @@ for (const deal of deals) {
     assert(deal.url, `${label} 已核验优惠必须提供具体商品页或活动页 url`);
     assert(deal.sourceName, `${label} 已核验优惠必须提供 sourceName`);
     assert(
+      Array.isArray(deal.participationSteps) && deal.participationSteps.length >= 3,
+      `${label} 已核验优惠必须提供至少 3 项 participationSteps`
+    );
+    assert(deal.savingsExample, `${label} 已核验优惠必须提供 savingsExample`);
+    assert(deal.maxBenefitExample, `${label} 已核验优惠必须提供 maxBenefitExample`);
+    assert(
       deal.availabilityStatus !== "unknown",
       `${label} 已核验优惠必须明确 active / expired / unavailable`
     );
@@ -137,6 +143,12 @@ for (const event of calendarEvents) {
     ["prepare", "same-day", "watch"].includes(event.buyingTiming),
     `${label} buyingTiming 只能是 prepare / same-day / watch`
   );
+  assert(
+    Array.isArray(event.participationSteps) && event.participationSteps.length >= 3,
+    `${label} participationSteps 至少需要 3 项`
+  );
+  assert(event.savingsExample, `${label} 缺少 savingsExample`);
+  assert(event.maxBenefitExample, `${label} 缺少 maxBenefitExample`);
   assert(["easy", "normal", "hard"].includes(event.difficulty), `${label} difficulty 只能是 easy / normal / hard`);
   if (event.updatedAt) {
     assert(datePattern.test(toDateOnly(event.updatedAt)), `${label} updatedAt 需要使用 YYYY-MM-DD`);

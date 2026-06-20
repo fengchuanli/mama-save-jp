@@ -17,6 +17,9 @@ export type Deal = {
   whyWorthBuying: string;
   skipWhen: string;
   checkBeforeBuying: string[];
+  participationSteps?: string[];
+  savingsExample?: string;
+  maxBenefitExample?: string;
   updatedAt: string;
   priority: "high" | "medium" | "low";
 };
@@ -31,6 +34,9 @@ export type CalendarEvent = {
   buyingTiming: "prepare" | "same-day" | "watch";
   checkBeforeBuying: string[];
   suitableItems: string[];
+  participationSteps?: string[];
+  savingsExample?: string;
+  maxBenefitExample?: string;
   difficulty: "easy" | "normal" | "hard";
   sourceName?: string;
   sourceUrl?: string;

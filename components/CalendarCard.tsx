@@ -24,6 +24,19 @@ const buyingTimingClass = {
   watch: "bg-mist text-stone-700"
 };
 
+function BulletList({ items }: { items: string[] }) {
+  return (
+    <ul className="mt-2 space-y-1.5 text-sm leading-6 text-stone-700 sm:mt-3 sm:space-y-2">
+      {items.map((item) => (
+        <li key={item} className="flex gap-2">
+          <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-tea" />
+          <span>{item}</span>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 export function CalendarCard({ event }: { event: CalendarEvent }) {
   return (
     <article className="rounded-lg border border-stone-200 bg-white p-4 shadow-soft sm:p-5">
@@ -46,7 +59,12 @@ export function CalendarCard({ event }: { event: CalendarEvent }) {
       {(event.sourceName || event.updatedAt) && (
         <p className="mt-1.5 text-xs leading-5 text-stone-500 sm:mt-2">
           {event.sourceName && event.sourceUrl ? (
-            <a className="underline underline-offset-2" href={event.sourceUrl}>
+            <a
+              className="underline underline-offset-2"
+              href={event.sourceUrl}
+              target="_blank"
+              rel="noreferrer"
+            >
               来源：{event.sourceName}
             </a>
           ) : event.sourceName ? (
@@ -59,6 +77,13 @@ export function CalendarCard({ event }: { event: CalendarEvent }) {
       <p className="mt-3 text-sm leading-6 text-stone-700 sm:text-base sm:leading-7">
         {event.benefit}
       </p>
+
+      {event.participationSteps?.length ? (
+        <div className="mt-4 rounded-lg border border-stone-200 bg-white p-3 sm:mt-5 sm:p-4">
+          <p className="text-sm font-semibold text-ink">怎么参加</p>
+          <BulletList items={event.participationSteps} />
+        </div>
+      ) : null}
 
       <div className="mt-4 rounded-lg bg-cream p-3 sm:mt-5 sm:p-4">
         <p className="text-sm font-semibold text-ink">适合买什么</p>
@@ -74,16 +99,26 @@ export function CalendarCard({ event }: { event: CalendarEvent }) {
         </div>
       </div>
 
+      {(event.savingsExample || event.maxBenefitExample) && (
+        <div className="mt-3 grid gap-3 sm:mt-4 sm:grid-cols-2">
+          {event.savingsExample ? (
+            <div className="rounded-lg border border-tea/30 bg-mist p-3 sm:p-4">
+              <p className="text-sm font-semibold text-ink">省钱示例</p>
+              <p className="mt-2 text-sm leading-6 text-stone-700">{event.savingsExample}</p>
+            </div>
+          ) : null}
+          {event.maxBenefitExample ? (
+            <div className="rounded-lg border border-peach bg-linen p-3 sm:p-4">
+              <p className="text-sm font-semibold text-ink">最大可省/可返示例</p>
+              <p className="mt-2 text-sm leading-6 text-stone-700">{event.maxBenefitExample}</p>
+            </div>
+          ) : null}
+        </div>
+      )}
+
       <div className="mt-3 rounded-lg border border-stone-200 bg-white p-3 sm:mt-4 sm:p-4">
         <p className="text-sm font-semibold text-ink">下单前确认</p>
-        <ul className="mt-2 space-y-1.5 text-sm leading-6 text-stone-700 sm:mt-3 sm:space-y-2">
-          {event.checkBeforeBuying.map((item) => (
-            <li key={item} className="flex gap-2">
-              <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-tea" />
-              <span>{item}</span>
-            </li>
-          ))}
-        </ul>
+        <BulletList items={event.checkBeforeBuying} />
       </div>
 
       <div className="mt-3 rounded-lg border border-peach bg-linen p-3 sm:mt-4 sm:p-4">

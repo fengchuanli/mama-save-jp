@@ -30,6 +30,19 @@ const availabilityStatusClass = {
   unavailable: "bg-rose-100 text-rose-800"
 };
 
+function BulletList({ items }: { items: string[] }) {
+  return (
+    <ul className="mt-2 space-y-2 text-sm leading-6 text-stone-700 sm:text-base sm:leading-7">
+      {items.map((item) => (
+        <li key={item} className="flex gap-2">
+          <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-tea" />
+          <span>{item}</span>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 export function DealCard({ deal }: { deal: Deal }) {
   const hasPrice = Boolean(deal.originalPrice || deal.salePrice || deal.effectivePrice);
   const content = (
@@ -60,18 +73,22 @@ export function DealCard({ deal }: { deal: Deal }) {
           </span>
         ) : null}
       </div>
+
       <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <h3 className="text-base font-semibold leading-7 text-ink sm:text-lg">{deal.title}</h3>
-          <p className="mt-1 text-xs text-stone-500 sm:text-sm">更新 {deal.updatedAt}</p>
+          <p className="mt-1 text-xs leading-5 text-stone-500 sm:text-sm">
+            更新 {deal.updatedAt}
+            {deal.sourceName ? ` · 来源：${deal.sourceName}` : ""}
+          </p>
         </div>
         {deal.url ? (
           <span className="text-xs font-semibold text-tea sm:rounded-full sm:border sm:border-stone-200 sm:px-3 sm:py-2">
-            查看商品页
+            查看活动/商品页
           </span>
         ) : (
           <span className="text-xs font-semibold text-stone-400 sm:rounded-full sm:border sm:border-stone-200 sm:px-3 sm:py-2">
-            商品页待确认
+            来源待确认
           </span>
         )}
       </div>
@@ -80,7 +97,7 @@ export function DealCard({ deal }: { deal: Deal }) {
         <div className="mt-4 grid grid-cols-2 gap-3 rounded-lg bg-cream p-3 text-sm sm:mt-5 sm:grid-cols-3">
           <div>
             <p className="text-stone-500">原价</p>
-            <p className="mt-1 font-semibold text-stone-700">{deal.originalPrice || "未标注"}</p>
+            <p className="mt-1 font-semibold text-stone-700">{deal.originalPrice || "以商品页为准"}</p>
           </div>
           <div>
             <p className="text-stone-500">优惠价</p>
@@ -97,7 +114,14 @@ export function DealCard({ deal }: { deal: Deal }) {
         </div>
       )}
 
-      <div className="mt-4 rounded-lg border border-peach bg-linen p-3 sm:mt-5 sm:p-4">
+      {deal.participationSteps?.length ? (
+        <div className="mt-4 rounded-lg border border-stone-200 bg-white p-3 sm:mt-5 sm:p-4">
+          <p className="text-sm font-semibold text-ink">怎么参加</p>
+          <BulletList items={deal.participationSteps} />
+        </div>
+      ) : null}
+
+      <div className="mt-3 rounded-lg border border-peach bg-linen p-3 sm:mt-4 sm:p-4">
         <p className="text-sm font-semibold text-ink">
           {deal.availabilityStatus === "active" ? "为什么值得买" : "参考价值"}
         </p>
@@ -105,6 +129,23 @@ export function DealCard({ deal }: { deal: Deal }) {
           {deal.whyWorthBuying}
         </p>
       </div>
+
+      {(deal.savingsExample || deal.maxBenefitExample) && (
+        <div className="mt-3 grid gap-3 sm:grid-cols-2">
+          {deal.savingsExample ? (
+            <div className="rounded-lg border border-tea/30 bg-mist p-3 sm:p-4">
+              <p className="text-sm font-semibold text-ink">买了能省多少</p>
+              <p className="mt-2 text-sm leading-6 text-stone-700">{deal.savingsExample}</p>
+            </div>
+          ) : null}
+          {deal.maxBenefitExample ? (
+            <div className="rounded-lg border border-peach bg-linen p-3 sm:p-4">
+              <p className="text-sm font-semibold text-ink">最大可省/可返示例</p>
+              <p className="mt-2 text-sm leading-6 text-stone-700">{deal.maxBenefitExample}</p>
+            </div>
+          ) : null}
+        </div>
+      )}
 
       <div className="mt-3 rounded-lg border border-stone-200 bg-white p-3 sm:p-4">
         <p className="text-sm font-semibold text-ink">什么情况不适合买</p>
@@ -115,14 +156,7 @@ export function DealCard({ deal }: { deal: Deal }) {
 
       <div className="mt-3 rounded-lg border border-stone-200 bg-white p-3 sm:p-4">
         <p className="text-sm font-semibold text-ink">下单前核价</p>
-        <ul className="mt-2 space-y-2 text-sm leading-6 text-stone-700 sm:text-base sm:leading-7">
-          {deal.checkBeforeBuying.map((item) => (
-            <li key={item} className="flex gap-2">
-              <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-tea" />
-              <span>{item}</span>
-            </li>
-          ))}
-        </ul>
+        <BulletList items={deal.checkBeforeBuying} />
       </div>
 
       <dl className="mt-4 grid gap-3 text-sm sm:mt-5 sm:gap-4 md:grid-cols-2">
