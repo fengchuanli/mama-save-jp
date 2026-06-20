@@ -1,5 +1,29 @@
 # 优化记录
 
+## 2026-06-21
+
+- 时间：2026-06-21 01:03 JST
+- 当前优化方向：01:00 优惠数据。
+- 目标：为 `/deals` 已核验优惠补充“核验范围”，让朋友评估时能区分官方活动规则已核验、商品实时价格/库存仍需下单前确认。
+- 已核验优惠复查：本次修改 `data/deals.json` 前复查 6 条 `dataStatus: "verified"` 优惠。楽天お買い物マラソン、Yahoo!ショッピング 5のつく日、アカチャンホンポ 3/8 日ポイント10倍、西松屋チラシ・セール入口、PayPay キャンペーン / PayPayスクラッチ、楽天姓名贴搜索页均仍可访问；未发现需要改为 `expired` 或 `unavailable` 的条目。
+- 修改文件：
+  - `data/deals.json`
+  - `components/DealCard.tsx`
+  - `lib/types.ts`
+  - `scripts/validate-content.mjs`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - 官方页面人工核对 6 条已核验优惠来源
+  - `npm run validate:content`
+  - `npm run sitemap`
+  - `git diff --check`
+  - `npm run build`
+- 结果：6 条已核验优惠均新增 `verificationScope`，逐条说明已核验的是官方活动规则、活动入口或商品集合入口，并明确具体 SKU、库存、送料、券后价、积分内訳、门店参加情况仍需用户在商品页或结算页确认；优惠卡片新增“核验范围”展示，内容校验脚本要求所有已核验优惠必须提供该字段。
+- 构建结果：`npm run validate:content` 通过，当前 9 篇攻略、6 条优惠、13 个日历活动校验通过；`npm run sitemap` 生成 13 个 URL；`git diff --check` 通过；`npm run build` 先成功执行 `prebuild`，但主构建仍因当前工作区没有可用的 `next` 命令失败，报 `sh: next: command not found`。npm 日志写入用户目录仍因权限受限失败，未安装依赖，避免提交 `node_modules` 或缓存。
+- 是否提交：是，提交说明为“补充优惠核验范围说明”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：继续把已核验优惠从“活动机会”推进到少量具体商品页级别核验；新增商品页优惠前仍需先复查现有 verified 条目。
+
 ## 2026-06-21 真实数据评估版
 
 - 时间：2026-06-21 JST

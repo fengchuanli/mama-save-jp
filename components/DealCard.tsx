@@ -130,6 +130,15 @@ export function DealCard({ deal }: { deal: Deal }) {
         </p>
       </div>
 
+      {deal.verificationScope ? (
+        <div className="mt-3 rounded-lg border border-stone-200 bg-white p-3 sm:p-4">
+          <p className="text-sm font-semibold text-ink">核验范围</p>
+          <p className="mt-2 text-sm leading-6 text-stone-700 sm:text-base sm:leading-7">
+            {deal.verificationScope}
+          </p>
+        </div>
+      ) : null}
+
       {(deal.savingsExample || deal.maxBenefitExample) && (
         <div className="mt-3 grid gap-3 sm:grid-cols-2">
           {deal.savingsExample ? (

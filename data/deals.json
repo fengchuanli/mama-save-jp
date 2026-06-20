@@ -16,6 +16,7 @@
     "dataStatus": "verified",
     "availabilityStatus": "active",
     "whyWorthBuying": "尿不湿、湿巾、辅食都是高频刚需，买回活动的优势不是某一个商品便宜，而是把本来就要买的东西分散到不同店铺后，整体返点更高。",
+    "verificationScope": "已核验楽天官方买回活动页仍可访问，活动规则、エントリー、1 店铺 1,000 日元条件和积分上限有官方来源；未核验具体尿不湿/湿巾 SKU 的实时库存、券后价或送料。",
     "skipWhen": "如果只是为了凑店铺数买不需要的东西，或者宝宝快换码、家里库存超过 1 个月，就不建议硬凑。",
     "checkBeforeBuying": [
       "先エントリー，并领取目标店铺优惠券。",
@@ -51,6 +52,7 @@
     "dataStatus": "verified",
     "availabilityStatus": "active",
     "whyWorthBuying": "尿不湿箱购金额通常能到 5,000-12,000 日元，+4% 对刚需补货有直接冲击，参加方式也比复杂买回简单。",
+    "verificationScope": "已核验 Yahoo!ショッピング 5のつく日官方活动页仍可访问，下一次期间、エントリー、指定支付和 +4% 上限有官方来源；未核验具体箱购商品的实时售价、库存或最终 PayPay 内訳。",
     "skipWhen": "如果不用指定支付方式、不会用 Yahoo/PayPay 期间限定ポイント，或者同款在 Amazon/楽天含运费更低，就不适合买。",
     "checkBeforeBuying": [
       "活动当天先エントリー，再下单。",
@@ -86,6 +88,7 @@
     "dataStatus": "verified",
     "availabilityStatus": "active",
     "whyWorthBuying": "赤ちゃん本舗适合买月龄敏感、需要看品牌安心感的用品。固定 3/8 结尾日更容易形成购物节奏，不用每天刷价。",
+    "verificationScope": "已核验アカチャンホンポ Online Shop 官方 3/8 日ポイント10倍页仍可访问，活动时间、Online Shop 限定和対象カテゴリ规则有官方来源；未核验每个商品是否属于対象カテゴリ或结算页实际积分。",
     "skipWhen": "如果商品不属于対象カテゴリ、需要凑免运买非刚需，或同款在其他平台实付更低，就不建议只为积分买。",
     "checkBeforeBuying": [
       "确认当前时间在 10:00 到次日 09:59 活动窗口内。",
@@ -121,6 +124,7 @@
     "dataStatus": "verified",
     "availabilityStatus": "active",
     "whyWorthBuying": "保育园备用衣物和小件用品不需要追求高端，西松屋的优势是基础款便宜、到店可看实物，买错成本较低。",
+    "verificationScope": "已核验西松屋官方首页的チラシ・セール入口仍可访问，并能确认 6/18-6/30 チラシ活动入口；未核验单个门店库存、门店售价或线上具体商品价格。",
     "skipWhen": "如果园方还没发清单、尺码不确定，或为了凑低价买花色复杂/不好清洗的款式，先不要买。",
     "checkBeforeBuying": [
       "先看保育园清单，再决定数量。",
@@ -156,6 +160,7 @@
     "dataStatus": "verified",
     "availabilityStatus": "active",
     "whyWorthBuying": "对临时小额补货友好：不需要凑店铺数，本来要买就顺手用 PayPay 结账，有机会拿到额外返还。",
+    "verificationScope": "已核验 PayPay 官方キャンペーン页和 PayPayスクラッチくじ详情页仍可访问，期间、200 日元以上支付、本人确认和抽选返还规则有官方来源；未核验具体药妆店是否参加或商品本身是否降价。",
     "skipWhen": "如果目标门店不参加、商品本身比电商贵很多，或为了抽选额外买非刚需，就不值得。",
     "checkBeforeBuying": [
       "确认门店或线上渠道是否属于対象。",
@@ -191,6 +196,7 @@
     "dataStatus": "verified",
     "availabilityStatus": "active",
     "whyWorthBuying": "姓名贴通常单价不高，但刚好能作为买回活动中的一个店铺，同时解决入园高频刚需。",
+    "verificationScope": "已核验楽天市場姓名贴搜索结果页仍可访问，并能确认有保育园姓名贴相关结果；这是可核验商品集合入口，不代表推荐某个固定店铺或单一 SKU。",
     "skipWhen": "保育园还没发清单、园方要求手写，或需要特殊尺寸但店铺制作周期不确定时先不要买。",
     "checkBeforeBuying": [
       "确认园方是否允许姓名贴。",

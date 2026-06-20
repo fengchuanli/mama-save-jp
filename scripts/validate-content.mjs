@@ -114,6 +114,7 @@ for (const deal of deals) {
     );
     assert(deal.savingsExample, `${label} 已核验优惠必须提供 savingsExample`);
     assert(deal.maxBenefitExample, `${label} 已核验优惠必须提供 maxBenefitExample`);
+    assert(deal.verificationScope, `${label} 已核验优惠必须说明 verificationScope`);
     assert(
       deal.availabilityStatus !== "unknown",
       `${label} 已核验优惠必须明确 active / expired / unavailable`
