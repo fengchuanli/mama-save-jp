@@ -1,5 +1,25 @@
 # 优化记录
 
+## 2026-06-21 亲友试用反馈清单
+
+- 时间：2026-06-21 07:03 JST
+- 当前优化方向：07:00 增长准备。
+- 目标：为 5-10 个亲友小范围试用准备可执行的反馈清单，帮助验证站点定位、信任感、决策帮助和分享意愿，而不引入表单、后端、账号或追踪。
+- 修改文件：
+  - `docs/friend-feedback-checklist.md`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `npm run sitemap`
+  - `node` 静态检查反馈清单包含试用对象、发送前检查、观察任务、访谈问题、反馈记录模板和优先级判断
+  - `git diff --check`
+  - `npm run build`
+- 结果：新增亲友试用反馈清单，覆盖试用对象选择、发送前人工检查、5 个观察任务、围绕第一印象/信任感/决策帮助/分享意愿的访谈问题、反馈记录模板和反馈处理优先级。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、6 条优惠、13 个日历活动校验通过；`npm run sitemap` 生成 14 个 URL；`node` 静态检查反馈清单核心章节通过；`git diff --check` 通过；`npm run build` 先成功执行 `prebuild`，但主构建仍因当前工作区没有可用的 `next` 命令失败，报 `sh: next: command not found`。npm 日志写入用户目录仍因权限受限失败，未安装依赖，避免提交 `node_modules` 或缓存。
+- 是否提交：是，提交说明为“新增亲友试用反馈清单”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：把清单用于 5-10 个亲友试用，优先记录原话；网络恢复后先推送本地领先提交。
+
 ## 2026-06-21 攻略详情页移动端阅读优化
 
 - 时间：2026-06-21 06:02 JST
