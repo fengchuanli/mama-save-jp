@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Head from "next/head";
 import type { GetStaticProps } from "next";
 import { GuideCard } from "@/components/GuideCard";
 import { Layout } from "@/components/Layout";
@@ -11,6 +12,8 @@ type GuidesProps = {
 };
 
 export default function Guides({ guides }: GuidesProps) {
+  const siteUrl = "https://fengchuanli.github.io/mama-save-jp";
+  const guidesUrl = `${siteUrl}/guides`;
   const beginnerGuideSlugs = [
     "newborn-shopping-list",
     "buy-diapers-japan",
@@ -19,12 +22,68 @@ export default function Guides({ guides }: GuidesProps) {
   const beginnerGuides = beginnerGuideSlugs
     .map((slug) => guides.find((guide) => guide.slug === slug))
     .filter((guide): guide is GuideMeta => Boolean(guide));
+  const collectionJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: "日本母婴省钱攻略列表",
+    description:
+      "面向在日华人宝妈/宝爸的日本母婴省钱攻略，整理尿不湿、楽天积分、药妆店优惠、保育园用品和支付返点判断方法。",
+    url: guidesUrl,
+    inLanguage: "zh-CN",
+    isPartOf: {
+      "@type": "WebSite",
+      name: "母婴省钱日历",
+      url: siteUrl
+    },
+    audience: {
+      "@type": "Audience",
+      audienceType: "在日华人宝妈/宝爸"
+    },
+    mainEntity: {
+      "@type": "ItemList",
+      itemListElement: guides.map((guide, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        name: guide.title,
+        url: `${guidesUrl}/${guide.slug}`,
+        description: guide.description
+      }))
+    }
+  };
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "首页",
+        item: siteUrl
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "攻略",
+        item: guidesUrl
+      }
+    ]
+  };
 
   return (
     <Layout
       title="攻略列表"
       description="面向在日华人宝妈的日本母婴省钱攻略，解释尿不湿、楽天积分、西松屋、赤ちゃん本舗、保育园用品和童装尺码。"
     >
+      <Head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        />
+      </Head>
       <section className="mx-auto max-w-6xl px-5 py-12">
         <SectionHeader
           eyebrow="攻略列表"

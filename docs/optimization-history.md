@@ -1,5 +1,25 @@
 # 优化记录
 
+## 2026-06-21 攻略列表 SEO 结构化数据
+
+- 时间：2026-06-21 04:01 JST
+- 当前优化方向：04:00 SEO。
+- 目标：让攻略列表页不仅展示文章卡片，也用结构化数据明确这是日本母婴省钱攻略集合页，并把全部攻略作为 ItemList 暴露给搜索引擎。
+- 修改文件：
+  - `pages/guides/index.tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `npm run sitemap`
+  - `node` 静态检查攻略列表页包含 CollectionPage、BreadcrumbList 和攻略 ItemList JSON-LD
+  - `git diff --check`
+  - `npm run build`
+- 结果：攻略列表页新增 `CollectionPage` JSON-LD，包含站点归属、目标读者和 10 篇攻略的 `ItemList`；同时新增 `BreadcrumbList`，明确首页到攻略列表页的层级。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、6 条优惠、13 个日历活动校验通过；`npm run sitemap` 生成 14 个 URL；`node` 静态检查通过；`git diff --check` 通过；`npm run build` 先成功执行 `prebuild`，但主构建仍因当前工作区没有可用的 `next` 命令失败，报 `sh: next: command not found`。npm 日志写入用户目录仍因权限受限失败，未安装依赖，避免提交 `node_modules` 或缓存。
+- 是否提交：是，提交说明为“补充攻略列表SEO结构化数据”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续 SEO 方向可继续为 `/deals` 或 `/calendar` 补充集合页结构化数据；网络恢复后先推送本地领先提交。
+
 ## 2026-06-21 支付返点新手攻略
 
 - 时间：2026-06-21 03:03 JST
