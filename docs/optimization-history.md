@@ -1,5 +1,26 @@
 # 优化记录
 
+## 2026-06-21 支付返点新手攻略
+
+- 时间：2026-06-21 03:03 JST
+- 当前优化方向：03:00 攻略内容。
+- 目标：新增一篇面向新手宝妈的支付返点判断攻略，承接首页和省钱日历里的 PayPay、楽天ペイ、d払い、au PAY 等支付活动入口，帮助用户区分“顺手叠加刚需”和“为了返点多买”。
+- 修改文件：
+  - `content/guides/payment-rebates-mama-shopping.mdx`
+  - `public/sitemap.xml`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `npm run sitemap`
+  - `node` 静态检查新增攻略已进入攻略列表数据和 sitemap
+  - `git diff --check`
+  - `npm run build`
+- 结果：新增《PayPay、楽天ペイ等支付返点 母婴用品怎么判断》，包含“适合谁”“适合买什么”“怎么判断值不值得”“买前检查清单”“不建议”，强调支付返点不是直接降价、抽选不能当确定优惠、先看实付和是否本来就要买。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、6 条优惠、13 个日历活动校验通过；`npm run sitemap` 生成 14 个 URL；`node` 静态检查确认新增攻略包含 5 个核心章节且 sitemap 已包含新增 URL；`git diff --check` 通过；`npm run build` 先成功执行 `prebuild`，但主构建仍因当前工作区没有可用的 `next` 命令失败，报 `sh: next: command not found`。npm 日志写入用户目录仍因权限受限失败，未安装依赖，避免提交 `node_modules` 或缓存。
+- 是否提交：是，提交说明为“新增支付返点新手攻略”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续攻略内容方向可继续补齐支付返点与药妆店、楽天买回、保育园清单之间的内链锚文本；优惠数据方向仍应优先复查 verified 条目后再新增商品页级优惠。
+
 ## 2026-06-21 省钱日历决策提示
 
 - 时间：2026-06-21 02:03 JST
