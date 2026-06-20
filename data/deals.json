@@ -159,8 +159,8 @@
     "bestTime": "去药妆店/超市本来就要买宝宝洗护、湿巾小包装、妈妈用品时顺手参加。",
     "targetUser": "已经日常使用 PayPay，且附近门店参加活动的人。",
     "note": "抽选不是确定优惠，不要为了抽奖改变购物计划。",
-    "url": "https://paypay.ne.jp/event/",
-    "sourceName": "PayPay 官方キャンペーン页",
+    "url": "https://paypay.ne.jp/event/matsuri202606-paypay-scratch/",
+    "sourceName": "PayPayスクラッチくじ官方详情页",
     "dataStatus": "verified",
     "availabilityStatus": "active",
     "whyWorthBuying": "对临时小额补货友好：不需要凑店铺数，本来要买就顺手用 PayPay 结账，有机会拿到额外返还。",
@@ -173,13 +173,13 @@
       "纸尿裤/湿巾仍按单价和含运费价格比较。"
     ],
     "participationSteps": [
-      "出门前打开 PayPay 官方キャンペーン页。",
+      "出门前打开 PayPayスクラッチくじ官方详情页。",
       "确认活动期间、対象店舗和支付方式。",
       "在対象店舗用 PayPay 完成符合金额的支付。",
       "支付后查看是否获得抽选/返还。"
     ],
     "savingsExample": "例：药妆店买宝宝洗护和湿巾共 3,000 日元。若中 3 等 0.5%，约返 15 点；若中 2 等 5%，约返 150 点。未中奖则没有这部分节省。",
-    "maxBenefitExample": "官方活动页显示 PayPayスクラッチ类活动存在“最大全額”表达，但这是抽选结果，不是保证。明天给朋友评估时应按 0.5%-5% 小额返还来判断，不把 100% 当稳定收益。",
+    "maxBenefitExample": "官方活动页显示 PayPayスクラッチ类活动存在“最大全額”表达，但这是抽选结果，不是保证。评估时应按 0.5%-5% 小额返还来判断，不把 100% 当稳定收益。",
     "updatedAt": "2026-06-21",
     "priority": "medium",
     "sourceLevel": "official"

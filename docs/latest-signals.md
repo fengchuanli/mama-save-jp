@@ -59,3 +59,12 @@
 是否已更新到站点：已更新 data/shopping-calendar.json 的赤ちゃん本舗日历规则；未更新 data/deals.json。
 下一步：下次优先继续核对赤ちゃん本舗夏季特卖中能否打开具体商品页，并确认价格、库存、送料和积分条件；只有具体商品页和条件完整时再新增 verified 优惠。
 ```
+
+```text
+日期时间：2026-06-21 07:31 JST
+来源：楽天市場 お買い物マラソン https://event.rakuten.co.jp/campaign/point-up/marathon/；Yahoo!ショッピング 5のつく日 https://shopping.yahoo.co.jp/promotion/campaign/5day/；アカチャンホンポ 3と8のつく日 https://shop.akachan.jp/shop/r/rse90/；西松屋官方首页 https://www.24028.jp/；PayPayスクラッチくじ https://paypay.ne.jp/event/matsuri202606-paypay-scratch/；楽天市場姓名贴搜索页。
+主题：复查 data/deals.json 的 6 条 verified 优惠机会，页面仍可访问，未发现需要改为 expired 或 unavailable 的条目；PayPay 泛活动页当前不如スクラッチ详情页直接，因此已把站内 PayPay 来源链接改为官方详情页。
+可能影响：现有 verified 条目仍可作为活动机会展示，但仍不是 SKU 级固定低价。用户下单前必须继续确认具体商品页、库存、送料、券后价和积分内訳。
+是否已更新到站点：已更新 data/deals.json 和 data/shopping-calendar.json 的 PayPay 来源链接；未新增商品级优惠。
+下一步：继续优先找具体母婴商品页级好价；只有价格、库存/配送、券后条件和来源都清楚时再新增 verified 商品优惠。
+```
