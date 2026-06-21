@@ -1,5 +1,25 @@
 # 优化记录
 
+## 2026-06-22 首页新手分流前置
+
+- 时间：2026-06-22 00:02 JST
+- 当前优化方向：00:00 内容结构。
+- 目标：把首页第一屏从单纯展示“本周值得买 / 省钱日历”按钮，改成能按用户当前状态快速分流，方便首次访问或亲友试用时知道先看哪里。
+- 修改文件：
+  - `pages/index.tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `npm run sitemap`
+  - `node` 静态检查首页包含 3 个 quick-start 入口和对应链接
+  - `git diff --check`
+  - `npm run build`
+- 结果：首页 hero 按钮下新增“第一次打开，按现在的状态先走这里”分流区，覆盖“刚开始准备 -> 攻略”“准备下单 -> 本周值得买”“等活动日 -> 省钱日历”三类访问意图；不改变现有优惠、日历和攻略数据。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、6 条优惠、13 个日历活动校验通过；`npm run sitemap` 生成 14 个 URL；`node` 静态检查首页 quick-start 入口通过；`git diff --check` 通过；`npm run build` 先成功执行 `prebuild`，但主构建仍因当前工作区没有可用的 `next` 命令失败，报 `sh: next: command not found`。npm 日志写入用户目录仍因权限受限失败，未安装依赖，避免提交 `node_modules` 或缓存。
+- 是否提交：是，提交说明为“前置首页新手分流入口”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续内容结构方向可结合亲友试用反馈，判断首页三个分流入口文案是否需要更贴近真实提问；网络恢复后先推送本地领先提交。
+
 ## 2026-06-21 16:30 最新母婴省钱消息整理
 
 - 时间：2026-06-21 16:32 JST

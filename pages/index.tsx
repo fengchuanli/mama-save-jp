@@ -21,6 +21,26 @@ type HomeProps = {
 
 export default function Home({ deals, calendarEvents, paymentRebateEvents, guides }: HomeProps) {
   const guideSteps = ["准备清单", "高频消耗品", "平台规则"];
+  const quickStartRoutes = [
+    {
+      label: "刚开始准备",
+      href: "/guides",
+      title: "先看新手攻略",
+      description: "控制清单范围，避免一上来就囤错。"
+    },
+    {
+      label: "准备下单",
+      href: "/deals",
+      title: "先看本周机会",
+      description: "核对为什么值得买、哪些情况跳过。"
+    },
+    {
+      label: "等活动日",
+      href: "/calendar",
+      title: "先看省钱日历",
+      description: "确认活动规则、适合买什么和注意事项。"
+    }
+  ];
 
   return (
     <Layout
@@ -49,6 +69,22 @@ export default function Home({ deals, calendarEvents, paymentRebateEvents, guide
               >
                 查看省钱日历
               </Link>
+            </div>
+            <div className="mt-8">
+              <p className="text-sm font-semibold text-tea">第一次打开，按现在的状态先走这里</p>
+              <div className="mt-3 grid gap-3 sm:grid-cols-3">
+                {quickStartRoutes.map((route) => (
+                  <Link
+                    key={route.href}
+                    href={route.href}
+                    className="rounded-lg border border-stone-200 bg-white/80 p-4 transition hover:border-peach hover:bg-white"
+                  >
+                    <p className="text-xs font-semibold text-tea">{route.label}</p>
+                    <h2 className="mt-2 text-base font-semibold text-ink">{route.title}</h2>
+                    <p className="mt-2 text-sm leading-6 text-stone-600">{route.description}</p>
+                  </Link>
+                ))}
+              </div>
             </div>
           </div>
           <div className="rounded-lg border border-stone-200 bg-white p-5 shadow-soft">
