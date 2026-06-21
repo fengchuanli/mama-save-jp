@@ -68,3 +68,12 @@
 是否已更新到站点：已更新 data/deals.json 和 data/shopping-calendar.json 的 PayPay 来源链接；未新增商品级优惠。
 下一步：继续优先找具体母婴商品页级好价；只有价格、库存/配送、券后条件和来源都清楚时再新增 verified 商品优惠。
 ```
+
+```text
+日期时间：2026-06-21 16:32 JST
+来源：楽天市場 お買い物マラソン https://event.rakuten.co.jp/campaign/point-up/marathon/；Yahoo!ショッピング 5のつく日 https://shopping.yahoo.co.jp/promotion/campaign/5day/；アカチャンホンポ 3と8のつく日 https://shop.akachan.jp/shop/r/rse90/；西松屋官方首页 https://www.24028.jp/；PayPayスクラッチくじ https://paypay.ne.jp/event/matsuri202606-paypay-scratch/；楽天市場姓名贴搜索页 https://search.rakuten.co.jp/search/mall/%E4%BF%9D%E8%82%B2%E5%9C%92+%E5%90%8D%E5%89%8D%E3%82%B7%E3%83%BC%E3%83%AB/
+主题：复查 data/deals.json 的 6 条 verified 优惠机会。楽天买回、Yahoo! 5のつく日、アカチャンホンポ 3/8 日対象カテゴリポイント10倍、西松屋セール入口、PayPayスクラッチ和楽天姓名贴搜索入口均仍可访问；没有发现需要改为 expired 或 unavailable 的条目。
+可能影响：当前 verified 条目仍适合作为“活动机会/购买前提醒”展示，但依旧不是商品页级固定低价。尤其西松屋、PayPay 和楽天姓名贴仍需要用户在具体商品页、门店或结算页确认价格、库存、送料、対象店舗和积分内訳。
+是否已更新到站点：未更新 data/deals.json 或 data/shopping-calendar.json；本轮信息只记录为复查信号，避免把没有具体 SKU 的线索写成确定商品优惠。
+下一步：继续优先查纸尿裤、湿巾、辅食、婴儿洗护的官方商品页或活动页；只有同时确认商品 URL、价格/券后条件、库存/配送、sourceName 和 updatedAt 时，才新增 dataStatus=verified 的商品级优惠。
+```
