@@ -20,6 +20,7 @@
 - 首页、攻略列表和 1-2 篇重点攻略能正常打开。
 - 如果引用具体优惠，只引用 `dataStatus: verified` 且 `availabilityStatus: active` 的条目。
 - 发送文案只承诺“帮你判断”和“少踩坑”，不承诺一定省多少钱。
+- 发送话术可直接使用 `docs/friend-trial-message.md`，每次只请对方完成 3 个小任务。
 
 ## 观察任务
 

@@ -1,5 +1,26 @@
 # 优化记录
 
+## 2026-06-23 亲友试用发送话术
+
+- 时间：2026-06-23 07:02 JST
+- 当前优化方向：07:00 增长准备。
+- 目标：把亲友小范围试用从“反馈清单”推进到可直接发送的话术，降低邀请成本，同时继续避免表单、登录、订阅和追踪链接。
+- 修改文件：
+  - `docs/friend-trial-message.md`
+  - `docs/friend-feedback-checklist.md`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查试用话术包含私聊版、群聊版、3 个小任务、跟进追问和不做登录/追踪说明
+  - `npm run sitemap`
+  - `git diff --check`
+  - `npm run build`
+- 结果：新增亲友试用发送话术，包含微信或 LINE 私聊版、群聊轻量版、跟进追问和反馈处理规则；反馈清单的发送前检查补充该话术入口。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、6 条优惠、13 个日历活动校验通过；静态检查通过；`npm run sitemap` 生成 14 个 URL；`git diff --check` 通过；`npm run build` 的 `prebuild` 和 sitemap 成功，但主构建仍因当前工作区没有可用 `next` 命令失败，报 `sh: next: command not found`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“新增亲友试用发送话术”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：亲友试用后优先把信任问题和找不到入口的问题回填到反馈清单；网络恢复后优先推送本地领先提交。
+
 ## 2026-06-23 值得买页移动端筛选优化
 
 - 时间：2026-06-23 06:03 JST
