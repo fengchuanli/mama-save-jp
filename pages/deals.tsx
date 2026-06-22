@@ -103,13 +103,24 @@ export default function Deals({ deals }: DealsProps) {
           title="先快速判断，再决定要不要点开"
           description="每周整理在日华人宝妈常用母婴用品的购买时机和优惠线索。先看亮点、时机和适合人群，详细参加方法可在卡片内展开。"
         />
-        <div className="mb-7 space-y-5 rounded-lg border border-stone-200 bg-white p-5 shadow-soft">
+        <div className="mb-7 space-y-4 rounded-lg border border-stone-200 bg-white p-4 shadow-soft sm:space-y-5 sm:p-5">
           <div>
             <div className="mb-3 flex items-center justify-between gap-3">
               <p className="text-sm font-semibold text-ink">按分类筛选</p>
-              <p className="text-xs text-stone-500">当前 {filteredDeals.length} 条</p>
+              <div className="flex items-center gap-3">
+                <p className="whitespace-nowrap text-xs text-stone-500">当前 {filteredDeals.length} 条</p>
+                {selectedCategory !== "全部" || selectedPlatform !== "全部" ? (
+                  <button
+                    type="button"
+                    onClick={resetFilters}
+                    className="whitespace-nowrap rounded-full bg-linen px-3 py-1 text-xs font-semibold text-stone-700"
+                  >
+                    清除
+                  </button>
+                ) : null}
+              </div>
             </div>
-            <div className="flex flex-wrap gap-2">
+            <div className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-1 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0 sm:pb-0">
               {categories.map((category) => {
                 const active = selectedCategory === category;
 
@@ -117,8 +128,9 @@ export default function Deals({ deals }: DealsProps) {
                   <button
                     key={category}
                     type="button"
+                    aria-pressed={active}
                     onClick={() => setSelectedCategory(category)}
-                    className={`rounded-full px-4 py-2 text-sm transition ${
+                    className={`min-h-10 shrink-0 whitespace-nowrap rounded-full px-4 py-2 text-sm transition ${
                       active
                         ? "bg-ink text-white"
                         : "bg-cream text-stone-700 hover:bg-linen"
@@ -133,7 +145,7 @@ export default function Deals({ deals }: DealsProps) {
 
           <div>
             <p className="mb-3 text-sm font-semibold text-ink">按平台筛选</p>
-            <div className="flex flex-wrap gap-2">
+            <div className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-1 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0 sm:pb-0">
               {platforms.map((platform) => {
                 const active = selectedPlatform === platform;
 
@@ -141,8 +153,9 @@ export default function Deals({ deals }: DealsProps) {
                   <button
                     key={platform}
                     type="button"
+                    aria-pressed={active}
                     onClick={() => setSelectedPlatform(platform)}
-                    className={`rounded-full px-4 py-2 text-sm transition ${
+                    className={`min-h-10 shrink-0 whitespace-nowrap rounded-full px-4 py-2 text-sm transition ${
                       active
                         ? "bg-tea text-white"
                         : "bg-cream text-stone-700 hover:bg-linen"
@@ -154,16 +167,6 @@ export default function Deals({ deals }: DealsProps) {
               })}
             </div>
           </div>
-
-          {selectedCategory !== "全部" || selectedPlatform !== "全部" ? (
-            <button
-              type="button"
-              onClick={resetFilters}
-              className="text-sm font-semibold text-tea"
-            >
-              清除筛选
-            </button>
-          ) : null}
         </div>
 
         <div className="grid gap-5 md:grid-cols-2">

@@ -2,13 +2,13 @@ import Link from "next/link";
 import type { Deal } from "@/lib/types";
 
 const ctaClass =
-  "inline-flex whitespace-nowrap rounded-full bg-linen px-3 py-1 text-xs font-semibold text-stone-700 transition hover:bg-peach";
+  "inline-flex min-h-10 items-center whitespace-nowrap rounded-full bg-linen px-3 py-1 text-xs font-semibold text-stone-700 transition hover:bg-peach sm:min-h-0";
 
 function MiniMeta({ label, value }: { label: string; value: string }) {
   return (
     <div>
       <p className="text-xs text-stone-500">{label}</p>
-      <p className="mt-1 text-sm font-semibold leading-5 text-stone-800">{value}</p>
+      <p className="mt-1 break-words text-sm font-semibold leading-5 text-stone-800">{value}</p>
     </div>
   );
 }
@@ -33,7 +33,7 @@ export function DealSummaryCard({ deal }: { deal: Deal }) {
         {deal.highlight}
       </p>
       <h3 className="mt-3 text-lg font-semibold leading-7 text-ink">{deal.title}</h3>
-      <div className="mt-3 grid grid-cols-2 gap-3">
+      <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2">
         <MiniMeta label="平台" value={deal.platform} />
         <MiniMeta label="类型" value={deal.dealType} />
         <MiniMeta label="时机" value={deal.shortPeriod} />
@@ -44,7 +44,7 @@ export function DealSummaryCard({ deal }: { deal: Deal }) {
         </span>
         <span className="text-sm leading-6 text-stone-600">{deal.targetSummary}</span>
       </div>
-      <Link href={`/deals#${deal.id}`} className={ctaClass}>
+      <Link href={`/deals#${deal.id}`} className={`mt-3 ${ctaClass}`}>
         查看详情
       </Link>
     </article>
@@ -66,7 +66,7 @@ export function DealCard({ deal }: { deal: Deal }) {
         </span>
       </div>
 
-      <div className="mt-4 grid grid-cols-2 gap-3 rounded-lg bg-cream p-3 sm:grid-cols-4">
+      <div className="mt-4 grid grid-cols-1 gap-3 rounded-lg bg-cream p-3 sm:grid-cols-2 lg:grid-cols-4">
         <MiniMeta label="平台" value={deal.platform} />
         <MiniMeta label="类型" value={deal.dealType} />
         <MiniMeta label="时机" value={deal.shortPeriod} />

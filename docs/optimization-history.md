@@ -1,5 +1,26 @@
 # 优化记录
 
+## 2026-06-23 值得买页移动端筛选优化
+
+- 时间：2026-06-23 06:03 JST
+- 当前优化方向：06:00 移动端体验。
+- 目标：优化 `/deals` 在手机端的筛选区和优惠卡片信息密度，让分类/平台筛选不再挤占过多首屏空间，同时避免卡片元信息在窄屏里过度压缩。
+- 修改文件：
+  - `pages/deals.tsx`
+  - `components/DealCard.tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查手机端横向筛选、`aria-pressed`、清除按钮位置、CTA 触控高度、移动端元信息单列和长文案换行
+  - `npm run sitemap`
+  - `git diff --check`
+  - `npm run build`
+- 结果：`/deals` 分类和平台筛选在手机端改为横向滑动按钮行，筛选按钮补充 `aria-pressed`，当前数量和清除按钮合并到筛选标题右侧；优惠摘要卡和详情卡的元信息在手机端改为单列，长字段允许换行，详情/官网入口保留标签视觉但增加手机端可点高度。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、6 条优惠、13 个日历活动校验通过；静态检查通过；`npm run sitemap` 生成 14 个 URL；`git diff --check` 通过；`npm run build` 的 `prebuild` 和 sitemap 成功，但主构建仍因当前工作区没有可用 `next` 命令失败，报 `sh: next: command not found`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“优化值得买页移动端筛选”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续 06:00 移动端体验方向可用真实浏览器复查 `/deals` 小屏首屏高度和横向筛选提示是否足够明显；网络恢复后优先推送本地领先提交。
+
 ## 2026-06-23 结构化数据 helper 抽取
 
 - 时间：2026-06-23 05:03 JST
