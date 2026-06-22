@@ -5,6 +5,11 @@ export type Deal = {
   title: string;
   category: string;
   platform: string;
+  highlight: string;
+  shortPeriod: string;
+  recommendationLabel: string;
+  targetSummary: string;
+  detailReason: string;
   originalPrice?: string;
   salePrice?: string;
   effectivePrice?: string;
@@ -13,6 +18,7 @@ export type Deal = {
   targetUser: string;
   note: string;
   url?: string;
+  sourceUrl?: string;
   sourceName?: string;
   sourceLevel?: SourceLevel;
   dataStatus: "sample" | "verified";

@@ -48,8 +48,8 @@ export default function Deals({ deals }: DealsProps) {
       <section className="mx-auto max-w-6xl px-5 py-12">
         <SectionHeader
           eyebrow="本周值得买"
-          title="先看为什么值得买，再看价格"
-          description="这里展示人工精选的母婴优惠和攻略型推荐。可以按分类和平台筛选，先判断是否适合自己，再决定要不要下单。"
+          title="先快速判断，再决定要不要点开"
+          description="每周整理在日华人宝妈常用母婴用品的购买时机和优惠线索。先看亮点、时机和适合人群，详细参加方法可在卡片内展开。"
         />
         <div className="mb-7 space-y-5 rounded-lg border border-stone-200 bg-white p-5 shadow-soft">
           <div>
@@ -107,9 +107,9 @@ export default function Deals({ deals }: DealsProps) {
             <button
               type="button"
               onClick={resetFilters}
-              className="text-sm font-semibold text-tea"
+              className="text-sm font-bold text-blue-700 underline underline-offset-4 transition hover:text-blue-900"
             >
-              清除筛选
+              清除筛选 →
             </button>
           ) : null}
         </div>

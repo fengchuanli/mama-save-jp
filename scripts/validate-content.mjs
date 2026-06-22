@@ -91,6 +91,11 @@ for (const deal of deals) {
     "title",
     "category",
     "platform",
+    "highlight",
+    "shortPeriod",
+    "recommendationLabel",
+    "targetSummary",
+    "detailReason",
     "condition",
     "bestTime",
     "targetUser",
@@ -108,6 +113,11 @@ for (const deal of deals) {
     assert(deal[field], `${label} 缺少字段：${field}`);
   }
 
+  assert(deal.highlight.length <= 24, `${label} highlight 建议控制在 24 字以内`);
+  assert(deal.shortPeriod.length <= 36, `${label} shortPeriod 建议控制在 36 字以内`);
+  assert(deal.recommendationLabel.length <= 12, `${label} recommendationLabel 建议控制在 12 字以内`);
+  assert(deal.targetSummary.length <= 34, `${label} targetSummary 建议控制在 34 字以内`);
+  assert(deal.detailReason.length <= 80, `${label} detailReason 建议控制在 80 字以内`);
   assert(["high", "medium", "low"].includes(deal.priority), `${label} priority 只能是 high / medium / low`);
   assert(["sample", "verified"].includes(deal.dataStatus), `${label} dataStatus 只能是 sample / verified`);
   assert(
@@ -123,6 +133,7 @@ for (const deal of deals) {
   }
   if (deal.dataStatus === "verified") {
     assert(deal.url, `${label} 已核验优惠必须提供具体商品页或活动页 url`);
+    assert(deal.sourceUrl, `${label} 已核验优惠必须提供 sourceUrl`);
     assert(deal.sourceName, `${label} 已核验优惠必须提供 sourceName`);
     assert(
       ["official", "authorized"].includes(deal.sourceLevel),

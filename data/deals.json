@@ -34,7 +34,13 @@
     "maxBenefitExample": "官方买回特典上限为 7,000 点。例：10 店铺合计 50,000 日元且都符合条件，买回部分约 +9%，理论多返约 4,500 点；最终以官方上限、券后金额和点数内訳为准。",
     "updatedAt": "2026-06-21",
     "priority": "high",
-    "sourceLevel": "official"
+    "sourceLevel": "official",
+    "highlight": "最高约 +9% 买回",
+    "shortPeriod": "6/20 20:00 - 6/26 01:59",
+    "recommendationLabel": "适合囤货",
+    "targetSummary": "适合 1 个月内会补尿不湿、湿巾的家庭",
+    "detailReason": "把本来就要买的高频刚需分到不同店铺，整体返点更高。",
+    "sourceUrl": "https://event.rakuten.co.jp/campaign/point-up/marathon/"
   },
   {
     "id": "yahoo-5day-diaper-box",
@@ -71,7 +77,13 @@
     "maxBenefitExample": "官方 +4% 上限为 1,000 円相当。例：対象金額 25,000 日元左右可接近 1,000 円相当上限；超过部分不再按这项活动增加。",
     "updatedAt": "2026-06-21",
     "priority": "high",
-    "sourceLevel": "official"
+    "sourceLevel": "official",
+    "highlight": "+4% PayPayポイント",
+    "shortPeriod": "6/25 当天关注",
+    "recommendationLabel": "建议关注",
+    "targetSummary": "适合常用 PayPay / Yahoo 的箱购家庭",
+    "detailReason": "箱购金额较高，指定支付 +4% 对纸尿裤和湿巾补货更有感。",
+    "sourceUrl": "https://shopping.yahoo.co.jp/promotion/campaign/5day/"
   },
   {
     "id": "akachan-3-8-baby-category",
@@ -108,7 +120,13 @@
     "maxBenefitExample": "适合把 5,000-10,000 日元以内刚需集中到活动日。例：10,000 日元订单若通常 100 点、10 倍日约 1,000 点，差额约 900 点；是否到手取决于対象カテゴリ和结算页内訳。",
     "updatedAt": "2026-06-21",
     "priority": "high",
-    "sourceLevel": "official"
+    "sourceLevel": "official",
+    "highlight": "対象カテゴリ积分 10 倍",
+    "shortPeriod": "每月 3 / 8 结尾日",
+    "recommendationLabel": "活动日再买",
+    "targetSummary": "适合重视品牌安心感的新手宝妈",
+    "detailReason": "辅食、餐具、通园小物等在活动日集中确认，积分差额更清楚。",
+    "sourceUrl": "https://shop.akachan.jp/shop/r/rse90/"
   },
   {
     "id": "nishimatsuya-monthly-nursery-items",
@@ -145,7 +163,13 @@
     "maxBenefitExample": "这类活动不是高返点，最大价值在“低价基础款一次配齐”。例：入园初期买 5-8 件基础衣物，若每件便宜 100-200 日元，可少花约 500-1,600 日元。",
     "updatedAt": "2026-06-21",
     "priority": "medium",
-    "sourceLevel": "official"
+    "sourceLevel": "official",
+    "highlight": "本周关注",
+    "shortPeriod": "6/18 - 7/14",
+    "recommendationLabel": "不急可等",
+    "targetSummary": "适合准备保育园备用衣物和小件用品",
+    "detailReason": "基础款和小件用品适合按清单补齐，重点是看具体尺码和库存。",
+    "sourceUrl": "https://www.24028.jp/"
   },
   {
     "id": "paypay-scratch-drugstore-baby-care",
@@ -182,7 +206,13 @@
     "maxBenefitExample": "官方活动页显示 PayPayスクラッチ类活动存在“最大全額”表达，但这是抽选结果，不是保证。评估时应按 0.5%-5% 小额返还来判断，不把 100% 当稳定收益。",
     "updatedAt": "2026-06-21",
     "priority": "medium",
-    "sourceLevel": "official"
+    "sourceLevel": "official",
+    "highlight": "抽选返还进行中",
+    "shortPeriod": "6/19 - 7/31",
+    "recommendationLabel": "急用可买",
+    "targetSummary": "适合药妆店临时补宝宝洗护和湿巾",
+    "detailReason": "本来就要买时顺手确认支付活动，不为抽选额外囤货。",
+    "sourceUrl": "https://paypay.ne.jp/event/matsuri202606-paypay-scratch/"
   },
   {
     "id": "rakuten-name-sticker-marathon",
@@ -219,6 +249,12 @@
     "maxBenefitExample": "如果同时买尿不湿、湿巾、辅食等凑到 10 店铺，姓名贴这单也参与整体 +9% 买回；1,500 日元订单约多返 135 点。",
     "updatedAt": "2026-06-21",
     "priority": "medium",
-    "sourceLevel": "official"
+    "sourceLevel": "official",
+    "highlight": "买回凑店铺",
+    "shortPeriod": "入园前 3-4 周",
+    "recommendationLabel": "提前准备",
+    "targetSummary": "适合准备入园姓名贴和防水标签",
+    "detailReason": "姓名贴金额不高，但能解决入园刚需，也可作为买回店铺之一。",
+    "sourceUrl": "https://search.rakuten.co.jp/search/mall/%E4%BF%9D%E8%82%B2%E5%9C%92+%E5%90%8D%E5%89%8D%E3%82%B7%E3%83%BC%E3%83%AB/"
   }
 ]

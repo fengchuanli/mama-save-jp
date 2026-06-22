@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { GetStaticProps } from "next";
 import { CalendarCard } from "@/components/CalendarCard";
-import { DealCard } from "@/components/DealCard";
+import { DealSummaryCard } from "@/components/DealCard";
 import { GuideCard } from "@/components/GuideCard";
 import { Layout } from "@/components/Layout";
 import { PaymentRebateSpotlight } from "@/components/PaymentRebateSpotlight";
@@ -111,15 +111,18 @@ export default function Home({ deals, calendarEvents, paymentRebateEvents, guide
           <SectionHeader
             eyebrow="Deals"
             title="本周值得买"
-            description="人工整理尿不湿、湿巾、童装和保育园用品的优惠信息，先看为什么值得买，再看价格。"
+            description="每周整理在日华人宝妈常用母婴用品的购买时机和优惠线索。价格、库存和活动条件可能变化，购买前请以官方页面为准。"
           />
-          <Link href="/deals" className="mb-6 text-sm font-semibold text-tea">
-            查看全部
+          <Link
+            href="/deals"
+            className="mb-6 text-sm font-bold text-blue-700 underline underline-offset-4 transition hover:text-blue-900"
+          >
+            查看全部 →
           </Link>
         </div>
-        <div className="grid gap-5 md:grid-cols-2">
+        <div className="grid gap-4 md:grid-cols-3">
           {deals.map((deal) => (
-            <DealCard key={deal.id} deal={deal} />
+            <DealSummaryCard key={deal.id} deal={deal} />
           ))}
         </div>
       </section>
@@ -219,7 +222,7 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => {
 
   return {
     props: {
-      deals: (dealsData as Deal[]).slice(0, 2),
+      deals: (dealsData as Deal[]).slice(0, 3),
       calendarEvents: (calendarData as CalendarEvent[]).slice(0, 3),
       paymentRebateEvents: getPaymentRebateEvents(calendarData as CalendarEvent[], 3),
       guides: beginnerGuides

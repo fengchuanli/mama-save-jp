@@ -1,5 +1,29 @@
 # 优化记录
 
+## 2026-06-22 首页和值得买轻量化
+
+- 时间：2026-06-22 JST
+- 当前优化方向：首页移动端信息流与 `/deals` 分层展示。
+- 目标：让首页「本周值得买」只展示 3 个重点项目和轻量字段，减少手机端阅读压力；`/deals` 默认展示短信息，详细参加方法、购买前确认、来源和更新时间放入展开区。
+- 修改文件：
+  - `components/DealCard.tsx`
+  - `pages/index.tsx`
+  - `pages/deals.tsx`
+  - `data/deals.json`
+  - `lib/types.ts`
+  - `scripts/validate-content.mjs`
+  - `README.md`
+  - `docs/30-day-optimization-plan.md`
+  - `docs/product-goals.md`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `git diff --check`
+  - 全站搜索开发阶段文案
+  - `npm run build`
+- 结果：首页改用 `DealSummaryCard`，每张卡片只展示 highlight、title、platform、shortPeriod、recommendationLabel、targetSummary 和「查看详情 →」；`/deals` 卡片默认展示轻量判断，并提供「查看详情 →」展开区和「去官方页面 →」。链接统一为蓝色、加粗、下划线并带箭头。`data/deals.json` 新增轻量字段并纳入内容校验。全站已清除指定开发阶段文案。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、6 条优惠、13 个日历活动校验通过；`git diff --check` 通过；`npm run build` 的 `prebuild` 生成 sitemap 成功，但主构建因本地没有可用 `next` 命令失败，报 `sh: next: command not found`。尝试 `npm install --fetch-timeout=15000 --cache /tmp/mama-save-npm-cache` 超过 60 秒无输出后中止，未生成依赖文件。
+
 ## 2026-06-22 首页新手分流前置
 
 - 时间：2026-06-22 00:02 JST
@@ -263,7 +287,7 @@
 
 - 时间：2026-06-21 JST
 - 当前优化方向：明天给朋友评估前的真实数据替换。
-- 目标：把 `/deals` 从示例数据改为可评估的已核验优惠/活动来源，并让 `/calendar` 明确说明怎么参加、能省多少、最大可返多少。
+- 目标：把 `/deals` 从待核验线索改为可评估的已核验优惠/活动来源，并让 `/calendar` 明确说明怎么参加、能省多少、最大可返多少。
 - 修改文件：
   - `data/deals.json`
   - `data/shopping-calendar.json`
@@ -304,10 +328,10 @@
   - `docs/30-day-optimization-plan.md`
   - `docs/optimization-history.md`
 - 验证方式：文档关键词检查。
-- 结果：已新增“2026-06-20 起近期优先级调整”，明确短期优先级为真实数据核验、示例数据替换、页面小优化、新功能；到 2026-06-27 前以 5-10 条真实已核验优惠和官方来源日历为阶段目标。
+- 结果：已新增“2026-06-20 起近期优先级调整”，明确短期优先级为真实数据核验、待核验线索替换、页面小优化、新功能；到 2026-06-27 前以 5-10 条真实已核验优惠和官方来源日历为阶段目标。
 - 是否提交：待提交。
 - 是否推送：待推送。
-- 下一步：自动化后续执行时优先替换 `/deals` 示例数据，并保持已核验优惠有效性复查。
+- 下一步：自动化后续执行时优先替换 `/deals` 待核验线索，并保持已核验优惠有效性复查。
 
 - 时间：2026-06-20 16:31 JST
 - 当前优化方向：16:30 最新日本母婴省钱消息整理。
@@ -524,7 +548,7 @@
 
 - 时间：2026-06-19 20:15 JST
 - 当前优化方向：产品路线图补充。
-- 目标：把个人账号、购买频率、省钱记录和订阅动力列入中期规划，但不影响当前静态 MVP 的短期验证节奏。
+- 目标：把个人账号、购买频率、省钱记录和订阅动力列入中期规划，但不影响当前静态信息站的短期验证节奏。
 - 修改文件：
   - `docs/product-goals.md`
   - `docs/30-day-optimization-plan.md`
