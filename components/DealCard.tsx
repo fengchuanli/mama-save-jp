@@ -35,6 +35,7 @@ export function DealSummaryCard({ deal }: { deal: Deal }) {
       <h3 className="mt-3 text-lg font-semibold leading-7 text-ink">{deal.title}</h3>
       <div className="mt-3 grid grid-cols-2 gap-3">
         <MiniMeta label="平台" value={deal.platform} />
+        <MiniMeta label="类型" value={deal.dealType} />
         <MiniMeta label="时机" value={deal.shortPeriod} />
       </div>
       <div className="mt-3 flex flex-wrap items-center gap-2">
@@ -65,8 +66,9 @@ export function DealCard({ deal }: { deal: Deal }) {
         </span>
       </div>
 
-      <div className="mt-4 grid grid-cols-2 gap-3 rounded-lg bg-cream p-3 sm:grid-cols-3">
+      <div className="mt-4 grid grid-cols-2 gap-3 rounded-lg bg-cream p-3 sm:grid-cols-4">
         <MiniMeta label="平台" value={deal.platform} />
+        <MiniMeta label="类型" value={deal.dealType} />
         <MiniMeta label="时机" value={deal.shortPeriod} />
         <MiniMeta label="适合谁" value={deal.targetSummary} />
       </div>

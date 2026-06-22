@@ -91,6 +91,7 @@ for (const deal of deals) {
     "title",
     "category",
     "platform",
+    "dealType",
     "highlight",
     "shortPeriod",
     "recommendationLabel",
@@ -113,6 +114,7 @@ for (const deal of deals) {
     assert(deal[field], `${label} 缺少字段：${field}`);
   }
 
+  assert(deal.dealType.length <= 14, `${label} dealType 建议控制在 14 字以内`);
   assert(deal.highlight.length <= 24, `${label} highlight 建议控制在 24 字以内`);
   assert(deal.shortPeriod.length <= 36, `${label} shortPeriod 建议控制在 36 字以内`);
   assert(deal.recommendationLabel.length <= 12, `${label} recommendationLabel 建议控制在 12 字以内`);

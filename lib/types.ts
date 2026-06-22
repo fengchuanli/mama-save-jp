@@ -5,6 +5,7 @@ export type Deal = {
   title: string;
   category: string;
   platform: string;
+  dealType: string;
   highlight: string;
   shortPeriod: string;
   recommendationLabel: string;
