@@ -1,5 +1,26 @@
 # 优化记录
 
+## 2026-06-23 核心列表页 SEO 结构化数据
+
+- 时间：2026-06-23 04:03 JST
+- 当前优化方向：04:00 SEO。
+- 目标：为 `/deals` 和 `/calendar` 两个核心列表页补充集合页、列表项和面包屑结构化数据，让搜索引擎更清楚识别“本周值得买”和“省钱日历”的页面层级与内容范围。
+- 修改文件：
+  - `pages/deals.tsx`
+  - `pages/calendar.tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查两个页面包含 `CollectionPage`、`ItemList` 和 `BreadcrumbList`
+  - `npm run sitemap`
+  - `git diff --check`
+  - `npm run build`
+- 结果：`/deals` 输出 `CollectionPage`、`ItemList`、优惠 `Offer` 和面包屑 JSON-LD；`/calendar` 输出 `CollectionPage`、`ItemList`、日历条目 `Thing` 和面包屑 JSON-LD。日历条目没有标准 ISO 活动日期，因此未使用 `Event` 类型，避免生成缺少 `startDate` 的结构化数据。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、6 条优惠、13 个日历活动校验通过；静态检查通过；`npm run sitemap` 生成 14 个 URL；`git diff --check` 通过；`npm run build` 的 `prebuild` 和 sitemap 成功，但主构建仍因当前工作区没有可用 `next` 命令失败，报 `sh: next: command not found`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“补充核心列表页SEO结构化数据”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续 04:00 SEO 方向可检查首页是否需要站点级 `WebSite` / `Organization` JSON-LD，或检查攻略详情页内链锚文本覆盖。
+
 ## 2026-06-23 新生儿准备攻略完善
 
 - 时间：2026-06-23 03:03 JST
