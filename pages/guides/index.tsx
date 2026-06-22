@@ -5,7 +5,12 @@ import { GuideCard } from "@/components/GuideCard";
 import { Layout } from "@/components/Layout";
 import { SectionHeader } from "@/components/SectionHeader";
 import { getAllGuides } from "@/lib/guides";
-import { siteConfig } from "@/lib/site";
+import {
+  createBreadcrumbJsonLd,
+  createCollectionPageJsonLd,
+  createListItemJsonLd,
+  getAbsoluteUrl
+} from "@/lib/structured-data";
 import type { GuideMeta } from "@/lib/types";
 
 type GuidesProps = {
@@ -44,7 +49,7 @@ const guideProblemGroups = [
 ];
 
 export default function Guides({ guides }: GuidesProps) {
-  const guidesUrl = `${siteConfig.siteUrl}/guides`;
+  const guidesUrl = getAbsoluteUrl("/guides");
   const beginnerGuideSlugs = [
     "newborn-shopping-list",
     "buy-diapers-japan",
@@ -59,52 +64,26 @@ export default function Guides({ guides }: GuidesProps) {
       .map((slug) => guides.find((guide) => guide.slug === slug))
       .filter((guide): guide is GuideMeta => Boolean(guide))
   }));
-  const collectionJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "CollectionPage",
+  const collectionJsonLd = createCollectionPageJsonLd({
     name: "日本母婴省钱攻略列表",
     description:
       "面向在日华人宝妈/宝爸的日本母婴省钱攻略，整理尿不湿、楽天积分、药妆店优惠、保育园用品和支付返点判断方法。",
     url: guidesUrl,
-    inLanguage: "zh-CN",
-    isPartOf: {
-      "@type": "WebSite",
-      name: siteConfig.siteName,
-      url: siteConfig.siteUrl
-    },
-    audience: {
-      "@type": "Audience",
-      audienceType: "在日华人宝妈/宝爸"
-    },
-    mainEntity: {
-      "@type": "ItemList",
-      itemListElement: guides.map((guide, index) => ({
-        "@type": "ListItem",
+    items: guides.map((guide, index) =>
+      createListItemJsonLd({
         position: index + 1,
         name: guide.title,
         url: `${guidesUrl}/${guide.slug}`,
         description: guide.description
-      }))
+      })
+    )
+  });
+  const breadcrumbJsonLd = createBreadcrumbJsonLd([
+    {
+      name: "攻略",
+      item: guidesUrl
     }
-  };
-  const breadcrumbJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "首页",
-        item: siteConfig.siteUrl
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "攻略",
-        item: guidesUrl
-      }
-    ]
-  };
+  ]);
 
   return (
     <Layout

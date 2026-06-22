@@ -1,5 +1,28 @@
 # 优化记录
 
+## 2026-06-23 结构化数据 helper 抽取
+
+- 时间：2026-06-23 05:03 JST
+- 当前优化方向：05:00 代码质量。
+- 目标：把 `/guides`、`/deals`、`/calendar` 三个列表页重复的 `CollectionPage`、`ItemList`、`BreadcrumbList` JSON-LD 外壳抽成共享 helper，减少后续 SEO 结构化数据维护时的重复和漂移。
+- 修改文件：
+  - `lib/structured-data.ts`
+  - `pages/guides/index.tsx`
+  - `pages/deals.tsx`
+  - `pages/calendar.tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查三个列表页均使用 `createCollectionPageJsonLd`、`createListItemJsonLd`、`createBreadcrumbJsonLd` 和 `getAbsoluteUrl`
+  - `npm run sitemap`
+  - `git diff --check`
+  - `npm run build`
+- 结果：新增 `lib/structured-data.ts`，集中生成站点绝对 URL、集合页 JSON-LD、列表项 JSON-LD 和面包屑 JSON-LD；三个核心列表页继续保留各自的页面描述、列表项详情和 `application/ld+json` 输出。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、6 条优惠、13 个日历活动校验通过；静态检查通过；`npm run sitemap` 生成 14 个 URL；`git diff --check` 通过；`npm run build` 的 `prebuild` 和 sitemap 成功，但主构建仍因当前工作区没有可用 `next` 命令失败，报 `sh: next: command not found`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“抽取结构化数据生成工具”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续 05:00 代码质量方向可继续检查攻略详情页的 JSON-LD 是否也能复用同一 helper；网络恢复后优先推送本地领先提交。
+
 ## 2026-06-23 核心列表页 SEO 结构化数据
 
 - 时间：2026-06-23 04:03 JST

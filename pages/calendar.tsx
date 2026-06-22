@@ -5,7 +5,12 @@ import { Layout } from "@/components/Layout";
 import { PaymentRebateSpotlight } from "@/components/PaymentRebateSpotlight";
 import { SectionHeader } from "@/components/SectionHeader";
 import { getPaymentRebateEvents } from "@/lib/payment-rebates";
-import { siteConfig } from "@/lib/site";
+import {
+  createBreadcrumbJsonLd,
+  createCollectionPageJsonLd,
+  createListItemJsonLd,
+  getAbsoluteUrl
+} from "@/lib/structured-data";
 import type { CalendarEvent } from "@/lib/types";
 import calendarData from "@/data/shopping-calendar.json";
 
@@ -14,7 +19,7 @@ type CalendarProps = {
 };
 
 export default function Calendar({ events }: CalendarProps) {
-  const calendarUrl = `${siteConfig.siteUrl}/calendar`;
+  const calendarUrl = getAbsoluteUrl("/calendar");
   const paymentRebateEvents = getPaymentRebateEvents(events);
   const groupedEvents = events.reduce<Record<string, CalendarEvent[]>>((groups, event) => {
     if (!groups[event.store]) {
@@ -24,27 +29,13 @@ export default function Calendar({ events }: CalendarProps) {
     groups[event.store].push(event);
     return groups;
   }, {});
-  const collectionJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "CollectionPage",
+  const collectionJsonLd = createCollectionPageJsonLd({
     name: "日本母婴购物省钱日历",
     description:
       "面向在日华人宝妈/宝爸的日本母婴购物活动日历，整理 Amazon、楽天、西松屋、赤ちゃん本舗、药妆店和支付平台活动。",
     url: calendarUrl,
-    inLanguage: "zh-CN",
-    isPartOf: {
-      "@type": "WebSite",
-      name: siteConfig.siteName,
-      url: siteConfig.siteUrl
-    },
-    audience: {
-      "@type": "Audience",
-      audienceType: "在日华人宝妈/宝爸"
-    },
-    mainEntity: {
-      "@type": "ItemList",
-      itemListElement: events.map((event, index) => ({
-        "@type": "ListItem",
+    items: events.map((event, index) =>
+      createListItemJsonLd({
         position: index + 1,
         name: event.title,
         url: `${calendarUrl}#${event.slug}`,
@@ -59,27 +50,15 @@ export default function Calendar({ events }: CalendarProps) {
             name: event.platform
           }
         }
-      }))
+      })
+    )
+  });
+  const breadcrumbJsonLd = createBreadcrumbJsonLd([
+    {
+      name: "省钱日历",
+      item: calendarUrl
     }
-  };
-  const breadcrumbJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "首页",
-        item: siteConfig.siteUrl
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "省钱日历",
-        item: calendarUrl
-      }
-    ]
-  };
+  ]);
 
   return (
     <Layout

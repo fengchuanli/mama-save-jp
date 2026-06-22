@@ -4,7 +4,12 @@ import { useMemo, useState } from "react";
 import { DealCard } from "@/components/DealCard";
 import { Layout } from "@/components/Layout";
 import { SectionHeader } from "@/components/SectionHeader";
-import { siteConfig } from "@/lib/site";
+import {
+  createBreadcrumbJsonLd,
+  createCollectionPageJsonLd,
+  createListItemJsonLd,
+  getAbsoluteUrl
+} from "@/lib/structured-data";
 import type { Deal } from "@/lib/types";
 import dealsData from "@/data/deals.json";
 
@@ -13,7 +18,7 @@ type DealsProps = {
 };
 
 export default function Deals({ deals }: DealsProps) {
-  const dealsUrl = `${siteConfig.siteUrl}/deals`;
+  const dealsUrl = getAbsoluteUrl("/deals");
   const [selectedCategory, setSelectedCategory] = useState("全部");
   const [selectedPlatform, setSelectedPlatform] = useState("全部");
 
@@ -42,27 +47,13 @@ export default function Deals({ deals }: DealsProps) {
     setSelectedCategory("全部");
     setSelectedPlatform("全部");
   };
-  const collectionJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "CollectionPage",
+  const collectionJsonLd = createCollectionPageJsonLd({
     name: "日本母婴本周值得买",
     description:
       "面向在日华人宝妈/宝爸的日本母婴优惠集合，整理尿不湿、湿巾、保育园用品、支付返点和平台活动的购买判断。",
     url: dealsUrl,
-    inLanguage: "zh-CN",
-    isPartOf: {
-      "@type": "WebSite",
-      name: siteConfig.siteName,
-      url: siteConfig.siteUrl
-    },
-    audience: {
-      "@type": "Audience",
-      audienceType: "在日华人宝妈/宝爸"
-    },
-    mainEntity: {
-      "@type": "ItemList",
-      itemListElement: deals.map((deal, index) => ({
-        "@type": "ListItem",
+    items: deals.map((deal, index) =>
+      createListItemJsonLd({
         position: index + 1,
         name: deal.title,
         url: deal.url || dealsUrl,
@@ -81,27 +72,15 @@ export default function Deals({ deals }: DealsProps) {
             name: deal.platform
           }
         }
-      }))
+      })
+    )
+  });
+  const breadcrumbJsonLd = createBreadcrumbJsonLd([
+    {
+      name: "本周值得买",
+      item: dealsUrl
     }
-  };
-  const breadcrumbJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "首页",
-        item: siteConfig.siteUrl
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "本周值得买",
-        item: dealsUrl
-      }
-    ]
-  };
+  ]);
 
   return (
     <Layout
