@@ -1,11 +1,12 @@
 import Link from "next/link";
 import type { GetStaticProps } from "next";
-import { CalendarCard } from "@/components/CalendarCard";
+import { CalendarSummaryCard } from "@/components/CalendarCard";
 import { DealSummaryCard } from "@/components/DealCard";
 import { GuideCard } from "@/components/GuideCard";
 import { Layout } from "@/components/Layout";
 import { PaymentRebateSpotlight } from "@/components/PaymentRebateSpotlight";
 import { SectionHeader } from "@/components/SectionHeader";
+import { getFeaturedCalendarEvents } from "@/lib/calendar-highlights";
 import { getAllGuides } from "@/lib/guides";
 import { getPaymentRebateEvents } from "@/lib/payment-rebates";
 import type { CalendarEvent, Deal, GuideMeta } from "@/lib/types";
@@ -143,12 +144,20 @@ export default function Home({ deals, calendarEvents, paymentRebateEvents, guide
           <SectionHeader
             eyebrow="Calendar"
             title="最近要关注的省钱节点"
-            description="把 Amazon、楽天、西松屋、赤ちゃん本舗和药妆店的活动，用新手宝妈能看懂的中文放到同一个日历里。"
+            description="先看最近值得关注的活动时间、关键优惠和适合买什么，详细规则放在省钱日历里。"
           />
           <div className="grid gap-5 md:grid-cols-3">
             {calendarEvents.map((event) => (
-              <CalendarCard key={event.id} event={event} />
+              <CalendarSummaryCard key={event.id} event={event} />
             ))}
+          </div>
+          <div className="mt-5">
+            <Link
+              href="/calendar"
+              className="inline-flex min-h-[44px] items-center text-sm font-bold text-blue-700 underline underline-offset-4 transition hover:text-blue-900"
+            >
+              查看全部省钱日历 →
+            </Link>
           </div>
         </div>
       </section>
@@ -223,7 +232,7 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => {
   return {
     props: {
       deals: (dealsData as Deal[]).slice(0, 3),
-      calendarEvents: (calendarData as CalendarEvent[]).slice(0, 3),
+      calendarEvents: getFeaturedCalendarEvents(calendarData as CalendarEvent[]),
       paymentRebateEvents: getPaymentRebateEvents(calendarData as CalendarEvent[], 3),
       guides: beginnerGuides
     }

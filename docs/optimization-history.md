@@ -1,5 +1,27 @@
 # 优化记录
 
+## 2026-06-22 首页省钱节点轻量化
+
+- 时间：2026-06-22 JST
+- 当前优化方向：首页支付返点和省钱节点信息流。
+- 目标：首页只负责提醒和吸引点击，详细规则与核验信息由 `/calendar` 承接；支付返点和最近省钱节点都控制为最多 3 条轻量卡片。
+- 修改文件：
+  - `components/PaymentRebateSpotlight.tsx`
+  - `components/CalendarCard.tsx`
+  - `pages/index.tsx`
+  - `data/shopping-calendar.json`
+  - `lib/types.ts`
+  - `lib/calendar-highlights.ts`
+  - `scripts/validate-content.mjs`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `git diff --check`
+  - 页面/组件/数据搜索夸张表达
+  - `npm run build`
+- 结果：首页「出门前先看支付返点」改为平台、重点优惠、一句话提醒和「查看详情 →」；首页「最近要关注的省钱节点」改为活动名称、时间、关键优惠、适合买什么、行动建议和「查看详情 →」。两块首页模块均最多展示 3 条。`/calendar` 活动卡片默认显示轻量信息，详细参加方法、省钱示例、最大返还、下单前确认、注意事项、来源和更新时间放入展开区。每个活动新增 `slug` 和 `detailUrl`，首页链接可跳转到 `/calendar#slug`。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、6 条优惠、13 个日历活动校验通过；`git diff --check` 通过；页面/组件/数据中未发现“必买 / 稳赚 / 一定省 / 全网最低 / 必返”等夸张表达；`npm run build` 的 `prebuild` 生成 sitemap 成功，但主构建因本地没有可用 `next` 命令失败，报 `sh: next: command not found`。
+
 ## 2026-06-22 首页和值得买轻量化
 
 - 时间：2026-06-22 JST

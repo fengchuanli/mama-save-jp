@@ -161,6 +161,18 @@ assertUniqueIds(calendarEvents, "data/shopping-calendar.json");
 for (const event of calendarEvents) {
   const label = `data/shopping-calendar.json#${event.id ?? "unknown"}`;
   const requiredFields = [
+    "slug",
+    "title",
+    "platform",
+    "highlight",
+    "shortSummary",
+    "keyBenefit",
+    "targetItems",
+    "actionTip",
+    "period",
+    "detailUrl",
+    "priority",
+    "description",
     "store",
     "eventName",
     "days",
@@ -168,6 +180,7 @@ for (const event of calendarEvents) {
     "reminder",
     "buyingTiming",
     "decisionHint",
+    "caution",
     "difficulty"
   ];
 
@@ -176,6 +189,12 @@ for (const event of calendarEvents) {
   }
 
   assert(Array.isArray(event.suitableItems) && event.suitableItems.length > 0, `${label} suitableItems 至少需要 1 项`);
+  assert(Array.isArray(event.targetItems) && event.targetItems.length > 0, `${label} targetItems 至少需要 1 项`);
+  assert(["high", "medium", "low"].includes(event.priority), `${label} priority 只能是 high / medium / low`);
+  assert(event.detailUrl === `/calendar#${event.slug}`, `${label} detailUrl 需要指向 /calendar#slug`);
+  assert(event.highlight.length <= 24, `${label} highlight 建议控制在 24 字以内`);
+  assert(event.period.length <= 48, `${label} period 建议控制在 48 字以内`);
+  assert(event.actionTip.length <= 42, `${label} actionTip 建议控制在 42 字以内`);
   assert(
     Array.isArray(event.checkBeforeBuying) && event.checkBeforeBuying.length >= 3,
     `${label} checkBeforeBuying 至少需要 3 项`

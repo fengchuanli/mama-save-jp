@@ -32,7 +32,25 @@
     ],
     "savingsExample": "例：纸尿裤箱购平时 2,980 日元，活动券后 2,680 日元，买 2 箱可直接少花约 600 日元。",
     "maxBenefitExample": "Amazon 的最大节省通常来自“券 + 定期便 + 大促价”叠加。例：10% 券叠定期便 5%，3,000 日元商品理论可少约 450 日元；实际以结算页为准。",
-    "sourceLevel": "official"
+    "sourceLevel": "official",
+    "slug": "amazon-smile-sale",
+    "title": "Amazon Smile Sale",
+    "platform": "Amazon",
+    "highlight": "本周关注",
+    "keyBenefit": "看券后价和单片价",
+    "period": "活动期间关注",
+    "actionTip": "先看券后价，再算单片价。",
+    "priority": "high",
+    "shortSummary": "看券后价和单片价",
+    "targetItems": [
+      "尿不湿箱购",
+      "湿巾",
+      "棉柔巾",
+      "婴儿洗护"
+    ],
+    "detailUrl": "/calendar#amazon-smile-sale",
+    "description": "部分母婴用品会出现限时券、定期便折扣或满额积分回馈。",
+    "caution": "Amazon 的价格变化比较快，先把常买的纸尿裤、湿巾加入购物车，活动当天再看是否真的低于平时价。不要只因为页面写着 Sale 就下单。"
   },
   {
     "id": "amazon-black-friday",
@@ -67,7 +85,25 @@
     ],
     "savingsExample": "例：婴儿监控器平时 8,000 日元，大促降到 6,800 日元，可少花约 1,200 日元；纸尿裤继续按单片价判断。",
     "maxBenefitExample": "大件 10%-20% 降价时冲击更明显。例：20,000 日元安全座椅若降 15%，可少花约 3,000 日元；但必须确认是否适配车型。",
-    "sourceLevel": "official"
+    "sourceLevel": "official",
+    "slug": "amazon-big-sale",
+    "title": "Amazon Prime Day / Black Friday",
+    "platform": "Amazon",
+    "highlight": "大促前准备",
+    "keyBenefit": "大件和消耗品重点比价",
+    "period": "夏季 / 11 月大促",
+    "actionTip": "大促前先记录平时价。",
+    "priority": "medium",
+    "shortSummary": "大件和消耗品重点比价",
+    "targetItems": [
+      "安全座椅",
+      "婴儿监控器",
+      "吸奶器",
+      "尿不湿"
+    ],
+    "detailUrl": "/calendar#amazon-big-sale",
+    "description": "全年级别的大促，适合看大件和全年稳定消耗品。",
+    "caution": "大促前先写清单和心理价位。安全座椅、监控器、吸奶器这类大件可以关注，但宝宝可能挑口味或挑品牌的东西不要盲目囤。"
   },
   {
     "id": "rakuten-marathon",
@@ -103,7 +139,25 @@
     ],
     "savingsExample": "例：5 店铺各买 2,000 日元刚需，共 10,000 日元，买回部分约 +4%，大约多返 400 点。",
     "maxBenefitExample": "官方买回上限 7,000 点。例：10 店铺合计 50,000 日元且都符合条件，买回部分约 +9%，理论多返约 4,500 点。",
-    "sourceLevel": "official"
+    "sourceLevel": "official",
+    "slug": "rakuten-marathon",
+    "title": "楽天お買い物マラソン",
+    "platform": "楽天",
+    "highlight": "最高 7,000 点",
+    "keyBenefit": "最高按 10 店铺买回",
+    "period": "6/20 20:00 - 6/26 01:59",
+    "actionTip": "先 Entry，再把刚需商品加入收藏。",
+    "priority": "high",
+    "shortSummary": "最高按 10 店铺买回",
+    "targetItems": [
+      "尿不湿",
+      "辅食",
+      "棉柔巾",
+      "保育园姓名贴"
+    ],
+    "detailUrl": "/calendar#rakuten-marathon",
+    "description": "官方规则为エントリー后按购买店铺数提高倍率，单店铺需满 1,000 日元（税込、送料別、券后）才计入，最多按 10 店铺计算，特典积分上限 7,000 点；活动页同时预告开场 2 小时限定和对象商品限定的最高 50%OFF 优惠券。",
+    "caution": "适合把本来要买的尿不湿、辅食、湿巾、姓名贴集中到 6/20 晚上后下单。6/20 20:00 开场前可先领取优惠券，但不要因为“最高 50%OFF”就临时凑单；特典积分预计 2026/7/15 左右发放，期限到 2026/8/31 23:59。"
   },
   {
     "id": "rakuten-5-0-day",
@@ -137,7 +191,25 @@
     ],
     "savingsExample": "例：5,000 日元日用品补货，如果额外 +1% 生效，约多返 50 点；叠加买回和店铺券时再一起计算。",
     "maxBenefitExample": "适合与买回同日叠加。例：20 日既是 5/0 日又有买回，10,000 日元刚需订单可能比普通日多几百点，具体由内訳决定。",
-    "sourceLevel": "official"
+    "sourceLevel": "official",
+    "slug": "rakuten-5-0-day",
+    "title": "楽天 5 和 0 结尾日",
+    "platform": "楽天",
+    "highlight": "指定日期加成",
+    "keyBenefit": "适合和买回活动叠加",
+    "period": "每月 5 / 10 / 15 / 20 / 25 / 30 日",
+    "actionTip": "当天先 Entry，再看支付条件。",
+    "priority": "medium",
+    "shortSummary": "适合和买回活动叠加",
+    "targetItems": [
+      "日用品补货",
+      "辅食",
+      "纸尿裤",
+      "湿巾"
+    ],
+    "detailUrl": "/calendar#rakuten-5-0-day",
+    "description": "满足条件时会有额外积分回馈，适合和买回活动叠加观察。",
+    "caution": "需要提前确认是否要报名参加活动，以及支付方式是否满足条件。不要只看积分倍率，也要看券后价格。"
   },
   {
     "id": "nishimatsuya-season-sale",
@@ -172,7 +244,25 @@
     ],
     "savingsExample": "例：备用衣物 5 件，每件活动价比平时便宜 100-200 日元，可少花约 500-1,000 日元。",
     "maxBenefitExample": "这类活动最大收益不是高返点，而是基础款便宜。入园一次性买 8 件小物/衣物，若平均每件少 150 日元，可少花约 1,200 日元。",
-    "sourceLevel": "official"
+    "sourceLevel": "official",
+    "slug": "nishimatsuya-season-sale",
+    "title": "西松屋 チラシ・月間奉仕品",
+    "platform": "西松屋",
+    "highlight": "本周关注",
+    "keyBenefit": "基础款和小件补货",
+    "period": "6/18 - 7/14",
+    "actionTip": "先按保育园清单确认尺码和数量。",
+    "priority": "medium",
+    "shortSummary": "基础款和小件补货",
+    "targetItems": [
+      "夏季童装基础款",
+      "手口湿巾",
+      "纸尿裤",
+      "母乳垫"
+    ],
+    "detailUrl": "/calendar#nishimatsuya-season-sale",
+    "description": "官方首页显示新一轮チラシ、WEB限定ミミよりコレクション和月間奉仕品已开始，适合顺手看夏季童装、小件育儿用品和消耗品补货。",
+    "caution": "目前官方首页能确认活动期间和品类入口，但未能在可读页面确认具体单品价格。建议只把它当作到店/线上比价提醒，看到纸尿裤、手口湿巾、母乳垫等商品时再核对单价和库存。"
   },
   {
     "id": "akachan-point-day",
@@ -209,7 +299,25 @@
     ],
     "savingsExample": "例：如果平时 5,000 日元订单预计 50 点，10 倍日可能显示约 500 点，多约 450 点；实际以结算页为准。",
     "maxBenefitExample": "例：10,000 日元対象カテゴリ订单，若通常 100 点、10 倍日约 1,000 点，多约 900 点。不要为了凑免运买非刚需。",
-    "sourceLevel": "official"
+    "sourceLevel": "official",
+    "slug": "akachan-3-8-day",
+    "title": "赤ちゃん本舗 3/8 日",
+    "platform": "赤ちゃん本舗",
+    "highlight": "积分 10 倍",
+    "keyBenefit": "対象カテゴリ积分 10 倍",
+    "period": "每月 3 / 8 结尾日",
+    "actionTip": "10:00 后确认商品是否为対象カテゴリ。",
+    "priority": "high",
+    "shortSummary": "対象カテゴリ积分 10 倍",
+    "targetItems": [
+      "辅食和宝宝食品",
+      "奶瓶",
+      "宝宝餐具",
+      "纸尿裤和湿巾"
+    ],
+    "detailUrl": "/calendar#akachan-3-8-day",
+    "description": "官方 Online Shop 页面显示，每月 3 和 8 结尾日対象カテゴリ商品积分 10 倍，対象カテゴリ覆盖マタニティ・ママ、ベビー服、ベビーカー・チャイルドシート、纸尿裤/湿巾、授乳用品、ベビーケア、食品、通园用品等。",
+    "caution": "适合把本来要在赤ちゃん本舗买的辅食、奶瓶配件、宝宝餐具、通园小物或需要安心看品牌的用品放到 3/8 结尾日再确认。它是 Online Shop 限定企划，积分活动重叠时通常优先适用付与率更高的活动；仍要和 Amazon、楽天、西松屋对比实付价和送料门槛。"
   },
   {
     "id": "matsukiyo-coupon",
@@ -244,7 +352,25 @@
     ],
     "savingsExample": "例：宝宝洗护 900 日元，App 10% 券可少约 90 日元；买 3 件合计 2,700 日元，可少约 270 日元。",
     "maxBenefitExample": "药妆店券常见上限或対象外限制较多。例：15% 券买 3,000 日元対象商品，理论少约 450 日元；若母婴品类排除则不可用。",
-    "sourceLevel": "official"
+    "sourceLevel": "official",
+    "slug": "drugstore-coupon",
+    "title": "药妆店 App 优惠券",
+    "platform": "药妆店",
+    "highlight": "急用可看",
+    "keyBenefit": "小额补货看券后价",
+    "period": "每周或不定期",
+    "actionTip": "到店前先确认优惠券是否排除母婴品。",
+    "priority": "medium",
+    "shortSummary": "小额补货看券后价",
+    "targetItems": [
+      "婴儿洗护",
+      "退热贴",
+      "妈妈日用品",
+      "湿巾小包装"
+    ],
+    "detailUrl": "/calendar#drugstore-coupon",
+    "description": "常见为单品折扣、全场部分品类折扣或积分回馈。",
+    "caution": "药妆店适合临时补货和小件刚需，不一定适合大量箱购。买前看优惠券适用范围，有些母婴品类可能被排除。"
   },
   {
     "id": "paypay-yahoo-campaign",
@@ -280,7 +406,25 @@
     ],
     "savingsExample": "例：尿不湿箱购 10,000 日元，対象金額符合时 +4% 约返 400 円相当；20,000 日元约返 800 円相当。",
     "maxBenefitExample": "官方 +4% 上限 1,000 円相当。対象金額约 25,000 日元可接近上限，超过部分不再通过这项活动增加。",
-    "sourceLevel": "official"
+    "sourceLevel": "official",
+    "slug": "yahoo-5day",
+    "title": "Yahoo!ショッピング 5のつく日",
+    "platform": "Yahoo!ショッピング",
+    "highlight": "+4%",
+    "keyBenefit": "指定支付 +4%",
+    "period": "每月 5 / 15 / 25 日",
+    "actionTip": "先 Entry，再确认支付方式和结算页内訳。",
+    "priority": "high",
+    "shortSummary": "指定支付 +4%",
+    "targetItems": [
+      "尿不湿箱购",
+      "湿巾箱购",
+      "儿童家具",
+      "婴儿车配件"
+    ],
+    "detailUrl": "/calendar#yahoo-5day",
+    "description": "官方规则为エントリー后，使用 PayPayクレジット、PayPay残高等、PayPayカード、PayPayカード ゴールド或ヤフーショッピング商品券等指定支付方式，对対象金額付与 +4% PayPayポイント（期間限定），上限 1,000 円相当。",
+    "caution": "适合在 6/25 看纸尿裤、湿巾箱购、婴儿洗护和儿童家具等本来要买的东西。必须先エントリー再下单；対象金額按税抜商品价扣除优惠券后计算，不含送料和手数料。期間限定ポイント不是现金，付与翌日后最短 30 日以后的月末到期。"
   },
   {
     "id": "paypay-official-campaign-check",
@@ -316,7 +460,25 @@
     ],
     "savingsExample": "例：药妆店买 3,000 日元，若中 3 等 0.5% 约返 15 点；若中 2 等 5% 约返 150 点。未中奖则没有这部分节省。",
     "maxBenefitExample": "抽选类“最大 100%”不能当稳定优惠。评估时按小额返还看价值，只有刚需顺手支付才值得参加。",
-    "sourceLevel": "official"
+    "sourceLevel": "official",
+    "slug": "paypay-scratch",
+    "title": "PayPay スクラッチ",
+    "platform": "PayPay",
+    "highlight": "最高可返 / 抽选活动中",
+    "keyBenefit": "药妆店和超市前先确认対象店舗",
+    "period": "6/19 - 7/31",
+    "actionTip": "去店前先确认対象店舗和付与条件。",
+    "priority": "high",
+    "shortSummary": "药妆店和超市前先确认対象店舗",
+    "targetItems": [
+      "尿不湿",
+      "湿巾",
+      "婴儿洗护",
+      "药妆店日用品"
+    ],
+    "detailUrl": "/calendar#paypay-scratch",
+    "description": "PayPay 官方活动页显示超PayPay祭和 PayPayスクラッチ已开始。PayPayスクラッチ为 200 日元以上/次的対象決済发放抽选，需本人确认；当选时 1 等 100%、2 等 5%、3 等 0.5% PayPayポイント，付与上限为 10 万点/回および期間。",
+    "caution": "这不是确定折扣，也不是母婴商品专属活动。适合本来就要买宝宝洗护、湿巾小包装、妈妈用品时顺手确认；不要为了抽选或“最大返还”改变购买计划。スギ薬局联动活动也在进行，但多为后日可用 PayPay クーポン，需确认対象店舗、対象外商品和利用期间。"
   },
   {
     "id": "aeon-paypay-local-campaign-check",
@@ -352,7 +514,25 @@
     ],
     "savingsExample": "例：若某地区活动写明 10% 返还、上限 1,000 点，买 5,000 日元対象商品理论可返 500 点；未确认门店参加前不能按此计算。",
     "maxBenefitExample": "如果活动上限 1,000 点，対象金额约 10,000 日元且 10% 返还可接近上限；实际必须以当地活动公告为准。",
-    "sourceLevel": "official"
+    "sourceLevel": "official",
+    "slug": "aeon-paypay",
+    "title": "AEON + PayPay 地区活动",
+    "platform": "AEON / PayPay",
+    "highlight": "地区限定",
+    "keyBenefit": "可能有门店限定返点",
+    "period": "不定期",
+    "actionTip": "先看店头公告，不要只看支付 App。",
+    "priority": "medium",
+    "shortSummary": "可能有门店限定返点",
+    "targetItems": [
+      "尿不湿箱购",
+      "湿巾",
+      "宝宝洗护",
+      "妈妈日用品"
+    ],
+    "detailUrl": "/calendar#aeon-paypay",
+    "description": "AEON 系列店铺如果出现 PayPay 或地区消费返还活动，适合顺手看尿不湿、湿巾、奶粉周边、宝宝洗护和家庭日用品。",
+    "caution": "目前站内不要把 AEON + PayPay 写成固定长期优惠。很多返点活动是地区、门店、支付方式或期间限定，必须确认活动页、店头海报和结账方式后再买。"
   },
   {
     "id": "rakuten-pay-campaign-check",
@@ -387,7 +567,25 @@
     ],
     "savingsExample": "例：线下买宝宝洗护 2,000 日元，若活动额外 +5% 且符合条件，约多返 100 点。",
     "maxBenefitExample": "若活动上限 500 点，対象金额 10,000 日元且 +5% 时可接近上限；上限、付与日和期间限定积分需逐次确认。",
-    "sourceLevel": "official"
+    "sourceLevel": "official",
+    "slug": "rakuten-pay",
+    "title": "楽天ペイ 街中支付活动",
+    "platform": "楽天ペイ",
+    "highlight": "出门前先看活动",
+    "keyBenefit": "不定期门店支付返点",
+    "period": "不定期",
+    "actionTip": "结账前确认活动页和対象店舗。",
+    "priority": "medium",
+    "shortSummary": "不定期门店支付返点",
+    "targetItems": [
+      "药妆店小额补货",
+      "婴儿洗护",
+      "湿巾小包装",
+      "妈妈用品"
+    ],
+    "detailUrl": "/calendar#rakuten-pay",
+    "description": "楽天ペイ活动适合关注街中门店支付返点，若覆盖药妆店或超市，可用于宝宝洗护、湿巾小包装、妈妈用品等日常小额补货。",
+    "caution": "楽天ペイ和楽天市場不是同一套购物场景。线下支付活动要看対象店舗、エントリー、支払い方法和ポイント付与条件。"
   },
   {
     "id": "dbarai-campaign-check",
@@ -422,7 +620,25 @@
     ],
     "savingsExample": "例：3,000 日元宝宝洗护订单，若活动 +10% 且符合条件，理论约返 300 点；如果有上限或対象外则按官方规则调整。",
     "maxBenefitExample": "若单活动上限 500 点，5,000 日元対象购买且 +10% 可接近上限；不要为了用满上限购买非刚需。",
-    "sourceLevel": "official"
+    "sourceLevel": "official",
+    "slug": "dbarai",
+    "title": "d払い 活动检查",
+    "platform": "d払い",
+    "highlight": "活动页确认",
+    "keyBenefit": "街のお店 / 网络店铺分开看",
+    "period": "不定期",
+    "actionTip": "先分清街中店还是网络店活动。",
+    "priority": "medium",
+    "shortSummary": "街のお店 / 网络店铺分开看",
+    "targetItems": [
+      "药妆店日用品",
+      "宝宝洗护",
+      "湿巾",
+      "妈妈用品"
+    ],
+    "detailUrl": "/calendar#dbarai",
+    "description": "d払い官方活动页按街のお店、ネットのお店等分类展示活动。若覆盖药妆店、超市或网购平台，可作为母婴日用品补货前的检查项。",
+    "caution": "d払い活动常和 dポイント、dカード、エントリー条件相关。不是所有店铺和商品都参加，别为了返点改变本来不需要的购买计划。"
   },
   {
     "id": "aupay-campaign-check",
@@ -457,6 +673,24 @@
     ],
     "savingsExample": "例：2,500 日元日用品补货，若活动 +5% 且符合条件，约返 125 点。",
     "maxBenefitExample": "若活动上限 300 点，6,000 日元対象金额且 +5% 可接近上限；具体以官方活动页为准。",
-    "sourceLevel": "official"
+    "sourceLevel": "official",
+    "slug": "aupay",
+    "title": "au PAY 活动检查",
+    "platform": "au PAY",
+    "highlight": "活动页确认",
+    "keyBenefit": "药妆店和超市补货前可看",
+    "period": "不定期",
+    "actionTip": "先确认领取券、対象店舗和上限。",
+    "priority": "medium",
+    "shortSummary": "药妆店和超市补货前可看",
+    "targetItems": [
+      "婴儿洗护",
+      "湿巾小包装",
+      "妈妈日用品",
+      "家庭消耗品"
+    ],
+    "detailUrl": "/calendar#aupay",
+    "description": "au PAY 活动如果覆盖附近药妆店、超市或商场，可用于宝宝洗护、日用品和临时补货。适合和 PayPay、楽天ペイ、d払い一起比较。",
+    "caution": "au PAY 活动同样要看対象店舗、決済方法、還元上限和ポイント有效期。母婴用品省钱优先看刚需和实际付款金额。"
   }
 ]

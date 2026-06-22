@@ -1,32 +1,18 @@
+import Link from "next/link";
 import type { CalendarEvent } from "@/lib/types";
 
-const difficultyLabel = {
-  easy: "新手友好",
-  normal: "需要简单计算",
-  hard: "规则较复杂"
-};
+const linkClass =
+  "inline-flex min-h-[44px] items-center text-sm font-bold text-blue-700 underline underline-offset-4 transition hover:text-blue-900";
 
-const difficultyClass = {
-  easy: "bg-tea text-white",
-  normal: "bg-linen text-stone-700",
-  hard: "bg-peach text-ink"
-};
-
-const buyingTimingLabel = {
-  prepare: "适合提前准备",
-  "same-day": "当天确认再买",
-  watch: "先观察价格"
-};
-
-const buyingTimingClass = {
-  prepare: "bg-ink text-white",
-  "same-day": "bg-tea text-white",
-  watch: "bg-mist text-stone-700"
+const priorityClass = {
+  high: "border-rose-200 bg-rose-50 text-rose-700",
+  medium: "border-peach bg-linen text-ink",
+  low: "border-stone-200 bg-stone-50 text-stone-700"
 };
 
 function BulletList({ items }: { items: string[] }) {
   return (
-    <ul className="mt-2 space-y-1.5 text-sm leading-6 text-stone-700 sm:mt-3 sm:space-y-2">
+    <ul className="mt-2 space-y-2 text-sm leading-6 text-stone-700">
       {items.map((item) => (
         <li key={item} className="flex gap-2">
           <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-tea" />
@@ -37,97 +23,111 @@ function BulletList({ items }: { items: string[] }) {
   );
 }
 
+function TargetItems({ items }: { items: string[] }) {
+  return (
+    <div className="mt-3 flex flex-wrap gap-1.5">
+      {items.map((item) => (
+        <span key={item} className="rounded-full bg-cream px-2.5 py-1 text-xs text-stone-700">
+          {item}
+        </span>
+      ))}
+    </div>
+  );
+}
+
+export function CalendarSummaryCard({ event }: { event: CalendarEvent }) {
+  return (
+    <article className="rounded-lg border border-stone-200 bg-white p-4 shadow-soft">
+      <p className={`inline-flex rounded-full border px-3 py-1 text-sm font-bold ${priorityClass[event.priority]}`}>
+        {event.highlight}
+      </p>
+      <h3 className="mt-3 text-lg font-semibold leading-7 text-ink">{event.title}</h3>
+      <p className="mt-2 text-sm font-semibold leading-6 text-rose-700">{event.period}</p>
+      <p className="mt-2 text-sm leading-6 text-stone-700">{event.keyBenefit}</p>
+      <TargetItems items={event.targetItems} />
+      <p className="mt-3 text-sm leading-6 text-stone-600">{event.actionTip}</p>
+      <Link href={event.detailUrl} className={linkClass}>
+        查看详情 →
+      </Link>
+    </article>
+  );
+}
+
 export function CalendarCard({ event }: { event: CalendarEvent }) {
   return (
-    <article className="rounded-lg border border-stone-200 bg-white p-4 shadow-soft sm:p-5">
-      <div className="mb-3 flex flex-wrap items-center gap-1.5 sm:mb-4 sm:gap-2">
-        <span className="rounded-full bg-mist px-2.5 py-1 text-xs font-medium text-stone-700 sm:px-3">
-          {event.days}
-        </span>
-        <span
-          className={`rounded-full px-2.5 py-1 text-xs font-medium sm:px-3 ${buyingTimingClass[event.buyingTiming]}`}
-        >
-          {buyingTimingLabel[event.buyingTiming]}
-        </span>
-        <span
-          className={`rounded-full px-2.5 py-1 text-xs font-medium sm:px-3 ${difficultyClass[event.difficulty]}`}
-        >
-          {difficultyLabel[event.difficulty]}
-        </span>
+    <article id={event.slug} className="scroll-mt-24 rounded-lg border border-stone-200 bg-white p-4 shadow-soft sm:p-5">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+        <div>
+          <p className={`inline-flex rounded-full border px-3 py-1 text-sm font-bold ${priorityClass[event.priority]}`}>
+            {event.highlight}
+          </p>
+          <h3 className="mt-3 text-lg font-semibold leading-7 text-ink sm:text-xl">{event.title}</h3>
+        </div>
+        <p className="text-sm font-semibold leading-6 text-rose-700">{event.period}</p>
       </div>
-      <h3 className="text-base font-semibold leading-7 text-ink sm:text-lg">{event.eventName}</h3>
-      <p className="mt-2 rounded-lg border border-tea/20 bg-mist px-3 py-2 text-sm font-medium leading-6 text-ink">
-        先这样判断：{event.decisionHint}
-      </p>
-      {(event.sourceName || event.updatedAt) && (
-        <p className="mt-1.5 text-xs leading-5 text-stone-500 sm:mt-2">
-          {event.sourceName && event.sourceUrl ? (
-            <a
-              className="underline underline-offset-2"
-              href={event.sourceUrl}
-              target="_blank"
-              rel="noreferrer"
-            >
-              来源：{event.sourceName}
-            </a>
-          ) : event.sourceName ? (
-            <>来源：{event.sourceName}</>
+
+      <div className="mt-4 rounded-lg bg-cream p-3">
+        <p className="text-sm font-semibold text-ink">{event.keyBenefit}</p>
+        <TargetItems items={event.targetItems} />
+        <p className="mt-3 text-sm leading-6 text-stone-700">行动建议：{event.actionTip}</p>
+      </div>
+
+      <details className="mt-4 group">
+        <summary className={`${linkClass} cursor-pointer list-none`}>
+          查看详情 →
+        </summary>
+        <div className="mt-4 grid gap-4 border-t border-stone-200 pt-4 lg:grid-cols-2">
+          <section>
+            <h4 className="text-sm font-semibold text-ink">活动是什么</h4>
+            <p className="mt-2 text-sm leading-6 text-stone-700">{event.description}</p>
+          </section>
+
+          {event.participationSteps?.length ? (
+            <section>
+              <h4 className="text-sm font-semibold text-ink">怎么参加</h4>
+              <BulletList items={event.participationSteps} />
+            </section>
           ) : null}
-          {event.sourceName && event.updatedAt ? " · " : ""}
-          {event.updatedAt ? `更新：${event.updatedAt}` : ""}
-        </p>
-      )}
-      <p className="mt-3 text-sm leading-6 text-stone-700 sm:text-base sm:leading-7">
-        {event.benefit}
-      </p>
 
-      {event.participationSteps?.length ? (
-        <div className="mt-4 rounded-lg border border-stone-200 bg-white p-3 sm:mt-5 sm:p-4">
-          <p className="text-sm font-semibold text-ink">怎么参加</p>
-          <BulletList items={event.participationSteps} />
-        </div>
-      ) : null}
-
-      <div className="mt-4 rounded-lg bg-cream p-3 sm:mt-5 sm:p-4">
-        <p className="text-sm font-semibold text-ink">适合买什么</p>
-        <div className="mt-2 flex flex-wrap gap-1.5 sm:mt-3 sm:gap-2">
-          {event.suitableItems.map((item) => (
-            <span
-              key={item}
-              className="rounded-full bg-white px-2.5 py-1 text-xs text-stone-700 sm:px-3"
-            >
-              {item}
-            </span>
-          ))}
-        </div>
-      </div>
-
-      {(event.savingsExample || event.maxBenefitExample) && (
-        <div className="mt-3 grid gap-3 sm:mt-4 sm:grid-cols-2">
           {event.savingsExample ? (
-            <div className="rounded-lg border border-tea/30 bg-mist p-3 sm:p-4">
-              <p className="text-sm font-semibold text-ink">省钱示例</p>
+            <section>
+              <h4 className="text-sm font-semibold text-ink">省钱示例</h4>
               <p className="mt-2 text-sm leading-6 text-stone-700">{event.savingsExample}</p>
-            </div>
+            </section>
           ) : null}
+
           {event.maxBenefitExample ? (
-            <div className="rounded-lg border border-peach bg-linen p-3 sm:p-4">
-              <p className="text-sm font-semibold text-ink">最大可省/可返示例</p>
+            <section>
+              <h4 className="text-sm font-semibold text-ink">最大可省/可返示例</h4>
               <p className="mt-2 text-sm leading-6 text-stone-700">{event.maxBenefitExample}</p>
-            </div>
+            </section>
           ) : null}
+
+          <section>
+            <h4 className="text-sm font-semibold text-ink">下单前确认</h4>
+            <BulletList items={event.checkBeforeBuying} />
+          </section>
+
+          <section>
+            <h4 className="text-sm font-semibold text-ink">注意事项</h4>
+            <p className="mt-2 text-sm leading-6 text-stone-700">{event.caution}</p>
+          </section>
+
+          <section>
+            <h4 className="text-sm font-semibold text-ink">来源与更新</h4>
+            <p className="mt-2 text-sm leading-6 text-stone-700">更新时间：{event.updatedAt}</p>
+            {event.sourceUrl ? (
+              <a href={event.sourceUrl} target="_blank" rel="noreferrer" className={linkClass}>
+                去官方页面 →
+              </a>
+            ) : null}
+          </section>
         </div>
-      )}
+      </details>
 
-      <div className="mt-3 rounded-lg border border-stone-200 bg-white p-3 sm:mt-4 sm:p-4">
-        <p className="text-sm font-semibold text-ink">下单前确认</p>
-        <BulletList items={event.checkBeforeBuying} />
-      </div>
-
-      <div className="mt-3 rounded-lg border border-peach bg-linen p-3 sm:mt-4 sm:p-4">
-        <p className="text-sm font-semibold text-ink">注意什么</p>
-        <p className="mt-2 text-sm leading-6 text-stone-700">{event.reminder}</p>
-      </div>
+      <p className="mt-4 text-xs leading-5 text-stone-500">
+        活动、返点、库存和适用门店可能变化，购买前请以官方页面、结算页或店头公告为准。
+      </p>
     </article>
   );
 }

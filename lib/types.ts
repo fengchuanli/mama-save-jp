@@ -36,6 +36,18 @@ export type Deal = {
 
 export type CalendarEvent = {
   id: string;
+  slug: string;
+  title: string;
+  platform: string;
+  highlight: string;
+  shortSummary: string;
+  keyBenefit: string;
+  targetItems: string[];
+  actionTip: string;
+  period: string;
+  detailUrl: string;
+  priority: "high" | "medium" | "low";
+  description: string;
   store: string;
   eventName: string;
   days: string;
@@ -48,6 +60,7 @@ export type CalendarEvent = {
   participationSteps?: string[];
   savingsExample?: string;
   maxBenefitExample?: string;
+  caution: string;
   difficulty: "easy" | "normal" | "hard";
   sourceName?: string;
   sourceUrl?: string;
