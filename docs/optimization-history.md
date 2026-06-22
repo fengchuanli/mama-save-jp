@@ -1,5 +1,26 @@
 # 优化记录
 
+## 2026-06-23 新生儿准备攻略完善
+
+- 时间：2026-06-23 03:03 JST
+- 当前优化方向：03:00 攻略内容。
+- 目标：把偏薄的《新生儿准备品先买什么》扩展成完整新手攻略，补足“适合谁 / 怎么买 / 买前检查 / 注意事项”，让第一次准备宝宝用品的用户能按刚需优先、少量试错来做决策。
+- 修改文件：
+  - `content/guides/newborn-shopping-list.mdx`
+  - `public/sitemap.xml`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查新生儿攻略包含核心章节、`updatedAt` 和阅读时长
+  - `npm run sitemap`
+  - `git diff --check`
+  - `npm run build`
+- 结果：新生儿攻略从短清单扩展为约 6 分钟阅读文章，新增第一批先买什么、线下看实物/线上比价、消耗品先少量试错、买前检查清单和不急囤品类说明。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、6 条优惠、13 个日历活动校验通过；静态检查通过；`npm run sitemap` 生成 14 个 URL；`git diff --check` 通过；`npm run build` 的 `prebuild` 和 sitemap 成功，但主构建仍因当前工作区没有可用 `next` 命令失败，报 `sh: next: command not found`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“完善新生儿准备攻略”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续 03:00 攻略内容方向可优先完善仍偏短的纸尿裤好价线攻略，或新增湿巾/宝宝洗护好价判断攻略；网络恢复后优先推送本地领先提交。
+
 ## 2026-06-23 省钱日历行动时机展示
 
 - 时间：2026-06-23 02:03 JST
