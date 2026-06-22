@@ -12,6 +12,37 @@ type GuidesProps = {
   guides: GuideMeta[];
 };
 
+const guideProblemGroups = [
+  {
+    id: "start",
+    title: "先定购物范围",
+    description: "还不知道第一批该买什么、去哪家店看时，先用这些攻略把清单收窄。",
+    slugs: ["newborn-shopping-list", "choose-baby-stores-japan"]
+  },
+  {
+    id: "essentials",
+    title: "判断消耗品值不值",
+    description: "尿不湿、纸尿裤和药妆店补货先看单价、尺码风险和是否马上会用。",
+    slugs: ["buy-diapers-japan", "diaper-price-line", "drugstore-coupon"]
+  },
+  {
+    id: "platforms",
+    title: "看懂平台和返点",
+    description: "遇到楽天、5と0のつく日或支付返点时，先确认实付、上限和是否本来就要买。",
+    slugs: [
+      "rakuten-points-basics",
+      "rakuten-5-0-mama-shopping",
+      "payment-rebates-mama-shopping"
+    ]
+  },
+  {
+    id: "nursery",
+    title: "保育园和童装准备",
+    description: "入园清单、姓名贴和换季童装更容易买多，先按场景和尺码判断。",
+    slugs: ["nursery-entry-budget-items", "kids-clothes-size-80-90-100"]
+  }
+];
+
 export default function Guides({ guides }: GuidesProps) {
   const guidesUrl = `${siteConfig.siteUrl}/guides`;
   const beginnerGuideSlugs = [
@@ -22,6 +53,12 @@ export default function Guides({ guides }: GuidesProps) {
   const beginnerGuides = beginnerGuideSlugs
     .map((slug) => guides.find((guide) => guide.slug === slug))
     .filter((guide): guide is GuideMeta => Boolean(guide));
+  const groupedGuides = guideProblemGroups.map((group) => ({
+    ...group,
+    guides: group.slugs
+      .map((slug) => guides.find((guide) => guide.slug === slug))
+      .filter((guide): guide is GuideMeta => Boolean(guide))
+  }));
   const collectionJsonLd = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
@@ -119,9 +156,30 @@ export default function Guides({ guides }: GuidesProps) {
           </div>
         </div>
 
-        <div className="grid gap-5 md:grid-cols-2">
-          {guides.map((guide) => (
-            <GuideCard key={guide.slug} guide={guide} />
+        <div className="space-y-8">
+          {groupedGuides.map((group) => (
+            <section key={group.id} aria-labelledby={`guide-group-${group.id}`}>
+              <div className="mb-4 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
+                <div>
+                  <p className="text-sm font-semibold text-tea">按问题找攻略</p>
+                  <h2
+                    id={`guide-group-${group.id}`}
+                    className="mt-1 text-xl font-semibold text-ink"
+                  >
+                    {group.title}
+                  </h2>
+                </div>
+                <p className="max-w-2xl text-sm leading-6 text-stone-600">
+                  {group.description}
+                </p>
+              </div>
+
+              <div className="grid gap-5 md:grid-cols-2">
+                {group.guides.map((guide) => (
+                  <GuideCard key={guide.slug} guide={guide} />
+                ))}
+              </div>
+            </section>
           ))}
         </div>
       </section>

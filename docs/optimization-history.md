@@ -1,5 +1,25 @@
 # 优化记录
 
+## 2026-06-23 攻略列表按问题分组
+
+- 时间：2026-06-23 00:02 JST
+- 当前优化方向：00:00 内容结构。
+- 目标：让 `/guides` 不只是按发布时间平铺攻略，而是按新手真实问题组织阅读入口，帮助首次访问者更快找到“先买什么、怎么算值、看平台规则、保育园童装”等内容。
+- 修改文件：
+  - `pages/guides/index.tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查攻略列表包含 4 个问题分组和 10 篇现有攻略 slug
+  - `npm run sitemap`
+  - `git diff --check`
+  - `npm run build`
+- 结果：攻略列表页新增 4 个“按问题找攻略”分组：先定购物范围、判断消耗品值不值、看懂平台和返点、保育园和童装准备；保留原有新手宝妈必读路线，不新增优惠、价格或日历信息。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、6 条优惠、13 个日历活动校验通过；静态检查通过；`npm run sitemap` 生成 14 个 URL；`git diff --check` 通过；`npm run build` 的 `prebuild` 和 sitemap 成功，但主构建仍因本地没有可用 `next` 命令失败，报 `sh: next: command not found`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“按问题组织攻略列表”。
+- 是否推送：失败；提交前执行 `git ls-remote origin HEAD`、提交后执行 `git push origin main` 均无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续内容结构方向可根据亲友试用反馈判断 4 个问题分组是否需要改名，或给每组增加更明确的“先读哪篇”标识。
+
 ## 2026-06-22 详情入口改为标签尺寸
 
 - 时间：2026-06-22 JST
