@@ -1,5 +1,23 @@
 # 优化记录
 
+## 2026-06-22 详情入口改为标签尺寸
+
+- 时间：2026-06-22 JST
+- 当前优化方向：卡片 CTA 视觉收敛。
+- 目标：将「查看详情」「去官方页面」按钮改成与推荐标签相同的尺寸、背景色和文字颜色，并确保按钮/标签文字不换行。
+- 修改文件：
+  - `components/DealCard.tsx`
+  - `components/CalendarCard.tsx`
+  - `components/PaymentRebateSpotlight.tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - 搜索蓝色按钮样式残留
+  - `npm run validate:content`
+  - `git diff --check`
+  - `npm run build`
+- 结果：三处组件的 CTA class 统一为 `bg-linen px-3 py-1 text-xs font-semibold text-stone-700 whitespace-nowrap`，和「适合囤货」标签默认视觉一致；推荐标签和适合买什么标签也补充 `whitespace-nowrap`，避免文字换行。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、6 条优惠、13 个日历活动校验通过；`git diff --check` 通过；`npm run build` 的 `prebuild` 生成 sitemap 成功，但主构建因本地没有可用 `next` 命令失败，报 `sh: next: command not found`。
+
 ## 2026-06-22 CTA 按钮样式统一
 
 - 时间：2026-06-22 JST

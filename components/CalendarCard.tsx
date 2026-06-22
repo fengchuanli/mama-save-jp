@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { CalendarEvent } from "@/lib/types";
 
 const linkClass =
-  "inline-flex min-h-[44px] items-center justify-center rounded-full border border-blue-200 bg-blue-50 px-4 py-2 text-sm font-bold text-blue-700 transition hover:border-blue-300 hover:bg-blue-100 hover:text-blue-900";
+  "inline-flex whitespace-nowrap rounded-full bg-linen px-3 py-1 text-xs font-semibold text-stone-700 transition hover:bg-peach";
 
 const priorityClass = {
   high: "border-rose-200 bg-rose-50 text-rose-700",
@@ -27,7 +27,7 @@ function TargetItems({ items }: { items: string[] }) {
   return (
     <div className="mt-3 flex flex-wrap gap-1.5">
       {items.map((item) => (
-        <span key={item} className="rounded-full bg-cream px-2.5 py-1 text-xs text-stone-700">
+        <span key={item} className="whitespace-nowrap rounded-full bg-cream px-2.5 py-1 text-xs text-stone-700">
           {item}
         </span>
       ))}
