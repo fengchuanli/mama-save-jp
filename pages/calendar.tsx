@@ -43,6 +43,11 @@ export default function Calendar({ events }: CalendarProps) {
             <p>每个活动先看“适合买什么”，只买家里本来就会用的刚需品。</p>
             <p>再看“注意什么”，尤其是积分上限、运费门槛和不要为了凑单乱买。</p>
           </div>
+          <div className="mt-4 flex flex-wrap gap-2 text-xs font-semibold">
+            <span className="rounded-full border border-tea/30 bg-tea/10 px-3 py-1 text-tea">提前准备：先列清单和心理价</span>
+            <span className="rounded-full border border-rose-200 bg-rose-50 px-3 py-1 text-rose-700">当天确认：结算前看条件</span>
+            <span className="rounded-full border border-stone-200 bg-stone-50 px-3 py-1 text-stone-700">先观察：看到具体价格再买</span>
+          </div>
         </div>
 
         <PaymentRebateSpotlight events={paymentRebateEvents} />

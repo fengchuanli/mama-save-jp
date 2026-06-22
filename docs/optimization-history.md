@@ -1,5 +1,26 @@
 # 优化记录
 
+## 2026-06-23 省钱日历行动时机展示
+
+- 时间：2026-06-23 02:03 JST
+- 当前优化方向：02:00 省钱日历。
+- 目标：把日历数据里已有的“提前准备 / 当天确认 / 先观察”和“先这样判断”展示到卡片上，让用户不用展开详情也能判断这类活动应该怎么处理。
+- 修改文件：
+  - `components/CalendarCard.tsx`
+  - `pages/calendar.tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查日历卡片包含行动时机标签、判断提示和页面图例
+  - `npm run sitemap`
+  - `git diff --check`
+  - `npm run build`
+- 结果：日历首页摘要卡和 `/calendar` 详情卡都显示行动时机标签，并在核心信息区展示“先这样判断”；日历页新手说明补充 3 个标签的含义。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、6 条优惠、13 个日历活动校验通过；静态检查通过；`npm run sitemap` 生成 14 个 URL；`git diff --check` 通过；`npm run build` 的 `prebuild` 和 sitemap 成功，但主构建仍因当前工作区没有可用 `next` 命令失败，报 `sh: next: command not found`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“展示省钱日历行动时机”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续 02:00 省钱日历方向可继续检查是否需要按平台增加“本周优先看哪 3 个活动”的排序说明；网络恢复后优先推送本地领先提交。
+
 ## 2026-06-23 优惠类型标识
 
 - 时间：2026-06-23 01:02 JST

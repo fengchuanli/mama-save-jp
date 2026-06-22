@@ -10,6 +10,26 @@ const priorityClass = {
   low: "border-stone-200 bg-stone-50 text-stone-700"
 };
 
+const timingLabel = {
+  prepare: "提前准备",
+  "same-day": "当天确认",
+  watch: "先观察"
+};
+
+const timingClass = {
+  prepare: "border-tea/30 bg-tea/10 text-tea",
+  "same-day": "border-rose-200 bg-rose-50 text-rose-700",
+  watch: "border-stone-200 bg-stone-50 text-stone-700"
+};
+
+function TimingBadge({ event }: { event: CalendarEvent }) {
+  return (
+    <span className={`inline-flex rounded-full border px-3 py-1 text-xs font-semibold ${timingClass[event.buyingTiming]}`}>
+      {timingLabel[event.buyingTiming]}
+    </span>
+  );
+}
+
 function BulletList({ items }: { items: string[] }) {
   return (
     <ul className="mt-2 space-y-2 text-sm leading-6 text-stone-700">
@@ -38,13 +58,17 @@ function TargetItems({ items }: { items: string[] }) {
 export function CalendarSummaryCard({ event }: { event: CalendarEvent }) {
   return (
     <article className="rounded-lg border border-stone-200 bg-white p-4 shadow-soft">
-      <p className={`inline-flex rounded-full border px-3 py-1 text-sm font-bold ${priorityClass[event.priority]}`}>
-        {event.highlight}
-      </p>
+      <div className="flex flex-wrap items-center gap-2">
+        <p className={`inline-flex rounded-full border px-3 py-1 text-sm font-bold ${priorityClass[event.priority]}`}>
+          {event.highlight}
+        </p>
+        <TimingBadge event={event} />
+      </div>
       <h3 className="mt-3 text-lg font-semibold leading-7 text-ink">{event.title}</h3>
       <p className="mt-2 text-sm font-semibold leading-6 text-rose-700">{event.period}</p>
       <p className="mt-2 text-sm leading-6 text-stone-700">{event.keyBenefit}</p>
       <TargetItems items={event.targetItems} />
+      <p className="mt-3 text-sm leading-6 text-stone-700">先这样判断：{event.decisionHint}</p>
       <p className="mt-3 text-sm leading-6 text-stone-600">{event.actionTip}</p>
       <Link href={event.detailUrl} className={linkClass}>
         查看详情
@@ -58,9 +82,12 @@ export function CalendarCard({ event }: { event: CalendarEvent }) {
     <article id={event.slug} className="scroll-mt-24 rounded-lg border border-stone-200 bg-white p-4 shadow-soft sm:p-5">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
         <div>
-          <p className={`inline-flex rounded-full border px-3 py-1 text-sm font-bold ${priorityClass[event.priority]}`}>
-            {event.highlight}
-          </p>
+          <div className="flex flex-wrap items-center gap-2">
+            <p className={`inline-flex rounded-full border px-3 py-1 text-sm font-bold ${priorityClass[event.priority]}`}>
+              {event.highlight}
+            </p>
+            <TimingBadge event={event} />
+          </div>
           <h3 className="mt-3 text-lg font-semibold leading-7 text-ink sm:text-xl">{event.title}</h3>
         </div>
         <p className="text-sm font-semibold leading-6 text-rose-700">{event.period}</p>
@@ -69,6 +96,7 @@ export function CalendarCard({ event }: { event: CalendarEvent }) {
       <div className="mt-4 rounded-lg bg-cream p-3">
         <p className="text-sm font-semibold text-ink">{event.keyBenefit}</p>
         <TargetItems items={event.targetItems} />
+        <p className="mt-3 text-sm leading-6 text-stone-700">先这样判断：{event.decisionHint}</p>
         <p className="mt-3 text-sm leading-6 text-stone-700">行动建议：{event.actionTip}</p>
       </div>
 
