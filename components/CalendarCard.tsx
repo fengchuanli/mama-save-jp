@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { CalendarEvent } from "@/lib/types";
 
 const linkClass =
-  "inline-flex min-h-[44px] items-center text-sm font-bold text-blue-700 underline underline-offset-4 transition hover:text-blue-900";
+  "inline-flex min-h-[44px] items-center justify-center rounded-full border border-blue-200 bg-blue-50 px-4 py-2 text-sm font-bold text-blue-700 transition hover:border-blue-300 hover:bg-blue-100 hover:text-blue-900";
 
 const priorityClass = {
   high: "border-rose-200 bg-rose-50 text-rose-700",
@@ -47,7 +47,7 @@ export function CalendarSummaryCard({ event }: { event: CalendarEvent }) {
       <TargetItems items={event.targetItems} />
       <p className="mt-3 text-sm leading-6 text-stone-600">{event.actionTip}</p>
       <Link href={event.detailUrl} className={linkClass}>
-        查看详情 →
+        查看详情
       </Link>
     </article>
   );
@@ -74,7 +74,7 @@ export function CalendarCard({ event }: { event: CalendarEvent }) {
 
       <details className="mt-4 group">
         <summary className={`${linkClass} cursor-pointer list-none`}>
-          查看详情 →
+          查看详情
         </summary>
         <div className="mt-4 grid gap-4 border-t border-stone-200 pt-4 lg:grid-cols-2">
           <section>
@@ -118,7 +118,7 @@ export function CalendarCard({ event }: { event: CalendarEvent }) {
             <p className="mt-2 text-sm leading-6 text-stone-700">更新时间：{event.updatedAt}</p>
             {event.sourceUrl ? (
               <a href={event.sourceUrl} target="_blank" rel="noreferrer" className={linkClass}>
-                去官方页面 →
+                去官方页面
               </a>
             ) : null}
           </section>

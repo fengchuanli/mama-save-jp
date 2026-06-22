@@ -107,9 +107,9 @@ export default function Deals({ deals }: DealsProps) {
             <button
               type="button"
               onClick={resetFilters}
-              className="text-sm font-bold text-blue-700 underline underline-offset-4 transition hover:text-blue-900"
+              className="text-sm font-semibold text-tea"
             >
-              清除筛选 →
+              清除筛选
             </button>
           ) : null}
         </div>

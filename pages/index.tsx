@@ -116,9 +116,9 @@ export default function Home({ deals, calendarEvents, paymentRebateEvents, guide
           />
           <Link
             href="/deals"
-            className="mb-6 text-sm font-bold text-blue-700 underline underline-offset-4 transition hover:text-blue-900"
+            className="mb-6 text-sm font-semibold text-tea"
           >
-            查看全部 →
+            查看全部
           </Link>
         </div>
         <div className="grid gap-4 md:grid-cols-3">
@@ -154,9 +154,9 @@ export default function Home({ deals, calendarEvents, paymentRebateEvents, guide
           <div className="mt-5">
             <Link
               href="/calendar"
-              className="inline-flex min-h-[44px] items-center text-sm font-bold text-blue-700 underline underline-offset-4 transition hover:text-blue-900"
+              className="text-sm font-semibold text-tea"
             >
-              查看全部省钱日历 →
+              查看全部省钱日历
             </Link>
           </div>
         </div>

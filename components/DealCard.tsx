@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { Deal } from "@/lib/types";
 
 const ctaClass =
-  "inline-flex min-h-[44px] items-center text-sm font-bold text-blue-700 underline underline-offset-4 transition hover:text-blue-900";
+  "inline-flex min-h-[44px] items-center justify-center rounded-full border border-blue-200 bg-blue-50 px-4 py-2 text-sm font-bold text-blue-700 transition hover:border-blue-300 hover:bg-blue-100 hover:text-blue-900";
 
 function MiniMeta({ label, value }: { label: string; value: string }) {
   return (
@@ -44,7 +44,7 @@ export function DealSummaryCard({ deal }: { deal: Deal }) {
         <span className="text-sm leading-6 text-stone-600">{deal.targetSummary}</span>
       </div>
       <Link href={`/deals#${deal.id}`} className={ctaClass}>
-        查看详情 →
+        查看详情
       </Link>
     </article>
   );
@@ -76,7 +76,7 @@ export function DealCard({ deal }: { deal: Deal }) {
       <div className="mt-4 flex flex-wrap gap-4">
         <details className="group">
           <summary className={`${ctaClass} cursor-pointer list-none`}>
-            查看详情 →
+            查看详情
           </summary>
           <div className="mt-4 grid gap-4 border-t border-stone-200 pt-4 lg:grid-cols-2">
             {deal.participationSteps?.length ? (
@@ -116,7 +116,7 @@ export function DealCard({ deal }: { deal: Deal }) {
 
         {deal.sourceUrl ? (
           <a href={deal.sourceUrl} target="_blank" rel="noreferrer" className={ctaClass}>
-            去官方页面 →
+            去官方页面
           </a>
         ) : null}
       </div>

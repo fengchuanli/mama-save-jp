@@ -9,7 +9,7 @@ type PaymentRebateSpotlightProps = {
 };
 
 const linkClass =
-  "inline-flex min-h-[44px] items-center text-sm font-bold text-blue-700 underline underline-offset-4 transition hover:text-blue-900";
+  "inline-flex min-h-[44px] items-center justify-center rounded-full border border-blue-200 bg-blue-50 px-4 py-2 text-sm font-bold text-blue-700 transition hover:border-blue-300 hover:bg-blue-100 hover:text-blue-900";
 
 export function PaymentRebateSpotlight({
   events,
@@ -28,8 +28,8 @@ export function PaymentRebateSpotlight({
           </p>
         </div>
         {showAllLink ? (
-          <Link href="/calendar" className={linkClass}>
-            查看全部省钱日历 →
+          <Link href="/calendar" className="text-sm font-semibold text-tea">
+            查看全部省钱日历
           </Link>
         ) : null}
       </div>
@@ -38,10 +38,12 @@ export function PaymentRebateSpotlight({
         {events.map((event) => (
           <article key={event.id} className="rounded-lg border border-stone-200 bg-white p-4 shadow-soft">
             <p className="text-sm font-semibold text-tea">{event.platform}</p>
-            <p className="mt-2 text-lg font-bold leading-7 text-rose-700">{event.highlight}</p>
+            <h3 className="mt-2 text-lg font-semibold leading-7 text-ink">{event.title}</h3>
+            <p className="mt-2 text-base font-bold leading-6 text-rose-700">{event.highlight}</p>
+            <p className="mt-1 text-sm font-semibold leading-6 text-rose-700">{event.period}</p>
             <p className="mt-2 text-sm leading-6 text-stone-700">{event.actionTip}</p>
             <Link href={event.detailUrl} className={linkClass}>
-              查看详情 →
+              查看详情
             </Link>
           </article>
         ))}

@@ -1,5 +1,26 @@
 # 优化记录
 
+## 2026-06-22 CTA 按钮样式统一
+
+- 时间：2026-06-22 JST
+- 当前优化方向：链接与按钮视觉一致性。
+- 目标：将站内「查看详情」「去官方页面」从蓝色文字链接改成按钮 UI；首页「查看全部」「查看全部省钱日历」改成和「查看全部攻略」一致的轻文本样式；支付返点卡片只在返点、时间等重点信息上使用红色。
+- 修改文件：
+  - `components/CalendarCard.tsx`
+  - `components/DealCard.tsx`
+  - `components/PaymentRebateSpotlight.tsx`
+  - `pages/index.tsx`
+  - `pages/deals.tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - 搜索旧的箭头文字链接和下划线样式
+  - `npm run validate:content`
+  - `git diff --check`
+  - 页面/组件/数据搜索夸张表达
+  - `npm run build`
+- 结果：卡片内「查看详情」「去官方页面」统一为圆角浅蓝按钮；支付返点卡片增加黑色活动标题，红色只用于 highlight 和 period；首页两个「查看全部」入口恢复为普通 teal 文本链接；`/deals` 的「清除筛选」也同步去掉蓝色下划线和箭头。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、6 条优惠、13 个日历活动校验通过；`git diff --check` 通过；页面/组件/数据中未发现“必买 / 稳赚 / 一定省 / 全网最低 / 必返”等夸张表达；`npm run build` 的 `prebuild` 生成 sitemap 成功，但主构建因本地没有可用 `next` 命令失败，报 `sh: next: command not found`。
+
 ## 2026-06-22 16:30 最新母婴省钱消息整理
 
 - 时间：2026-06-22 16:32 JST
