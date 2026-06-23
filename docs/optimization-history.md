@@ -1,5 +1,26 @@
 # 优化记录
 
+## 2026-06-24 省钱日历难度标签展示
+
+- 时间：2026-06-24 02:01 JST
+- 当前优化方向：02:00 省钱日历。
+- 目标：把日历数据里已有的活动难度展示到卡片和页面说明里，让新手宝妈先区分“简单”“需要核对”“规则复杂”，优先处理更容易判断的省钱节点。
+- 修改文件：
+  - `components/CalendarCard.tsx`
+  - `pages/calendar.tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查日历难度标签、三种难度文案，以及摘要卡、首页货架卡、详情卡均展示难度标签。
+  - `npm run sitemap`
+  - `git diff --check`
+  - `npm run build`
+- 结果：日历摘要卡、首页货架卡和 `/calendar` 详情卡都展示活动难度；`/calendar` 新手说明区补充三种难度含义，帮助用户判断哪些活动只需看价格，哪些需要额外核对支付、运费、対象条件、积分上限和期限。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、6 条优惠、13 个日历活动校验通过；静态检查通过；`npm run sitemap` 生成 14 个 URL；`git diff --check` 通过；`npm run build` 的 `prebuild` 和 sitemap 成功，但主构建仍因当前工作区没有可用 `next` 命令失败，报 `sh: next: command not found`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“展示省钱日历难度标签”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续 02:00 省钱日历方向可根据亲友反馈观察“规则复杂”活动是否需要更短的结算前检查清单；网络恢复后优先推送本地领先提交。
+
 ## 2026-06-24 优惠确定性标签优化
 
 - 时间：2026-06-24 01:03 JST

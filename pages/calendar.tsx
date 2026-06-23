@@ -96,6 +96,11 @@ export default function Calendar({ events }: CalendarProps) {
             <span className="rounded-full border border-rose-200 bg-rose-50 px-3 py-1 text-rose-700">当天确认：结算前看条件</span>
             <span className="rounded-full border border-stone-200 bg-stone-50 px-3 py-1 text-stone-700">先观察：看到具体价格再买</span>
           </div>
+          <div className="mt-3 flex flex-wrap gap-2 text-xs font-semibold">
+            <span className="rounded-full border border-tea/30 bg-tea/10 px-3 py-1 text-tea">简单：价格和用途好判断</span>
+            <span className="rounded-full border border-peach bg-linen px-3 py-1 text-ink">需要核对：看支付、运费或対象条件</span>
+            <span className="rounded-full border border-rose-200 bg-rose-50 px-3 py-1 text-rose-700">规则复杂：先算上限和积分期限</span>
+          </div>
         </div>
 
         <PaymentRebateSpotlight events={paymentRebateEvents} />
