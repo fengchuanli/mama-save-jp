@@ -1,5 +1,26 @@
 # 优化记录
 
+## 2026-06-24 攻略详情页结构化数据优化
+
+- 时间：2026-06-24 04:03 JST
+- 当前优化方向：04:00 SEO。
+- 目标：补强攻略详情页的 Article 和 BreadcrumbList 结构化数据，让搜索引擎更清楚识别每篇攻略的页面主体、发布时间、更新时间、阅读时长、作者/发布方和站内层级。
+- 修改文件：
+  - `lib/structured-data.ts`
+  - `pages/guides/[slug].tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查攻略详情页使用 `createArticleJsonLd`、`createBreadcrumbJsonLd`、`getAbsoluteUrl`，且 Article JSON-LD 包含 `mainEntityOfPage`、`timeRequired`、`author` 和 `publisher`。
+  - `npm run sitemap`
+  - `git diff --check`
+  - `npm run build`
+- 结果：新增 `createArticleJsonLd`，将攻略详情页原本内联的 Article JSON-LD 改为共享 helper，并补充 `mainEntityOfPage`、ISO 8601 阅读时长、作者和发布方；攻略详情页同时输出“首页 > 攻略 > 当前攻略”的面包屑 JSON-LD。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、6 条优惠、13 个日历活动校验通过；静态 SEO 检查通过；`npm run sitemap` 生成 14 个 URL；`git diff --check` 通过；`npm run build` 的 `prebuild` 和 sitemap 成功，但主构建仍因当前工作区没有可用 `next` 命令失败，报 `sh: next: command not found`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“优化攻略详情页结构化数据”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续 SEO 方向可检查首页是否需要站点级 `WebSite` / `Organization` JSON-LD，或继续优化攻略间的相关链接锚文本；网络恢复后优先推送本地领先提交。
+
 ## 2026-06-24 纸尿裤好价线攻略完善
 
 - 时间：2026-06-24 03:02 JST

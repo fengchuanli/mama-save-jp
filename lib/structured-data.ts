@@ -14,6 +14,17 @@ type BreadcrumbItem = {
   item: string;
 };
 
+type ArticleInput = {
+  title: string;
+  description: string;
+  url: string;
+  publishedAt: string;
+  updatedAt: string;
+  section: string;
+  tags: string[];
+  readingTime?: string;
+};
+
 type ListItemInput = {
   position: number;
   name: string;
@@ -83,4 +94,55 @@ export const createBreadcrumbJsonLd = (items: BreadcrumbItem[]): JsonLdObject =>
       ...item
     }))
   ]
+});
+
+const toIsoDuration = (readingTime?: string) => {
+  const minutes = readingTime?.match(/(\d+)/)?.[1];
+  return minutes ? `PT${minutes}M` : undefined;
+};
+
+export const createArticleJsonLd = ({
+  title,
+  description,
+  url,
+  publishedAt,
+  updatedAt,
+  section,
+  tags,
+  readingTime
+}: ArticleInput): JsonLdObject => ({
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: title,
+  description,
+  url,
+  mainEntityOfPage: {
+    "@type": "WebPage",
+    "@id": url
+  },
+  datePublished: publishedAt,
+  dateModified: updatedAt,
+  articleSection: section,
+  keywords: tags,
+  ...(toIsoDuration(readingTime) ? { timeRequired: toIsoDuration(readingTime) } : {}),
+  inLanguage: "zh-CN",
+  author: {
+    "@type": "Organization",
+    name: siteConfig.siteName,
+    url: siteConfig.siteUrl
+  },
+  publisher: {
+    "@type": "Organization",
+    name: siteConfig.siteName,
+    url: siteConfig.siteUrl
+  },
+  isPartOf: {
+    "@type": "WebSite",
+    name: siteConfig.siteName,
+    url: siteConfig.siteUrl
+  },
+  audience: {
+    "@type": "Audience",
+    audienceType: "在日华人宝妈/宝爸"
+  }
 });

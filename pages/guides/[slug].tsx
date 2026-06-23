@@ -4,7 +4,11 @@ import type { GetStaticPaths, GetStaticProps } from "next";
 import { Layout } from "@/components/Layout";
 import { MarkdownContent } from "@/components/MarkdownContent";
 import { getAllGuides, getGuideBySlug, getGuideSlugs } from "@/lib/guides";
-import { siteConfig } from "@/lib/site";
+import {
+  createArticleJsonLd,
+  createBreadcrumbJsonLd,
+  getAbsoluteUrl
+} from "@/lib/structured-data";
 import type { Guide, GuideMeta } from "@/lib/types";
 
 type GuideDetailProps = {
@@ -36,31 +40,25 @@ function getRelatedGuides(guide: Guide, guides: GuideMeta[]) {
 }
 
 export default function GuideDetail({ guide, relatedGuides }: GuideDetailProps) {
-  const guideUrl = `${siteConfig.siteUrl}/guides/${guide.slug}`;
+  const guidePath = `/guides/${guide.slug}`;
+  const guideUrl = getAbsoluteUrl(guidePath);
   const detailTags = guide.tags.length ? guide.tags : [guide.babyAge];
   const primaryTags = detailTags.slice(0, 3);
   const secondaryTags = detailTags.slice(3);
-  const articleJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    headline: guide.title,
+  const articleJsonLd = createArticleJsonLd({
+    title: guide.title,
     description: guide.description,
     url: guideUrl,
-    datePublished: guide.publishedAt || guide.updatedAt,
-    dateModified: guide.updatedAt || guide.publishedAt,
-    articleSection: guide.category,
-    keywords: guide.tags,
-    inLanguage: "zh-CN",
-    isPartOf: {
-      "@type": "WebSite",
-      name: siteConfig.siteName,
-      url: siteConfig.siteUrl
-    },
-    audience: {
-      "@type": "Audience",
-      audienceType: "在日华人宝妈/宝爸"
-    }
-  };
+    publishedAt: guide.publishedAt || guide.updatedAt,
+    updatedAt: guide.updatedAt || guide.publishedAt,
+    section: guide.category,
+    tags: guide.tags,
+    readingTime: guide.readingTime
+  });
+  const breadcrumbJsonLd = createBreadcrumbJsonLd([
+    { name: "攻略", item: getAbsoluteUrl("/guides") },
+    { name: guide.title, item: guideUrl }
+  ]);
 
   return (
     <Layout title={guide.title} description={guide.description} ogType="article">
@@ -75,6 +73,10 @@ export default function GuideDetail({ guide, relatedGuides }: GuideDetailProps) 
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
         />
       </Head>
       <article className="mx-auto max-w-3xl px-4 py-8 sm:px-5 sm:py-12">
