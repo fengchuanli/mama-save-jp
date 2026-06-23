@@ -17,18 +17,35 @@ type GuidesProps = {
   guides: GuideMeta[];
 };
 
-const guideProblemGroups = [
+type GuideProblemGroup = {
+  id: string;
+  title: string;
+  description: string;
+  slugs: string[];
+  readingOrder: Record<string, string>;
+};
+
+const guideProblemGroups: GuideProblemGroup[] = [
   {
     id: "start",
     title: "先定购物范围",
     description: "还不知道第一批该买什么、去哪家店看时，先用这些攻略把清单收窄。",
-    slugs: ["newborn-shopping-list", "choose-baby-stores-japan"]
+    slugs: ["newborn-shopping-list", "choose-baby-stores-japan"],
+    readingOrder: {
+      "newborn-shopping-list": "先读：第一批买什么",
+      "choose-baby-stores-japan": "再读：去哪家店看"
+    }
   },
   {
     id: "essentials",
     title: "判断消耗品值不值",
     description: "尿不湿、纸尿裤和药妆店补货先看单价、尺码风险和是否马上会用。",
-    slugs: ["buy-diapers-japan", "diaper-price-line", "drugstore-coupon"]
+    slugs: ["buy-diapers-japan", "diaper-price-line", "drugstore-coupon"],
+    readingOrder: {
+      "buy-diapers-japan": "先读：纸尿裤怎么买",
+      "diaper-price-line": "再读：怎么算好价",
+      "drugstore-coupon": "需要时读：药妆店补货"
+    }
   },
   {
     id: "platforms",
@@ -38,13 +55,22 @@ const guideProblemGroups = [
       "rakuten-points-basics",
       "rakuten-5-0-mama-shopping",
       "payment-rebates-mama-shopping"
-    ]
+    ],
+    readingOrder: {
+      "rakuten-points-basics": "先读：理解积分",
+      "rakuten-5-0-mama-shopping": "再读：判断活动日",
+      "payment-rebates-mama-shopping": "出门前读：支付返点"
+    }
   },
   {
     id: "nursery",
     title: "保育园和童装准备",
     description: "入园清单、姓名贴和换季童装更容易买多，先按场景和尺码判断。",
-    slugs: ["nursery-entry-budget-items", "kids-clothes-size-80-90-100"]
+    slugs: ["nursery-entry-budget-items", "kids-clothes-size-80-90-100"],
+    readingOrder: {
+      "nursery-entry-budget-items": "先读：入园用品",
+      "kids-clothes-size-80-90-100": "换季前读：童装尺码"
+    }
   }
 ];
 
@@ -155,7 +181,11 @@ export default function Guides({ guides }: GuidesProps) {
 
               <div className="grid gap-5 md:grid-cols-2">
                 {group.guides.map((guide) => (
-                  <GuideCard key={guide.slug} guide={guide} />
+                  <GuideCard
+                    key={guide.slug}
+                    guide={guide}
+                    contextLabel={group.readingOrder[guide.slug]}
+                  />
                 ))}
               </div>
             </section>

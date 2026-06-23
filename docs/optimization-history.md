@@ -1,5 +1,25 @@
 # 优化记录
 
+## 2026-06-24 攻略分组阅读顺序优化
+
+- 时间：2026-06-24 00:01 JST
+- 当前优化方向：00:00 内容结构。
+- 目标：让 `/guides` 的“按问题找攻略”不只按主题分组，还能提示每组内先读哪篇、再读哪篇，降低新手第一次进入攻略列表时的选择成本。
+- 修改文件：
+  - `components/GuideCard.tsx`
+  - `pages/guides/index.tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查攻略分组阅读顺序标签和 `GuideCard` 可选上下文标签
+  - `git diff --check`
+  - `npm run build`
+- 结果：`GuideCard` 新增可选 `contextLabel`，不影响首页攻略货架；攻略列表 4 个问题分组分别展示“先读 / 再读 / 需要时读 / 出门前读 / 换季前读”等阅读提示，帮助用户按当前问题进入对应攻略。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、6 条优惠、13 个日历活动校验通过；静态检查通过；`git diff --check` 通过；`npm run build` 的 `prebuild` 和 sitemap 成功，但主构建仍因当前工作区没有可用 `next` 命令失败，报 `sh: next: command not found`。npm 日志写入用户目录仍因权限受限失败。额外尝试 `npx tsc --noEmit` 时同样因本地缺少 Next/React 类型依赖出现大量既有模块类型错误，未作为本次通过项。
+- 是否提交：是，提交说明为“优化攻略分组阅读顺序”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续内容结构方向可观察亲友试用反馈中“攻略列表是否知道先点哪篇”，再决定是否把同样的阅读顺序提示扩展到首页新手攻略模块。
+
 ## 2026-06-23 首页横向卡片货架优化
 
 - 时间：2026-06-23 21:10 JST

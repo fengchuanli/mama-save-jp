@@ -1,7 +1,12 @@
 import Link from "next/link";
 import type { GuideMeta } from "@/lib/types";
 
-export function GuideCard({ guide }: { guide: GuideMeta }) {
+type GuideCardProps = {
+  guide: GuideMeta;
+  contextLabel?: string;
+};
+
+export function GuideCard({ guide, contextLabel }: GuideCardProps) {
   return (
     <Link
       href={`/guides/${guide.slug}`}
@@ -17,6 +22,9 @@ export function GuideCard({ guide }: { guide: GuideMeta }) {
           </span>
         ))}
       </div>
+      {contextLabel ? (
+        <p className="mb-2 text-xs font-semibold text-tea">{contextLabel}</p>
+      ) : null}
       <h3 className="text-lg font-semibold text-ink">{guide.title}</h3>
       <p className="mt-3 leading-7 text-stone-600">{guide.description}</p>
       <p className="mt-5 text-sm text-stone-500">
