@@ -1,5 +1,26 @@
 # 优化记录
 
+## 2026-06-24 纸尿裤好价线攻略完善
+
+- 时间：2026-06-24 03:02 JST
+- 当前优化方向：03:00 攻略内容。
+- 目标：把偏薄的《纸尿裤怎么算好价》扩展成可执行的新手判断攻略，让宝妈能用单片价、尺码风险和实付金额判断是否值得囤，而不是只看箱购总价或积分宣传。
+- 修改文件：
+  - `content/guides/diaper-price-line.mdx`
+  - `public/sitemap.xml`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查攻略包含“适合谁”“怎么定自己的好价线”“下单前检查清单”、单片价公式、`updatedAt: "2026-06-24"` 和单一 `readingTime`。
+  - `npm run sitemap`
+  - `git diff --check`
+  - `npm run build`
+- 结果：纸尿裤好价线攻略从短提示扩展为约 6 分钟阅读文章，补充适合人群、单片价公式、手机记录模板、好价线设定方法、尺码风险信号、下单前检查清单和凑单风险提醒。`public/sitemap.xml` 同步更新攻略列表页和该攻略详情页的 `lastmod`。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、6 条优惠、13 个日历活动校验通过；静态检查通过；`npm run sitemap` 生成 14 个 URL；`git diff --check` 通过；`npm run build` 的 `prebuild` 和 sitemap 成功，但主构建仍因当前工作区没有可用 `next` 命令失败，报 `sh: next: command not found`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“完善纸尿裤好价线攻略”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续 03:00 攻略内容方向可优先补湿巾或宝宝洗护好价判断攻略；网络恢复后优先推送本地领先提交。
+
 ## 2026-06-24 省钱日历难度标签展示
 
 - 时间：2026-06-24 02:01 JST
