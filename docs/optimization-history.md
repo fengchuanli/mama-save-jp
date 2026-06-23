@@ -1,5 +1,25 @@
 # 优化记录
 
+## 2026-06-24 结构化数据基础对象复用
+
+- 时间：2026-06-24 05:03 JST
+- 当前优化方向：05:00 代码质量。
+- 目标：继续收敛结构化数据 helper 内部重复逻辑，避免 `schema.org` context、站点语言、站点组织、站点 WebSite 和受众信息在 CollectionPage 与 Article JSON-LD 之间分散维护。
+- 修改文件：
+  - `lib/structured-data.ts`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查结构化数据 helper 仍包含共享 `schemaContext`、`siteLanguage`、`siteOrganization`、`siteWebsite`，Article JSON-LD 仍包含 `author`、`publisher`、`isPartOf`、`audience` 和一次性 `timeRequired` 转换。
+  - `npm run sitemap`
+  - `git diff --check`
+  - `npm run build`
+- 结果：新增结构化数据基础对象复用，CollectionPage、BreadcrumbList 和 Article JSON-LD 统一使用共享 context、语言、站点组织、站点 WebSite 和受众对象；Article 的 `timeRequired` 只解析一次，减少后续维护时的字段漂移。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、6 条优惠、13 个日历活动校验通过；结构化数据 helper 静态检查通过；`npm run sitemap` 生成 14 个 URL；`git diff --check` 通过；`npm run build` 的 `prebuild` 和 sitemap 成功，但主构建仍因当前工作区没有可用 `next` 命令失败，报 `sh: next: command not found`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“复用结构化数据基础对象”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续代码质量方向可考虑为 JSON-LD 输出增加轻量测试脚本，或在依赖可用后补跑 TypeScript/Next 构建。
+
 ## 2026-06-24 攻略详情页结构化数据优化
 
 - 时间：2026-06-24 04:03 JST
