@@ -24,6 +24,8 @@ export type Deal = {
   sourceLevel?: SourceLevel;
   dataStatus: "sample" | "verified";
   availabilityStatus: "unknown" | "active" | "expired" | "unavailable";
+  benefitCertainty: string;
+  certaintyReason: string;
   verificationScope?: string;
   whyWorthBuying: string;
   skipWhen: string;

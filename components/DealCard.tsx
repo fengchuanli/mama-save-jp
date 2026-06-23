@@ -36,6 +36,7 @@ export function DealSummaryCard({ deal }: { deal: Deal }) {
       <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2">
         <MiniMeta label="平台" value={deal.platform} />
         <MiniMeta label="类型" value={deal.dealType} />
+        <MiniMeta label="确定性" value={deal.benefitCertainty} />
         <MiniMeta label="时机" value={deal.shortPeriod} />
       </div>
       <div className="mt-3 flex flex-wrap items-center gap-2">
@@ -61,6 +62,7 @@ export function DealShelfCard({ deal }: { deal: Deal }) {
       <p className="mt-2 text-sm font-semibold leading-6 text-stone-700">
         {deal.platform} · {deal.shortPeriod}
       </p>
+      <p className="mt-2 text-xs font-semibold text-tea">{deal.benefitCertainty}</p>
       <div className="mt-3 flex flex-wrap items-center gap-2">
         <span className="whitespace-nowrap rounded-full bg-linen px-3 py-1 text-xs font-semibold text-stone-700">
           {deal.recommendationLabel}
@@ -92,11 +94,15 @@ export function DealCard({ deal }: { deal: Deal }) {
       <div className="mt-4 grid grid-cols-1 gap-3 rounded-lg bg-cream p-3 sm:grid-cols-2 lg:grid-cols-4">
         <MiniMeta label="平台" value={deal.platform} />
         <MiniMeta label="类型" value={deal.dealType} />
+        <MiniMeta label="确定性" value={deal.benefitCertainty} />
         <MiniMeta label="时机" value={deal.shortPeriod} />
         <MiniMeta label="适合谁" value={deal.targetSummary} />
       </div>
 
       <p className="mt-3 text-sm leading-6 text-stone-700">{deal.detailReason}</p>
+      <p className="mt-2 text-xs leading-5 text-stone-500">
+        确定性：{deal.certaintyReason}
+      </p>
 
       <div className="mt-4 flex flex-wrap gap-4">
         <details className="group">

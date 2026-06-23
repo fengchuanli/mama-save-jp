@@ -106,6 +106,8 @@ for (const deal of deals) {
     "checkBeforeBuying",
     "dataStatus",
     "availabilityStatus",
+    "benefitCertainty",
+    "certaintyReason",
     "updatedAt",
     "priority"
   ];
@@ -118,6 +120,8 @@ for (const deal of deals) {
   assert(deal.highlight.length <= 24, `${label} highlight 建议控制在 24 字以内`);
   assert(deal.shortPeriod.length <= 36, `${label} shortPeriod 建议控制在 36 字以内`);
   assert(deal.recommendationLabel.length <= 12, `${label} recommendationLabel 建议控制在 12 字以内`);
+  assert(deal.benefitCertainty.length <= 14, `${label} benefitCertainty 建议控制在 14 字以内`);
+  assert(deal.certaintyReason.length <= 80, `${label} certaintyReason 建议控制在 80 字以内`);
   assert(deal.targetSummary.length <= 34, `${label} targetSummary 建议控制在 34 字以内`);
   assert(deal.detailReason.length <= 80, `${label} detailReason 建议控制在 80 字以内`);
   assert(["high", "medium", "low"].includes(deal.priority), `${label} priority 只能是 high / medium / low`);
