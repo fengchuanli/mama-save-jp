@@ -1,5 +1,26 @@
 # 优化记录
 
+## 2026-06-23 首页横向卡片货架优化
+
+- 时间：2026-06-23 21:10 JST
+- 当前优化方向：首页移动端信息流体验。
+- 目标：把首页“本周值得买”“出门前先看支付返点”“最近要关注的省钱节点”“新手攻略”改成移动端横向滑动卡片，减少一直向下滚动的压力，同时保留每个模块的“查看全部”入口。
+- 修改文件：
+  - `components/HorizontalCardSection.tsx`
+  - `components/DealCard.tsx`
+  - `components/CalendarCard.tsx`
+  - `components/PaymentRebateSpotlight.tsx`
+  - `components/GuideCard.tsx`
+  - `pages/index.tsx`
+  - `styles/globals.css`
+- 结果：首页新增通用横向模块组件，移动端卡片宽度约为屏幕 82%，右侧露出下一张卡片；桌面端回到三列网格。四个首页模块都改用更短的首页专用卡片，只保留亮点、标题、平台/时间、行动建议和“查看详情”。“查看全部”统一放在模块标题右侧。
+- 验证方式：
+  - `npm run validate:content`
+  - `git diff --check`
+  - 夸张表达关键词检查
+  - `npm run build`
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、6 条优惠、13 个日历活动校验通过；`git diff --check` 通过；未发现“必买、稳赚、一定返、全网最低、错过就亏”等表达。`npm run build` 的 sitemap 生成成功，但主构建仍因当前工作区没有安装依赖、找不到 `next` 命令失败，报 `sh: next: command not found`。
+
 ## 2026-06-23 16:30 最新母婴省钱消息整理
 
 - 时间：2026-06-23 16:31 JST

@@ -70,7 +70,26 @@ export function CalendarSummaryCard({ event }: { event: CalendarEvent }) {
       <TargetItems items={event.targetItems} />
       <p className="mt-3 text-sm leading-6 text-stone-700">先这样判断：{event.decisionHint}</p>
       <p className="mt-3 text-sm leading-6 text-stone-600">{event.actionTip}</p>
-      <Link href={event.detailUrl} className={linkClass}>
+      <Link href={event.detailUrl} className={`mt-4 ${linkClass}`}>
+        查看详情
+      </Link>
+    </article>
+  );
+}
+
+export function CalendarShelfCard({ event }: { event: CalendarEvent }) {
+  return (
+    <article className="h-full rounded-lg border border-stone-200 bg-white p-4 shadow-soft">
+      <p className={`inline-flex rounded-full border px-3 py-1 text-sm font-bold ${priorityClass[event.priority]}`}>
+        {event.highlight}
+      </p>
+      <h3 className="mt-3 text-lg font-semibold leading-7 text-ink">{event.title}</h3>
+      <p className="mt-2 text-sm font-semibold leading-6 text-rose-700">{event.period}</p>
+      <p className="mt-2 text-sm leading-6 text-stone-700">
+        适合：{event.targetItems.slice(0, 3).join("、")}
+      </p>
+      <p className="mt-2 text-sm leading-6 text-stone-600">{event.actionTip}</p>
+      <Link href={event.detailUrl} className={`mt-4 ${linkClass}`}>
         查看详情
       </Link>
     </article>

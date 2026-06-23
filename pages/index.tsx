@@ -1,11 +1,11 @@
 import Link from "next/link";
 import type { GetStaticProps } from "next";
-import { CalendarSummaryCard } from "@/components/CalendarCard";
-import { DealSummaryCard } from "@/components/DealCard";
-import { GuideCard } from "@/components/GuideCard";
+import { CalendarShelfCard } from "@/components/CalendarCard";
+import { DealShelfCard } from "@/components/DealCard";
+import { GuideShelfCard } from "@/components/GuideCard";
+import { HorizontalCardSection } from "@/components/HorizontalCardSection";
 import { Layout } from "@/components/Layout";
-import { PaymentRebateSpotlight } from "@/components/PaymentRebateSpotlight";
-import { SectionHeader } from "@/components/SectionHeader";
+import { PaymentRebateShelfCard } from "@/components/PaymentRebateSpotlight";
 import { getFeaturedCalendarEvents } from "@/lib/calendar-highlights";
 import { getAllGuides } from "@/lib/guides";
 import { getPaymentRebateEvents } from "@/lib/payment-rebates";
@@ -21,7 +21,6 @@ type HomeProps = {
 };
 
 export default function Home({ deals, calendarEvents, paymentRebateEvents, guides }: HomeProps) {
-  const guideSteps = ["准备清单", "高频消耗品", "平台规则"];
   const quickStartRoutes = [
     {
       label: "刚开始准备",
@@ -108,81 +107,54 @@ export default function Home({ deals, calendarEvents, paymentRebateEvents, guide
       </section>
 
       <section className="mx-auto max-w-6xl px-5 py-12">
-        <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
-          <SectionHeader
-            eyebrow="Deals"
-            title="本周值得买"
-            description="每周整理在日华人宝妈常用母婴用品的购买时机和优惠线索。价格、库存和活动条件可能变化，购买前请以官方页面为准。"
-          />
-          <Link
-            href="/deals"
-            className="mb-6 text-sm font-semibold text-tea"
-          >
-            查看全部
-          </Link>
-        </div>
-        <div className="grid gap-4 md:grid-cols-3">
-          {deals.map((deal) => (
-            <DealSummaryCard key={deal.id} deal={deal} />
-          ))}
-        </div>
+        <HorizontalCardSection
+          title="本周值得买"
+          description="先看本周最值得关注的母婴用品和活动线索，点开后再确认详细条件。"
+          viewAllHref="/deals"
+          items={deals}
+          getKey={(deal) => deal.id}
+          renderCard={(deal) => <DealShelfCard deal={deal} />}
+        />
       </section>
 
       <section className="bg-cream">
         <div className="mx-auto max-w-6xl px-5 py-12">
-          <PaymentRebateSpotlight
-            events={paymentRebateEvents}
+          <HorizontalCardSection
             title="出门前先看支付返点"
-            eyebrow="出门前检查"
-            showAllLink
+            description="去药妆店、AEON、西松屋、超市前，先确认今天哪个支付方式有返还。"
+            viewAllHref="/calendar"
+            items={paymentRebateEvents}
+            getKey={(event) => event.id}
+            renderCard={(event) => <PaymentRebateShelfCard event={event} />}
           />
+          <p className="mt-4 text-xs leading-5 text-stone-500">
+            活动、返点、库存和适用门店可能变化，购买前请以官方页面、结算页或店头公告为准。
+          </p>
         </div>
       </section>
 
       <section className="bg-white">
         <div className="mx-auto max-w-6xl px-5 py-12">
-          <SectionHeader
-            eyebrow="Calendar"
+          <HorizontalCardSection
             title="最近要关注的省钱节点"
             description="先看最近值得关注的活动时间、关键优惠和适合买什么，详细规则放在省钱日历里。"
+            viewAllHref="/calendar"
+            items={calendarEvents}
+            getKey={(event) => event.id}
+            renderCard={(event) => <CalendarShelfCard event={event} />}
           />
-          <div className="grid gap-5 md:grid-cols-3">
-            {calendarEvents.map((event) => (
-              <CalendarSummaryCard key={event.id} event={event} />
-            ))}
-          </div>
-          <div className="mt-5">
-            <Link
-              href="/calendar"
-              className="text-sm font-semibold text-tea"
-            >
-              查看全部省钱日历
-            </Link>
-          </div>
         </div>
       </section>
 
       <section className="mx-auto max-w-6xl px-5 py-12">
-        <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
-          <SectionHeader
-            eyebrow="Guides"
-            title="新手先按这 3 步读"
-            description="第一次在日本准备母婴用品时，先控制购买范围，再看高频消耗品和平台规则。"
-          />
-          <Link href="/guides" className="mb-6 text-sm font-semibold text-tea">
-            查看全部攻略
-          </Link>
-        </div>
-        <div className="grid gap-5 md:grid-cols-3">
-          {guides.map((guide, index) => (
-            <div key={guide.slug} className="space-y-3">
-              <p className="text-sm font-semibold text-tea">
-                第 {index + 1} 步 · {guideSteps[index]}
-              </p>
-              <GuideCard guide={guide} />
-            </div>
-          ))}
-        </div>
+        <HorizontalCardSection
+          title="新手攻略"
+          description="第一次在日本准备母婴用品时，先控制购买范围，再看高频消耗品和平台规则。"
+          viewAllHref="/guides"
+          items={guides}
+          getKey={(guide) => guide.slug}
+          renderCard={(guide) => <GuideShelfCard guide={guide} />}
+        />
       </section>
 
       <section className="bg-linen">

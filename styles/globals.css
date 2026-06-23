@@ -27,3 +27,11 @@ a {
   background: #f6b8a2;
   color: #2e2a27;
 }
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
