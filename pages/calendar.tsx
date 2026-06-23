@@ -1,5 +1,6 @@
 import type { GetStaticProps } from "next";
 import Head from "next/head";
+import { useMemo, useState } from "react";
 import { CalendarStoreGroup } from "@/components/CalendarCard";
 import { Layout } from "@/components/Layout";
 import { PaymentRebateSpotlight } from "@/components/PaymentRebateSpotlight";
@@ -21,14 +22,30 @@ type CalendarProps = {
 export default function Calendar({ events }: CalendarProps) {
   const calendarUrl = getAbsoluteUrl("/calendar");
   const paymentRebateEvents = getPaymentRebateEvents(events);
-  const groupedEvents = events.reduce<Record<string, CalendarEvent[]>>((groups, event) => {
-    if (!groups[event.store]) {
-      groups[event.store] = [];
-    }
+  const [selectedStore, setSelectedStore] = useState("全部");
+  const stores = useMemo(
+    () => ["全部", ...Array.from(new Set(events.map((event) => event.store)))],
+    [events]
+  );
+  const visibleEvents = useMemo(
+    () =>
+      selectedStore === "全部"
+        ? events
+        : events.filter((event) => event.store === selectedStore),
+    [events, selectedStore]
+  );
+  const groupedEvents = useMemo(
+    () =>
+      visibleEvents.reduce<Record<string, CalendarEvent[]>>((groups, event) => {
+        if (!groups[event.store]) {
+          groups[event.store] = [];
+        }
 
-    groups[event.store].push(event);
-    return groups;
-  }, {});
+        groups[event.store].push(event);
+        return groups;
+      }, {}),
+    [visibleEvents]
+  );
   const collectionJsonLd = createCollectionPageJsonLd({
     name: "日本母婴购物省钱日历",
     description:
@@ -104,6 +121,45 @@ export default function Calendar({ events }: CalendarProps) {
         </div>
 
         <PaymentRebateSpotlight events={paymentRebateEvents} />
+
+        <div className="mb-6 rounded-lg border border-stone-200 bg-white p-4 shadow-soft sm:mb-8 sm:p-5">
+          <div className="mb-3 flex items-center justify-between gap-3">
+            <div>
+              <p className="text-sm font-semibold text-ink">按平台快速查看</p>
+              <p className="mt-1 text-xs text-stone-500">当前 {visibleEvents.length} 个省钱节点</p>
+            </div>
+            {selectedStore !== "全部" ? (
+              <button
+                type="button"
+                onClick={() => setSelectedStore("全部")}
+                className="min-h-10 whitespace-nowrap rounded-full bg-linen px-3 py-2 text-xs font-semibold text-stone-700"
+              >
+                清除
+              </button>
+            ) : null}
+          </div>
+          <div className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-1 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0 sm:pb-0">
+            {stores.map((store) => {
+              const active = selectedStore === store;
+
+              return (
+                <button
+                  key={store}
+                  type="button"
+                  aria-pressed={active}
+                  onClick={() => setSelectedStore(store)}
+                  className={`min-h-10 shrink-0 whitespace-nowrap rounded-full px-4 py-2 text-sm transition ${
+                    active
+                      ? "bg-ink text-white"
+                      : "bg-cream text-stone-700 hover:bg-linen"
+                  }`}
+                >
+                  {store}
+                </button>
+              );
+            })}
+          </div>
+        </div>
 
         <div className="space-y-5 sm:space-y-7">
           {Object.entries(groupedEvents).map(([store, storeEvents]) => (

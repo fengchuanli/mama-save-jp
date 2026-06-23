@@ -1,5 +1,25 @@
 # 优化记录
 
+## 2026-06-24 省钱日历移动端平台筛选
+
+- 时间：2026-06-24 06:02 JST
+- 当前优化方向：06:00 移动端体验。
+- 目标：优化 `/calendar` 在手机端查看多个平台活动时的浏览效率，让用户可以先按常用平台快速缩小日历节点，避免在小屏上反复纵向滚动。
+- 修改文件：
+  - `pages/calendar.tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查日历页包含平台筛选状态、可见节点数量、横向筛选按钮、`aria-pressed` 和清除按钮。
+  - `npm run sitemap`
+  - `git diff --check`
+  - `npm run build`
+- 结果：`/calendar` 新增“按平台快速查看”筛选区，移动端使用横向滑动按钮行，桌面端自动换行；筛选区展示当前可见省钱节点数量，单平台筛选后可一键清除。日历 JSON-LD 仍使用完整事件集合，页面正文只过滤可见分组。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、6 条优惠、13 个日历活动校验通过；日历页移动端筛选静态检查通过；`npm run sitemap` 生成 14 个 URL；`git diff --check` 通过；`npm run build` 的 `prebuild` 和 sitemap 成功，但主构建仍因当前工作区没有可用 `next` 命令失败，报 `sh: next: command not found`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“优化省钱日历移动端筛选”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续移动端体验方向可用真实浏览器复查 `/calendar` 首屏筛选区高度和各平台按钮在 320-390px 宽度下是否容易点击。
+
 ## 2026-06-24 结构化数据基础对象复用
 
 - 时间：2026-06-24 05:03 JST
