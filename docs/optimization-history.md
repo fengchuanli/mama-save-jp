@@ -1,5 +1,26 @@
 # 优化记录
 
+## 2026-06-24 首次分享执行清单
+
+- 时间：2026-06-24 07:03 JST
+- 当前优化方向：07:00 增长准备。
+- 目标：把现有小红书/朋友圈文案库和亲友试用话术之间的执行步骤补齐，让第一次对外分享前能完成入口选择、可信度检查、发布记录和反馈处理判断。
+- 修改文件：
+  - `docs/first-share-checklist.md`
+  - `docs/growth-copy-bank.md`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查首次分享清单包含发布前检查、入口和文案匹配、发布当天记录、反馈处理和不做事项，并确认文案库链接到该清单。
+  - `npm run sitemap`
+  - `git diff --check`
+  - `npm run build`
+- 结果：新增首次分享执行清单，覆盖发布前 10 分钟检查、不同用户状态对应的推荐入口和文案方向、发布当天记录模板、反馈处理规则以及早期不做事项；`docs/growth-copy-bank.md` 的使用原则补充首次发布前先执行该清单。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、6 条优惠、13 个日历活动校验通过；首次分享清单静态检查通过；`npm run sitemap` 生成 14 个 URL；`git diff --check` 通过；`npm run build` 的 `prebuild` 和 sitemap 成功，但主构建仍因当前工作区没有可用 `next` 命令失败，报 `sh: next: command not found`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“新增首次分享执行清单”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：第一次真实发布后，把发布渠道、使用文案编号、收到回复数和最常见困惑填入清单模板；若 3 人以上反馈同类问题，再决定是否调整首页、优惠信任提示或攻略入口。
+
 ## 2026-06-24 省钱日历移动端平台筛选
 
 - 时间：2026-06-24 06:02 JST
