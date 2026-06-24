@@ -45,6 +45,14 @@ export default function GuideDetail({ guide, relatedGuides }: GuideDetailProps) 
   const detailTags = guide.tags.length ? guide.tags : [guide.babyAge];
   const primaryTags = detailTags.slice(0, 3);
   const secondaryTags = detailTags.slice(3);
+  const contentLines = guide.content.split("\n");
+  const sectionLinks = contentLines
+    .map((line, index) => ({
+      id: `section-${index}`,
+      title: line.trim().replace("## ", "")
+    }))
+    .filter((section, index) => section.title && contentLines[index].trim().startsWith("## "))
+    .slice(0, 6);
   const articleJsonLd = createArticleJsonLd({
     title: guide.title,
     description: guide.description,
@@ -117,6 +125,25 @@ export default function GuideDetail({ guide, relatedGuides }: GuideDetailProps) 
             {guide.readingTime} · 发布 {guide.publishedAt || guide.updatedAt}
           </p>
         </div>
+        {sectionLinks.length > 1 ? (
+          <nav
+            aria-label="攻略小节"
+            className="mt-4 rounded-lg border border-stone-200 bg-white p-3 shadow-soft sm:mt-5 sm:p-4"
+          >
+            <p className="px-1 text-xs font-semibold text-tea">快速跳到小节</p>
+            <div className="no-scrollbar mt-2 flex gap-2 overflow-x-auto pb-1">
+              {sectionLinks.map((section) => (
+                <a
+                  key={section.id}
+                  href={`#${section.id}`}
+                  className="shrink-0 rounded-full bg-cream px-3 py-2 text-sm text-stone-700 transition hover:bg-linen"
+                >
+                  {section.title}
+                </a>
+              ))}
+            </div>
+          </nav>
+        ) : null}
         <div className="prose prose-stone mt-6 max-w-none rounded-lg border border-stone-200 bg-white p-4 shadow-soft sm:mt-8 sm:p-6">
           <MarkdownContent content={guide.content} />
         </div>

@@ -10,7 +10,11 @@ export function MarkdownContent({ content }: { content: string }) {
 
         if (trimmed.startsWith("## ")) {
           return (
-            <h2 key={index} className="mt-7 text-xl font-semibold text-ink sm:mt-8 sm:text-2xl">
+            <h2
+              key={index}
+              id={`section-${index}`}
+              className="mt-7 scroll-mt-24 text-xl font-semibold text-ink sm:mt-8 sm:text-2xl"
+            >
               {trimmed.replace("## ", "")}
             </h2>
           );

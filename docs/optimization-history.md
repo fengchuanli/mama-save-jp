@@ -1,5 +1,26 @@
 # 优化记录
 
+## 2026-06-25 攻略详情页移动端小节导航
+
+- 时间：2026-06-25 06:03 JST
+- 当前优化方向：06:00 移动端体验。
+- 目标：长攻略内容最近持续加厚后，在手机端阅读时需要频繁纵向滚动；本次为攻略详情页增加小节快捷入口，让用户能直接跳到正文中的主要 H2 小节。
+- 修改文件：
+  - `pages/guides/[slug].tsx`
+  - `components/MarkdownContent.tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查攻略详情页会解析正文 H2、渲染“快速跳到小节”、限制最多 6 个入口，并确认 Markdown H2 输出稳定锚点和滚动偏移。
+  - `npm run sitemap`
+  - `git diff --check`
+  - `npm run build`
+- 结果：攻略详情页标题卡片下方新增横向滚动的小节导航，仅在正文存在多个 H2 时展示；Markdown H2 增加 `section-*` 锚点和 `scroll-mt-24`，避免跳转后标题被顶部区域贴边。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、6 条优惠、13 个日历活动校验通过；攻略详情页小节导航静态检查通过；`npm run sitemap` 生成 14 个 URL；`git diff --check` 通过；`npm run build` 的 `prebuild` 和 sitemap 成功，但主构建仍因当前工作区没有可用 `next` 命令失败，报 `sh: next: command not found`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“优化攻略详情页移动端导航”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续移动端体验方向可在依赖可用时用真实浏览器检查长攻略页面的锚点跳转、横向小节按钮宽度和 320-390px 手机首屏高度。
+
 ## 2026-06-25 保育园入园准备攻略完善
 
 - 时间：2026-06-25 03:02 JST
