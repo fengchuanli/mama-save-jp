@@ -1,5 +1,26 @@
 # 优化记录
 
+## 2026-06-25 保育园入园准备攻略完善
+
+- 时间：2026-06-25 03:02 JST
+- 当前优化方向：03:00 攻略内容。
+- 目标：把偏短的《保育园入园准备 哪些可以买便宜的》扩展成更可执行的入园准备省钱攻略，让用户能先按园方清单分层，再决定哪些可以买便宜、哪些必须等尺寸和规则确认后再买。
+- 修改文件：
+  - `content/guides/nursery-entry-budget-items.mdx`
+  - `public/sitemap.xml`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查攻略包含 7 分钟阅读、`updatedAt: "2026-06-25"`、清单分层、购买顺序、适合便宜买、不建议只看低价、买前检查清单等关键内容。
+  - `npm run sitemap`
+  - `git diff --check`
+  - `npm run build`
+- 结果：攻略新增“先把清单分成三层”“推荐购买顺序”“哪些适合便宜买”“哪些不建议只看低价”“买前检查清单”等章节，并把阅读时长更新为 7 分钟；`public/sitemap.xml` 同步更新首页、攻略列表和该攻略详情页的 `lastmod`。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、6 条优惠、13 个日历活动校验通过；入园准备攻略静态检查通过；`npm run sitemap` 生成 14 个 URL；`git diff --check` 通过；`npm run build` 的 `prebuild` 和 sitemap 成功，但主构建仍因当前工作区没有可用 `next` 命令失败，报 `sh: next: command not found`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“完善保育园入园准备攻略”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续攻略内容方向可继续补强童装尺码或楽天 5/0 日攻略；网络恢复后优先推送本地领先提交。
+
 ## 2026-06-25 本周值得买任务入口优化
 
 - 时间：2026-06-25 00:01 JST
