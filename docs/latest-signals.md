@@ -16,6 +16,15 @@
 ## 当前记录
 
 ```text
+日期时间：2026-06-25 07:32 JST
+来源：楽天市場 お買い物マラソン https://event.rakuten.co.jp/campaign/point-up/marathon/；Yahoo!ショッピング 5のつく日 https://shopping.yahoo.co.jp/promotion/campaign/5day/；アカチャンホンポ 3と8のつく日 https://shop.akachan.jp/shop/r/rse90/；西松屋官方首页 https://www.24028.jp/；PayPayスクラッチくじ https://paypay.ne.jp/event/matsuri202606-paypay-scratch/；楽天市場姓名贴搜索页 https://search.rakuten.co.jp/search/mall/%E4%BF%9D%E8%82%B2%E5%9C%92+%E5%90%8D%E5%89%8D%E3%82%B7%E3%83%BC%E3%83%AB/
+主题：复查 data/deals.json 的 6 条 verified + active 优惠机会。楽天买回官方页仍显示 1 店铺 1,000 日元（税込）以上、7,000 点上限和 2026/7/15 左右付与等规则；Yahoo! 5のつく日官方页显示 2026/6/25 00:00 - 23:59、エントリー、指定支付 +4% 和期间限定 PayPay ポイント；赤ちゃん本舗 3/8 日页面仍显示 10:00 到次日 09:59、対象カテゴリ积分 10 倍和 Online Shop 限定；西松屋首页仍有 6/18 - 6/30 チラシ / ミミよりコレクション与 6/18 - 7/14 月間奉仕品入口；PayPayスクラッチ仍显示 2026/6/19 - 7/31、200 日元以上支付、抽选返还档位和 10 万点上限；楽天姓名贴搜索结果仍显示保育园姓名贴相关商品、价格、送料無料和発送目安。
+可能影响：现有 verified 条目仍可作为“活动机会/购买前提醒”展示，没有发现需要改为 expired 或 unavailable 的条目。但它们仍不是单一 SKU 固定低价，用户下单前必须确认具体商品页、库存、送料、券后价、対象店舗和积分内訳。
+是否已更新到站点：已同步 data/deals.json 的核验日期，并更新 data/shopping-calendar.json 中对应活动的更新时间；未新增商品级优惠。
+下一步：继续找纸尿裤、湿巾、辅食、婴儿洗护的具体商品页或官方活动页；只有同时确认商品 URL、价格/券后条件、库存/配送、sourceName 和 updatedAt 时，才新增 dataStatus=verified 的商品级优惠。
+```
+
+```text
 日期时间：2026-06-24 16:32 JST
 来源：楽天市場 お買い物マラソン https://event.rakuten.co.jp/campaign/point-up/marathon/；Yahoo!ショッピング 5のつく日 https://shopping.yahoo.co.jp/promotion/campaign/5day/；アカチャンホンポ 3と8のつく日 https://shop.akachan.jp/shop/r/rse90/；西松屋官方首页 https://www.24028.jp/；PayPayスクラッチくじ https://paypay.ne.jp/event/matsuri202606-paypay-scratch/；楽天市場姓名贴搜索页 https://search.rakuten.co.jp/search/mall/%E4%BF%9D%E8%82%B2%E5%9C%92+%E5%90%8D%E5%89%8D%E3%82%B7%E3%83%BC%E3%83%AB/
 主题：复查 data/deals.json 的 6 条 verified + active 优惠机会。楽天买回官方页仍显示 2026/6/20 20:00 - 6/26 01:59、1 店铺 1,000 日元（税込、送料別、券后）和 7,000 点上限；Yahoo! 5のつく日官方页仍显示付与上限 1,000 円相当、期间限定 PayPay ポイント和对象金额计算规则；赤ちゃん本舗 3/8 日积分页、西松屋首页、PayPayスクラッチ详情页和楽天姓名贴搜索页均仍可访问。西松屋首页出现 2026/6/24 SmartAngel 超厚手おしりふき新品新闻，但未提供优惠价或活动条件。
