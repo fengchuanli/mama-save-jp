@@ -21,6 +21,29 @@ export default function Deals({ deals }: DealsProps) {
   const dealsUrl = getAbsoluteUrl("/deals");
   const [selectedCategory, setSelectedCategory] = useState("全部");
   const [selectedPlatform, setSelectedPlatform] = useState("全部");
+  const taskEntryRoutes = [
+    {
+      label: "马上要补货",
+      title: "先看尿不湿/湿巾",
+      description: "适合家里 1-2 周内会用完，先按单片价和库存判断。",
+      category: "尿不湿",
+      platform: "全部"
+    },
+    {
+      label: "准备入园",
+      title: "先看保育园用品",
+      description: "适合按园方清单补小件、备用衣物和姓名贴。",
+      category: "保育园用品",
+      platform: "全部"
+    },
+    {
+      label: "出门前顺手确认",
+      title: "先看支付/门店机会",
+      description: "适合去药妆店、超市或西松屋前确认是否值得顺手参加。",
+      category: "全部",
+      platform: "PayPay"
+    }
+  ];
 
   const categories = useMemo(
     () => ["全部", ...Array.from(new Set(deals.map((deal) => deal.category)))],
@@ -46,6 +69,10 @@ export default function Deals({ deals }: DealsProps) {
   const resetFilters = () => {
     setSelectedCategory("全部");
     setSelectedPlatform("全部");
+  };
+  const applyTaskEntry = (category: string, platform: string) => {
+    setSelectedCategory(category);
+    setSelectedPlatform(platform);
   };
   const collectionJsonLd = createCollectionPageJsonLd({
     name: "日本母婴本周值得买",
@@ -103,6 +130,33 @@ export default function Deals({ deals }: DealsProps) {
           title="先快速判断，再决定要不要点开"
           description="每周整理在日华人宝妈常用母婴用品的购买时机和优惠线索。先看亮点、时机和适合人群，详细参加方法可在卡片内展开。"
         />
+        <div className="mb-7 rounded-lg border border-stone-200 bg-white p-4 shadow-soft sm:p-5">
+          <div className="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
+            <div>
+              <p className="text-sm font-semibold text-tea">先按当前任务进入</p>
+              <h2 className="mt-1 text-xl font-semibold text-ink">不用先理解全部优惠类型</h2>
+            </div>
+            <p className="max-w-2xl text-sm leading-6 text-stone-600">
+              如果只是想快速判断今天该不该买，先选最接近的状态，再看卡片里的确定性、跳过条件和购买前确认。
+            </p>
+          </div>
+
+          <div className="mt-5 grid gap-3 md:grid-cols-3">
+            {taskEntryRoutes.map((route) => (
+              <button
+                key={route.label}
+                type="button"
+                onClick={() => applyTaskEntry(route.category, route.platform)}
+                className="rounded-lg bg-cream p-4 text-left transition hover:bg-linen"
+              >
+                <p className="text-xs font-semibold text-tea">{route.label}</p>
+                <h3 className="mt-2 font-semibold text-ink">{route.title}</h3>
+                <p className="mt-2 text-sm leading-6 text-stone-600">{route.description}</p>
+              </button>
+            ))}
+          </div>
+        </div>
+
         <div className="mb-7 space-y-4 rounded-lg border border-stone-200 bg-white p-4 shadow-soft sm:space-y-5 sm:p-5">
           <div>
             <div className="mb-3 flex items-center justify-between gap-3">

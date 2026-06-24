@@ -1,5 +1,24 @@
 # 优化记录
 
+## 2026-06-25 本周值得买任务入口优化
+
+- 时间：2026-06-25 00:01 JST
+- 当前优化方向：00:00 内容结构。
+- 目标：让 `/deals` 访问者在看到分类/平台筛选前，先按“马上补货、准备入园、出门前确认”这类真实任务进入，降低首次理解优惠类型和平台规则的成本。
+- 修改文件：
+  - `pages/deals.tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查 `/deals` 包含任务入口、三种状态文案和筛选应用函数。
+  - `git diff --check`
+  - `npm run build`
+- 结果：`/deals` 顶部新增“先按当前任务进入”结构卡片，三个入口按钮会直接套用现有分类/平台筛选；后续用户仍可用原有分类、平台按钮继续调整。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、6 条优惠、13 个日历活动校验通过；任务入口静态检查通过；`git diff --check` 通过；`npm run build` 的 `prebuild` 和 sitemap 成功，但主构建仍因当前工作区没有可用 `next` 命令失败，报 `sh: next: command not found`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“优化值得买任务入口”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：观察真实用户是否更常点击任务入口；若仍反馈“不知道哪条能今天买”，再考虑把优惠确定性作为可筛选项。
+
 ## 2026-06-24 16:32 最新母婴省钱消息整理复查
 
 - 时间：2026-06-24 16:32 JST
