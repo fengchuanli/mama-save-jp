@@ -1,5 +1,25 @@
 # 优化记录
 
+## 2026-06-26 全站移动端导航优化
+
+- 时间：2026-06-26 06:04 JST
+- 当前优化方向：06:00 移动端体验。
+- 目标：减少手机端打开页面时顶部导航换行占用的首屏高度，让首页、优惠、日历和攻略页的主要入口在小屏上保持一行横向滑动，同时不影响桌面端右侧导航布局。
+- 修改文件：
+  - `components/Layout.tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查 `Layout` 包含主要导航 `aria-label`、移动端横向滚动、隐藏滚动条、桌面端恢复换行和导航项不换行。
+  - `npm run sitemap`
+  - `git diff --check`
+  - `npm run build`
+- 结果：全站头部导航在手机端改为单行横向滑动，导航项使用 `shrink-0` 和 `whitespace-nowrap` 避免按钮被压缩或断行；外层头部手机端垂直内边距略收紧，桌面端仍保持原有上下间距和可换行导航。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、6 条优惠、13 个日历活动校验通过；移动端导航静态检查通过；`npm run sitemap` 生成 14 个 URL；`git diff --check` 通过；`npm run build` 的 `prebuild` 和 sitemap 成功，但主构建仍因当前工作区没有可用 `next` 命令失败，报 `sh: next: command not found`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“优化全站移动端导航”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续移动端体验方向可在依赖可用时用真实浏览器检查 320-390px 宽度下的头部高度、横向滑动手感和当前页高亮可见性。
+
 ## 2026-06-26 母婴店选择攻略完善
 
 - 时间：2026-06-26 03:03 JST

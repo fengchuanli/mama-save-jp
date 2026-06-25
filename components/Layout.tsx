@@ -45,7 +45,7 @@ export function Layout({
       </Head>
       <div className="min-h-screen bg-cream">
         <header className="border-b border-stone-200 bg-cream/95">
-          <div className="mx-auto flex max-w-6xl flex-col gap-4 px-5 py-5 sm:flex-row sm:items-center sm:justify-between">
+          <div className="mx-auto flex max-w-6xl flex-col gap-4 px-5 py-4 sm:flex-row sm:items-center sm:justify-between sm:py-5">
             <Link href="/" className="flex items-center gap-3">
               <span className="flex h-10 w-10 items-center justify-center rounded-full bg-peach text-sm font-bold text-ink">
                 省
@@ -55,7 +55,10 @@ export function Layout({
                 <span className="block text-xs text-stone-500">日本生活 · 0-3 岁宝宝家庭</span>
               </span>
             </Link>
-            <nav className="flex flex-wrap gap-2">
+            <nav
+              aria-label="主要导航"
+              className="no-scrollbar -mx-5 flex gap-2 overflow-x-auto px-5 pb-1 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0 sm:pb-0"
+            >
               {navItems.map((item) => {
                 const active =
                   item.href === "/"
@@ -66,7 +69,7 @@ export function Layout({
                   <Link
                     key={item.href}
                     href={item.href}
-                    className={`rounded-full px-4 py-2 text-sm transition ${
+                    className={`shrink-0 whitespace-nowrap rounded-full px-4 py-2 text-sm transition ${
                       active
                         ? "bg-ink text-white"
                         : "bg-white text-stone-700 hover:bg-linen"
