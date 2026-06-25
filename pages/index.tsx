@@ -24,21 +24,24 @@ export default function Home({ deals, calendarEvents, paymentRebateEvents, guide
   const quickStartRoutes = [
     {
       label: "刚开始准备",
-      href: "/guides",
+      href: "/guides/newborn-shopping-list",
       title: "先看新手攻略",
-      description: "控制清单范围，避免一上来就囤错。"
+      description: "从第一批用品开始，把必买、可等等和不急囤分开。",
+      nextStep: "下一步：列出第一批清单"
     },
     {
       label: "准备下单",
       href: "/deals",
       title: "先看本周机会",
-      description: "核对为什么值得买、哪些情况跳过。"
+      description: "核对为什么值得买、哪些情况跳过，再去官方页确认。",
+      nextStep: "下一步：判断今天能不能买"
     },
     {
       label: "等活动日",
       href: "/calendar",
       title: "先看省钱日历",
-      description: "确认活动规则、适合买什么和注意事项。"
+      description: "确认活动规则、适合买什么和注意事项。",
+      nextStep: "下一步：挑最近的省钱节点"
     }
   ];
 
@@ -82,6 +85,7 @@ export default function Home({ deals, calendarEvents, paymentRebateEvents, guide
                     <p className="text-xs font-semibold text-tea">{route.label}</p>
                     <h2 className="mt-2 text-base font-semibold text-ink">{route.title}</h2>
                     <p className="mt-2 text-sm leading-6 text-stone-600">{route.description}</p>
+                    <p className="mt-3 text-xs font-semibold text-stone-500">{route.nextStep}</p>
                   </Link>
                 ))}
               </div>
