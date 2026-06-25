@@ -16,6 +16,15 @@
 ## 当前记录
 
 ```text
+日期时间：2026-06-26 07:34 JST
+来源：楽天市場 お買い物マラソン https://event.rakuten.co.jp/campaign/point-up/marathon/；Yahoo!ショッピング 5のつく日 https://shopping.yahoo.co.jp/promotion/campaign/5day/；アカチャンホンポ 3と8のつく日 https://shop.akachan.jp/shop/r/rse90/；西松屋官方首页 https://www.24028.jp/；PayPayスクラッチくじ https://paypay.ne.jp/event/matsuri202606-paypay-scratch/；楽天市場姓名贴搜索页 https://search.rakuten.co.jp/search/mall/%E4%BF%9D%E8%82%B2%E5%9C%92+%E5%90%8D%E5%89%8D%E3%82%B7%E3%83%BC%E3%83%AB/
+主题：复查 data/deals.json 的 6 条 verified 优惠。楽天お買い物マラソン官方页已显示活动结束，因此尿不湿/湿巾买回和姓名贴买回两条不应继续展示为可参加；Yahoo! 5のつく日页面仍显示 2026/6/25 00:00 - 23:59、指定支付 +4% 和 1,000 円相当上限，但当前已在エントリー期间外，因此 6/25 场次不应继续展示为可参加。赤ちゃん本舗 3/8 日页面仍可访问并保留対象カテゴリ积分 10 倍入口；西松屋首页仍显示 6/18-6/30 チラシ/ミミよりコレクション和 6/18-7/14 月間奉仕品入口；PayPayスクラッチ仍显示 2026/6/19-7/31 活动、200 日元以上支付和抽选返还规则；楽天姓名贴搜索结果仍显示相关商品、价格、送料無料和発送目安，但本轮买回条件已结束。
+可能影响：已把 3 条依赖已结束活动的 verified 优惠改为 expired，避免用户误以为仍可参加。其余 3 条 verified 仍可作为活动机会/购买前提醒展示，但依然需要用户在具体商品页、门店或结算页确认价格、库存、送料、対象店舗和积分内訳。
+是否已更新到站点：已更新 data/deals.json 的 availabilityStatus、note、whyWorthBuying、skipWhen、updatedAt 等字段；同步更新 data/shopping-calendar.json 中楽天、Yahoo!、赤ちゃん本舗、西松屋、PayPay 的说明和更新时间。未新增商品级优惠。
+下一步：继续跟进 Yahoo! 7/10 起超PayPay祭预告和下一轮楽天买回公告；只有官方细则、具体商品页、价格/券后条件、库存/配送和 sourceName 都明确时，再新增 dataStatus=verified 的商品级优惠。
+```
+
+```text
 日期时间：2026-06-25 07:32 JST
 来源：楽天市場 お買い物マラソン https://event.rakuten.co.jp/campaign/point-up/marathon/；Yahoo!ショッピング 5のつく日 https://shopping.yahoo.co.jp/promotion/campaign/5day/；アカチャンホンポ 3と8のつく日 https://shop.akachan.jp/shop/r/rse90/；西松屋官方首页 https://www.24028.jp/；PayPayスクラッチくじ https://paypay.ne.jp/event/matsuri202606-paypay-scratch/；楽天市場姓名贴搜索页 https://search.rakuten.co.jp/search/mall/%E4%BF%9D%E8%82%B2%E5%9C%92+%E5%90%8D%E5%89%8D%E3%82%B7%E3%83%BC%E3%83%AB/
 主题：复查 data/deals.json 的 6 条 verified + active 优惠机会。楽天买回官方页仍显示 1 店铺 1,000 日元（税込）以上、7,000 点上限和 2026/7/15 左右付与等规则；Yahoo! 5のつく日官方页显示 2026/6/25 00:00 - 23:59、エントリー、指定支付 +4% 和期间限定 PayPay ポイント；赤ちゃん本舗 3/8 日页面仍显示 10:00 到次日 09:59、対象カテゴリ积分 10 倍和 Online Shop 限定；西松屋首页仍有 6/18 - 6/30 チラシ / ミミよりコレクション与 6/18 - 7/14 月間奉仕品入口；PayPayスクラッチ仍显示 2026/6/19 - 7/31、200 日元以上支付、抽选返还档位和 10 万点上限；楽天姓名贴搜索结果仍显示保育园姓名贴相关商品、价格、送料無料和発送目安。

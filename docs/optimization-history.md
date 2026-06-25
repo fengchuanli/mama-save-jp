@@ -1,5 +1,35 @@
 # 优化记录
 
+## 2026-06-26 07:34 最新母婴省钱消息整理
+
+- 时间：2026-06-26 07:34 JST
+- 当前优化方向：最新日本母婴省钱消息整理。
+- 目标：按自动化要求先复查 `data/deals.json` 中所有 `dataStatus: "verified"` 的优惠，再只同步官方或可靠来源能支撑的信息，避免已结束活动继续显示为可参加。
+- 已核验优惠复查：
+  - 楽天お買い物マラソン：官方活动页仍可访问，但已显示本轮お買い物マラソン结束；因此 `rakuten-marathon-diaper-wipes` 不能继续作为 active 买回优惠展示。
+  - Yahoo!ショッピング 5のつく日：官方页仍可访问，仍可读到 2026/6/25 00:00 - 23:59、指定支付 +4%、1,000 円相当上限和期间限定 PayPay ポイント规则，但当前已显示エントリー期间外；因此 `yahoo-5day-diaper-box` 不能继续作为 6/25 active 优惠展示。
+  - アカチャンホンポ 3/8 日対象カテゴリポイント10倍：官方页仍可访问，対象カテゴリ入口和通园/お名前グッズ等分类仍可读；保留 active，但仍需结算页确认対象商品和预计积分。
+  - 西松屋チラシ・セール入口：官方首页仍可访问，确认 6/18-6/30 チラシ/ミミよりコレクション和 6/18-7/14 月間奉仕品入口仍可读；保留 active，但未确认具体单品价格或门店库存。
+  - PayPayスクラッチ：官方详情页仍可访问，确认 2026/6/19-7/31、200 日元以上支付和抽选返还规则仍可读；保留 active，但仍不是确定母婴商品折扣。
+  - 楽天姓名贴搜索页：搜索结果页仍可访问，并显示保育园姓名贴相关商品、价格、送料無料和発送目安；但作为买回店铺的本轮活动条件已结束，因此 `rakuten-name-sticker-marathon` 改为 expired。
+- 修改文件：
+  - `data/deals.json`
+  - `data/shopping-calendar.json`
+  - `docs/latest-signals.md`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - 官方/平台页面人工核对楽天、Yahoo!ショッピング、アカチャンホンポ、西松屋、PayPayスクラッチ、楽天姓名贴搜索结果。
+  - `node` 静态检查 6 条优惠状态和重点日历更新时间。
+  - `npm run validate:content`
+  - `npm run sitemap`
+  - `git diff --check`
+  - `npm run build`
+- 结果：6 条 verified 中，3 条依赖已结束活动的优惠已改为 `availabilityStatus: "expired"`，并同步修改 `note`、`whyWorthBuying`、`skipWhen`、`updatedAt` 和展示标签；赤ちゃん本舗、西松屋、PayPay 三条保留 active 并更新核验日期。日历中楽天买回和 Yahoo! 6/25 场次改为已结束/等下一场的提醒；未新增商品级优惠，因为本轮没有确认到同时具备具体商品页、明确价格/券后条件、库存/配送和来源的母婴单品。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、6 条优惠、13 个日历活动校验通过；`node` 静态检查确认 3 条 expired、3 条 active，重点日历活动更新时间已同步；`npm run sitemap` 生成 14 个 URL；`git diff --check` 通过；`npm run build` 的 `prebuild` 和 sitemap 成功，但主构建仍因当前工作区没有可用 `next` 命令失败，报 `sh: next: command not found`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“复查已结束母婴优惠”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：继续跟进 Yahoo! 7/10 起超PayPay祭预告、下一轮楽天买回公告，以及纸尿裤、湿巾、辅食、婴儿洗护的商品页级明确价格和条件。
+
 ## 2026-06-26 全站移动端导航优化
 
 - 时间：2026-06-26 06:04 JST
