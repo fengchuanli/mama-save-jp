@@ -1,5 +1,25 @@
 # 优化记录
 
+## 2026-06-30 攻略列表移动端路线优化
+
+- 时间：2026-06-30 06:03 JST
+- 当前优化方向：06:00 移动端体验。
+- 目标：减少 `/guides` 手机端顶部“新手宝妈必读路线”三张步骤卡的纵向占用，让用户更快看到下面的“按问题找攻略”分组，同时保持桌面端三列路线不变。
+- 修改文件：
+  - `pages/guides/index.tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查 `/guides` 新手路线包含横向滚动、snap、隐藏滚动条、移动端固定卡宽和桌面端三列布局。
+  - `npm run sitemap`
+  - `git diff --check`
+  - `npm run build`
+- 结果：`/guides` 新手路线在手机端改为横向滑动步骤卡，卡片使用 `w-[78vw]`、`min-w-[17rem]` 和 `snap-start` 保持可读宽度；桌面端仍通过 `md:grid md:grid-cols-3` 保持三列展示。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、6 条优惠、13 个日历活动校验通过；攻略列表移动端路线静态检查通过；`npm run sitemap` 生成 14 个 URL；`git diff --check` 通过；`npm run build` 已完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“优化攻略列表移动端路线”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续移动端体验方向可在真实浏览器检查 `/guides` 320-390px 宽度下路线卡滑动、首屏高度和分组标题露出情况。
+
 ## 2026-06-30 童装尺码攻略完善
 
 - 时间：2026-06-30 03:03 JST

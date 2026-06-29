@@ -147,12 +147,15 @@ export default function Guides({ guides }: GuidesProps) {
             </p>
           </div>
 
-          <div className="mt-5 grid gap-3 md:grid-cols-3">
+          <div
+            aria-label="新手宝妈必读路线"
+            className="no-scrollbar -mx-5 mt-5 flex snap-x snap-mandatory gap-3 overflow-x-auto px-5 pb-1 md:mx-0 md:grid md:snap-none md:grid-cols-3 md:overflow-visible md:px-0 md:pb-0"
+          >
             {beginnerGuides.map((guide, index) => (
               <Link
                 key={guide.slug}
                 href={`/guides/${guide.slug}`}
-                className="rounded-lg border border-emerald-100 bg-emerald-50 p-4 transition hover:bg-white"
+                className="w-[78vw] min-w-[17rem] shrink-0 snap-start rounded-lg border border-emerald-100 bg-emerald-50 p-4 transition hover:bg-white md:w-auto md:min-w-0"
               >
                 <p className="text-xs font-semibold text-tea">第 {index + 1} 步</p>
                 <h3 className="mt-2 font-semibold text-ink">{guide.title}</h3>
