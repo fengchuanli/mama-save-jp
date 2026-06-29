@@ -1,5 +1,26 @@
 # 优化记录
 
+## 2026-06-30 童装尺码攻略完善
+
+- 时间：2026-06-30 03:03 JST
+- 当前优化方向：03:00 攻略内容。
+- 目标：把偏薄的《日本童装 80/90/100 尺码怎么选》扩展成更可执行的尺码和换季清仓攻略，帮助 1-3 岁家庭按衣服类型、保育园规则和季节风险判断是否值得买。
+- 修改文件：
+  - `content/guides/kids-clothes-size-80-90-100.mdx`
+  - `public/sitemap.xml`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查攻略包含 7 分钟阅读、`updatedAt: "2026-06-30"`、按衣服类型判断、保育园衣服、换季清仓和买前检查清单等关键章节。
+  - `npm run sitemap`
+  - `git diff --check`
+  - `npm run build`
+- 结果：攻略新增上衣、裤子、外套、睡衣/内搭的尺码判断，补充保育园衣服选择、换季清仓保守购买规则、买前检查清单和收纳建议；阅读时长更新为 7 分钟，`public/sitemap.xml` 同步更新首页、攻略列表和该攻略详情页的 `lastmod`。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、6 条优惠、13 个日历活动校验通过；童装尺码攻略静态检查通过；`npm run sitemap` 生成 14 个 URL；`git diff --check` 通过；`npm run build` 已完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“完善童装尺码攻略”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续攻略内容方向可继续补强楽天 5/0 日或药妆店优惠券攻略里的示例计算；网络恢复后优先推送本地领先提交。
+
 ## 2026-06-30 首页值得买货架过滤优化
 
 - 时间：2026-06-30 00:03 JST
