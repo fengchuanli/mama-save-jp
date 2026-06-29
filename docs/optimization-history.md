@@ -1,5 +1,36 @@
 # 优化记录
 
+## 2026-06-30 07:35 最新母婴省钱消息整理
+
+- 时间：2026-06-30 07:35 JST
+- 当前优化方向：最新日本母婴省钱消息整理。
+- 目标：按自动化要求先复查 `data/deals.json` 中所有 `dataStatus: "verified"` 的优惠，再只同步官方或可靠来源能支撑的信息，避免把已结束活动或预告活动写成确定商品优惠。
+- 已核验优惠复查：
+  - 楽天お買い物マラソン：官方活动页仍可访问，并继续显示お買い物マラソン已结束；`rakuten-marathon-diaper-wipes` 保持 `expired`。
+  - Yahoo!ショッピング 5のつく日：官方页仍可访问，2026/6/25 场次仍显示エントリー期间外；`yahoo-5day-diaper-box` 保持 `expired`。
+  - アカチャンホンポ 3/8 日対象カテゴリポイント10倍：官方页仍可访问，规则仍成立；本轮修正站内“30 日”措辞为“有 31 日的月份为 30 日 10:00 至次月 1 日 09:59”，避免 6/30 误读。
+  - 西松屋チラシ・セール入口：官方首页仍可访问，确认 6/18-6/30 チラシ/ミミよりコレクション和 6/18-7/14 月間奉仕品入口仍可读；保留 `active`，但仍未确认具体单品价格或门店库存。
+  - PayPayスクラッチ：官方详情页仍可访问，确认 2026/6/19-7/31、200 日元以上、本人确认、抽选返还和上限规则仍可读；保留 `active`，继续标注不是确定折扣。
+  - 楽天姓名贴搜索页：搜索结果仍可访问并显示保育园姓名贴相关商品、价格、送料無料和発送目安；因楽天买回已结束，继续保持 `expired`，只作为下次买回前准备线索。
+- 新增/更新信息：
+  - Yahoo!ショッピング お得ガイド已出现 2026/7/10 0:00 - 7/12 25:59 超PayPay祭预告，対象ストア合计 5,000-19,999 日元决済 +4%、20,000 日元以上 +7%，另有 7/1 起抽选、最大 70%OFF 期间限定セール和対象者限定クーポン等予定；已写入 `data/shopping-calendar.json`，但未写入 `data/deals.json`，因为没有具体母婴商品页、价格、库存或券后条件。
+- 修改文件：
+  - `data/deals.json`
+  - `data/shopping-calendar.json`
+  - `docs/latest-signals.md`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - 官方/平台页面人工核对楽天、Yahoo!ショッピング、Yahoo!お得ガイド、アカチャンホンポ、西松屋、PayPayスクラッチ、楽天姓名贴搜索结果。
+  - `npm run validate:content`
+  - `npm run sitemap`
+  - `git diff --check`
+  - `npm run build`
+- 结果：6 条 verified 优惠均已复查；3 条保持 `expired`，3 条保持 `active`，未发现商品下架、页面失效或需新增 `unavailable` 的情况。已新增 1 条 Yahoo! 7/10 超PayPay祭日历预告，并修正赤ちゃん本舗 30 日规则。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、6 条优惠、14 个日历活动校验通过；`npm run sitemap` 生成 14 个 URL；`git diff --check` 通过；`npm run build` 已完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“复查6月30日母婴优惠状态”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：7/10 前继续等待 Yahoo! 超PayPay祭正式活动页和対象商品确认；明天重点复查西松屋 6/18-6/30 チラシ/ミミよりコレクション是否结束。
+
 ## 2026-06-30 攻略列表移动端路线优化
 
 - 时间：2026-06-30 06:03 JST
