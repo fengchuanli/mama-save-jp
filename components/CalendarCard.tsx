@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { CalendarEvent } from "@/lib/types";
+import { CardVisual, getCalendarVisual } from "@/components/VisualMotif";
 
 const linkClass =
   "inline-flex whitespace-nowrap rounded-full bg-linen px-3 py-1 text-xs font-semibold text-stone-700 transition hover:bg-peach";
@@ -77,7 +78,8 @@ function TargetItems({ items }: { items: string[] }) {
 
 export function CalendarSummaryCard({ event }: { event: CalendarEvent }) {
   return (
-    <article className="rounded-lg border border-stone-200 bg-white p-4 shadow-soft">
+    <article className="h-full rounded-lg border border-amber-100 bg-white p-4 shadow-soft">
+      <CardVisual label={event.platform} tone="yellow" variant={getCalendarVisual(event)} />
       <div className="flex flex-wrap items-center gap-2">
         <p className={`inline-flex rounded-full border px-3 py-1 text-sm font-bold ${priorityClass[event.priority]}`}>
           {event.highlight}
@@ -100,7 +102,8 @@ export function CalendarSummaryCard({ event }: { event: CalendarEvent }) {
 
 export function CalendarShelfCard({ event }: { event: CalendarEvent }) {
   return (
-    <article className="h-full rounded-lg border border-stone-200 bg-white p-4 shadow-soft">
+    <article className="h-full rounded-lg border border-amber-100 bg-white p-4 shadow-soft">
+      <CardVisual label={event.platform} tone="yellow" variant={getCalendarVisual(event)} />
       <div className="flex flex-wrap items-center gap-2">
         <p className={`inline-flex rounded-full border px-3 py-1 text-sm font-bold ${priorityClass[event.priority]}`}>
           {event.highlight}
@@ -122,7 +125,8 @@ export function CalendarShelfCard({ event }: { event: CalendarEvent }) {
 
 export function CalendarCard({ event }: { event: CalendarEvent }) {
   return (
-    <article id={event.slug} className="scroll-mt-24 rounded-lg border border-stone-200 bg-white p-4 shadow-soft sm:p-5">
+    <article id={event.slug} className="scroll-mt-24 rounded-lg border border-amber-100 bg-white p-4 shadow-soft sm:p-5">
+      <CardVisual label={event.platform} tone="yellow" variant={getCalendarVisual(event)} />
       <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <div className="flex flex-wrap items-center gap-2">
@@ -212,7 +216,7 @@ export function CalendarStoreGroup({
   events: CalendarEvent[];
 }) {
   return (
-    <section className="rounded-lg border border-stone-200 bg-white/70 p-4 shadow-soft sm:p-5">
+    <section className="rounded-lg border border-amber-100 bg-white/80 p-4 shadow-soft sm:p-5">
       <div className="mb-4 flex flex-col gap-2 border-b border-stone-200 pb-3 sm:mb-5 sm:flex-row sm:items-end sm:justify-between sm:pb-4">
         <div>
           <p className="text-sm font-semibold text-tea">平台</p>

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { CalendarEvent } from "@/lib/types";
+import { CardVisual, getCalendarVisual } from "@/components/VisualMotif";
 
 type PaymentRebateSpotlightProps = {
   events: CalendarEvent[];
@@ -36,7 +37,8 @@ export function PaymentRebateSpotlight({
 
       <div className="grid gap-3 md:grid-cols-3">
         {events.map((event) => (
-          <article key={event.id} className="rounded-lg border border-stone-200 bg-white p-4 shadow-soft">
+          <article key={event.id} className="rounded-lg border border-sky-100 bg-white p-4 shadow-soft">
+            <CardVisual label={event.platform} tone="blue" variant={getCalendarVisual(event)} />
             <p className="text-sm font-semibold text-tea">{event.platform}</p>
             <h3 className="mt-2 text-lg font-semibold leading-7 text-ink">{event.title}</h3>
             <p className="mt-2 text-base font-bold leading-6 text-rose-700">{event.highlight}</p>
@@ -58,7 +60,8 @@ export function PaymentRebateSpotlight({
 
 export function PaymentRebateShelfCard({ event }: { event: CalendarEvent }) {
   return (
-    <article className="h-full rounded-lg border border-stone-200 bg-white p-4 shadow-soft">
+    <article className="h-full rounded-lg border border-sky-100 bg-white p-4 shadow-soft">
+      <CardVisual label={event.platform} tone="blue" variant={getCalendarVisual(event)} />
       <p className="text-sm font-semibold text-stone-700">{event.platform}</p>
       <h3 className="mt-2 text-lg font-semibold leading-7 text-ink">{event.title}</h3>
       <p className="mt-2 text-base font-bold leading-6 text-rose-700">{event.highlight}</p>

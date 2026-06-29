@@ -124,13 +124,14 @@ export default function Deals({ deals }: DealsProps) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
         />
       </Head>
-      <section className="mx-auto max-w-6xl px-5 py-12">
+      <section className="bg-[#fff7ed]">
+        <div className="mx-auto max-w-6xl px-5 py-12">
         <SectionHeader
           eyebrow="本周值得买"
           title="先快速判断，再决定要不要点开"
           description="每周整理在日华人宝妈常用母婴用品的购买时机和优惠线索。先看亮点、时机和适合人群，详细参加方法可在卡片内展开。"
         />
-        <div className="mb-7 rounded-lg border border-stone-200 bg-white p-4 shadow-soft sm:p-5">
+        <div className="mb-7 rounded-lg border border-orange-100 bg-white p-4 shadow-soft sm:p-5">
           <div className="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
             <div>
               <p className="text-sm font-semibold text-tea">先按当前任务进入</p>
@@ -147,7 +148,7 @@ export default function Deals({ deals }: DealsProps) {
                 key={route.label}
                 type="button"
                 onClick={() => applyTaskEntry(route.category, route.platform)}
-                className="rounded-lg bg-cream p-4 text-left transition hover:bg-linen"
+                className="rounded-lg border border-orange-100 bg-orange-50 p-4 text-left transition hover:bg-linen"
               >
                 <p className="text-xs font-semibold text-tea">{route.label}</p>
                 <h3 className="mt-2 font-semibold text-ink">{route.title}</h3>
@@ -157,7 +158,7 @@ export default function Deals({ deals }: DealsProps) {
           </div>
         </div>
 
-        <div className="mb-7 space-y-4 rounded-lg border border-stone-200 bg-white p-4 shadow-soft sm:space-y-5 sm:p-5">
+        <div className="mb-7 space-y-4 rounded-lg border border-orange-100 bg-white p-4 shadow-soft sm:space-y-5 sm:p-5">
           <div>
             <div className="mb-3 flex items-center justify-between gap-3">
               <p className="text-sm font-semibold text-ink">按分类筛选</p>
@@ -234,6 +235,7 @@ export default function Deals({ deals }: DealsProps) {
             暂时没有符合条件的优惠，换一个分类或平台看看。
           </div>
         ) : null}
+        </div>
       </section>
     </Layout>
   );

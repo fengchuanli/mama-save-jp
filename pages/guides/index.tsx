@@ -126,14 +126,15 @@ export default function Guides({ guides }: GuidesProps) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
         />
       </Head>
-      <section className="mx-auto max-w-6xl px-5 py-12">
+      <section className="bg-emerald-50">
+        <div className="mx-auto max-w-6xl px-5 py-12">
         <SectionHeader
           eyebrow="攻略列表"
           title="把日本购物规则讲清楚"
           description="适合刚来日本、日语购物页面看着费劲、还不熟悉积分和促销节奏的华人宝妈/宝爸。"
         />
 
-        <div className="mb-8 rounded-lg border border-stone-200 bg-white p-5 shadow-soft">
+        <div className="mb-8 rounded-lg border border-emerald-100 bg-white p-5 shadow-soft">
           <div className="flex flex-col justify-between gap-3 md:flex-row md:items-end">
             <div>
               <p className="text-sm font-semibold text-tea">新手宝妈必读路线</p>
@@ -151,7 +152,7 @@ export default function Guides({ guides }: GuidesProps) {
               <Link
                 key={guide.slug}
                 href={`/guides/${guide.slug}`}
-                className="rounded-lg bg-cream p-4 transition hover:bg-linen"
+                className="rounded-lg border border-emerald-100 bg-emerald-50 p-4 transition hover:bg-white"
               >
                 <p className="text-xs font-semibold text-tea">第 {index + 1} 步</p>
                 <h3 className="mt-2 font-semibold text-ink">{guide.title}</h3>
@@ -190,6 +191,7 @@ export default function Guides({ guides }: GuidesProps) {
               </div>
             </section>
           ))}
+        </div>
         </div>
       </section>
     </Layout>

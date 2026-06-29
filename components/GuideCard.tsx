@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { GuideMeta } from "@/lib/types";
+import { CardVisual, getGuideVisual } from "@/components/VisualMotif";
 
 type GuideCardProps = {
   guide: GuideMeta;
@@ -10,8 +11,9 @@ export function GuideCard({ guide, contextLabel }: GuideCardProps) {
   return (
     <Link
       href={`/guides/${guide.slug}`}
-      className="block rounded-lg border border-stone-200 bg-white p-5 shadow-soft transition hover:-translate-y-0.5 hover:border-peach"
+      className="block h-full rounded-lg border border-emerald-100 bg-white p-5 shadow-soft transition hover:-translate-y-0.5 hover:border-emerald-200"
     >
+      <CardVisual label={guide.category} tone="green" variant={getGuideVisual(guide)} />
       <div className="mb-4 flex flex-wrap gap-2">
         <span className="rounded-full bg-linen px-3 py-1 text-xs text-stone-700">
           {guide.category}
@@ -38,8 +40,9 @@ export function GuideShelfCard({ guide }: { guide: GuideMeta }) {
   return (
     <Link
       href={`/guides/${guide.slug}`}
-      className="block h-full rounded-lg border border-stone-200 bg-white p-4 shadow-soft transition hover:-translate-y-0.5 hover:border-peach"
+      className="block h-full rounded-lg border border-emerald-100 bg-white p-4 shadow-soft transition hover:-translate-y-0.5 hover:border-emerald-200"
     >
+      <CardVisual label={guide.category} tone="green" variant={getGuideVisual(guide)} />
       <div className="mb-3 flex flex-wrap gap-2">
         <span className="whitespace-nowrap rounded-full bg-linen px-3 py-1 text-xs text-stone-700">
           {guide.category}

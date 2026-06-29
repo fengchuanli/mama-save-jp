@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Deal } from "@/lib/types";
+import { CardVisual, getDealVisual } from "@/components/VisualMotif";
 
 const ctaClass =
   "inline-flex whitespace-nowrap rounded-full bg-linen px-3 py-1 text-xs font-semibold text-stone-700 transition hover:bg-peach";
@@ -28,7 +29,8 @@ function BulletList({ items }: { items: string[] }) {
 
 export function DealSummaryCard({ deal }: { deal: Deal }) {
   return (
-    <article className="rounded-lg border border-stone-200 bg-white p-4 shadow-soft sm:p-5">
+    <article className="h-full rounded-lg border border-orange-100 bg-white p-4 shadow-soft sm:p-5">
+      <CardVisual label={deal.category} tone="warm" variant={getDealVisual(deal)} />
       <p className="inline-flex rounded-full border border-rose-200 bg-rose-50 px-3 py-1 text-sm font-bold text-rose-700">
         {deal.highlight}
       </p>
@@ -54,7 +56,8 @@ export function DealSummaryCard({ deal }: { deal: Deal }) {
 
 export function DealShelfCard({ deal }: { deal: Deal }) {
   return (
-    <article className="h-full rounded-lg border border-stone-200 bg-white p-4 shadow-soft">
+    <article className="h-full rounded-lg border border-orange-100 bg-white p-4 shadow-soft">
+      <CardVisual label={deal.category} tone="warm" variant={getDealVisual(deal)} />
       <p className="inline-flex rounded-full border border-rose-200 bg-rose-50 px-3 py-1 text-sm font-bold text-rose-700">
         {deal.highlight}
       </p>
@@ -78,7 +81,8 @@ export function DealShelfCard({ deal }: { deal: Deal }) {
 
 export function DealCard({ deal }: { deal: Deal }) {
   return (
-    <article id={deal.id} className="scroll-mt-24 rounded-lg border border-stone-200 bg-white p-4 shadow-soft sm:p-5">
+    <article id={deal.id} className="scroll-mt-24 rounded-lg border border-orange-100 bg-white p-4 shadow-soft sm:p-5">
+      <CardVisual label={deal.category} tone="warm" variant={getDealVisual(deal)} />
       <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <p className="inline-flex rounded-full border border-rose-200 bg-rose-50 px-3 py-1 text-sm font-bold text-rose-700">

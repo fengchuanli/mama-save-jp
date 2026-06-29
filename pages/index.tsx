@@ -6,6 +6,7 @@ import { GuideShelfCard } from "@/components/GuideCard";
 import { HorizontalCardSection } from "@/components/HorizontalCardSection";
 import { Layout } from "@/components/Layout";
 import { PaymentRebateShelfCard } from "@/components/PaymentRebateSpotlight";
+import { HeroShoppingVisual } from "@/components/VisualMotif";
 import { getFeaturedCalendarEvents } from "@/lib/calendar-highlights";
 import { getAllGuides } from "@/lib/guides";
 import { getPaymentRebateEvents } from "@/lib/payment-rebates";
@@ -26,7 +27,7 @@ export default function Home({ deals, calendarEvents, paymentRebateEvents, guide
       label: "刚开始准备",
       href: "/guides/newborn-shopping-list",
       title: "先看新手攻略",
-      description: "从第一批用品开始，把必买、可等等和不急囤分开。",
+      description: "从第一批用品开始，把马上需要、可等等和不急囤分开。",
       nextStep: "下一步：列出第一批清单"
     },
     {
@@ -50,9 +51,10 @@ export default function Home({ deals, calendarEvents, paymentRebateEvents, guide
       title="日本母婴省钱日历"
       description="面向在日华人宝妈的日本母婴省钱信息站，整理尿不湿、保育园用品、楽天、Amazon、西松屋、赤ちゃん本舗等购物攻略和省钱日历。"
     >
-      <section className="bg-linen">
-        <div className="mx-auto grid max-w-6xl gap-8 px-5 py-14 md:grid-cols-[1.1fr_0.9fr] md:items-center">
-          <div>
+      <section className="relative overflow-hidden bg-[#fff3e8]">
+        <HeroShoppingVisual />
+        <div className="relative z-10 mx-auto grid max-w-6xl gap-8 px-5 py-14 md:grid-cols-[1.1fr_0.9fr] md:items-center">
+          <div className="rounded-lg bg-[#fff3e8]/80 py-2">
             <p className="mb-4 text-sm font-semibold text-tea">
               在日华人宝妈/宝爸的日本母婴省钱日历
             </p>
@@ -80,7 +82,7 @@ export default function Home({ deals, calendarEvents, paymentRebateEvents, guide
                   <Link
                     key={route.href}
                     href={route.href}
-                    className="rounded-lg border border-stone-200 bg-white/80 p-4 transition hover:border-peach hover:bg-white"
+                  className="rounded-lg border border-orange-100 bg-white/90 p-4 shadow-soft transition hover:border-peach hover:bg-white"
                   >
                     <p className="text-xs font-semibold text-tea">{route.label}</p>
                     <h2 className="mt-2 text-base font-semibold text-ink">{route.title}</h2>
@@ -91,7 +93,7 @@ export default function Home({ deals, calendarEvents, paymentRebateEvents, guide
               </div>
             </div>
           </div>
-          <div className="rounded-lg border border-stone-200 bg-white p-5 shadow-soft">
+          <div className="rounded-lg border border-orange-100 bg-white/95 p-5 shadow-soft">
             <p className="text-sm font-semibold text-tea">本周提醒</p>
             <h2 className="mt-2 text-2xl font-semibold text-ink">先补高频消耗品</h2>
             <div className="mt-5 space-y-4">
@@ -100,7 +102,7 @@ export default function Home({ deals, calendarEvents, paymentRebateEvents, guide
                 ["湿巾", "低于好价线可按 1-2 个月用量补"],
                 ["洗护", "常用品牌遇到券后价再买补充装"]
               ].map(([title, text]) => (
-                <div key={title} className="rounded-lg bg-cream p-4">
+                <div key={title} className="rounded-lg border border-orange-100 bg-orange-50 p-4">
                   <p className="font-semibold text-ink">{title}</p>
                   <p className="mt-1 text-sm text-stone-600">{text}</p>
                 </div>
@@ -110,7 +112,8 @@ export default function Home({ deals, calendarEvents, paymentRebateEvents, guide
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-5 py-12">
+      <section className="bg-[#fff7ed]">
+        <div className="mx-auto max-w-6xl px-5 py-12">
         <HorizontalCardSection
           title="本周值得买"
           description="先看本周最值得关注的母婴用品和活动线索，点开后再确认详细条件。"
@@ -119,9 +122,10 @@ export default function Home({ deals, calendarEvents, paymentRebateEvents, guide
           getKey={(deal) => deal.id}
           renderCard={(deal) => <DealShelfCard deal={deal} />}
         />
+        </div>
       </section>
 
-      <section className="bg-cream">
+      <section className="bg-sky-50">
         <div className="mx-auto max-w-6xl px-5 py-12">
           <HorizontalCardSection
             title="出门前先看支付返点"
@@ -137,7 +141,7 @@ export default function Home({ deals, calendarEvents, paymentRebateEvents, guide
         </div>
       </section>
 
-      <section className="bg-white">
+      <section className="bg-amber-50">
         <div className="mx-auto max-w-6xl px-5 py-12">
           <HorizontalCardSection
             title="最近要关注的省钱节点"
@@ -150,7 +154,8 @@ export default function Home({ deals, calendarEvents, paymentRebateEvents, guide
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-5 py-12">
+      <section className="bg-emerald-50">
+        <div className="mx-auto max-w-6xl px-5 py-12">
         <HorizontalCardSection
           title="新手攻略"
           description="第一次在日本准备母婴用品时，先控制购买范围，再看高频消耗品和平台规则。"
@@ -159,6 +164,7 @@ export default function Home({ deals, calendarEvents, paymentRebateEvents, guide
           getKey={(guide) => guide.slug}
           renderCard={(guide) => <GuideShelfCard guide={guide} />}
         />
+        </div>
       </section>
 
       <section className="bg-linen">

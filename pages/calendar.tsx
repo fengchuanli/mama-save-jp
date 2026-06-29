@@ -92,14 +92,15 @@ export default function Calendar({ events }: CalendarProps) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
         />
       </Head>
-      <section className="mx-auto max-w-6xl px-4 py-9 sm:px-5 sm:py-12">
+      <section className="bg-amber-50">
+        <div className="mx-auto max-w-6xl px-4 py-9 sm:px-5 sm:py-12">
         <SectionHeader
           eyebrow="省钱日历"
           title="日本母婴购物什么时候买更划算"
           description="把 Amazon、楽天、西松屋、赤ちゃん本舗和药妆店的常见活动翻成新手也能看懂的中文。不是每次活动都要买，先看适合买什么，再看注意事项。"
         />
 
-        <div className="mb-6 rounded-lg border border-stone-200 bg-white p-4 shadow-soft sm:mb-8 sm:p-5">
+        <div className="mb-6 rounded-lg border border-amber-100 bg-white p-4 shadow-soft sm:mb-8 sm:p-5">
           <h2 className="text-base font-semibold text-ink sm:text-lg">
             新手宝妈怎么看这个日历
           </h2>
@@ -122,7 +123,7 @@ export default function Calendar({ events }: CalendarProps) {
 
         <PaymentRebateSpotlight events={paymentRebateEvents} />
 
-        <div className="mb-6 rounded-lg border border-stone-200 bg-white p-4 shadow-soft sm:mb-8 sm:p-5">
+        <div className="mb-6 rounded-lg border border-amber-100 bg-white p-4 shadow-soft sm:mb-8 sm:p-5">
           <div className="mb-3 flex items-center justify-between gap-3">
             <div>
               <p className="text-sm font-semibold text-ink">按平台快速查看</p>
@@ -165,6 +166,7 @@ export default function Calendar({ events }: CalendarProps) {
           {Object.entries(groupedEvents).map(([store, storeEvents]) => (
             <CalendarStoreGroup key={store} store={store} events={storeEvents} />
           ))}
+        </div>
         </div>
       </section>
     </Layout>
