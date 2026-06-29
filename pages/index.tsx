@@ -202,6 +202,11 @@ export default function Home({ deals, calendarEvents, paymentRebateEvents, guide
 
 export const getStaticProps: GetStaticProps<HomeProps> = async () => {
   const allGuides = getAllGuides();
+  const allDeals = dealsData as Deal[];
+  const homepageDeals = [
+    ...allDeals.filter((deal) => deal.availabilityStatus === "active"),
+    ...allDeals.filter((deal) => deal.availabilityStatus !== "active")
+  ].slice(0, 3);
   const beginnerGuideSlugs = [
     "newborn-shopping-list",
     "buy-diapers-japan",
@@ -213,7 +218,7 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => {
 
   return {
     props: {
-      deals: (dealsData as Deal[]).slice(0, 3),
+      deals: homepageDeals,
       calendarEvents: getFeaturedCalendarEvents(calendarData as CalendarEvent[]),
       paymentRebateEvents: getPaymentRebateEvents(calendarData as CalendarEvent[], 3),
       guides: beginnerGuides

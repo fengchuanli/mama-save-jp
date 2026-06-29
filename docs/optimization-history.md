@@ -1,5 +1,25 @@
 # 优化记录
 
+## 2026-06-30 首页值得买货架过滤优化
+
+- 时间：2026-06-30 00:03 JST
+- 当前优化方向：00:00 内容结构。
+- 目标：复查发现最近已把 3 条过期活动保留在 `data/deals.json` 中作复盘和下次准备参考，但首页“本周值得买”仍直接取前 3 条优惠，容易让首屏展示已结束活动；本次让首页优先展示仍可参加或仍值得确认的 active 优惠。
+- 修改文件：
+  - `pages/index.tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查首页优惠货架按 `availabilityStatus === "active"` 优先排序，并确认当前首页 3 条为 active。
+  - `npm run sitemap`
+  - `git diff --check`
+  - `npm run build`
+- 结果：首页 `getStaticProps` 不再直接取 `data/deals.json` 前 3 条，而是先取 active 优惠，不足 3 条时再用其他状态补位；当前首页会展示赤ちゃん本舗、西松屋、PayPay 三条 active 优惠，已结束的楽天买回、Yahoo! 6/25 和楽天姓名贴买回不再占用首页首屏货架。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、6 条优惠、13 个日历活动校验通过；首页 active 优先静态检查通过；`npm run sitemap` 生成 14 个 URL；`git diff --check` 通过；`npm run build` 已完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“优化首页有效优惠展示”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续内容结构方向可继续检查首页其它货架是否需要按可行动性排序，例如日历是否优先展示未结束、今天可用或近期要准备的节点。
+
 ## 2026-06-26 07:34 最新母婴省钱消息整理
 
 - 时间：2026-06-26 07:34 JST
