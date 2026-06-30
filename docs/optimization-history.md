@@ -1,5 +1,25 @@
 # 优化记录
 
+## 2026-07-01 值得买任务入口移动端优化
+
+- 时间：2026-07-01 06:02 JST
+- 当前优化方向：06:00 移动端体验。
+- 目标：减少 `/deals` 顶部“先按当前任务进入”三张任务卡在手机端的纵向占用，让用户更快看到分类/平台筛选和优惠列表，同时保留桌面端三列任务入口。
+- 修改文件：
+  - `pages/deals.tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查 `/deals` 任务入口包含横向滚动、snap、移动端固定卡宽和桌面端三列布局。
+  - `npm run sitemap`
+  - `git diff --check`
+  - `npm run build`
+- 结果：`/deals` 任务入口在手机端从三张纵向卡片改为横向滑动卡片，使用 `w-[78vw]`、`min-w-[17rem]` 和 `snap-start` 保持可读宽度；桌面端仍通过 `md:grid md:grid-cols-3` 保持三列展示。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、6 条优惠、14 个日历活动校验通过；`/deals` 任务入口移动端静态检查通过；`npm run sitemap` 生成 14 个 URL；`git diff --check` 通过；`npm run build` 已完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“优化值得买移动端任务入口”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续移动端体验方向可在真实浏览器检查 `/deals` 320-390px 宽度下任务入口滑动、筛选区露出和优惠卡片展开后的阅读高度。
+
 ## 2026-07-01 尿不湿购买攻略完善
 
 - 时间：2026-07-01 03:03 JST
