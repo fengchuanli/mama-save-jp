@@ -98,14 +98,34 @@ export default function Home({ deals, calendarEvents, paymentRebateEvents, guide
             <h2 className="mt-2 text-2xl font-semibold text-ink">先补高频消耗品</h2>
             <div className="mt-5 space-y-4">
               {[
-                ["纸尿裤", "看单片价，不要跨码囤太多"],
-                ["湿巾", "低于好价线可按 1-2 个月用量补"],
-                ["洗护", "常用品牌遇到券后价再买补充装"]
-              ].map(([title, text]) => (
-                <div key={title} className="rounded-lg border border-orange-100 bg-orange-50 p-4">
+                {
+                  title: "纸尿裤",
+                  text: "看单片价，不要跨码囤太多",
+                  href: "/guides/diaper-price-line",
+                  action: "先算好价线"
+                },
+                {
+                  title: "湿巾",
+                  text: "低于好价线可按 1-2 个月用量补",
+                  href: "/deals",
+                  action: "查看本周机会"
+                },
+                {
+                  title: "洗护",
+                  text: "常用品牌遇到券后价再买补充装",
+                  href: "/guides/drugstore-coupon",
+                  action: "看药妆店用券"
+                }
+              ].map(({ title, text, href, action }) => (
+                <Link
+                  key={title}
+                  href={href}
+                  className="block rounded-lg border border-orange-100 bg-orange-50 p-4 transition hover:border-peach hover:bg-linen"
+                >
                   <p className="font-semibold text-ink">{title}</p>
                   <p className="mt-1 text-sm text-stone-600">{text}</p>
-                </div>
+                  <p className="mt-3 text-xs font-semibold text-tea">{action}</p>
+                </Link>
               ))}
             </div>
           </div>

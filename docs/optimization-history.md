@@ -1,5 +1,25 @@
 # 优化记录
 
+## 2026-07-01 首页高频消耗品入口优化
+
+- 时间：2026-07-01 00:04 JST
+- 当前优化方向：00:00 内容结构。
+- 目标：首页右侧“本周提醒”里的纸尿裤、湿巾、洗护三条提示只有说明，没有明确下一步；本次把它们改成可点击任务入口，让新手从高频消耗品直接进入对应攻略或优惠判断页。
+- 修改文件：
+  - `pages/index.tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查首页高频消耗品入口链接、动作文案和 hover 样式。
+  - `npm run sitemap`
+  - `git diff --check`
+  - `npm run build`
+- 结果：首页“本周提醒”三张高频消耗品卡片从静态说明改为链接入口：纸尿裤指向纸尿裤好价线攻略，湿巾指向本周值得买，洗护指向药妆店优惠券攻略；每张卡补充明确动作文案，帮助用户继续完成判断。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、6 条优惠、14 个日历活动校验通过；首页入口静态检查通过；`npm run sitemap` 生成 14 个 URL；`git diff --check` 通过；`npm run build` 已完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“优化首页高频消耗品入口”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：网络恢复后先推送本地领先提交；后续内容结构方向可继续检查首页“最近要关注的省钱节点”是否需要按今天可用、即将开始和仅作准备分层。
+
 ## 2026-06-30 07:35 最新母婴省钱消息整理
 
 - 时间：2026-06-30 07:35 JST
