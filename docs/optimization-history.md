@@ -1,5 +1,26 @@
 # 优化记录
 
+## 2026-07-01 尿不湿购买攻略完善
+
+- 时间：2026-07-01 03:03 JST
+- 当前优化方向：03:00 攻略内容。
+- 目标：补强核心品类攻略《在日本买尿不湿怎么买最划算》，让新手不仅知道要算单片价，也能按宝宝阶段、尺码风险、购买渠道和买前检查清单判断是否值得囤货。
+- 修改文件：
+  - `content/guides/buy-diapers-japan.mdx`
+  - `public/sitemap.xml`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查尿不湿攻略阅读时长、更新时间、记录模板、按阶段判断、渠道分工和买前检查清单。
+  - `npm run sitemap`
+  - `git diff --check`
+  - `npm run build`
+- 结果：尿不湿攻略从 5 分钟扩展为 7 分钟阅读，`updatedAt` 更新为 `2026-07-01`；新增常用品价格记录模板、按新生儿/3-8 个月/9 个月后/换码期的判断、Amazon/楽天/线下渠道分工，以及下单前检查清单，帮助用户避免只看低价而囤错尺码或品牌。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、6 条优惠、14 个日历活动校验通过；尿不湿攻略静态检查通过；`npm run sitemap` 生成 14 个 URL；`git diff --check` 通过；`npm run build` 已完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“完善尿不湿购买攻略”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续攻略内容方向可继续补强楽天 5/0 日或药妆店优惠券攻略里的实际付款金额与积分判断示例；网络恢复后优先推送本地领先提交。
+
 ## 2026-07-01 首页高频消耗品入口优化
 
 - 时间：2026-07-01 00:04 JST
