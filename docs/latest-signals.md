@@ -16,6 +16,15 @@
 ## 当前记录
 
 ```text
+日期时间：2026-07-01 07:31 JST
+来源：楽天市場 お買い物マラソン https://event.rakuten.co.jp/campaign/point-up/marathon/；Yahoo!ショッピング 5のつく日 https://shopping.yahoo.co.jp/promotion/campaign/5day/；Yahoo!ショッピング お得ガイド https://shopping.yahoo.co.jp/promotion/campaign/guide/；アカチャンホンポ 3と8のつく日 https://shop.akachan.jp/shop/r/rse90/；西松屋官方首页 https://www.24028.jp/；PayPayスクラッチくじ https://paypay.ne.jp/event/matsuri202606-paypay-scratch/；楽天市場姓名贴搜索页 https://search.rakuten.co.jp/search/mall/%E4%BF%9D%E8%82%B2%E5%9C%92+%E5%90%8D%E5%89%8D%E3%82%B7%E3%83%BC%E3%83%AB/
+主题：复查 data/deals.json 的 6 条 verified 优惠。楽天お買い物マラソン仍显示本轮已结束；Yahoo! 5のつく日已更新下一场 2026/7/5 00:00-23:59，但当前仍在エントリー期间外，并新增 2026/7/1 起ヤフーショッピング商品券利用分不再作为付与対象的说明；赤ちゃん本舗 3/8 日页面仍可访问；西松屋首页显示次回デジタルチラシ和次回ミミコレ为 7/2 起，月間奉仕品仍到 7/14；PayPayスクラッチ仍显示 2026/6/19-7/31、200 日元以上、本人确认、抽选返还和 10 万点上限；楽天姓名贴搜索结果仍显示相关商品、价格、送料無料和発送目安。
+可能影响：没有新增商品级 verified 优惠。西松屋 6/18-6/30 チラシ/ミミよりコレクション不应继续作为当前活动展示，已收窄为 7/14 月間奉仕品和 7/2 新チラシ待确认；Yahoo! 5のつく日适合提前准备 7/5，但不是当前可参加的商品优惠。
+是否已更新到站点：已更新 data/deals.json 的 6 条 verified 核验日期/范围，修正西松屋 note、bestTime、condition 和短周期；同步更新 data/shopping-calendar.json 的西松屋、Yahoo! 5のつく日、Yahoo! 超PayPay祭、PayPay、楽天、赤ちゃん本舗更新时间与注意事项。未新增 data/deals.json 商品级优惠。
+下一步：7/2 后复查西松屋新数字チラシ/ミミコレ是否有可确认的保育园衣物、小件用品或消耗品单品价；7/5 当天复查 Yahoo! 5のつく日是否仍显示可エントリー；7/10 前继续等 Yahoo! 超PayPay祭正式商品/対象ストア确认。
+```
+
+```text
 日期时间：2026-06-30 07:35 JST
 来源：楽天市場 お買い物マラソン https://event.rakuten.co.jp/campaign/point-up/marathon/；Yahoo!ショッピング 5のつく日 https://shopping.yahoo.co.jp/promotion/campaign/5day/；Yahoo!ショッピング お得ガイド https://shopping.yahoo.co.jp/promotion/campaign/guide/；アカチャンホンポ 3と8のつく日 https://shop.akachan.jp/shop/r/rse90/；西松屋官方首页 https://www.24028.jp/；PayPayスクラッチくじ https://paypay.ne.jp/event/matsuri202606-paypay-scratch/；楽天市場姓名贴搜索页 https://search.rakuten.co.jp/search/mall/%E4%BF%9D%E8%82%B2%E5%9C%92+%E5%90%8D%E5%89%8D%E3%82%B7%E3%83%BC%E3%83%AB/
 主题：复查 data/deals.json 的 6 条 verified 优惠。楽天お買い物マラソン仍显示活动已结束；Yahoo! 5のつく日 6/25 场次仍在エントリー期间外；赤ちゃん本舗 3/8 日页面仍可访问，但 30 日规则应写成“有 31 日的月份为 30 日 10:00 至次月 1 日 09:59”；西松屋首页仍显示 6/18-6/30 チラシ/ミミよりコレクション和 6/18-7/14 月間奉仕品入口；PayPayスクラッチ仍显示 2026/6/19-7/31、200 日元以上和抽选返还规则；楽天姓名贴搜索结果仍显示相关商品、价格、送料無料和発送目安。另确认 Yahoo! お得ガイド已有 7/10-7/12 超PayPay祭预告：対象ストア合计 5,000-19,999 日元 +4%、20,000 日元以上 +7%，但条件/上限/内容可能变更。

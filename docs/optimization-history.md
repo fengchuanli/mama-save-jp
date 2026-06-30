@@ -1,5 +1,37 @@
 # 优化记录
 
+## 2026-07-01 07:31 最新母婴省钱消息整理
+
+- 时间：2026-07-01 07:31 JST
+- 当前优化方向：最新日本母婴省钱消息整理。
+- 目标：按自动化要求先复查 `data/deals.json` 中所有 `dataStatus: "verified"` 的优惠，再只同步官方或可靠来源能支撑的信息，特别处理 7/1 后西松屋 6/30 截止入口和 Yahoo! 5のつく日下一场变化。
+- 已核验优惠复查：
+  - 楽天お買い物マラソン：官方活动页仍可访问，并继续显示お買い物マラソン已结束；`rakuten-marathon-diaper-wipes` 保持 `expired`，更新时间改为 2026-07-01。
+  - Yahoo!ショッピング 5のつく日：官方页仍可访问，已更新下一场为 2026/7/5 00:00-23:59，但当前仍在エントリー期间外；页面还说明 2026/7/1 起ヤフーショッピング商品券利用分不再作为付与対象。`yahoo-5day-diaper-box` 保持 `expired`，改成 7/5 前准备提醒。
+  - アカチャンホンポ 3/8 日対象カテゴリポイント10倍：官方页仍可访问，规则仍成立；`akachan-3-8-baby-category` 保持 `active`。
+  - 西松屋チラシ・セール入口：官方首页仍可访问，次回デジタルチラシ和次回ミミコレ显示 7/2 起，月間奉仕品仍到 7/14；`nishimatsuya-monthly-nursery-items` 保持 `active`，但已去掉 6/18-6/30 チラシ/ミミよりコレクション作为当前活动的表述。
+  - PayPayスクラッチ：官方详情页仍可访问，确认 2026/6/19-7/31、200 日元以上、本人确认、抽选返还和 10 万点上限规则仍可读；`paypay-scratch-drugstore-baby-care` 保持 `active`。
+  - 楽天姓名贴搜索页：搜索结果仍可访问并显示保育园姓名贴相关商品、价格、送料無料和発送目安；因楽天买回仍已结束，`rakuten-name-sticker-marathon` 保持 `expired`。
+- 新增/更新信息：
+  - Yahoo!ショッピング お得ガイド仍能确认 7/10-7/12 超PayPay祭预告，対象ストア合计 5,000-19,999 日元 +4%、20,000 日元以上 +7%，7/1 起抽选、期間限定セール和対象者限定クーポン等仍只是活动预告；继续只放日历，不写入商品级优惠。
+- 修改文件：
+  - `data/deals.json`
+  - `data/shopping-calendar.json`
+  - `docs/latest-signals.md`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - 官方/平台页面人工核对楽天、Yahoo!ショッピング、Yahoo!お得ガイド、アカチャンホンポ、西松屋、PayPayスクラッチ、楽天姓名贴搜索结果。
+  - `node` 静态检查 6 条优惠状态、更新时间和西松屋/Yahoo 日历字段。
+  - `npm run validate:content`
+  - `npm run sitemap`
+  - `git diff --check`
+  - `npm run build`
+- 结果：6 条 verified 优惠均已复查；3 条保持 `expired`，3 条保持 `active`，没有发现需要改为 `unavailable` 的商品页。西松屋已从 6/30 结束的チラシ/ミミコレ收窄到 7/14 月間奉仕品和 7/2 新チラシ待确认；Yahoo! 5のつく日更新为 7/5 下一场准备提醒；未新增商品级优惠，因为本轮没有确认到同时具备具体商品页、明确价格/券后条件、库存/配送和来源的母婴单品。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、6 条优惠、14 个日历活动校验通过；`node` 静态检查确认 3 条 expired、3 条 active，西松屋/Yahoo 日历字段已更新；`npm run sitemap` 生成 14 个 URL；`git diff --check` 通过；`npm run build` 已完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“复查7月1日母婴优惠状态”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：7/2 后复查西松屋新チラシ/ミミコレ具体单品；7/5 当天复查 Yahoo! 5のつく日エントリー；7/10 前继续等待 Yahoo! 超PayPay祭正式商品/対象ストア确认。
+
 ## 2026-07-01 值得买任务入口移动端优化
 
 - 时间：2026-07-01 06:02 JST
