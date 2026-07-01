@@ -1,5 +1,25 @@
 # 优化记录
 
+## 2026-07-02 省钱日历卡片移动端优化
+
+- 时间：2026-07-02 06:02 JST
+- 当前优化方向：06:00 移动端体验。
+- 目标：`/calendar` 的活动详情卡在手机端信息密度较高，长时间说明和目标标签容易影响扫读；详情按钮也只有“查看详情”，展开后没有状态反馈。本次只优化日历卡片的移动端阅读和展开反馈，不改数据和筛选逻辑。
+- 修改文件：
+  - `components/CalendarCard.tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查日历卡详情展开/收起文案、手机端时间提示块和目标标签换行保护。
+  - `npm run sitemap`
+  - `git diff --check`
+  - `npm run build`
+- 结果：日历详情卡的活动时间在手机端显示为独立浅红提示块，桌面端仍保持右侧对齐；“查看详情”改为可随展开状态切换的“展开详情 / 收起详情”；目标品类标签允许在极窄屏或长词情况下换行，避免撑开卡片。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、6 条优惠、14 个日历活动校验通过；日历卡移动端静态检查通过；`npm run sitemap` 生成 14 个 URL；`git diff --check` 通过；`npm run build` 已完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“优化省钱日历移动端卡片”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续移动端体验方向可用真实浏览器检查 `/calendar` 320-390px 宽度下展开详情后的高度、来源链接和平台筛选露出情况；网络恢复后优先推送本地领先提交。
+
 ## 2026-07-02 楽天 5/0 日攻略完善
 
 - 时间：2026-07-02 03:04 JST

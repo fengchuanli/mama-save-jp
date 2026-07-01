@@ -5,6 +5,9 @@ import { CardVisual, getCalendarVisual } from "@/components/VisualMotif";
 const linkClass =
   "inline-flex whitespace-nowrap rounded-full bg-linen px-3 py-1 text-xs font-semibold text-stone-700 transition hover:bg-peach";
 
+const detailsSummaryClass =
+  "inline-flex cursor-pointer list-none whitespace-nowrap rounded-full bg-linen px-3 py-1 text-xs font-semibold text-stone-700 transition hover:bg-peach";
+
 const priorityClass = {
   high: "border-rose-200 bg-rose-50 text-rose-700",
   medium: "border-peach bg-linen text-ink",
@@ -68,7 +71,7 @@ function TargetItems({ items }: { items: string[] }) {
   return (
     <div className="mt-3 flex flex-wrap gap-1.5">
       {items.map((item) => (
-        <span key={item} className="whitespace-nowrap rounded-full bg-cream px-2.5 py-1 text-xs text-stone-700">
+        <span key={item} className="max-w-full break-words rounded-full bg-cream px-2.5 py-1 text-xs text-stone-700">
           {item}
         </span>
       ))}
@@ -138,7 +141,9 @@ export function CalendarCard({ event }: { event: CalendarEvent }) {
           </div>
           <h3 className="mt-3 text-lg font-semibold leading-7 text-ink sm:text-xl">{event.title}</h3>
         </div>
-        <p className="text-sm font-semibold leading-6 text-rose-700">{event.period}</p>
+        <p className="rounded-lg bg-rose-50 px-3 py-2 text-sm font-semibold leading-6 text-rose-700 sm:max-w-[14rem] sm:bg-transparent sm:px-0 sm:py-0 sm:text-right">
+          {event.period}
+        </p>
       </div>
 
       <div className="mt-4 rounded-lg bg-cream p-3">
@@ -149,8 +154,9 @@ export function CalendarCard({ event }: { event: CalendarEvent }) {
       </div>
 
       <details className="mt-4 group">
-        <summary className={`${linkClass} cursor-pointer list-none`}>
-          查看详情
+        <summary className={detailsSummaryClass}>
+          <span className="group-open:hidden">展开详情</span>
+          <span className="hidden group-open:inline">收起详情</span>
         </summary>
         <div className="mt-4 grid gap-4 border-t border-stone-200 pt-4 lg:grid-cols-2">
           <section>
