@@ -1,5 +1,26 @@
 # 优化记录
 
+## 2026-07-02 楽天 5/0 日攻略完善
+
+- 时间：2026-07-02 03:04 JST
+- 当前优化方向：03:00 攻略内容。
+- 目标：`content/guides/rakuten-5-0-mama-shopping.mdx` 仍是 5 分钟基础说明，缺少适合买什么、金额记录模板和下单当天流程；本次把它扩展成更可执行的楽天 5/0 日母婴用品购买判断攻略，帮助新手先看实付、库存和宝宝适配性，再看积分。
+- 修改文件：
+  - `content/guides/rakuten-5-0-mama-shopping.mdx`
+  - `public/sitemap.xml`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查楽天 5/0 日攻略阅读时长、更新时间、适合买什么、金额记录模板、下单当天流程和买前检查清单。
+  - `npm run sitemap`
+  - `git diff --check`
+  - `npm run build`
+- 结果：楽天 5/0 日攻略从 5 分钟扩展为 7 分钟阅读，`updatedAt` 更新为 `2026-07-02`；新增适合买的母婴品类、不适合买的冲动品类、两段金额记录模板、下单当天 5 步流程和买前检查清单。`public/sitemap.xml` 同步更新首页、攻略列表和该攻略详情页的 `lastmod`。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、6 条优惠、14 个日历活动校验通过；楽天 5/0 日攻略静态检查通过；`npm run sitemap` 生成 14 个 URL；`git diff --check` 通过；`npm run build` 已完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“完善楽天5和0日攻略”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续攻略内容方向可继续补强药妆店优惠券攻略里的不同券型判断示例；网络恢复后优先推送本地领先提交。
+
 ## 2026-07-02 省钱日历行动入口优化
 
 - 时间：2026-07-02 00:04 JST
