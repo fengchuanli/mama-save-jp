@@ -19,20 +19,62 @@ type CalendarProps = {
   events: CalendarEvent[];
 };
 
+type TimingFilter = "全部" | CalendarEvent["buyingTiming"];
+
+const timingFilters: Array<{
+  id: TimingFilter;
+  label: string;
+  title: string;
+  description: string;
+}> = [
+  {
+    id: "全部",
+    label: "全部节点",
+    title: "先看完整日历",
+    description: "适合还没确定要买什么，先了解本周和近期有哪些平台活动。"
+  },
+  {
+    id: "same-day",
+    label: "当天确认",
+    title: "今天可能能买",
+    description: "适合已经要补货的用品，结算前重点确认价格、券和积分条件。"
+  },
+  {
+    id: "prepare",
+    label: "提前准备",
+    title: "先列清单等节点",
+    description: "适合大促或规则型活动，先记录平时价和要买的刚需品。"
+  },
+  {
+    id: "watch",
+    label: "先观察",
+    title: "看到具体价格再买",
+    description: "适合活动已结束、规则未完整或只适合做下次购买参考的节点。"
+  }
+];
+
 export default function Calendar({ events }: CalendarProps) {
   const calendarUrl = getAbsoluteUrl("/calendar");
   const paymentRebateEvents = getPaymentRebateEvents(events);
+  const [selectedTiming, setSelectedTiming] = useState<TimingFilter>("全部");
   const [selectedStore, setSelectedStore] = useState("全部");
+  const timingFilteredEvents = useMemo(
+    () =>
+      selectedTiming === "全部"
+        ? events
+        : events.filter((event) => event.buyingTiming === selectedTiming),
+    [events, selectedTiming]
+  );
   const stores = useMemo(
-    () => ["全部", ...Array.from(new Set(events.map((event) => event.store)))],
-    [events]
+    () => ["全部", ...Array.from(new Set(timingFilteredEvents.map((event) => event.store)))],
+    [timingFilteredEvents]
   );
   const visibleEvents = useMemo(
     () =>
       selectedStore === "全部"
-        ? events
-        : events.filter((event) => event.store === selectedStore),
-    [events, selectedStore]
+        ? timingFilteredEvents
+        : timingFilteredEvents.filter((event) => event.store === selectedStore),
+    [selectedStore, timingFilteredEvents]
   );
   const groupedEvents = useMemo(
     () =>
@@ -118,6 +160,47 @@ export default function Calendar({ events }: CalendarProps) {
             <span className="rounded-full border border-tea/30 bg-tea/10 px-3 py-1 text-tea">简单：价格和用途好判断</span>
             <span className="rounded-full border border-peach bg-linen px-3 py-1 text-ink">需要核对：看支付、运费或対象条件</span>
             <span className="rounded-full border border-rose-200 bg-rose-50 px-3 py-1 text-rose-700">规则复杂：先算上限和积分期限</span>
+          </div>
+        </div>
+
+        <div className="mb-6 rounded-lg border border-amber-100 bg-white p-4 shadow-soft sm:mb-8 sm:p-5">
+          <div className="mb-3 flex flex-col gap-1 sm:mb-4">
+            <p className="text-sm font-semibold text-tea">先按当前动作进入</p>
+            <h2 className="text-base font-semibold text-ink sm:text-lg">
+              今天打开日历，先判断是买、准备还是观察
+            </h2>
+          </div>
+          <div className="-mx-4 flex snap-x gap-3 overflow-x-auto px-4 pb-1 sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-4">
+            {timingFilters.map((filter) => {
+              const active = selectedTiming === filter.id;
+              const count =
+                filter.id === "全部"
+                  ? events.length
+                  : events.filter((event) => event.buyingTiming === filter.id).length;
+
+              return (
+                <button
+                  key={filter.id}
+                  type="button"
+                  aria-pressed={active}
+                  onClick={() => {
+                    setSelectedTiming(filter.id);
+                    setSelectedStore("全部");
+                  }}
+                  className={`min-w-[17rem] snap-start rounded-lg border p-4 text-left transition sm:min-w-0 ${
+                    active
+                      ? "border-tea bg-tea/10"
+                      : "border-orange-100 bg-orange-50 hover:border-peach hover:bg-linen"
+                  }`}
+                >
+                  <span className="inline-flex rounded-full bg-white px-3 py-1 text-xs font-semibold text-stone-600">
+                    {filter.label} · {count} 个
+                  </span>
+                  <span className="mt-3 block text-base font-semibold text-ink">{filter.title}</span>
+                  <span className="mt-2 block text-sm leading-6 text-stone-600">{filter.description}</span>
+                </button>
+              );
+            })}
           </div>
         </div>
 

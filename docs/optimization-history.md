@@ -1,5 +1,25 @@
 # 优化记录
 
+## 2026-07-02 省钱日历行动入口优化
+
+- 时间：2026-07-02 00:04 JST
+- 当前优化方向：00:00 内容结构。
+- 目标：`/calendar` 顶部已经有“提前准备 / 当天确认 / 先观察”的解释，但用户仍需要先按平台浏览所有活动；本次把已有 `buyingTiming` 字段变成首屏行动入口，让新手先按“今天能不能买、要不要提前准备、是否只观察”筛选日历节点。
+- 修改文件：
+  - `pages/calendar.tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查 `/calendar` 行动入口、`selectedTiming` 筛选、移动端横向滑动和桌面端四列布局。
+  - `npm run sitemap`
+  - `git diff --check`
+  - `npm run build`
+- 结果：`/calendar` 新增“先按当前动作进入”筛选区，覆盖全部节点、当天确认、提前准备、先观察四类；点击后会同步重置平台筛选，平台列表只显示当前行动分类下仍有节点的平台，避免用户进入空分组。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、6 条优惠、14 个日历活动校验通过；日历行动入口静态检查通过；`npm run sitemap` 生成 14 个 URL；`git diff --check` 通过；`npm run build` 已完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“优化省钱日历行动入口”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续内容结构方向可继续检查首页“最近要关注的省钱节点”是否也要按当天确认、提前准备、先观察分层；网络恢复后优先推送本地领先提交。
+
 ## 2026-07-01 07:31 最新母婴省钱消息整理
 
 - 时间：2026-07-01 07:31 JST
