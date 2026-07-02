@@ -1,5 +1,26 @@
 # 优化记录
 
+## 2026-07-03 首页省钱节点行动分层优化
+
+- 时间：2026-07-03 00:04 JST
+- 当前优化方向：00:00 内容结构。
+- 目标：首页“最近要关注的省钱节点”原本直接平铺活动卡，用户需要自己判断今天该买、提前准备还是先观察；本次承接 `/calendar` 的 `buyingTiming` 字段，把首页日历入口改成按当前动作分层，帮助新手先判断下一步。
+- 修改文件：
+  - `pages/index.tsx`
+  - `lib/calendar-highlights.ts`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查首页日历行动分层、三类文案和精选节点覆盖 `same-day / prepare / watch`。
+  - `npm run sitemap`
+  - `git diff --check`
+  - `npm run build`
+- 结果：首页省钱节点区新增“当天确认 / 提前准备 / 先观察”三类行动提示，每类下方仍展示对应日历卡；首页精选节点从原来的楽天已结束、Amazon、Yahoo 5 日改为 Amazon 当天确认、Yahoo 超PayPay祭提前准备、楽天已结束先观察，覆盖三种真实决策状态。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、6 条优惠、14 个日历活动校验通过；首页日历行动分层静态检查通过；`npm run sitemap` 生成 14 个 URL；`git diff --check` 通过；`npm run build` 已完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“优化首页省钱节点行动分层”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续内容结构方向可继续检查首页“出门前先看支付返点”和“本周值得买”是否也需要用同样的行动判断语气统一；网络恢复后继续确认远端是否已收到本地提交。
+
 ## 2026-07-02 07:32 最新母婴省钱消息整理
 
 - 时间：2026-07-02 07:32 JST

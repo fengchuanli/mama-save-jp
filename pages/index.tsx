@@ -21,6 +21,78 @@ type HomeProps = {
   guides: GuideMeta[];
 };
 
+const calendarTimingMeta: Record<
+  CalendarEvent["buyingTiming"],
+  {
+    label: string;
+    title: string;
+    description: string;
+    href: string;
+  }
+> = {
+  "same-day": {
+    label: "当天确认",
+    title: "今天可能能买",
+    description: "适合已经要补货的纸尿裤、湿巾或洗护，先看结算页的券、积分和配送。",
+    href: "/calendar"
+  },
+  prepare: {
+    label: "提前准备",
+    title: "先列清单等节点",
+    description: "适合大促或规则型活动，先记录平时价，等正式开始后再判断。",
+    href: "/calendar"
+  },
+  watch: {
+    label: "先观察",
+    title: "看到具体价格再买",
+    description: "适合已结束、只剩入口或规则还不完整的节点，先收藏不急下单。",
+    href: "/calendar"
+  }
+};
+
+function HomeCalendarActionSection({ events }: { events: CalendarEvent[] }) {
+  return (
+    <section>
+      <div className="mb-4 flex items-end justify-between gap-4">
+        <div>
+          <h2 className="text-2xl font-semibold tracking-normal text-ink md:text-3xl">
+            最近要关注的省钱节点
+          </h2>
+          <p className="mt-2 max-w-3xl text-sm leading-6 text-stone-600">
+            先按今天要做的动作判断：能买就核对结算，不能买就提前准备或先观察。
+          </p>
+        </div>
+        <Link
+          href="/calendar"
+          className="shrink-0 whitespace-nowrap text-sm font-bold text-blue-700 underline underline-offset-4 transition hover:text-blue-900"
+        >
+          查看全部
+        </Link>
+      </div>
+
+      <div className="grid gap-4 md:grid-cols-3 md:gap-5">
+        {events.map((event) => {
+          const meta = calendarTimingMeta[event.buyingTiming];
+
+          return (
+            <div key={event.id}>
+              <Link
+                href={meta.href}
+                className="mb-3 block rounded-lg border border-amber-100 bg-white/85 p-3 shadow-soft transition hover:bg-linen"
+              >
+                <p className="text-xs font-semibold text-tea">{meta.label}</p>
+                <h3 className="mt-1 text-base font-semibold text-ink">{meta.title}</h3>
+                <p className="mt-2 text-sm leading-6 text-stone-600">{meta.description}</p>
+              </Link>
+              <CalendarShelfCard event={event} />
+            </div>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
+
 export default function Home({ deals, calendarEvents, paymentRebateEvents, guides }: HomeProps) {
   const quickStartRoutes = [
     {
@@ -163,14 +235,7 @@ export default function Home({ deals, calendarEvents, paymentRebateEvents, guide
 
       <section className="bg-amber-50">
         <div className="mx-auto max-w-6xl px-5 py-12">
-          <HorizontalCardSection
-            title="最近要关注的省钱节点"
-            description="先看最近值得关注的活动时间、关键优惠和适合买什么，详细规则放在省钱日历里。"
-            viewAllHref="/calendar"
-            items={calendarEvents}
-            getKey={(event) => event.id}
-            renderCard={(event) => <CalendarShelfCard event={event} />}
-          />
+          <HomeCalendarActionSection events={calendarEvents} />
         </div>
       </section>
 

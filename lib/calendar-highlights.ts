@@ -1,9 +1,9 @@
 import type { CalendarEvent } from "@/lib/types";
 
 const featuredCalendarEventIds = [
-  "rakuten-marathon",
   "amazon-smile-sale",
-  "paypay-yahoo-campaign"
+  "yahoo-super-paypay-202607",
+  "rakuten-marathon"
 ];
 
 export function getFeaturedCalendarEvents(events: CalendarEvent[]) {
