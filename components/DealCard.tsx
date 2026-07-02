@@ -3,7 +3,7 @@ import type { Deal } from "@/lib/types";
 import { CardVisual, getDealVisual } from "@/components/VisualMotif";
 
 const ctaClass =
-  "inline-flex whitespace-nowrap rounded-full bg-linen px-3 py-1 text-xs font-semibold text-stone-700 transition hover:bg-peach";
+  "inline-flex min-h-10 items-center justify-center whitespace-nowrap rounded-full bg-linen px-3 py-1 text-xs font-semibold text-stone-700 transition hover:bg-peach sm:justify-start";
 
 function MiniMeta({ label, value }: { label: string; value: string }) {
   return (
@@ -108,10 +108,11 @@ export function DealCard({ deal }: { deal: Deal }) {
         确定性：{deal.certaintyReason}
       </p>
 
-      <div className="mt-4 flex flex-wrap gap-4">
-        <details className="group">
-          <summary className={`${ctaClass} cursor-pointer list-none`}>
-            查看详情
+      <div className="mt-4 grid gap-3 sm:flex sm:flex-wrap">
+        <details className="group w-full">
+          <summary className={`${ctaClass} w-full cursor-pointer list-none sm:w-fit`}>
+            <span className="group-open:hidden">展开详情</span>
+            <span className="hidden group-open:inline">收起详情</span>
           </summary>
           <div className="mt-4 grid gap-4 border-t border-stone-200 pt-4 lg:grid-cols-2">
             {deal.participationSteps?.length ? (
@@ -150,7 +151,7 @@ export function DealCard({ deal }: { deal: Deal }) {
         </details>
 
         {deal.sourceUrl ? (
-          <a href={deal.sourceUrl} target="_blank" rel="noreferrer" className={ctaClass}>
+          <a href={deal.sourceUrl} target="_blank" rel="noreferrer" className={`${ctaClass} w-full sm:w-auto`}>
             去官方页面
           </a>
         ) : null}

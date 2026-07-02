@@ -1,5 +1,25 @@
 # 优化记录
 
+## 2026-07-03 值得买卡片移动端操作区优化
+
+- 时间：2026-07-03 06:04 JST
+- 当前优化方向：06:00 移动端体验。
+- 目标：`/deals` 优惠详情卡在手机端的“查看详情”和“去官方页面”仍是较小的胶囊按钮，详情展开后也没有状态反馈；本次只优化优惠卡片操作区，让手机端更容易点击和判断当前状态。
+- 修改文件：
+  - `components/DealCard.tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查 DealCard 移动端操作区的最小点击高度、整宽按钮、详情展开/收起文案和官方链接整宽样式。
+  - `npm run sitemap`
+  - `git diff --check`
+  - `npm run build`
+- 结果：优惠详情卡的 CTA 基础样式新增 `min-h-10`、居中对齐和手机端整宽支持；详情操作区在手机端改为纵向网格，`展开详情 / 收起详情` 会随 `<details>` 状态切换；官方页面链接在手机端占满宽度，桌面端仍保持自适应宽度。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、6 条优惠、14 个日历活动校验通过；DealCard 移动端操作区静态检查通过；`npm run sitemap` 生成 14 个 URL；`git diff --check` 通过；`npm run build` 已完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“优化值得买移动端操作区”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续移动端体验方向可用真实浏览器检查 `/deals` 320-390px 宽度下卡片详情展开后的高度、官方链接位置和筛选区回退体验；网络恢复后优先推送本地领先提交。
+
 ## 2026-07-03 药妆店优惠券攻略完善
 
 - 时间：2026-07-03 03:02 JST
