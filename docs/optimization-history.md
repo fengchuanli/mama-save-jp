@@ -1,5 +1,26 @@
 # 优化记录
 
+## 2026-07-03 药妆店优惠券攻略完善
+
+- 时间：2026-07-03 03:02 JST
+- 当前优化方向：03:00 攻略内容。
+- 目标：`content/guides/drugstore-coupon.mdx` 仍是 5 分钟基础说明，缺少不同券型、货架前快速计算和按购物场景判断的可执行示例；本次把它扩展成更适合新手宝妈临时补货前阅读的药妆店优惠券攻略。
+- 修改文件：
+  - `content/guides/drugstore-coupon.mdx`
+  - `public/sitemap.xml`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查药妆店优惠券攻略阅读时长、更新时间、常见券型、货架前算法、按场景购买和新增检查项。
+  - `npm run sitemap`
+  - `git diff --check`
+  - `npm run build`
+- 结果：药妆店优惠券攻略从 5 分钟扩展为 7 分钟阅读，`updatedAt` 更新为 `2026-07-03`；新增常见券型表、货架前快速算法、临时缺货/周末顺路补货/支付抽选/首次试用等场景判断，并补充满额券和抽选返点检查项。`public/sitemap.xml` 同步更新首页、攻略列表和该攻略详情页的 `lastmod`。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、6 条优惠、14 个日历活动校验通过；药妆店优惠券攻略静态检查通过；`npm run sitemap` 生成 14 个 URL；`git diff --check` 通过；`npm run build` 已完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“完善药妆店优惠券攻略”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：网络恢复后先执行 `git push origin main`；后续攻略内容方向可继续补强支付返点攻略，加入确定返还、抽选返还、期间限定积分的对比模板。
+
 ## 2026-07-03 首页省钱节点行动分层优化
 
 - 时间：2026-07-03 00:04 JST
