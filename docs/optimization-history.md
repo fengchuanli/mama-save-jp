@@ -1,5 +1,26 @@
 # 优化记录
 
+## 2026-07-04 支付返点攻略完善
+
+- 时间：2026-07-04 03:03 JST
+- 当前优化方向：03:00 攻略内容。
+- 目标：`content/guides/payment-rebates-mama-shopping.mdx` 仍是 5 分钟基础说明，只提醒支付返点不是直接降价，但缺少“当场折扣、确定积分、抽选/后日券”三类返还的保守估值方法，也缺少药妆店货架前快速计算和不同购物场景判断；本次把它扩展成更适合新手宝妈在 PayPay、楽天ペイ等活动前快速判断的攻略。
+- 修改文件：
+  - `content/guides/payment-rebates-mama-shopping.mdx`
+  - `public/sitemap.xml`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查支付返点攻略阅读时长、更新时间、返点类型分层、货架前算法、按场景判断和检查清单扩展。
+  - `npm run sitemap`
+  - `git diff --check`
+  - `npm run build`
+- 结果：支付返点攻略从 5 分钟扩展为 7 分钟阅读，`updatedAt` 更新为 `2026-07-04`；新增常见返点类型的保守估值、货架前三行算法、临时补货/周末集中补货/线上箱购/大型活动等场景判断，并补充结账页当场折扣和现金预算检查项。`public/sitemap.xml` 同步更新首页、攻略列表和该攻略详情页的 `lastmod`。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、6 条优惠、14 个日历活动校验通过；支付返点攻略静态检查通过；`npm run sitemap` 生成 14 个 URL；`git diff --check` 通过；`npm run build` 已完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“完善支付返点攻略”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续攻略内容方向可继续补强 `rakuten-points-basics.mdx` 的买回清单模板，或检查支付返点攻略与省钱日历 PayPay 活动入口的内链锚文本；网络恢复后优先推送本地领先提交。
+
 ## 2026-07-04 攻略列表问题直达入口优化
 
 - 时间：2026-07-04 00:03 JST
