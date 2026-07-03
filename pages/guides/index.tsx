@@ -90,6 +90,32 @@ export default function Guides({ guides }: GuidesProps) {
       .map((slug) => guides.find((guide) => guide.slug === slug))
       .filter((guide): guide is GuideMeta => Boolean(guide))
   }));
+  const quickProblemLinks = [
+    {
+      label: "第一批买什么",
+      title: "先收窄清单",
+      description: "适合刚开始准备，不确定哪些用品现在就要买。",
+      href: "#guide-group-start"
+    },
+    {
+      label: "快要补货",
+      title: "先看消耗品",
+      description: "适合纸尿裤、湿巾、洗护快用完，想判断能不能囤。",
+      href: "#guide-group-essentials"
+    },
+    {
+      label: "活动看不懂",
+      title: "先拆平台规则",
+      description: "适合遇到楽天积分、5/0 日或支付返点时先核对上限。",
+      href: "#guide-group-platforms"
+    },
+    {
+      label: "准备入园换季",
+      title: "先按场景买",
+      description: "适合保育园清单、姓名贴、备用衣物和童装尺码判断。",
+      href: "#guide-group-nursery"
+    }
+  ];
   const collectionJsonLd = createCollectionPageJsonLd({
     name: "日本母婴省钱攻略列表",
     description:
@@ -160,6 +186,34 @@ export default function Guides({ guides }: GuidesProps) {
                 <p className="text-xs font-semibold text-tea">第 {index + 1} 步</p>
                 <h3 className="mt-2 font-semibold text-ink">{guide.title}</h3>
                 <p className="mt-2 text-sm leading-6 text-stone-600">{guide.description}</p>
+              </Link>
+            ))}
+          </div>
+        </div>
+
+        <div className="mb-8 rounded-lg border border-emerald-100 bg-white p-5 shadow-soft">
+          <div className="flex flex-col justify-between gap-3 md:flex-row md:items-end">
+            <div>
+              <p className="text-sm font-semibold text-tea">按今天的问题直达</p>
+              <h2 className="mt-2 text-xl font-semibold text-ink">
+                不用从全部攻略里慢慢找
+              </h2>
+            </div>
+            <p className="max-w-2xl text-sm leading-6 text-stone-600">
+              先选最接近的购物场景，再按该组里的阅读顺序继续看。
+            </p>
+          </div>
+
+          <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {quickProblemLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="rounded-lg border border-emerald-100 bg-emerald-50 p-4 transition hover:border-emerald-200 hover:bg-white"
+              >
+                <p className="text-xs font-semibold text-tea">{link.label}</p>
+                <h3 className="mt-2 text-base font-semibold text-ink">{link.title}</h3>
+                <p className="mt-2 text-sm leading-6 text-stone-600">{link.description}</p>
               </Link>
             ))}
           </div>
