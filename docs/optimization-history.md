@@ -1,5 +1,25 @@
 # 优化记录
 
+## 2026-07-04 首页省钱节点移动端优化
+
+- 时间：2026-07-04 06:02 JST
+- 当前优化方向：06:00 移动端体验。
+- 目标：首页“最近要关注的省钱节点”已经按当天确认、提前准备、先观察三类解释下一步，但手机端会把三组行动说明和日历卡纵向堆叠，占用较长首屏；本次只优化该区块的手机端浏览方式，让用户能横向扫读三类节点，桌面端仍保持三列。
+- 修改文件：
+  - `pages/index.tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查首页省钱节点区手机横向滑动、卡片宽度和桌面三列结构。
+  - `npm run sitemap`
+  - `git diff --check`
+  - `npm run build`
+- 结果：首页省钱节点区标题行在手机端改为上下排列，避免“查看全部”挤压标题；节点卡组在手机端改为横向滑动卡片，加入 `no-scrollbar`、`snap-x`、`w-[82vw]` 和 `max-w-[22rem]`，桌面端继续使用三列网格。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、6 条优惠、14 个日历活动校验通过；首页省钱节点移动端静态检查通过；`npm run sitemap` 生成 14 个 URL；`git diff --check` 通过；`npm run build` 已完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“优化首页省钱节点移动端”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续移动端体验方向可用真实浏览器检查首页各横向卡组在 320-390px 宽度下的滑动露出、卡片高度和“查看全部”入口位置；网络恢复后优先推送本地领先提交。
+
 ## 2026-07-04 支付返点攻略完善
 
 - 时间：2026-07-04 03:03 JST

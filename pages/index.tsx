@@ -53,7 +53,7 @@ const calendarTimingMeta: Record<
 function HomeCalendarActionSection({ events }: { events: CalendarEvent[] }) {
   return (
     <section>
-      <div className="mb-4 flex items-end justify-between gap-4">
+      <div className="mb-4 flex flex-col items-start justify-between gap-3 sm:flex-row sm:items-end sm:gap-4">
         <div>
           <h2 className="text-2xl font-semibold tracking-normal text-ink md:text-3xl">
             最近要关注的省钱节点
@@ -70,12 +70,15 @@ function HomeCalendarActionSection({ events }: { events: CalendarEvent[] }) {
         </Link>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-3 md:gap-5">
+      <div className="no-scrollbar -mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 pr-10 md:mx-0 md:grid md:snap-none md:grid-cols-3 md:gap-5 md:overflow-visible md:px-0 md:pb-0 md:pr-0">
         {events.map((event) => {
           const meta = calendarTimingMeta[event.buyingTiming];
 
           return (
-            <div key={event.id}>
+            <div
+              key={event.id}
+              className="w-[82vw] max-w-[22rem] shrink-0 snap-start md:w-auto md:max-w-none md:shrink"
+            >
               <Link
                 href={meta.href}
                 className="mb-3 block rounded-lg border border-amber-100 bg-white/85 p-3 shadow-soft transition hover:bg-linen"
