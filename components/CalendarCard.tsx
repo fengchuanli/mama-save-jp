@@ -3,10 +3,10 @@ import type { CalendarEvent } from "@/lib/types";
 import { CardVisual, getCalendarVisual } from "@/components/VisualMotif";
 
 const linkClass =
-  "inline-flex whitespace-nowrap rounded-full bg-linen px-3 py-1 text-xs font-semibold text-stone-700 transition hover:bg-peach";
+  "inline-flex min-h-10 items-center justify-center whitespace-nowrap rounded-full bg-linen px-3 py-1 text-xs font-semibold text-stone-700 transition hover:bg-peach sm:justify-start";
 
 const detailsSummaryClass =
-  "inline-flex cursor-pointer list-none whitespace-nowrap rounded-full bg-linen px-3 py-1 text-xs font-semibold text-stone-700 transition hover:bg-peach";
+  "inline-flex min-h-10 cursor-pointer list-none items-center justify-center whitespace-nowrap rounded-full bg-linen px-3 py-1 text-xs font-semibold text-stone-700 transition hover:bg-peach sm:justify-start";
 
 const priorityClass = {
   high: "border-rose-200 bg-rose-50 text-rose-700",
@@ -154,7 +154,7 @@ export function CalendarCard({ event }: { event: CalendarEvent }) {
       </div>
 
       <details className="mt-4 group">
-        <summary className={detailsSummaryClass}>
+        <summary className={`${detailsSummaryClass} w-full sm:w-fit`}>
           <span className="group-open:hidden">展开详情</span>
           <span className="hidden group-open:inline">收起详情</span>
         </summary>
@@ -199,7 +199,7 @@ export function CalendarCard({ event }: { event: CalendarEvent }) {
             <h4 className="text-sm font-semibold text-ink">来源与更新</h4>
             <p className="mt-2 text-sm leading-6 text-stone-700">更新时间：{event.updatedAt}</p>
             {event.sourceUrl ? (
-              <a href={event.sourceUrl} target="_blank" rel="noreferrer" className={linkClass}>
+              <a href={event.sourceUrl} target="_blank" rel="noreferrer" className={`mt-3 w-full sm:w-fit ${linkClass}`}>
                 去官方页面
               </a>
             ) : null}
