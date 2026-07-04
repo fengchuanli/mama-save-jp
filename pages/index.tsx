@@ -120,6 +120,28 @@ export default function Home({ deals, calendarEvents, paymentRebateEvents, guide
       nextStep: "下一步：挑最近的省钱节点"
     }
   ];
+  const guideProblemRoutes = [
+    {
+      label: "第一批买什么",
+      href: "/guides#guide-group-start",
+      title: "先收窄清单"
+    },
+    {
+      label: "快要补货",
+      href: "/guides#guide-group-essentials",
+      title: "看消耗品值不值"
+    },
+    {
+      label: "活动看不懂",
+      href: "/guides#guide-group-platforms",
+      title: "拆开平台规则"
+    },
+    {
+      label: "准备入园换季",
+      href: "/guides#guide-group-nursery",
+      title: "按场景和尺码买"
+    }
+  ];
 
   return (
     <Layout
@@ -244,14 +266,44 @@ export default function Home({ deals, calendarEvents, paymentRebateEvents, guide
 
       <section className="bg-emerald-50">
         <div className="mx-auto max-w-6xl px-5 py-12">
-        <HorizontalCardSection
-          title="新手攻略"
-          description="第一次在日本准备母婴用品时，先控制购买范围，再看高频消耗品和平台规则。"
-          viewAllHref="/guides"
-          items={guides}
-          getKey={(guide) => guide.slug}
-          renderCard={(guide) => <GuideShelfCard guide={guide} />}
-        />
+          <div className="mb-6">
+            <div className="mb-4 flex flex-col items-start justify-between gap-3 sm:flex-row sm:items-end">
+              <div>
+                <p className="text-sm font-semibold text-tea">新手攻略</p>
+                <h2 className="mt-2 text-2xl font-semibold tracking-normal text-ink md:text-3xl">
+                  先按今天的问题找
+                </h2>
+              </div>
+              <Link
+                href="/guides"
+                className="shrink-0 whitespace-nowrap text-sm font-bold text-blue-700 underline underline-offset-4 transition hover:text-blue-900"
+              >
+                查看全部攻略
+              </Link>
+            </div>
+
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+              {guideProblemRoutes.map((route) => (
+                <Link
+                  key={route.href}
+                  href={route.href}
+                  className="rounded-lg border border-emerald-100 bg-white p-4 shadow-soft transition hover:border-emerald-200 hover:bg-emerald-50"
+                >
+                  <p className="text-xs font-semibold text-tea">{route.label}</p>
+                  <h3 className="mt-2 text-base font-semibold text-ink">{route.title}</h3>
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          <HorizontalCardSection
+            title="新手必读路线"
+            description="第一次在日本准备母婴用品时，先控制购买范围，再看高频消耗品和平台规则。"
+            viewAllHref="/guides"
+            items={guides}
+            getKey={(guide) => guide.slug}
+            renderCard={(guide) => <GuideShelfCard guide={guide} />}
+          />
         </div>
       </section>
 
