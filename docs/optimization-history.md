@@ -1,5 +1,25 @@
 # 优化记录
 
+## 2026-07-06 首页首屏出门前路径优化
+
+- 时间：2026-07-06 00:02 JST
+- 当前优化方向：00:00 内容结构。
+- 目标：首页首屏“第一次打开”已有刚开始准备、准备下单、等活动日三条路径，但药妆店、超市、西松屋等出门前顺手确认支付返点的高频场景仍要向下浏览到支付返点区块；本次只把该场景纳入首屏状态入口，减少首次判断路径，不触碰优惠数据。
+- 修改文件：
+  - `pages/index.tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查首页首屏 4 条状态入口、准备出门文案、四列布局和稳定 React key。
+  - `npm run sitemap`
+  - `git diff --check`
+  - `npm run build`
+- 结果：首页首屏“第一次打开，按现在的状态先走这里”从 3 条扩展为 4 条，新增“准备出门 / 先看支付返点”，指向省钱日历，提醒出门前只确认本来要买用品的返还机会；入口网格改为 `sm:grid-cols-2 lg:grid-cols-4`，桌面端四项更清晰。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、6 条优惠、14 个日历活动校验通过；首页首屏状态入口静态检查通过；`npm run sitemap` 生成 14 个 URL 且 sitemap 无差异；`git diff --check` 通过；`npm run build` 已完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“优化首页出门前路径”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续内容结构方向可检查首页首屏 4 条状态入口是否需要为“准备出门”增加更精确的日历锚点；网络恢复后优先推送本地领先提交。
+
 ## 2026-07-05 07:32 最新母婴省钱消息整理
 
 - 时间：2026-07-05 07:32 JST

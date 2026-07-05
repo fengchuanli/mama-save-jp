@@ -118,6 +118,13 @@ export default function Home({ deals, calendarEvents, paymentRebateEvents, guide
       title: "先看省钱日历",
       description: "确认活动规则、适合买什么和注意事项。",
       nextStep: "下一步：挑最近的省钱节点"
+    },
+    {
+      label: "准备出门",
+      href: "/calendar",
+      title: "先看支付返点",
+      description: "去药妆店、超市或西松屋前，先确认今天有没有顺手参加的返还。",
+      nextStep: "下一步：只买本来要买的用品"
     }
   ];
   const guideProblemRoutes = [
@@ -174,12 +181,12 @@ export default function Home({ deals, calendarEvents, paymentRebateEvents, guide
             </div>
             <div className="mt-8">
               <p className="text-sm font-semibold text-tea">第一次打开，按现在的状态先走这里</p>
-              <div className="mt-3 grid gap-3 sm:grid-cols-3">
+              <div className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
                 {quickStartRoutes.map((route) => (
                   <Link
-                    key={route.href}
+                    key={route.label}
                     href={route.href}
-                  className="rounded-lg border border-orange-100 bg-white/90 p-4 shadow-soft transition hover:border-peach hover:bg-white"
+                    className="rounded-lg border border-orange-100 bg-white/90 p-4 shadow-soft transition hover:border-peach hover:bg-white"
                   >
                     <p className="text-xs font-semibold text-tea">{route.label}</p>
                     <h2 className="mt-2 text-base font-semibold text-ink">{route.title}</h2>
