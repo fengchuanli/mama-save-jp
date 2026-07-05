@@ -170,7 +170,7 @@ export default function Calendar({ events }: CalendarProps) {
               今天打开日历，先判断是买、准备还是观察
             </h2>
           </div>
-          <div className="-mx-4 flex snap-x gap-3 overflow-x-auto px-4 pb-1 sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-4">
+          <div className="no-scrollbar -mx-4 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-1 sm:mx-0 sm:grid sm:snap-none sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-4">
             {timingFilters.map((filter) => {
               const active = selectedTiming === filter.id;
               const count =
@@ -187,7 +187,7 @@ export default function Calendar({ events }: CalendarProps) {
                     setSelectedTiming(filter.id);
                     setSelectedStore("全部");
                   }}
-                  className={`min-w-[17rem] snap-start rounded-lg border p-4 text-left transition sm:min-w-0 ${
+                  className={`w-[78vw] min-w-[17rem] shrink-0 snap-start rounded-lg border p-4 text-left transition sm:w-auto sm:min-w-0 sm:shrink ${
                     active
                       ? "border-tea bg-tea/10"
                       : "border-orange-100 bg-orange-50 hover:border-peach hover:bg-linen"
