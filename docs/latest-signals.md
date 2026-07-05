@@ -16,6 +16,15 @@
 ## 当前记录
 
 ```text
+日期时间：2026-07-06 07:32 JST
+来源：楽天市場 お買い物マラソン https://event.rakuten.co.jp/campaign/point-up/marathon/；Yahoo!ショッピング 5のつく日 https://shopping.yahoo.co.jp/promotion/campaign/5day/；Yahoo!ショッピング お得ガイド https://shopping.yahoo.co.jp/promotion/campaign/guide/；アカチャンホンポ 3と8のつく日 https://shop.akachan.jp/shop/r/rse90/；西松屋官方首页 https://www.24028.jp/；PayPayスクラッチくじ https://paypay.ne.jp/event/matsuri202606-paypay-scratch/；楽天市場姓名贴搜索页 https://search.rakuten.co.jp/search/mall/%E4%BF%9D%E8%82%B2%E5%9C%92+%E5%90%8D%E5%89%8D%E3%82%B7%E3%83%BC%E3%83%AB/
+主题：复查 data/deals.json 的 6 条 verified 优惠。楽天お買い物マラソン官方页仍显示买回进行中、1ショップ1,000円(税込)以上、7,000ポイント上限、対象期間中エントリー和 2026/8/15 左右付与说明；楽天尿不湿/湿巾买回和姓名贴买回继续 active。Yahoo! 5のつく日官方页已切换到下一场 2026/7/15 00:00-23:59，7/5 场次已结束，因此 Yahoo 条目不应继续展示为今天可参加，已改为 expired/等下一场。赤ちゃん本舗 3/8 日页面仍可访问并能看到母婴対象カテゴリ入口；西松屋首页仍显示チラシ/ミミコレ 2026/7/2-7/14、月間奉仕品到 7/14；PayPayスクラッチ仍显示 2026/6/19-7/31、200 日元以上、抽选返还和対象外说明；楽天姓名贴搜索结果仍显示相关商品、价格、送料無料和発送目安。Yahoo! お得ガイド仍显示 7/10-7/12 超PayPay祭预告。
+可能影响：今天最重要的是把 Yahoo! 5のつく日从 7/5 当天可参加改回下一场准备，避免用户误以为仍可エントリー。楽天买回仍可作为活动中提醒，但没有确认具体尿不湿/湿巾 SKU 的券后价、库存、送料和ポイント内訳；Yahoo! 超PayPay祭仍只适合日历准备，不适合写成商品级优惠。
+是否已更新到站点：已更新 data/deals.json 中 6 条 verified 的 updatedAt 和 verificationScope；Yahoo! 5のつく日 availabilityStatus 改为 expired，并同步修改 note、whyWorthBuying、skipWhen、购买步骤和展示标签；同步更新 data/shopping-calendar.json 的楽天、Yahoo! 5のつく日、Yahoo! 超PayPay祭、西松屋、赤ちゃん本舗、PayPay 更新时间与注意事项。未新增 data/deals.json 商品级优惠。
+下一步：7/10 前继续等待 Yahoo! 超PayPay祭正式活动页/対象商品确认；7/15 当天复查 Yahoo! 5のつく日是否可エントリー；楽天买回期间如继续找商品，只新增具备具体商品页、明确价格/券后条件、库存/配送和来源的母婴单品。
+```
+
+```text
 日期时间：2026-07-05 07:32 JST
 来源：楽天市場 お買い物マラソン https://event.rakuten.co.jp/campaign/point-up/marathon/；Yahoo!ショッピング 5のつく日 https://shopping.yahoo.co.jp/promotion/campaign/5day/；アカチャンホンポ 3と8のつく日 https://shop.akachan.jp/shop/r/rse90/；西松屋チラシ・セール https://www.24028.jp/；PayPayスクラッチくじ https://paypay.ne.jp/event/matsuri202606-paypay-scratch/；楽天市場姓名贴搜索页 https://search.rakuten.co.jp/search/mall/%E4%BF%9D%E8%82%B2%E5%9C%92+%E5%90%8D%E5%89%8D%E3%82%B7%E3%83%BC%E3%83%AB/
 主题：复查 data/deals.json 的 6 条 verified 优惠。楽天お買い物マラソン官方页仍显示买回进行中、1ショップ1,000円(税込)以上、7,000ポイント上限和 2026/8/15 左右付与说明；因此楽天尿不湿/湿巾买回和姓名贴买回继续 active，但从“先准备”改成“活动中按商品页和结算页内訳判断”。Yahoo! 5のつく日官方页已进入 2026/7/5 00:00-23:59 场次，显示需要エントリー、エントリー后订单为对象、指定支付 +4% 和 1,000 円相当上限；因此 Yahoo 条目从 expired 改回 active。赤ちゃん本舗 3/8 日页面仍可访问；西松屋 7/2-7/14 チラシ/ミミコレ和 6/18-7/14 月間奉仕品入口仍可确认；PayPayスクラッチ仍显示 2026/6/19-7/31、200 日元以上、抽选返还和 10 万点上限；楽天姓名贴搜索结果仍显示相关商品、价格、送料無料和発送目安。
