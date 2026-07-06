@@ -131,12 +131,12 @@ export default function GuideDetail({ guide, relatedGuides }: GuideDetailProps) 
             className="mt-4 rounded-lg border border-stone-200 bg-white p-3 shadow-soft sm:mt-5 sm:p-4"
           >
             <p className="px-1 text-xs font-semibold text-tea">快速跳到小节</p>
-            <div className="no-scrollbar mt-2 flex gap-2 overflow-x-auto pb-1">
+            <div className="no-scrollbar -mx-1 mt-2 flex snap-x snap-mandatory gap-2 overflow-x-auto px-1 pb-1 sm:snap-none">
               {sectionLinks.map((section) => (
                 <a
                   key={section.id}
                   href={`#${section.id}`}
-                  className="shrink-0 rounded-full bg-cream px-3 py-2 text-sm text-stone-700 transition hover:bg-linen"
+                  className="min-h-10 max-w-[78vw] shrink-0 snap-start truncate rounded-full bg-cream px-3 py-2 text-sm text-stone-700 transition hover:bg-linen sm:max-w-none"
                 >
                   {section.title}
                 </a>
@@ -154,12 +154,12 @@ export default function GuideDetail({ guide, relatedGuides }: GuideDetailProps) 
           <p className="text-sm font-semibold text-tea">按主题继续读</p>
           <h2 className="mt-1.5 text-xl font-semibold text-ink sm:mt-2 sm:text-2xl">相关攻略</h2>
         </div>
-        <div className="grid gap-4 md:grid-cols-3">
+        <div className="no-scrollbar -mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 md:mx-0 md:grid md:snap-none md:grid-cols-3 md:overflow-visible md:px-0 md:pb-0">
           {relatedGuides.map((item) => (
             <Link
               key={item.slug}
               href={`/guides/${item.slug}`}
-              className="rounded-lg border border-stone-200 bg-white p-4 shadow-soft sm:p-5"
+              className="w-[82vw] max-w-[22rem] shrink-0 snap-start rounded-lg border border-stone-200 bg-white p-4 shadow-soft sm:p-5 md:w-auto md:max-w-none md:shrink"
             >
               <p className="text-sm text-tea">{item.category}</p>
               <h3 className="mt-2 font-semibold text-ink">{item.title}</h3>
