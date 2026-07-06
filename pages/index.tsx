@@ -149,6 +149,29 @@ export default function Home({ deals, calendarEvents, paymentRebateEvents, guide
       title: "按场景和尺码买"
     }
   ];
+  const shareTrialRoutes = [
+    {
+      label: "发给刚开始准备的朋友",
+      href: "/guides/newborn-shopping-list",
+      title: "让对方先看第一批用品",
+      description: "适合孕期或刚来日本的新手家庭，重点看哪些马上要买、哪些可以先不囤。",
+      action: "转发新手清单"
+    },
+    {
+      label: "发给最近要补货的朋友",
+      href: "/guides/diaper-price-line",
+      title: "让对方先算纸尿裤好价线",
+      description: "适合正在比较尿不湿、湿巾和箱购活动的人，重点看单片价和跳过条件。",
+      action: "转发好价线"
+    },
+    {
+      label: "发给等活动日的朋友",
+      href: "/calendar",
+      title: "让对方先收藏省钱日历",
+      description: "适合等楽天、西松屋、PayPay 等活动的人，重点分清当天确认、提前准备和先观察。",
+      action: "转发日历"
+    }
+  ];
 
   return (
     <Layout
@@ -316,29 +339,30 @@ export default function Home({ deals, calendarEvents, paymentRebateEvents, guide
 
       <section className="bg-linen">
         <div className="mx-auto max-w-6xl px-5 py-12">
-          <div className="grid gap-6 md:grid-cols-[1fr_0.85fr] md:items-center">
-            <div>
+          <div className="grid gap-6 md:grid-cols-[0.9fr_1.1fr] md:items-start">
+            <div className="max-w-xl">
               <p className="text-sm font-semibold text-tea">分享给同在日本的宝妈/宝爸</p>
               <h2 className="mt-2 text-2xl font-semibold tracking-normal text-ink md:text-3xl">
-                下次群里问“哪里买尿不湿划算”，可以直接发这一页。
+                亲友试用时，先按对方正在烦恼的事发一个入口。
               </h2>
               <p className="mt-3 max-w-2xl leading-7 text-stone-600">
-                先收藏本站，遇到楽天买回、西松屋活动或纸尿裤补货前，打开本周值得买和省钱日历快速确认适不适合自己。
+                早期先验证“看完能不能判断下一步”，不用一次把首页、优惠和全部攻略都发过去。
+                每次只让对方看 3-5 分钟，再问哪一页有用、哪里不够可信。
               </p>
             </div>
-            <div className="flex flex-col gap-3 rounded-lg border border-stone-200 bg-white p-5 shadow-soft sm:flex-row md:flex-col">
-              <Link
-                href="/deals"
-                className="flex-1 rounded-full bg-ink px-5 py-3 text-center text-sm font-medium text-white"
-              >
-                收藏本周值得买
-              </Link>
-              <Link
-                href="/guides"
-                className="flex-1 rounded-full border border-stone-300 bg-white px-5 py-3 text-center text-sm font-medium text-ink"
-              >
-                发给新手先读攻略
-              </Link>
+            <div className="grid gap-3">
+              {shareTrialRoutes.map((route) => (
+                <Link
+                  key={route.href}
+                  href={route.href}
+                  className="rounded-lg border border-stone-200 bg-white p-4 shadow-soft transition hover:border-peach hover:bg-white/90"
+                >
+                  <p className="text-xs font-semibold text-tea">{route.label}</p>
+                  <h3 className="mt-2 text-base font-semibold text-ink">{route.title}</h3>
+                  <p className="mt-2 text-sm leading-6 text-stone-600">{route.description}</p>
+                  <p className="mt-3 text-xs font-semibold text-stone-500">{route.action}</p>
+                </Link>
+              ))}
             </div>
           </div>
         </div>

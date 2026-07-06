@@ -1,5 +1,25 @@
 # 优化记录
 
+## 2026-07-07 首页亲友试用入口结构优化
+
+- 时间：2026-07-07 00:03 JST
+- 当前优化方向：00:00 内容结构。
+- 目标：首页底部“分享给同在日本的宝妈/宝爸”只有两个泛入口，亲友试用时仍容易一次发太多内容；本次只优化首页底部分享区的信息结构，让首次分享能按“刚开始准备、最近补货、等活动日”三种场景各发一个入口，不触碰优惠数据。
+- 修改文件：
+  - `pages/index.tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查首页亲友试用分享区文案和 3 个入口链接。
+  - `npm run sitemap`
+  - `git diff --check`
+  - `npm run build`
+- 结果：首页底部分享区从“收藏本周值得买 / 发给新手先读攻略”两个按钮，改为 3 张可转发入口卡：发给刚开始准备的朋友、新近要补货的朋友、等活动日的朋友，分别指向新生儿准备清单、纸尿裤好价线和省钱日历；文案强调每次只让对方看 3-5 分钟，再收集有用和不可信反馈。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、6 条优惠、14 个日历活动校验通过；首页亲友试用分享区静态检查通过；`npm run sitemap` 生成 14 个 URL 且 sitemap 无差异；`git diff --check` 通过；`npm run build` 已完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“优化首页亲友试用入口”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续增长准备方向可把这 3 个首页分享入口和 `docs/friend-trial-message.md` 的三项试用任务对齐；网络恢复后优先推送本地领先提交。
+
 ## 2026-07-06 07:32 最新母婴省钱消息整理
 
 - 时间：2026-07-06 07:32 JST
