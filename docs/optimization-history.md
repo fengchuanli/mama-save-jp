@@ -1,5 +1,25 @@
 # 优化记录
 
+## 2026-07-08 值得买状态筛选结构优化
+
+- 时间：2026-07-08 00:04 JST
+- 当前优化方向：00:00 内容结构。
+- 目标：`/deals` 同时展示“现在可确认”和“等下一场”的优惠机会，但原筛选只支持分类和平台，新手容易把已过窗口的活动误当成今天可买。本次只优化值得买列表的状态分层，不触碰优惠数据。
+- 修改文件：
+  - `pages/deals.tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查 `/deals` 状态筛选、状态计数、任务入口状态约束和过期活动入口文案。
+  - `npm run sitemap`
+  - `git diff --check`
+  - `npm run build`
+- 结果：`/deals` 新增“按当前状态筛选”，可一键查看全部状态、现在可确认、等下一场、暂不可买或待确认，并显示各状态数量；顶部“先按当前任务进入”增加“等下一场活动”入口，且补货、入园、出门前场景会自动筛到当前可确认的条目。默认仍展示全部优惠机会，避免隐藏可提前准备的固定活动。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、6 条优惠、14 个日历活动校验通过；`/deals` 状态筛选静态检查通过；`npm run sitemap` 生成 14 个 URL；`git diff --check` 通过；`npm run build` 已完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“优化值得买状态筛选”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续内容结构方向可继续检查 `/deals` 卡片是否需要在折叠前更明显标注“活动中确认 / 等下一场”，让用户不展开详情也能判断行动时机。
+
 ## 2026-07-07 07:33 最新母婴省钱消息整理
 
 - 时间：2026-07-07 07:33 JST
