@@ -1,5 +1,26 @@
 # 优化记录
 
+## 2026-07-08 母婴店选择攻略完善
+
+- 时间：2026-07-08 03:03 JST
+- 当前优化方向：03:00 攻略内容。
+- 目标：`/guides` 的“先定购物范围”会把新手引到《西松屋、バースデイ、赤ちゃん本舗 新手宝妈怎么选》，但原文更偏三家店差异说明，缺少第一次进店如何少买错、如何把线下看实物和线上比价衔接起来。本次只补强这一篇攻略，不触碰优惠数据。
+- 修改文件：
+  - `content/guides/choose-baby-stores-japan.mdx`
+  - `public/sitemap.xml`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查母婴店选择攻略的阅读时长、更新时间、第一次进店章节、线上复核步骤和新增检查项。
+  - `npm run sitemap`
+  - `git diff --check`
+  - `npm run build`
+- 结果：母婴店选择攻略从 7 分钟扩展为 8 分钟阅读，`updatedAt` 更新为 `2026-07-08`；新增“第一次进店怎么不买乱”，把赤ちゃん本舗看实物、西松屋补基础款、バースデイ补少量好看款拆成更具体的现场判断；推荐购买顺序新增回家后线上复核，提醒比较 Amazon、楽天、官方线上店、送料、到货时间和退换成本；买前检查清单补充线上价是否真正值得、今天不买是否影响照护。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、6 条优惠、14 个日历活动校验通过；母婴店选择攻略静态检查通过；`npm run sitemap` 生成 14 个 URL；`git diff --check` 通过；`npm run build` 已完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“完善母婴店选择攻略”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续攻略内容方向可继续补强保育园入园准备攻略，把园方清单确认、姓名贴制作周期和备用衣数量拆得更细；网络恢复后继续保持本地提交推送到 `origin main`。
+
 ## 2026-07-08 值得买状态筛选结构优化
 
 - 时间：2026-07-08 00:04 JST
