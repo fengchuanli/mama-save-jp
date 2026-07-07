@@ -190,13 +190,13 @@ export default function Deals({ deals }: DealsProps) {
             </p>
           </div>
 
-          <div className="no-scrollbar -mx-4 mt-5 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-1 md:mx-0 md:grid md:snap-none md:grid-cols-3 md:overflow-visible md:px-0 md:pb-0">
+          <div className="no-scrollbar -mx-4 mt-5 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-1 sm:mx-0 sm:grid sm:snap-none sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-4">
             {taskEntryRoutes.map((route) => (
               <button
                 key={route.label}
                 type="button"
                 onClick={() => applyTaskEntry(route.category, route.platform, route.status)}
-                className="w-[78vw] min-w-[17rem] shrink-0 snap-start rounded-lg border border-orange-100 bg-orange-50 p-4 text-left transition hover:bg-linen md:w-auto md:min-w-0"
+                className="w-[78vw] min-w-[17rem] shrink-0 snap-start rounded-lg border border-orange-100 bg-orange-50 p-4 text-left transition hover:bg-linen sm:w-auto sm:min-w-0 sm:shrink"
               >
                 <p className="text-xs font-semibold text-tea">{route.label}</p>
                 <h3 className="mt-2 font-semibold text-ink">{route.title}</h3>
