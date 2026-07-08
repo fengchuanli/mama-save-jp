@@ -27,6 +27,9 @@ const statusFilterLabels: Record<DealStatusFilter, string> = {
   unknown: "待确认"
 };
 
+const filterScrollerClass =
+  "no-scrollbar -mx-4 flex snap-x snap-mandatory gap-2 overflow-x-auto px-4 pb-1 sm:mx-0 sm:flex-wrap sm:snap-none sm:overflow-visible sm:px-0 sm:pb-0";
+
 export default function Deals({ deals }: DealsProps) {
   const dealsUrl = getAbsoluteUrl("/deals");
   const [selectedCategory, setSelectedCategory] = useState("全部");
@@ -214,7 +217,7 @@ export default function Deals({ deals }: DealsProps) {
                 {statusFilterLabels[selectedStatus]}
               </p>
             </div>
-            <div className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-1 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0 sm:pb-0">
+            <div className={filterScrollerClass}>
               {statusFilters.map((status) => {
                 const active = selectedStatus === status;
 
@@ -224,7 +227,7 @@ export default function Deals({ deals }: DealsProps) {
                     type="button"
                     aria-pressed={active}
                     onClick={() => setSelectedStatus(status)}
-                    className={`min-h-10 shrink-0 whitespace-nowrap rounded-full px-4 py-2 text-sm transition ${
+                    className={`min-h-10 shrink-0 snap-start whitespace-nowrap rounded-full px-4 py-2 text-sm transition ${
                       active
                         ? "bg-ink text-white"
                         : "bg-cream text-stone-700 hover:bg-linen"
@@ -253,7 +256,7 @@ export default function Deals({ deals }: DealsProps) {
                 ) : null}
               </div>
             </div>
-            <div className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-1 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0 sm:pb-0">
+            <div className={filterScrollerClass}>
               {categories.map((category) => {
                 const active = selectedCategory === category;
 
@@ -263,7 +266,7 @@ export default function Deals({ deals }: DealsProps) {
                     type="button"
                     aria-pressed={active}
                     onClick={() => setSelectedCategory(category)}
-                    className={`min-h-10 shrink-0 whitespace-nowrap rounded-full px-4 py-2 text-sm transition ${
+                    className={`min-h-10 shrink-0 snap-start whitespace-nowrap rounded-full px-4 py-2 text-sm transition ${
                       active
                         ? "bg-ink text-white"
                         : "bg-cream text-stone-700 hover:bg-linen"
@@ -278,7 +281,7 @@ export default function Deals({ deals }: DealsProps) {
 
           <div>
             <p className="mb-3 text-sm font-semibold text-ink">按平台筛选</p>
-            <div className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-1 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0 sm:pb-0">
+            <div className={filterScrollerClass}>
               {platforms.map((platform) => {
                 const active = selectedPlatform === platform;
 
@@ -288,7 +291,7 @@ export default function Deals({ deals }: DealsProps) {
                     type="button"
                     aria-pressed={active}
                     onClick={() => setSelectedPlatform(platform)}
-                    className={`min-h-10 shrink-0 whitespace-nowrap rounded-full px-4 py-2 text-sm transition ${
+                    className={`min-h-10 shrink-0 snap-start whitespace-nowrap rounded-full px-4 py-2 text-sm transition ${
                       active
                         ? "bg-tea text-white"
                         : "bg-cream text-stone-700 hover:bg-linen"
