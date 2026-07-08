@@ -1,5 +1,26 @@
 # 优化记录
 
+## 2026-07-09 保育园入园准备攻略完善
+
+- 时间：2026-07-09 03:01 JST
+- 当前优化方向：03:00 攻略内容。
+- 目标：`/guides` 中《保育园入园准备 哪些可以买便宜的》更新时间较早，已有“哪些可以买便宜”的基础判断，但缺少拿到园方清单后的复核顺序，以及姓名贴、备用衣这些最容易返工的入园细节；本次只补强这一篇攻略，不触碰优惠数据。
+- 修改文件：
+  - `content/guides/nursery-entry-budget-items.mdx`
+  - `public/sitemap.xml`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查保育园入园准备攻略的阅读时长、更新时间、说明会复核章节、姓名贴/备用衣章节和关键判断点。
+  - `npm run sitemap`
+  - `git diff --check`
+  - `npm run build`
+- 结果：保育园入园准备攻略从 7 分钟扩展为 8 分钟阅读，`updatedAt` 更新为 `2026-07-09`；新增“说明会后先复核什么”，把尺寸、数量、名字位置和禁止事项拆成入园清单复核步骤；新增“姓名贴和备用衣怎么少返工”，按衣物毛巾、餐具水杯、袋子小物区分标签方案，并补充 3-5 套基础备用衣、开园后再补第二批的建议。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、6 条优惠、14 个日历活动校验通过；保育园入园准备攻略、优化记录和 sitemap 静态检查通过；`npm run sitemap` 生成 14 个 URL；`git diff --check` 通过；`npm run build` 已完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“完善保育园入园准备攻略”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。当前本地 `main` 领先 `origin/main` 5 个提交。
+- 下一步：后续攻略内容方向可继续补强童装 80/90/100 尺码攻略，把换季清仓、保育园备用衣和尺码试错的购买顺序拆得更细；网络恢复后继续优先推送本地领先提交。
+
 ## 2026-07-09 省钱日历筛选结果结构优化
 
 - 时间：2026-07-09 00:02 JST
