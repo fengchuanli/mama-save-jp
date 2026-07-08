@@ -16,6 +16,15 @@
 ## 当前记录
 
 ```text
+日期时间：2026-07-09 07:34 JST
+来源：楽天市場 お買い物マラソン https://event.rakuten.co.jp/campaign/point-up/marathon/；Yahoo!ショッピング 5のつく日 https://shopping.yahoo.co.jp/promotion/campaign/5day/；Yahoo!ショッピング 超PayPay祭 https://shopping.yahoo.co.jp/promotion/sale/ppf/；LOHACO パンパース商品页 https://lohaco.yahoo.co.jp/store/h-lohaco/item/ek09918/；アカチャンホンポ 3と8のつく日 https://shop.akachan.jp/shop/r/rse90/；西松屋官方首页 https://www.24028.jp/；PayPayスクラッチくじ https://paypay.ne.jp/event/matsuri202606-paypay-scratch/；楽天市場姓名贴搜索页 https://search.rakuten.co.jp/search/mall/%E4%BF%9D%E8%82%B2%E5%9C%92+%E5%90%8D%E5%89%8D%E3%82%B7%E3%83%BC%E3%83%AB/
+主题：复查 data/deals.json 的 6 条既有 verified 优惠，并新增 1 条可核验商品页优惠。楽天お買い物マラソン官方页仍显示 1ショップ1,000円(税込)以上、7,000ポイント上限、対象期間中エントリー和 2026/8/15 左右付与；楽天尿不湿/湿巾买回和姓名贴买回继续 active。Yahoo! 5のつく日官方页仍显示下一场 2026/7/15，当前不是活动窗口；Yahoo 5 日条目继续 expired/等下一场。赤ちゃん本舗 3/8 日页面仍可访问，但今天 7/9 不是活动日，下一场为 7/13 10:00 起。西松屋首页仍显示チラシ/ミミコレ 7/2-7/14、月間奉仕品到 7/14；PayPayスクラッチ仍显示 2026/6/19-7/31、200 日元以上和抽选返还档位；楽天姓名贴搜索结果仍显示相关商品、价格、送料無料和発送目安。Yahoo! 超PayPay祭活动页的注目ポイントアップ商品已能跳到 LOHACO パンパース Big 码商品页，商品页显示 8,630 円（税込）、64枚×3パック、在庫あり、最短翌日お届け、3,780 円以上基本配送料無料和登录/全额 PayPay 支付时预计 20%(1,571pt)。
+可能影响：既有 active 条目没有发现页面失效或需要改为 unavailable；赤ちゃん本舗需要从“7/8 今天活动日”改为“下一场 7/13”。LOHACO パンパース Big 码具备具体商品页、价格、库存、配送和来源，可新增为 verified active；但ポイント、期間限定比例、クーポン和地区库存仍要登录后到商品页/购物车确认，不能写成无条件现金折扣。页面上的 1,000 円OFF クーポン要求商品合计 25,000 円以上，不能默认单买可用。
+是否已更新到站点：已更新 data/deals.json 中既有 6 条 verified 的 updatedAt 和 verificationScope；新增 lohaco-pampers-big-super-paypay。同步更新 data/shopping-calendar.json 的楽天、Yahoo! 超PayPay祭、西松屋、赤ちゃん本舗、Yahoo! 5のつく日、PayPay 更新时间与注意事项。
+下一步：7/10 活动开始后复查 LOHACO パンパース商品页是否仍有库存、BONUS/ポイント内訳是否成立；7/11 后确认楽天买回是否结束；7/13 10:00 后复查赤ちゃん本舗対象カテゴリ积分；7/15 当天复查 Yahoo! 5のつく日是否可エントリー。
+```
+
+```text
 日期时间：2026-07-08 07:32 JST
 来源：楽天市場 お買い物マラソン https://event.rakuten.co.jp/campaign/point-up/marathon/；Yahoo!ショッピング 5のつく日 https://shopping.yahoo.co.jp/promotion/campaign/5day/；Yahoo!ショッピング 超PayPay祭 https://shopping.yahoo.co.jp/promotion/sale/ppf/；アカチャンホンポ 3と8のつく日 https://shop.akachan.jp/shop/r/rse90/；西松屋官方首页 https://www.24028.jp/；PayPayスクラッチくじ https://paypay.ne.jp/event/matsuri202606-paypay-scratch/；楽天市場姓名贴搜索页 https://search.rakuten.co.jp/search/mall/%E4%BF%9D%E8%82%B2%E5%9C%92+%E5%90%8D%E5%89%8D%E3%82%B7%E3%83%BC%E3%83%AB/
 主题：复查 data/deals.json 的 6 条 verified 优惠。楽天お買い物マラソン官方页仍显示 2026/7/4 20:00-7/11 01:59、1ショップ1,000円(税込)以上、7,000ポイント上限和 2026/8/15 左右付与；楽天尿不湿/湿巾买回和姓名贴买回继续 active。Yahoo! 5のつく日官方页仍是下一场 2026/7/15，当前不是活动窗口；Yahoo 条目继续 expired/等下一场。赤ちゃん本舗 3/8 日页面仍可访问，今天 7/8 是活动日但 07:32 复查时需等 10:00 后确认対象カテゴリ和结算页积分。西松屋首页仍显示チラシ/ミミコレ 7/2-7/14、月間奉仕品到 7/14；PayPayスクラッチ仍显示 2026/6/19-7/31、200 日元以上、抽选返还和対象外说明；楽天姓名贴搜索结果仍显示相关商品、价格、送料無料和発送目安。Yahoo! 超PayPay祭单独活动页已公开，显示 7/10-7/12 本番、BONUS 商品合计 5,000 日元以上 +4%、20,000 日元以上 +7%、该项上限 7,000 円相当/期间。
