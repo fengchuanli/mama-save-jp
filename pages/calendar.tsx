@@ -88,6 +88,14 @@ export default function Calendar({ events }: CalendarProps) {
       }, {}),
     [visibleEvents]
   );
+  const selectedTimingLabel =
+    timingFilters.find((filter) => filter.id === selectedTiming)?.label ?? "全部节点";
+  const selectedStoreLabel =
+    selectedStore === "全部" ? "全部平台" : selectedStore;
+  const resultSummary =
+    visibleEvents.length > 0
+      ? `${selectedTimingLabel} / ${selectedStoreLabel}：当前 ${visibleEvents.length} 个省钱节点`
+      : `${selectedTimingLabel} / ${selectedStoreLabel}：暂时没有匹配的省钱节点`;
   const collectionJsonLd = createCollectionPageJsonLd({
     name: "日本母婴购物省钱日历",
     description:
@@ -246,9 +254,22 @@ export default function Calendar({ events }: CalendarProps) {
         </div>
 
         <div className="space-y-5 sm:space-y-7">
+          <div className="rounded-lg border border-amber-100 bg-white px-4 py-3 text-sm leading-6 text-stone-600 shadow-soft sm:px-5">
+            <span className="font-semibold text-ink">{resultSummary}</span>
+            <span className="ml-0 block sm:ml-2 sm:inline">
+              先看同一动作下的活动，再进入卡片核对适合买什么、注意事项和官方来源。
+            </span>
+          </div>
+
           {Object.entries(groupedEvents).map(([store, storeEvents]) => (
             <CalendarStoreGroup key={store} store={store} events={storeEvents} />
           ))}
+
+          {visibleEvents.length === 0 ? (
+            <div className="rounded-lg border border-stone-200 bg-white p-8 text-center text-stone-600 shadow-soft">
+              当前筛选下没有可看的省钱节点。可以清除平台筛选，或改看全部节点后再按平台找。
+            </div>
+          ) : null}
         </div>
         </div>
       </section>
