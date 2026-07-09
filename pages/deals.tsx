@@ -159,6 +159,14 @@ export default function Deals({ deals }: DealsProps) {
       item: dealsUrl
     }
   ]);
+  const selectedCategoryLabel =
+    selectedCategory === "全部" ? "全部分类" : selectedCategory;
+  const selectedPlatformLabel =
+    selectedPlatform === "全部" ? "全部平台" : selectedPlatform;
+  const resultSummary =
+    filteredDeals.length > 0
+      ? `${statusFilterLabels[selectedStatus]} / ${selectedCategoryLabel} / ${selectedPlatformLabel}：当前 ${filteredDeals.length} 条优惠机会`
+      : `${statusFilterLabels[selectedStatus]} / ${selectedCategoryLabel} / ${selectedPlatformLabel}：暂时没有匹配的优惠机会`;
 
   return (
     <Layout
@@ -303,6 +311,13 @@ export default function Deals({ deals }: DealsProps) {
               })}
             </div>
           </div>
+        </div>
+
+        <div className="mb-5 rounded-lg border border-orange-100 bg-white px-4 py-3 text-sm leading-6 text-stone-600 shadow-soft sm:px-5">
+          <span className="font-semibold text-ink">{resultSummary}</span>
+          <span className="ml-0 block sm:ml-2 sm:inline">
+            先看状态和确定性，再展开卡片核对参加方法、跳过条件和官方来源。
+          </span>
         </div>
 
         <div className="grid gap-5 md:grid-cols-2">
