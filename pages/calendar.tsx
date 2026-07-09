@@ -230,7 +230,7 @@ export default function Calendar({ events }: CalendarProps) {
               </button>
             ) : null}
           </div>
-          <div className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-1 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0 sm:pb-0">
+          <div className="no-scrollbar -mx-4 flex snap-x snap-mandatory gap-2 overflow-x-auto px-4 pb-1 sm:mx-0 sm:flex-wrap sm:snap-none sm:overflow-visible sm:px-0 sm:pb-0">
             {stores.map((store) => {
               const active = selectedStore === store;
 
@@ -240,7 +240,7 @@ export default function Calendar({ events }: CalendarProps) {
                   type="button"
                   aria-pressed={active}
                   onClick={() => setSelectedStore(store)}
-                  className={`min-h-10 shrink-0 whitespace-nowrap rounded-full px-4 py-2 text-sm transition ${
+                  className={`min-h-10 shrink-0 snap-start whitespace-nowrap rounded-full px-4 py-2 text-sm transition ${
                     active
                       ? "bg-ink text-white"
                       : "bg-cream text-stone-700 hover:bg-linen"

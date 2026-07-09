@@ -1,5 +1,25 @@
 # 优化记录
 
+## 2026-07-10 省钱日历平台筛选移动端优化
+
+- 时间：2026-07-10 06:02 JST
+- 当前优化方向：06:00 移动端体验。
+- 目标：`/calendar` 上方动作入口已经支持手机端横滑吸附，但“按平台快速查看”筛选条仍是普通横向滚动，和站内其他筛选条体验不一致；本次只优化这一组平台按钮，不触碰优惠数据。
+- 修改文件：
+  - `pages/calendar.tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查 `/calendar` 平台筛选条的隐藏滚动条、横向吸附、桌面端换行复位和按钮 `snap-start`。
+  - `npm run sitemap`
+  - `git diff --check`
+  - `npm run build`
+- 结果：`/calendar` 的平台筛选条在手机端新增 `no-scrollbar`、`snap-x snap-mandatory`，每个筛选按钮新增 `snap-start`；桌面端继续使用 `sm:flex-wrap` 并通过 `sm:snap-none` 复位为普通换行筛选。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、7 条优惠、14 个日历活动校验通过；`/calendar` 平台筛选条静态检查通过；`npm run sitemap` 生成 14 个 URL 且 sitemap 无差异；`git diff --check` 通过；`npm run build` 已完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“优化省钱日历平台筛选移动端体验”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续移动端体验方向可检查首页首屏状态入口在 320-390px 宽度下是否需要改成横滑或更紧凑的两列；网络恢复后继续优先推送本地领先提交。
+
 ## 2026-07-10 童装尺码攻略完善
 
 - 时间：2026-07-10 03:01 JST
