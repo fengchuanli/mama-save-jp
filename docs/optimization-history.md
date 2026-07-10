@@ -1,5 +1,26 @@
 # 优化记录
 
+## 2026-07-11 药妆店优惠券攻略完善
+
+- 时间：2026-07-11 03:01 JST
+- 当前优化方向：03:00 攻略内容。
+- 目标：`/guides` 中《日本药妆店优惠券适合买什么母婴用品》已有券型、快速算法和场景判断，但对“进店前如何筛掉不适用券”和“App 券、积分日、支付活动叠加时按什么顺序算”还不够具体；本次只补强这一篇攻略，不触碰优惠数据。
+- 修改文件：
+  - `content/guides/drugstore-coupon.mdx`
+  - `public/sitemap.xml`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查药妆店优惠券攻略的阅读时长、更新时间、新增筛券章节、叠加优惠计算顺序章节和 sitemap 更新时间。
+  - `npm run sitemap`
+  - `git diff --check`
+  - `npm run build`
+- 结果：药妆店优惠券攻略从 7 分钟扩展为 8 分钟阅读，`updatedAt` 更新为 `2026-07-11`；新增“进店前 3 分钟先筛券”，把全店/日用品券、指定品牌券和满额券拆成进店前判断；新增“叠加优惠先按什么顺序算”，明确先看商品本身价格、再看当场 App 券、最后才看会员积分、积分日和支付抽选，并提醒结账后核对小票或 App 明细。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、7 条优惠、14 个日历活动校验通过；药妆店优惠券攻略、优化记录和 sitemap 静态检查通过；`npm run sitemap` 生成 14 个 URL；`git diff --check` 通过；`npm run build` 已完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“完善药妆店优惠券攻略”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续攻略内容方向可继续补强 PayPay/楽天ペイ支付返点攻略与药妆店优惠券攻略之间的互相承接，或检查 `/guides` 中这两篇是否需要更明确的内链提示。
+
 ## 2026-07-11 首页攻略入口结构优化
 
 - 时间：2026-07-11 00:02 JST
