@@ -131,22 +131,30 @@ export default function Home({ deals, calendarEvents, paymentRebateEvents, guide
     {
       label: "第一批买什么",
       href: "/guides#guide-group-start",
-      title: "先收窄清单"
+      title: "先收窄清单",
+      description: "适合孕期或刚开始准备，不确定第一批用品和去哪家店看。",
+      nextStep: "先读：新生儿准备品"
     },
     {
       label: "快要补货",
       href: "/guides#guide-group-essentials",
-      title: "看消耗品值不值"
+      title: "看消耗品值不值",
+      description: "适合纸尿裤、湿巾、洗护快用完，想判断今天能不能囤。",
+      nextStep: "先读：纸尿裤怎么买"
     },
     {
       label: "活动看不懂",
       href: "/guides#guide-group-platforms",
-      title: "拆开平台规则"
+      title: "拆开平台规则",
+      description: "适合遇到楽天积分、5/0 日或支付返点，先确认实付和上限。",
+      nextStep: "先读：楽天积分入门"
     },
     {
       label: "准备入园换季",
       href: "/guides#guide-group-nursery",
-      title: "按场景和尺码买"
+      title: "按场景和尺码买",
+      description: "适合收到保育园清单，或想趁换季清仓买备用衣。",
+      nextStep: "先读：保育园入园准备"
     }
   ];
   const shareTrialRoutes = [
@@ -321,6 +329,8 @@ export default function Home({ deals, calendarEvents, paymentRebateEvents, guide
                 >
                   <p className="text-xs font-semibold text-tea">{route.label}</p>
                   <h3 className="mt-2 text-base font-semibold text-ink">{route.title}</h3>
+                  <p className="mt-2 text-sm leading-6 text-stone-600">{route.description}</p>
+                  <p className="mt-3 text-xs font-semibold text-stone-500">{route.nextStep}</p>
                 </Link>
               ))}
             </div>

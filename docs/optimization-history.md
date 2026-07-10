@@ -1,5 +1,25 @@
 # 优化记录
 
+## 2026-07-11 首页攻略入口结构优化
+
+- 时间：2026-07-11 00:02 JST
+- 当前优化方向：00:00 内容结构。
+- 目标：首页“新手攻略 / 先按今天的问题找”已经能跳到 `/guides` 的问题分组，但卡片只显示标签和标题，用户从首页过去前不容易判断每个入口对应哪类场景、应该先读哪篇；本次只补充首页攻略入口的场景说明和下一步提示，不触碰优惠数据。
+- 修改文件：
+  - `pages/index.tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查首页 4 个攻略问题入口都有 `description`、`nextStep`，并继续指向 `/guides#guide-group-*`。
+  - `npm run sitemap`
+  - `git diff --check`
+  - `npm run build`
+- 结果：首页 4 个攻略问题入口补充了适用场景和“先读”提示，分别承接第一批买什么、快要补货、活动看不懂、准备入园换季；用户不用只凭短标题判断该点哪个入口。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、7 条优惠、14 个日历活动校验通过；首页攻略问题入口静态检查通过；`npm run sitemap` 生成 14 个 URL 且 sitemap 无差异；`git diff --check` 通过；`npm run build` 已完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“优化首页攻略入口结构”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续内容结构方向可检查首页“本周提醒”和“本周值得买”的顺序是否需要根据真实试用反馈调整；网络恢复后继续优先推送本地领先提交。
+
 ## 2026-07-10 07:34 最新母婴省钱消息整理
 
 - 时间：2026-07-10 07:34 JST
