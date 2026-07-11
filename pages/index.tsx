@@ -180,6 +180,29 @@ export default function Home({ deals, calendarEvents, paymentRebateEvents, guide
       action: "转发日历"
     }
   ];
+  const weeklyReminderRoutes = [
+    {
+      label: "今天要补货",
+      href: "/deals",
+      title: "先核对本周机会",
+      description: "适合纸尿裤、湿巾和洗护快用完时，先看状态、跳过条件和官方来源。",
+      action: "判断今天能不能买"
+    },
+    {
+      label: "还没到活动日",
+      href: "/calendar",
+      title: "先把近期节点排好",
+      description: "适合等楽天、Yahoo! 或 PayPay 节点时，先记录平时价和需要补的数量。",
+      action: "看最近省钱节点"
+    },
+    {
+      label: "出门前 3 分钟",
+      href: "/guides/drugstore-coupon",
+      title: "先筛掉不适用券",
+      description: "适合去药妆店、超市或西松屋前，先确认対象商品、满额和抽选条件。",
+      action: "看药妆店用券"
+    }
+  ];
 
   return (
     <Layout
@@ -230,35 +253,20 @@ export default function Home({ deals, calendarEvents, paymentRebateEvents, guide
           </div>
           <div className="rounded-lg border border-orange-100 bg-white/95 p-5 shadow-soft">
             <p className="text-sm font-semibold text-tea">本周提醒</p>
-            <h2 className="mt-2 text-2xl font-semibold text-ink">先补高频消耗品</h2>
+            <h2 className="mt-2 text-2xl font-semibold text-ink">先按今天的动作走</h2>
+            <p className="mt-2 text-sm leading-6 text-stone-600">
+              不用一次看完全部信息，先确认是要马上补货、等活动日，还是出门前顺手核对。
+            </p>
             <div className="mt-5 space-y-4">
-              {[
-                {
-                  title: "纸尿裤",
-                  text: "看单片价，不要跨码囤太多",
-                  href: "/guides/diaper-price-line",
-                  action: "先算好价线"
-                },
-                {
-                  title: "湿巾",
-                  text: "低于好价线可按 1-2 个月用量补",
-                  href: "/deals",
-                  action: "查看本周机会"
-                },
-                {
-                  title: "洗护",
-                  text: "常用品牌遇到券后价再买补充装",
-                  href: "/guides/drugstore-coupon",
-                  action: "看药妆店用券"
-                }
-              ].map(({ title, text, href, action }) => (
+              {weeklyReminderRoutes.map(({ label, title, description, href, action }) => (
                 <Link
                   key={title}
                   href={href}
                   className="block rounded-lg border border-orange-100 bg-orange-50 p-4 transition hover:border-peach hover:bg-linen"
                 >
+                  <p className="text-xs font-semibold text-tea">{label}</p>
                   <p className="font-semibold text-ink">{title}</p>
-                  <p className="mt-1 text-sm text-stone-600">{text}</p>
+                  <p className="mt-1 text-sm leading-6 text-stone-600">{description}</p>
                   <p className="mt-3 text-xs font-semibold text-tea">{action}</p>
                 </Link>
               ))}
