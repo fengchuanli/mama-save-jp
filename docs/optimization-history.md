@@ -1,5 +1,25 @@
 # 优化记录
 
+## 2026-07-12 攻略列表问题入口移动端优化
+
+- 时间：2026-07-12 06:02 JST
+- 当前优化方向：06:00 移动端体验。
+- 目标：`/guides` 的“新手宝妈必读路线”在手机端已经是横滑吸附卡组，但紧接着的“按今天的问题直达”仍是普通网格，320-390px 宽度下四张入口卡会纵向占用较多首屏空间，和站内 `/deals`、`/calendar` 的任务入口体验不一致。本次只优化攻略列表页这一组入口，不触碰优惠数据。
+- 修改文件：
+  - `pages/guides/index.tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查 `/guides` 问题直达入口的 `aria-label`、手机端横滑吸附、桌面端网格复位和卡片宽度类。
+  - `npm run sitemap`
+  - `git diff --check`
+  - `npm run build`
+- 结果：攻略列表页“按今天的问题直达”手机端改为隐藏滚动条的横滑吸附入口，每张卡使用稳定宽度并支持 `snap-start`；从 `sm` 断点开始恢复为两列，`lg` 断点恢复为四列。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、7 条优惠、14 个日历活动校验通过；`/guides` 问题直达入口静态检查通过；`npm run sitemap` 生成 14 个 URL 且 sitemap 无差异；`git diff --check` 通过；`npm run build` 已完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“优化攻略列表移动端入口”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续移动端体验方向可检查 `/guides` 分组下方的攻略卡片在手机端是否需要补充更清晰的“先读/再读”视觉层级；网络恢复后继续确认本地提交是否已推送。
+
 ## 2026-07-12 支付返点攻略完善
 
 - 时间：2026-07-12 03:02 JST

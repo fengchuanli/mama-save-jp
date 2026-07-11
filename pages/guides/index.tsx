@@ -204,12 +204,15 @@ export default function Guides({ guides }: GuidesProps) {
             </p>
           </div>
 
-          <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          <div
+            aria-label="按今天的问题直达"
+            className="no-scrollbar -mx-5 mt-5 flex snap-x snap-mandatory gap-3 overflow-x-auto px-5 pb-1 sm:mx-0 sm:grid sm:snap-none sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-4"
+          >
             {quickProblemLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="rounded-lg border border-emerald-100 bg-emerald-50 p-4 transition hover:border-emerald-200 hover:bg-white"
+                className="w-[78vw] min-w-[17rem] shrink-0 snap-start rounded-lg border border-emerald-100 bg-emerald-50 p-4 transition hover:border-emerald-200 hover:bg-white sm:w-auto sm:min-w-0 sm:shrink"
               >
                 <p className="text-xs font-semibold text-tea">{link.label}</p>
                 <h3 className="mt-2 text-base font-semibold text-ink">{link.title}</h3>
