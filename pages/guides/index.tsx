@@ -246,6 +246,7 @@ export default function Guides({ guides }: GuidesProps) {
                     key={guide.slug}
                     guide={guide}
                     contextLabel={group.readingOrder[guide.slug]}
+                    mobileCompact
                   />
                 ))}
               </div>

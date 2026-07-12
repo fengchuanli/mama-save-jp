@@ -1,5 +1,26 @@
 # 优化记录
 
+## 2026-07-13 攻略列表分组卡片移动端优化
+
+- 时间：2026-07-13 06:04 JST
+- 当前优化方向：06:00 移动端体验。
+- 目标：`/guides` 已经有横滑的新手路线和问题直达入口，但下方每个问题分组的攻略卡片在手机端仍完整展示重复插图，导致用户按阅读顺序扫描时纵向占位偏大。本次只优化攻略列表分组卡片的手机端信息密度，不触碰优惠数据。
+- 修改文件：
+  - `components/GuideCard.tsx`
+  - `pages/guides/index.tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查 `GuideCard` 的 `mobileCompact` 属性、紧凑模式视觉隐藏、移动端字号/间距和 `/guides` 分组列表启用点。
+  - `npm run sitemap`
+  - `git diff --check`
+  - `npm run build`
+- 结果：`GuideCard` 新增可选 `mobileCompact` 模式，默认不影响首页和其他卡片；`/guides` 的问题分组列表启用该模式后，手机端隐藏重复插图并收紧标题、摘要和元信息间距，桌面端仍保留原大卡片视觉。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、7 条优惠、14 个日历活动校验通过；`GuideCard` 和 `/guides` 静态检查通过；`npm run sitemap` 生成 14 个 URL 且 sitemap 无差异；`git diff --check` 通过；`npm run build` 已完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“优化攻略列表分组卡片移动端体验”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续移动端体验方向可检查攻略详情页正文段落和小节导航在 320-390px 宽度下是否还需要进一步收紧；网络恢复后继续优先推送本地领先提交。
+
 ## 2026-07-13 尿不湿购买攻略承接优化
 
 - 时间：2026-07-13 03:02 JST
