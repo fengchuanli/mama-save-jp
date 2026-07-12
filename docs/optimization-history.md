@@ -1,5 +1,25 @@
 # 优化记录
 
+## 2026-07-13 首页优惠货架状态提示优化
+
+- 时间：2026-07-13 00:02 JST
+- 当前优化方向：00:00 内容结构。
+- 目标：首页“本周值得买”货架已经优先展示 active 优惠，但货架卡片本身没有直接显示 `availabilityStatus` 对应的“现在可确认 / 等下一场 / 暂不可买 / 待确认”状态，用户需要进入 `/deals` 后才知道每条是否适合今天继续核对。本次只优化优惠卡片展示层，不触碰优惠数据。
+- 修改文件：
+  - `components/DealCard.tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查 `DealShelfCard`、`DealSummaryCard` 和 `DealCard` 均使用 `dealStatusMeta` 展示状态标签。
+  - `npm run sitemap`
+  - `git diff --check`
+  - `npm run build`
+- 结果：优惠货架卡片和完整优惠卡片都能直接显示状态标签，首页用户可以先判断“现在可确认”还是“等下一场”，再决定是否进入详情。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、7 条优惠、14 个日历活动校验通过；状态标签静态检查通过，3 个卡片入口均使用 `dealStatusMeta`；`npm run sitemap` 生成 14 个 URL；`git diff --check` 通过；`npm run build` 已完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“优化首页优惠状态提示”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续内容结构方向可检查首页“本周值得买”标题是否需要按 active/expired 混排情况改成更中性的“近期值得关注”。
+
 ## 2026-07-12 07:32 最新母婴省钱消息整理
 
 - 时间：2026-07-12 07:32 JST

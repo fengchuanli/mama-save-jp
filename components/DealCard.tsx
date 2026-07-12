@@ -5,6 +5,31 @@ import { CardVisual, getDealVisual } from "@/components/VisualMotif";
 const ctaClass =
   "inline-flex min-h-10 items-center justify-center whitespace-nowrap rounded-full bg-linen px-3 py-1 text-xs font-semibold text-stone-700 transition hover:bg-peach sm:justify-start";
 
+const dealStatusMeta: Record<
+  Deal["availabilityStatus"],
+  {
+    label: string;
+    className: string;
+  }
+> = {
+  active: {
+    label: "现在可确认",
+    className: "border-tea/30 bg-tea/10 text-tea"
+  },
+  expired: {
+    label: "等下一场",
+    className: "border-stone-200 bg-stone-50 text-stone-700"
+  },
+  unavailable: {
+    label: "暂不可买",
+    className: "border-rose-200 bg-rose-50 text-rose-700"
+  },
+  unknown: {
+    label: "待确认",
+    className: "border-amber-200 bg-amber-50 text-amber-700"
+  }
+};
+
 function MiniMeta({ label, value }: { label: string; value: string }) {
   return (
     <div>
@@ -28,12 +53,19 @@ function BulletList({ items }: { items: string[] }) {
 }
 
 export function DealSummaryCard({ deal }: { deal: Deal }) {
+  const statusMeta = dealStatusMeta[deal.availabilityStatus];
+
   return (
     <article className="h-full rounded-lg border border-orange-100 bg-white p-4 shadow-soft sm:p-5">
       <CardVisual label={deal.category} tone="warm" variant={getDealVisual(deal)} />
-      <p className="inline-flex rounded-full border border-rose-200 bg-rose-50 px-3 py-1 text-sm font-bold text-rose-700">
-        {deal.highlight}
-      </p>
+      <div className="flex flex-wrap gap-2">
+        <p className="inline-flex rounded-full border border-rose-200 bg-rose-50 px-3 py-1 text-sm font-bold text-rose-700">
+          {deal.highlight}
+        </p>
+        <p className={`inline-flex rounded-full border px-3 py-1 text-sm font-bold ${statusMeta.className}`}>
+          {statusMeta.label}
+        </p>
+      </div>
       <h3 className="mt-3 text-lg font-semibold leading-7 text-ink">{deal.title}</h3>
       <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2">
         <MiniMeta label="平台" value={deal.platform} />
@@ -55,12 +87,19 @@ export function DealSummaryCard({ deal }: { deal: Deal }) {
 }
 
 export function DealShelfCard({ deal }: { deal: Deal }) {
+  const statusMeta = dealStatusMeta[deal.availabilityStatus];
+
   return (
     <article className="h-full rounded-lg border border-orange-100 bg-white p-4 shadow-soft">
       <CardVisual label={deal.category} tone="warm" variant={getDealVisual(deal)} />
-      <p className="inline-flex rounded-full border border-rose-200 bg-rose-50 px-3 py-1 text-sm font-bold text-rose-700">
-        {deal.highlight}
-      </p>
+      <div className="flex flex-wrap gap-2">
+        <p className="inline-flex rounded-full border border-rose-200 bg-rose-50 px-3 py-1 text-sm font-bold text-rose-700">
+          {deal.highlight}
+        </p>
+        <p className={`inline-flex rounded-full border px-3 py-1 text-sm font-bold ${statusMeta.className}`}>
+          {statusMeta.label}
+        </p>
+      </div>
       <h3 className="mt-3 text-lg font-semibold leading-7 text-ink">{deal.title}</h3>
       <p className="mt-2 text-sm font-semibold leading-6 text-stone-700">
         {deal.platform} · {deal.shortPeriod}
@@ -80,6 +119,8 @@ export function DealShelfCard({ deal }: { deal: Deal }) {
 }
 
 export function DealCard({ deal }: { deal: Deal }) {
+  const statusMeta = dealStatusMeta[deal.availabilityStatus];
+
   return (
     <article id={deal.id} className="scroll-mt-24 rounded-lg border border-orange-100 bg-white p-4 shadow-soft sm:p-5">
       <CardVisual label={deal.category} tone="warm" variant={getDealVisual(deal)} />
@@ -90,9 +131,14 @@ export function DealCard({ deal }: { deal: Deal }) {
           </p>
           <h3 className="mt-3 text-lg font-semibold leading-7 text-ink sm:text-xl">{deal.title}</h3>
         </div>
-        <span className="w-fit whitespace-nowrap rounded-full bg-linen px-3 py-1 text-xs font-semibold text-stone-700">
-          {deal.recommendationLabel}
-        </span>
+        <div className="flex flex-wrap gap-2 sm:justify-end">
+          <span className={`w-fit whitespace-nowrap rounded-full border px-3 py-1 text-xs font-semibold ${statusMeta.className}`}>
+            {statusMeta.label}
+          </span>
+          <span className="w-fit whitespace-nowrap rounded-full bg-linen px-3 py-1 text-xs font-semibold text-stone-700">
+            {deal.recommendationLabel}
+          </span>
+        </div>
       </div>
 
       <div className="mt-4 grid grid-cols-1 gap-3 rounded-lg bg-cream p-3 sm:grid-cols-2 lg:grid-cols-4">
