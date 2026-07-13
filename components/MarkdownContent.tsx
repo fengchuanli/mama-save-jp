@@ -1,9 +1,43 @@
 export function MarkdownContent({ content }: { content: string }) {
+  const lines = content.split("\n");
+  const renderedLines: Array<JSX.Element | { index: number; trimmed: string }> = [];
+
+  for (let index = 0; index < lines.length; index += 1) {
+    const line = lines[index];
+    const trimmed = line.trim();
+
+    if (trimmed.startsWith("```")) {
+      const codeLines: string[] = [];
+      let codeIndex = index + 1;
+
+      while (codeIndex < lines.length && !lines[codeIndex].trim().startsWith("```")) {
+        codeLines.push(lines[codeIndex]);
+        codeIndex += 1;
+      }
+
+      renderedLines.push(
+        <pre
+          key={index}
+          className="my-4 overflow-x-auto rounded-lg bg-ink p-3 text-xs leading-6 text-white sm:p-4 sm:text-sm"
+        >
+          <code>{codeLines.join("\n")}</code>
+        </pre>
+      );
+      index = codeIndex;
+      continue;
+    }
+
+    renderedLines.push({ index, trimmed });
+  }
+
   return (
     <>
-      {content.split("\n").map((line, index) => {
-        const trimmed = line.trim();
+      {renderedLines.map((item) => {
+        if (!("trimmed" in item)) {
+          return item;
+        }
 
+        const { index, trimmed } = item;
         if (!trimmed) {
           return <div key={index} className="h-3" />;
         }

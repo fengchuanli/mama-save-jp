@@ -1,5 +1,25 @@
 # 优化记录
 
+## 2026-07-14 攻略正文代码块移动端优化
+
+- 时间：2026-07-14 06:02 JST
+- 当前优化方向：06:00 移动端体验。
+- 目标：多篇攻略里有手机备忘录模板和买前记录模板，但正文渲染器原先把围栏代码块逐行当普通段落输出，窄屏下长模板行容易挤压阅读。本次只优化攻略正文的代码块呈现，不触碰优惠数据。
+- 修改文件：
+  - `components/MarkdownContent.tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查 `MarkdownContent` 是否识别围栏代码块并渲染为可横向滚动的 `pre/code`。
+  - `npm run sitemap`
+  - `git diff --check`
+  - `npm run build`
+- 结果：攻略正文现在会把 ``` 包裹的模板内容渲染为独立代码块，手机端使用小字号、深色背景和 `overflow-x-auto` 横向滚动，避免金额记录模板、清单示例等长行撑破阅读卡片。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、7 条优惠、14 个日历活动校验通过；`MarkdownContent` 静态检查通过，已确认围栏代码块会渲染为可横向滚动的 `pre/code`；`npm run sitemap` 生成 14 个 URL 且 sitemap 无差异；`git diff --check` 通过；`npm run build` 已完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“优化攻略代码块移动端阅读”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续移动端体验方向可继续检查攻略详情页正文列表和小节跳转在 320-390px 宽度下的阅读密度。
+
 ## 2026-07-14 纸尿裤好价线攻略承接优化
 
 - 时间：2026-07-14 03:02 JST
