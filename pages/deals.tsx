@@ -327,8 +327,18 @@ export default function Deals({ deals }: DealsProps) {
         </div>
 
         {filteredDeals.length === 0 ? (
-          <div className="mt-8 rounded-lg border border-stone-200 bg-white p-8 text-center text-stone-600 shadow-soft">
-            暂时没有符合条件的优惠，换一个分类或平台看看。
+          <div className="mt-8 rounded-lg border border-stone-200 bg-white p-6 text-center text-stone-600 shadow-soft sm:p-8">
+            <p className="font-semibold text-ink">当前组合没有符合条件的优惠。</p>
+            <p className="mt-2 text-sm leading-6">
+              可以先清除状态、分类和平台筛选，再从“马上要补货”或“等下一场活动”重新进入。
+            </p>
+            <button
+              type="button"
+              onClick={resetFilters}
+              className="mt-4 inline-flex min-h-10 items-center justify-center rounded-full bg-ink px-4 py-2 text-sm font-semibold text-white transition hover:bg-stone-800"
+            >
+              清除全部筛选
+            </button>
           </div>
         ) : null}
         </div>

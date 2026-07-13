@@ -1,5 +1,25 @@
 # 优化记录
 
+## 2026-07-14 值得买筛选空状态承接优化
+
+- 时间：2026-07-14 00:02 JST
+- 当前优化方向：00:00 内容结构。
+- 目标：`/deals` 已有状态、分类和平台三组筛选，但空结果只提示“换一个分类或平台”，没有明确提醒状态筛选也可能限制结果，也没有直接恢复入口。本次只优化筛选后的空状态承接，不触碰优惠数据。
+- 修改文件：
+  - `pages/deals.tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查 `/deals` 空状态文案和 `resetFilters` 按钮。
+  - `npm run sitemap`
+  - `git diff --check`
+  - `npm run build`
+- 结果：`/deals` 空筛选结果现在说明“当前组合没有符合条件的优惠”，提醒可清除状态、分类和平台筛选，并提供“清除全部筛选”按钮直接调用现有 `resetFilters`。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、7 条优惠、14 个日历活动校验通过；`node` 静态检查 `/deals` 空状态标题、状态/分类/平台提示、`resetFilters` 按钮和优化记录通过；`npm run sitemap` 生成 14 个 URL；`git diff --check` 通过；`npm run build` 已完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“优化值得买筛选空状态承接”。
+- 是否推送：失败；提交前远端探测 `git ls-remote --heads origin main` 已无法解析 `github.com`，提交后执行 `git push origin main` 仍失败，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续内容结构方向可继续检查 `/deals` 筛选结果摘要是否需要按 active/expired 分组展示，帮助用户更快理解“现在可买”和“等下一场”的区别。
+
 ## 2026-07-13 07:32 最新母婴省钱消息整理
 
 - 时间：2026-07-13 07:32 JST
