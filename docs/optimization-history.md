@@ -1,5 +1,26 @@
 # 优化记录
 
+## 2026-07-14 纸尿裤好价线攻略承接优化
+
+- 时间：2026-07-14 03:02 JST
+- 当前优化方向：03:00 攻略内容。
+- 目标：昨天已补强《在日本买尿不湿怎么买最划算》，但《纸尿裤怎么算好价》还缺少从购买渠道攻略回到好价线判断的承接。本次只优化这一篇攻略的末尾判断顺序，不触碰优惠数据。
+- 修改文件：
+  - `content/guides/diaper-price-line.mdx`
+  - `public/sitemap.xml`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查纸尿裤好价线攻略阅读时长、更新时间、新增“和购买渠道怎么配合”章节、5 步判断顺序和 sitemap 更新时间。
+  - `npm run sitemap`
+  - `git diff --check`
+  - `npm run build`
+- 结果：纸尿裤好价线攻略从 7 分钟扩展为 8 分钟阅读，`updatedAt` 更新为 `2026-07-14`；新增“和购买渠道怎么配合”，把先选渠道、再算现金单片价、再核对运费/配送/エントリー/积分上限和凑单品的顺序写清楚，帮助用户把“在哪里买”和“今天值不值得买”分开判断。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、7 条优惠、14 个日历活动校验通过；纸尿裤好价线攻略和 sitemap 静态检查通过；`npm run sitemap` 生成 14 个 URL；`git diff --check` 通过；`npm run build` 已完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“完善纸尿裤好价线攻略承接”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续攻略内容方向可继续检查楽天 5/0 日攻略与楽天买回攻略之间是否需要互相补充“先看实际付款，再看积分上限”的内链提示；网络恢复后继续优先推送本地领先提交。
+
 ## 2026-07-14 值得买筛选空状态承接优化
 
 - 时间：2026-07-14 00:02 JST
