@@ -1,5 +1,26 @@
 # 优化记录
 
+## 2026-07-15 楽天 5/0 日攻略承接优化
+
+- 时间：2026-07-15 03:03 JST
+- 当前优化方向：03:00 攻略内容。
+- 目标：平台攻略组里《楽天买回怎么理解》和《PayPay、楽天ペイ等支付返点》已经补强，但《楽天 5と0のつく日》仍偏单点活动说明，缺少和买回、支付返点之间的判断顺序。本次只优化这一篇攻略，不触碰优惠数据。
+- 修改文件：
+  - `content/guides/rakuten-5-0-mama-shopping.mdx`
+  - `public/sitemap.xml`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查楽天 5/0 日攻略阅读时长、更新时间、买回承接章节、支付返点章节和 sitemap 更新时间。
+  - `npm run sitemap`
+  - `git diff --check`
+  - `npm run build`
+- 结果：楽天 5/0 日攻略从 7 分钟扩展为 8 分钟阅读，`updatedAt` 更新为 `2026-07-15`；新增“和买回活动怎么分工”，把清单、买回、5/0 日、实付和积分上限拆成 5 步；新增“付款前再看支付返点”，提醒支付返点只能放在商品好价和活动条件之后判断。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、7 条优惠、14 个日历活动校验通过；`node` 静态检查楽天 5/0 日攻略和 sitemap 通过；`npm run sitemap` 生成 14 个 URL；`git diff --check` 通过；`npm run build` 已完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“完善楽天5和0日攻略承接”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续攻略内容方向可检查支付返点攻略是否需要直接回链到楽天 5/0 日攻略；网络恢复后继续优先推送本地领先提交。
+
 ## 2026-07-15 攻略分组后续动作承接优化
 
 - 时间：2026-07-15 00:04 JST
