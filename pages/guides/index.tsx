@@ -21,6 +21,10 @@ type GuideProblemGroup = {
   id: string;
   title: string;
   description: string;
+  nextAction: {
+    label: string;
+    href: string;
+  };
   slugs: string[];
   readingOrder: Record<string, string>;
 };
@@ -30,6 +34,10 @@ const guideProblemGroups: GuideProblemGroup[] = [
     id: "start",
     title: "先定购物范围",
     description: "还不知道第一批该买什么、去哪家店看时，先用这些攻略把清单收窄。",
+    nextAction: {
+      label: "下一步：看近期省钱节点",
+      href: "/calendar"
+    },
     slugs: ["newborn-shopping-list", "choose-baby-stores-japan"],
     readingOrder: {
       "newborn-shopping-list": "先读：第一批买什么",
@@ -40,6 +48,10 @@ const guideProblemGroups: GuideProblemGroup[] = [
     id: "essentials",
     title: "判断消耗品值不值",
     description: "尿不湿、纸尿裤和药妆店补货先看单价、尺码风险和是否马上会用。",
+    nextAction: {
+      label: "下一步：看本周补货机会",
+      href: "/deals"
+    },
     slugs: ["buy-diapers-japan", "diaper-price-line", "drugstore-coupon"],
     readingOrder: {
       "buy-diapers-japan": "先读：纸尿裤怎么买",
@@ -51,6 +63,10 @@ const guideProblemGroups: GuideProblemGroup[] = [
     id: "platforms",
     title: "看懂平台和返点",
     description: "遇到楽天、5と0のつく日或支付返点时，先确认实付、上限和是否本来就要买。",
+    nextAction: {
+      label: "下一步：按活动日筛选",
+      href: "/calendar"
+    },
     slugs: [
       "rakuten-points-basics",
       "rakuten-5-0-mama-shopping",
@@ -66,6 +82,10 @@ const guideProblemGroups: GuideProblemGroup[] = [
     id: "nursery",
     title: "保育园和童装准备",
     description: "入园清单、姓名贴和换季童装更容易买多，先按场景和尺码判断。",
+    nextAction: {
+      label: "下一步：看保育园用品机会",
+      href: "/deals"
+    },
     slugs: ["nursery-entry-budget-items", "kids-clothes-size-80-90-100"],
     readingOrder: {
       "nursery-entry-budget-items": "先读：入园用品",
@@ -238,6 +258,15 @@ export default function Guides({ guides }: GuidesProps) {
                 <p className="max-w-2xl text-sm leading-6 text-stone-600">
                   {group.description}
                 </p>
+              </div>
+
+              <div className="mb-4 rounded-lg border border-emerald-100 bg-white px-4 py-3 shadow-soft">
+                <Link
+                  href={group.nextAction.href}
+                  className="inline-flex min-h-10 items-center justify-center rounded-full bg-linen px-4 py-2 text-sm font-semibold text-stone-700 transition hover:bg-peach"
+                >
+                  {group.nextAction.label}
+                </Link>
               </div>
 
               <div className="grid gap-5 md:grid-cols-2">
