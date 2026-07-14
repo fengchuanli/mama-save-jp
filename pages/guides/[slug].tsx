@@ -136,7 +136,7 @@ export default function GuideDetail({ guide, relatedGuides }: GuideDetailProps) 
                 <a
                   key={section.id}
                   href={`#${section.id}`}
-                  className="min-h-10 max-w-[78vw] shrink-0 snap-start truncate rounded-full bg-cream px-3 py-2 text-sm text-stone-700 transition hover:bg-linen sm:max-w-none"
+                  className="flex min-h-11 w-[11.5rem] max-w-[70vw] shrink-0 snap-start items-center rounded-lg bg-cream px-3 py-2 text-left text-sm leading-5 text-stone-700 transition hover:bg-linen sm:min-h-10 sm:w-auto sm:max-w-none sm:rounded-full sm:whitespace-nowrap"
                 >
                   {section.title}
                 </a>
