@@ -1,5 +1,26 @@
 # 优化记录
 
+## 2026-07-16 保育园备用衣尺码承接优化
+
+- 时间：2026-07-16 03:04 JST
+- 当前优化方向：03:00 攻略内容。
+- 目标：`保育园入园准备` 攻略已经说明清单分层、姓名贴和备用衣，但缺少和童装尺码判断之间的明确承接。用户容易在清仓时把“便宜备用衣”理解成可以大量提前囤。本次只优化这一篇攻略，不触碰优惠数据。
+- 修改文件：
+  - `content/guides/nursery-entry-budget-items.mdx`
+  - `public/sitemap.xml`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查保育园攻略阅读时长、更新时间、新增“备用衣和尺码怎么配合”章节、园方要求优先判断和 sitemap 更新时间。
+  - `npm run sitemap`
+  - `git diff --check`
+  - `npm run build`
+- 结果：保育园攻略从 8 分钟扩展为 9 分钟阅读，`updatedAt` 更新为 `2026-07-16`；新增“备用衣和尺码怎么配合”章节，把园方规则、宝宝当前稳定尺码、清仓价、当前季节基础款和开园后第二批补货拆成判断顺序，帮助用户把保育园备用衣和周末好看款分开准备。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、7 条优惠、14 个日历活动校验通过；`node` 静态检查保育园攻略尺码承接和 sitemap 日期通过；`npm run sitemap` 生成 14 个 URL；`git diff --check` 通过；`npm run build` 已完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“完善保育园备用衣尺码承接”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续攻略内容方向可检查童装尺码攻略是否需要反向补一句“保育园备用衣按园方规则单独判断”；网络恢复后继续优先推送本地领先提交。
+
 ## 2026-07-16 省钱日历空状态承接优化
 
 - 时间：2026-07-16 00:03 JST
