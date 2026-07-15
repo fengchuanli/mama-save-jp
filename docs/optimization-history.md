@@ -1,5 +1,25 @@
 # 优化记录
 
+## 2026-07-16 省钱日历空状态承接优化
+
+- 时间：2026-07-16 00:03 JST
+- 当前优化方向：00:00 内容结构。
+- 目标：`/calendar` 已支持按购买动作和平台筛选，但当某个动作 + 平台组合没有结果时，空状态只有文字提示，用户需要自己回到上方筛选区恢复。本次只优化省钱日历筛选空状态，不触碰优惠数据。
+- 修改文件：
+  - `pages/calendar.tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查 `/calendar` 空状态标题、清除平台筛选按钮、查看全部节点按钮和响应式按钮布局。
+  - `npm run sitemap`
+  - `git diff --check`
+  - `npm run build`
+- 结果：省钱日历空筛选结果现在明确提示“当前组合没有可看的省钱节点”，并提供“清除平台筛选”和“查看全部节点”两个恢复入口；如果没有选择具体平台，只保留查看全部节点。用户从动作筛选进入后遇到空结果，可以直接恢复到可继续浏览的日历状态。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、7 条优惠、14 个日历活动校验通过；`node` 静态检查省钱日历空状态结构通过；`npm run sitemap` 生成 14 个 URL 且 sitemap 无差异；`git diff --check` 通过；`npm run build` 已完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“优化省钱日历空状态承接”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续内容结构方向可检查 `/calendar` 分组卡片是否需要在“当天确认 / 提前准备 / 先观察”之间增加更清晰的下一步动作文案；网络恢复后继续优先推送本地领先提交。
+
 ## 2026-07-15 07:31 最新母婴省钱消息整理
 
 - 时间：2026-07-15 07:31 JST

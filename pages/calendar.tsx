@@ -76,6 +76,10 @@ export default function Calendar({ events }: CalendarProps) {
         : timingFilteredEvents.filter((event) => event.store === selectedStore),
     [selectedStore, timingFilteredEvents]
   );
+  const resetFilters = () => {
+    setSelectedTiming("全部");
+    setSelectedStore("全部");
+  };
   const groupedEvents = useMemo(
     () =>
       visibleEvents.reduce<Record<string, CalendarEvent[]>>((groups, event) => {
@@ -266,8 +270,29 @@ export default function Calendar({ events }: CalendarProps) {
           ))}
 
           {visibleEvents.length === 0 ? (
-            <div className="rounded-lg border border-stone-200 bg-white p-8 text-center text-stone-600 shadow-soft">
-              当前筛选下没有可看的省钱节点。可以清除平台筛选，或改看全部节点后再按平台找。
+            <div className="rounded-lg border border-stone-200 bg-white p-6 text-center text-stone-600 shadow-soft sm:p-8">
+              <p className="font-semibold text-ink">当前组合没有可看的省钱节点。</p>
+              <p className="mt-2 text-sm leading-6">
+                可以先清除平台筛选，或回到全部节点后再按平台找最近的购买动作。
+              </p>
+              <div className="mt-4 flex flex-col justify-center gap-2 sm:flex-row">
+                {selectedStore !== "全部" ? (
+                  <button
+                    type="button"
+                    onClick={() => setSelectedStore("全部")}
+                    className="inline-flex min-h-10 items-center justify-center rounded-full bg-linen px-4 py-2 text-sm font-semibold text-stone-700 transition hover:bg-peach"
+                  >
+                    清除平台筛选
+                  </button>
+                ) : null}
+                <button
+                  type="button"
+                  onClick={resetFilters}
+                  className="inline-flex min-h-10 items-center justify-center rounded-full bg-ink px-4 py-2 text-sm font-semibold text-white transition hover:bg-stone-800"
+                >
+                  查看全部节点
+                </button>
+              </div>
             </div>
           ) : null}
         </div>
