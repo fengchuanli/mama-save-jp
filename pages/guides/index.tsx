@@ -193,21 +193,31 @@ export default function Guides({ guides }: GuidesProps) {
             </p>
           </div>
 
-          <div
-            aria-label="新手宝妈必读路线"
-            className="no-scrollbar -mx-5 mt-5 flex snap-x snap-mandatory gap-3 overflow-x-auto px-5 pb-1 md:mx-0 md:grid md:snap-none md:grid-cols-3 md:overflow-visible md:px-0 md:pb-0"
-          >
-            {beginnerGuides.map((guide, index) => (
-              <Link
-                key={guide.slug}
-                href={`/guides/${guide.slug}`}
-                className="w-[78vw] min-w-[17rem] shrink-0 snap-start rounded-lg border border-emerald-100 bg-emerald-50 p-4 transition hover:bg-white md:w-auto md:min-w-0"
-              >
-                <p className="text-xs font-semibold text-tea">第 {index + 1} 步</p>
-                <h3 className="mt-2 font-semibold text-ink">{guide.title}</h3>
-                <p className="mt-2 text-sm leading-6 text-stone-600">{guide.description}</p>
-              </Link>
-            ))}
+          <div className="relative">
+            <div
+              aria-label="新手宝妈必读路线"
+              className="no-scrollbar -mx-5 mt-5 flex snap-x snap-mandatory gap-3 overflow-x-auto px-5 pb-1 md:mx-0 md:grid md:snap-none md:grid-cols-3 md:overflow-visible md:px-0 md:pb-0"
+            >
+              {beginnerGuides.map((guide, index) => (
+                <Link
+                  key={guide.slug}
+                  href={`/guides/${guide.slug}`}
+                  className="w-[78vw] min-w-[17rem] shrink-0 snap-start rounded-lg border border-emerald-100 bg-emerald-50 p-4 transition hover:bg-white md:w-auto md:min-w-0"
+                >
+                  <p className="text-xs font-semibold text-tea">第 {index + 1} 步</p>
+                  <h3 className="mt-2 font-semibold text-ink">{guide.title}</h3>
+                  <p className="mt-2 text-sm leading-6 text-stone-600">{guide.description}</p>
+                </Link>
+              ))}
+            </div>
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute bottom-1 right-0 top-5 flex w-14 items-center justify-end bg-gradient-to-l from-white via-white/90 to-white/0 pr-1 md:hidden"
+            >
+              <span className="flex h-8 w-8 items-center justify-center rounded-full border border-emerald-100 bg-white text-lg font-semibold text-tea shadow-soft">
+                ›
+              </span>
+            </div>
           </div>
         </div>
 
@@ -224,21 +234,31 @@ export default function Guides({ guides }: GuidesProps) {
             </p>
           </div>
 
-          <div
-            aria-label="按今天的问题直达"
-            className="no-scrollbar -mx-5 mt-5 flex snap-x snap-mandatory gap-3 overflow-x-auto px-5 pb-1 sm:mx-0 sm:grid sm:snap-none sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-4"
-          >
-            {quickProblemLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="w-[78vw] min-w-[17rem] shrink-0 snap-start rounded-lg border border-emerald-100 bg-emerald-50 p-4 transition hover:border-emerald-200 hover:bg-white sm:w-auto sm:min-w-0 sm:shrink"
-              >
-                <p className="text-xs font-semibold text-tea">{link.label}</p>
-                <h3 className="mt-2 text-base font-semibold text-ink">{link.title}</h3>
-                <p className="mt-2 text-sm leading-6 text-stone-600">{link.description}</p>
-              </Link>
-            ))}
+          <div className="relative">
+            <div
+              aria-label="按今天的问题直达"
+              className="no-scrollbar -mx-5 mt-5 flex snap-x snap-mandatory gap-3 overflow-x-auto px-5 pb-1 sm:mx-0 sm:grid sm:snap-none sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-4"
+            >
+              {quickProblemLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="w-[78vw] min-w-[17rem] shrink-0 snap-start rounded-lg border border-emerald-100 bg-emerald-50 p-4 transition hover:border-emerald-200 hover:bg-white sm:w-auto sm:min-w-0 sm:shrink"
+                >
+                  <p className="text-xs font-semibold text-tea">{link.label}</p>
+                  <h3 className="mt-2 text-base font-semibold text-ink">{link.title}</h3>
+                  <p className="mt-2 text-sm leading-6 text-stone-600">{link.description}</p>
+                </Link>
+              ))}
+            </div>
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute bottom-1 right-0 top-5 flex w-14 items-center justify-end bg-gradient-to-l from-white via-white/90 to-white/0 pr-1 sm:hidden"
+            >
+              <span className="flex h-8 w-8 items-center justify-center rounded-full border border-emerald-100 bg-white text-lg font-semibold text-tea shadow-soft">
+                ›
+              </span>
+            </div>
           </div>
         </div>
 
