@@ -70,27 +70,37 @@ function HomeCalendarActionSection({ events }: { events: CalendarEvent[] }) {
         </Link>
       </div>
 
-      <div className="no-scrollbar -mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 pr-10 md:mx-0 md:grid md:snap-none md:grid-cols-3 md:gap-5 md:overflow-visible md:px-0 md:pb-0 md:pr-0">
-        {events.map((event) => {
-          const meta = calendarTimingMeta[event.buyingTiming];
+      <div className="relative">
+        <div className="no-scrollbar -mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 pr-10 md:mx-0 md:grid md:snap-none md:grid-cols-3 md:gap-5 md:overflow-visible md:px-0 md:pb-0 md:pr-0">
+          {events.map((event) => {
+            const meta = calendarTimingMeta[event.buyingTiming];
 
-          return (
-            <div
-              key={event.id}
-              className="w-[82vw] max-w-[22rem] shrink-0 snap-start md:w-auto md:max-w-none md:shrink"
-            >
-              <Link
-                href={meta.href}
-                className="mb-3 block rounded-lg border border-amber-100 bg-white/85 p-3 shadow-soft transition hover:bg-linen"
+            return (
+              <div
+                key={event.id}
+                className="w-[82vw] max-w-[22rem] shrink-0 snap-start md:w-auto md:max-w-none md:shrink"
               >
-                <p className="text-xs font-semibold text-tea">{meta.label}</p>
-                <h3 className="mt-1 text-base font-semibold text-ink">{meta.title}</h3>
-                <p className="mt-2 text-sm leading-6 text-stone-600">{meta.description}</p>
-              </Link>
-              <CalendarShelfCard event={event} />
-            </div>
-          );
-        })}
+                <Link
+                  href={meta.href}
+                  className="mb-3 block rounded-lg border border-amber-100 bg-white/85 p-3 shadow-soft transition hover:bg-linen"
+                >
+                  <p className="text-xs font-semibold text-tea">{meta.label}</p>
+                  <h3 className="mt-1 text-base font-semibold text-ink">{meta.title}</h3>
+                  <p className="mt-2 text-sm leading-6 text-stone-600">{meta.description}</p>
+                </Link>
+                <CalendarShelfCard event={event} />
+              </div>
+            );
+          })}
+        </div>
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute bottom-2 right-0 top-0 flex w-14 items-center justify-end bg-gradient-to-l from-amber-50 via-amber-50/90 to-amber-50/0 pr-1 md:hidden"
+        >
+          <span className="flex h-8 w-8 items-center justify-center rounded-full border border-amber-100 bg-white text-lg font-semibold text-tea shadow-soft">
+            ›
+          </span>
+        </div>
       </div>
     </section>
   );
