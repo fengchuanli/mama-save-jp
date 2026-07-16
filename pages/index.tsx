@@ -280,6 +280,10 @@ export default function Home({ deals, calendarEvents, paymentRebateEvents, guide
         <HorizontalCardSection
           title="本周值得买"
           description="先看本周最值得关注的母婴用品和活动线索，点开后再确认详细条件。"
+          nextAction={{
+            label: "看完后：按状态筛选全部优惠",
+            href: "/deals"
+          }}
           viewAllHref="/deals"
           items={deals}
           getKey={(deal) => deal.id}
@@ -293,6 +297,10 @@ export default function Home({ deals, calendarEvents, paymentRebateEvents, guide
           <HorizontalCardSection
             title="出门前先看支付返点"
             description="去药妆店、AEON、西松屋、超市前，先确认今天哪个支付方式有返还。"
+            nextAction={{
+              label: "看完后：去日历核对活动条件",
+              href: "/calendar"
+            }}
             viewAllHref="/calendar"
             items={paymentRebateEvents}
             getKey={(event) => event.id}
@@ -347,6 +355,10 @@ export default function Home({ deals, calendarEvents, paymentRebateEvents, guide
           <HorizontalCardSection
             title="新手必读路线"
             description="第一次在日本准备母婴用品时，先控制购买范围，再看高频消耗品和平台规则。"
+            nextAction={{
+              label: "看完后：按今天的问题找攻略",
+              href: "/guides"
+            }}
             viewAllHref="/guides"
             items={guides}
             getKey={(guide) => guide.slug}

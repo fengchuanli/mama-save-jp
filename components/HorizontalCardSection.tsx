@@ -4,6 +4,10 @@ import type { ReactNode } from "react";
 type HorizontalCardSectionProps<T> = {
   title: string;
   description?: string;
+  nextAction?: {
+    label: string;
+    href: string;
+  };
   viewAllHref: string;
   viewAllLabel?: string;
   items: T[];
@@ -15,6 +19,7 @@ type HorizontalCardSectionProps<T> = {
 export function HorizontalCardSection<T>({
   title,
   description,
+  nextAction,
   viewAllHref,
   viewAllLabel = "查看全部",
   items,
@@ -29,6 +34,14 @@ export function HorizontalCardSection<T>({
           <h2 className="text-2xl font-semibold tracking-normal text-ink md:text-3xl">{title}</h2>
           {description ? (
             <p className="mt-2 max-w-3xl text-sm leading-6 text-stone-600">{description}</p>
+          ) : null}
+          {nextAction ? (
+            <Link
+              href={nextAction.href}
+              className="mt-3 inline-flex min-h-10 items-center justify-center rounded-full bg-linen px-4 py-2 text-xs font-semibold text-stone-700 transition hover:bg-peach"
+            >
+              {nextAction.label}
+            </Link>
           ) : null}
         </div>
         <Link
