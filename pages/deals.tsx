@@ -28,7 +28,20 @@ const statusFilterLabels: Record<DealStatusFilter, string> = {
 };
 
 const filterScrollerClass =
-  "no-scrollbar -mx-4 flex snap-x snap-mandatory gap-2 overflow-x-auto px-4 pb-1 sm:mx-0 sm:flex-wrap sm:snap-none sm:overflow-visible sm:px-0 sm:pb-0";
+  "no-scrollbar -mx-4 flex snap-x snap-mandatory gap-2 overflow-x-auto px-4 pb-1 pr-10 sm:mx-0 sm:flex-wrap sm:snap-none sm:overflow-visible sm:px-0 sm:pb-0 sm:pr-0";
+
+function MobileScrollHint({ className = "" }: { className?: string }) {
+  return (
+    <div
+      aria-hidden="true"
+      className={`pointer-events-none absolute right-0 flex w-14 items-center justify-end bg-gradient-to-l from-white via-white/90 to-white/0 pr-1 sm:hidden ${className}`}
+    >
+      <span className="flex h-8 w-8 items-center justify-center rounded-full border border-orange-100 bg-white text-lg font-semibold text-tea shadow-soft">
+        ›
+      </span>
+    </div>
+  );
+}
 
 export default function Deals({ deals }: DealsProps) {
   const dealsUrl = getAbsoluteUrl("/deals");
@@ -201,19 +214,22 @@ export default function Deals({ deals }: DealsProps) {
             </p>
           </div>
 
-          <div className="no-scrollbar -mx-4 mt-5 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-1 sm:mx-0 sm:grid sm:snap-none sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-4">
-            {taskEntryRoutes.map((route) => (
-              <button
-                key={route.label}
-                type="button"
-                onClick={() => applyTaskEntry(route.category, route.platform, route.status)}
-                className="w-[78vw] min-w-[17rem] shrink-0 snap-start rounded-lg border border-orange-100 bg-orange-50 p-4 text-left transition hover:bg-linen sm:w-auto sm:min-w-0 sm:shrink"
-              >
-                <p className="text-xs font-semibold text-tea">{route.label}</p>
-                <h3 className="mt-2 font-semibold text-ink">{route.title}</h3>
-                <p className="mt-2 text-sm leading-6 text-stone-600">{route.description}</p>
-              </button>
-            ))}
+          <div className="relative">
+            <div className="no-scrollbar -mx-4 mt-5 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-1 pr-10 sm:mx-0 sm:grid sm:snap-none sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:pb-0 sm:pr-0 lg:grid-cols-4">
+              {taskEntryRoutes.map((route) => (
+                <button
+                  key={route.label}
+                  type="button"
+                  onClick={() => applyTaskEntry(route.category, route.platform, route.status)}
+                  className="w-[78vw] min-w-[17rem] shrink-0 snap-start rounded-lg border border-orange-100 bg-orange-50 p-4 text-left transition hover:bg-linen sm:w-auto sm:min-w-0 sm:shrink"
+                >
+                  <p className="text-xs font-semibold text-tea">{route.label}</p>
+                  <h3 className="mt-2 font-semibold text-ink">{route.title}</h3>
+                  <p className="mt-2 text-sm leading-6 text-stone-600">{route.description}</p>
+                </button>
+              ))}
+            </div>
+            <MobileScrollHint className="bottom-1 top-5" />
           </div>
         </div>
 
@@ -225,26 +241,29 @@ export default function Deals({ deals }: DealsProps) {
                 {statusFilterLabels[selectedStatus]}
               </p>
             </div>
-            <div className={filterScrollerClass}>
-              {statusFilters.map((status) => {
-                const active = selectedStatus === status;
+            <div className="relative">
+              <div className={filterScrollerClass}>
+                {statusFilters.map((status) => {
+                  const active = selectedStatus === status;
 
-                return (
-                  <button
-                    key={status}
-                    type="button"
-                    aria-pressed={active}
-                    onClick={() => setSelectedStatus(status)}
-                    className={`min-h-10 shrink-0 snap-start whitespace-nowrap rounded-full px-4 py-2 text-sm transition ${
-                      active
-                        ? "bg-ink text-white"
-                        : "bg-cream text-stone-700 hover:bg-linen"
-                    }`}
-                  >
-                    {statusFilterLabels[status]}（{statusCounts[status]}）
-                  </button>
-                );
-              })}
+                  return (
+                    <button
+                      key={status}
+                      type="button"
+                      aria-pressed={active}
+                      onClick={() => setSelectedStatus(status)}
+                      className={`min-h-10 shrink-0 snap-start whitespace-nowrap rounded-full px-4 py-2 text-sm transition ${
+                        active
+                          ? "bg-ink text-white"
+                          : "bg-cream text-stone-700 hover:bg-linen"
+                      }`}
+                    >
+                      {statusFilterLabels[status]}（{statusCounts[status]}）
+                    </button>
+                  );
+                })}
+              </div>
+              <MobileScrollHint className="bottom-1 top-0" />
             </div>
           </div>
 
@@ -264,51 +283,57 @@ export default function Deals({ deals }: DealsProps) {
                 ) : null}
               </div>
             </div>
-            <div className={filterScrollerClass}>
-              {categories.map((category) => {
-                const active = selectedCategory === category;
+            <div className="relative">
+              <div className={filterScrollerClass}>
+                {categories.map((category) => {
+                  const active = selectedCategory === category;
 
-                return (
-                  <button
-                    key={category}
-                    type="button"
-                    aria-pressed={active}
-                    onClick={() => setSelectedCategory(category)}
-                    className={`min-h-10 shrink-0 snap-start whitespace-nowrap rounded-full px-4 py-2 text-sm transition ${
-                      active
-                        ? "bg-ink text-white"
-                        : "bg-cream text-stone-700 hover:bg-linen"
-                    }`}
-                  >
-                    {category}
-                  </button>
-                );
-              })}
+                  return (
+                    <button
+                      key={category}
+                      type="button"
+                      aria-pressed={active}
+                      onClick={() => setSelectedCategory(category)}
+                      className={`min-h-10 shrink-0 snap-start whitespace-nowrap rounded-full px-4 py-2 text-sm transition ${
+                        active
+                          ? "bg-ink text-white"
+                          : "bg-cream text-stone-700 hover:bg-linen"
+                      }`}
+                    >
+                      {category}
+                    </button>
+                  );
+                })}
+              </div>
+              <MobileScrollHint className="bottom-1 top-0" />
             </div>
           </div>
 
           <div>
             <p className="mb-3 text-sm font-semibold text-ink">按平台筛选</p>
-            <div className={filterScrollerClass}>
-              {platforms.map((platform) => {
-                const active = selectedPlatform === platform;
+            <div className="relative">
+              <div className={filterScrollerClass}>
+                {platforms.map((platform) => {
+                  const active = selectedPlatform === platform;
 
-                return (
-                  <button
-                    key={platform}
-                    type="button"
-                    aria-pressed={active}
-                    onClick={() => setSelectedPlatform(platform)}
-                    className={`min-h-10 shrink-0 snap-start whitespace-nowrap rounded-full px-4 py-2 text-sm transition ${
-                      active
-                        ? "bg-tea text-white"
-                        : "bg-cream text-stone-700 hover:bg-linen"
-                    }`}
-                  >
-                    {platform}
-                  </button>
-                );
-              })}
+                  return (
+                    <button
+                      key={platform}
+                      type="button"
+                      aria-pressed={active}
+                      onClick={() => setSelectedPlatform(platform)}
+                      className={`min-h-10 shrink-0 snap-start whitespace-nowrap rounded-full px-4 py-2 text-sm transition ${
+                        active
+                          ? "bg-tea text-white"
+                          : "bg-cream text-stone-700 hover:bg-linen"
+                      }`}
+                    >
+                      {platform}
+                    </button>
+                  );
+                })}
+              </div>
+              <MobileScrollHint className="bottom-1 top-0" />
             </div>
           </div>
         </div>
