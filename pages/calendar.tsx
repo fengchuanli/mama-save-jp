@@ -1,5 +1,6 @@
 import type { GetStaticProps } from "next";
 import Head from "next/head";
+import Link from "next/link";
 import { useMemo, useState } from "react";
 import { CalendarStoreGroup } from "@/components/CalendarCard";
 import { Layout } from "@/components/Layout";
@@ -26,30 +27,50 @@ const timingFilters: Array<{
   label: string;
   title: string;
   description: string;
+  nextAction: {
+    label: string;
+    href: string;
+  };
 }> = [
   {
     id: "全部",
     label: "全部节点",
     title: "先看完整日历",
-    description: "适合还没确定要买什么，先了解本周和近期有哪些平台活动。"
+    description: "适合还没确定要买什么，先了解本周和近期有哪些平台活动。",
+    nextAction: {
+      label: "看完后：按今天的问题找攻略",
+      href: "/guides"
+    }
   },
   {
     id: "same-day",
     label: "当天确认",
     title: "今天可能能买",
-    description: "适合已经要补货的用品，结算前重点确认价格、券和积分条件。"
+    description: "适合已经要补货的用品，结算前重点确认价格、券和积分条件。",
+    nextAction: {
+      label: "下一步：去本周值得买核对优惠",
+      href: "/deals"
+    }
   },
   {
     id: "prepare",
     label: "提前准备",
     title: "先列清单等节点",
-    description: "适合大促或规则型活动，先记录平时价和要买的刚需品。"
+    description: "适合大促或规则型活动，先记录平时价和要买的刚需品。",
+    nextAction: {
+      label: "下一步：先读平台规则攻略",
+      href: "/guides#guide-group-platforms"
+    }
   },
   {
     id: "watch",
     label: "先观察",
     title: "看到具体价格再买",
-    description: "适合活动已结束、规则未完整或只适合做下次购买参考的节点。"
+    description: "适合活动已结束、规则未完整或只适合做下次购买参考的节点。",
+    nextAction: {
+      label: "下一步：先看过期但可准备的优惠",
+      href: "/deals"
+    }
   }
 ];
 
@@ -94,6 +115,9 @@ export default function Calendar({ events }: CalendarProps) {
   );
   const selectedTimingLabel =
     timingFilters.find((filter) => filter.id === selectedTiming)?.label ?? "全部节点";
+  const selectedTimingAction =
+    timingFilters.find((filter) => filter.id === selectedTiming)?.nextAction ??
+    timingFilters[0].nextAction;
   const selectedStoreLabel =
     selectedStore === "全部" ? "全部平台" : selectedStore;
   const resultSummary =
@@ -259,10 +283,20 @@ export default function Calendar({ events }: CalendarProps) {
 
         <div className="space-y-5 sm:space-y-7">
           <div className="rounded-lg border border-amber-100 bg-white px-4 py-3 text-sm leading-6 text-stone-600 shadow-soft sm:px-5">
-            <span className="font-semibold text-ink">{resultSummary}</span>
-            <span className="ml-0 block sm:ml-2 sm:inline">
-              先看同一动作下的活动，再进入卡片核对适合买什么、注意事项和官方来源。
-            </span>
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <p>
+                <span className="font-semibold text-ink">{resultSummary}</span>
+                <span className="ml-0 block sm:ml-2 sm:inline">
+                  先看同一动作下的活动，再进入卡片核对适合买什么、注意事项和官方来源。
+                </span>
+              </p>
+              <Link
+                href={selectedTimingAction.href}
+                className="inline-flex min-h-10 shrink-0 items-center justify-center rounded-full bg-linen px-4 py-2 text-xs font-semibold text-stone-700 transition hover:bg-peach"
+              >
+                {selectedTimingAction.label}
+              </Link>
+            </div>
           </div>
 
           {Object.entries(groupedEvents).map(([store, storeEvents]) => (
