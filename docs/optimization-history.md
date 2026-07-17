@@ -1,5 +1,26 @@
 # 优化记录
 
+## 2026-07-18 选店攻略尺码用途过滤优化
+
+- 时间：2026-07-18 03:02 JST
+- 当前优化方向：03:00 攻略内容。
+- 目标：《西松屋、バースデイ、赤ちゃん本舗 新手宝妈怎么选》已经说明三家店的基础差异，但用户从“去哪家店”进入时，还缺少先按童装尺码、保育园用途和清仓风险过滤购物任务的步骤。本次只优化这一篇攻略，不触碰优惠数据。
+- 修改文件：
+  - `content/guides/choose-baby-stores-japan.mdx`
+  - `public/sitemap.xml`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run sitemap`
+  - `npm run validate:content`
+  - `node` 静态检查选店攻略阅读时长、更新时间、新增“进店前先按尺码和用途过滤”章节，以及 sitemap 更新时间。
+  - `git diff --check`
+  - `npm run build`
+- 结果：选店攻略从 8 分钟扩展为 9 分钟阅读，`updatedAt` 更新为 `2026-07-18`；新增“进店前先按尺码和用途过滤”章节，把西松屋基础备用衣、バースデイ好看款、赤ちゃん本舗实物确认和童装 80/90/100 尺码攻略串起来，帮助用户进店前先按用途和尺码风险筛掉冲动购买。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run sitemap` 生成 14 个 URL；`npm run validate:content` 通过，当前 10 篇攻略、8 条优惠、14 个日历活动校验通过；`node` 静态检查选店攻略尺码用途过滤章节、内链和 sitemap 日期通过；`git diff --check` 通过；`npm run build` 已完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“完善选店攻略尺码用途判断”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续攻略内容方向可继续检查 `newborn-shopping-list.mdx` 是否需要承接到选店攻略，帮助新手从“买什么”继续判断“去哪家先看实物”。
+
 ## 2026-07-18 省钱日历筛选结果下一步承接优化
 
 - 时间：2026-07-18 00:02 JST
