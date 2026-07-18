@@ -74,6 +74,22 @@ const timingFilters: Array<{
   }
 ];
 
+const filterScrollerClass =
+  "no-scrollbar -mx-4 flex snap-x snap-mandatory gap-2 overflow-x-auto px-4 pb-1 pr-10 sm:mx-0 sm:flex-wrap sm:snap-none sm:overflow-visible sm:px-0 sm:pb-0 sm:pr-0";
+
+function MobileScrollHint({ className = "" }: { className?: string }) {
+  return (
+    <div
+      aria-hidden="true"
+      className={`pointer-events-none absolute right-0 flex w-14 items-center justify-end bg-gradient-to-l from-white via-white/90 to-white/0 pr-1 sm:hidden ${className}`}
+    >
+      <span className="flex h-8 w-8 items-center justify-center rounded-full border border-amber-100 bg-white text-lg font-semibold text-tea shadow-soft">
+        ›
+      </span>
+    </div>
+  );
+}
+
 export default function Calendar({ events }: CalendarProps) {
   const calendarUrl = getAbsoluteUrl("/calendar");
   const paymentRebateEvents = getPaymentRebateEvents(events);
@@ -206,37 +222,40 @@ export default function Calendar({ events }: CalendarProps) {
               今天打开日历，先判断是买、准备还是观察
             </h2>
           </div>
-          <div className="no-scrollbar -mx-4 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-1 sm:mx-0 sm:grid sm:snap-none sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-4">
-            {timingFilters.map((filter) => {
-              const active = selectedTiming === filter.id;
-              const count =
-                filter.id === "全部"
-                  ? events.length
-                  : events.filter((event) => event.buyingTiming === filter.id).length;
+          <div className="relative">
+            <div className="no-scrollbar -mx-4 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-1 pr-10 sm:mx-0 sm:grid sm:snap-none sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:pb-0 sm:pr-0 lg:grid-cols-4">
+              {timingFilters.map((filter) => {
+                const active = selectedTiming === filter.id;
+                const count =
+                  filter.id === "全部"
+                    ? events.length
+                    : events.filter((event) => event.buyingTiming === filter.id).length;
 
-              return (
-                <button
-                  key={filter.id}
-                  type="button"
-                  aria-pressed={active}
-                  onClick={() => {
-                    setSelectedTiming(filter.id);
-                    setSelectedStore("全部");
-                  }}
-                  className={`w-[78vw] min-w-[17rem] shrink-0 snap-start rounded-lg border p-4 text-left transition sm:w-auto sm:min-w-0 sm:shrink ${
-                    active
-                      ? "border-tea bg-tea/10"
-                      : "border-orange-100 bg-orange-50 hover:border-peach hover:bg-linen"
-                  }`}
-                >
-                  <span className="inline-flex rounded-full bg-white px-3 py-1 text-xs font-semibold text-stone-600">
-                    {filter.label} · {count} 个
-                  </span>
-                  <span className="mt-3 block text-base font-semibold text-ink">{filter.title}</span>
-                  <span className="mt-2 block text-sm leading-6 text-stone-600">{filter.description}</span>
-                </button>
-              );
-            })}
+                return (
+                  <button
+                    key={filter.id}
+                    type="button"
+                    aria-pressed={active}
+                    onClick={() => {
+                      setSelectedTiming(filter.id);
+                      setSelectedStore("全部");
+                    }}
+                    className={`w-[78vw] min-w-[17rem] shrink-0 snap-start rounded-lg border p-4 text-left transition sm:w-auto sm:min-w-0 sm:shrink ${
+                      active
+                        ? "border-tea bg-tea/10"
+                        : "border-orange-100 bg-orange-50 hover:border-peach hover:bg-linen"
+                    }`}
+                  >
+                    <span className="inline-flex rounded-full bg-white px-3 py-1 text-xs font-semibold text-stone-600">
+                      {filter.label} · {count} 个
+                    </span>
+                    <span className="mt-3 block text-base font-semibold text-ink">{filter.title}</span>
+                    <span className="mt-2 block text-sm leading-6 text-stone-600">{filter.description}</span>
+                  </button>
+                );
+              })}
+            </div>
+            <MobileScrollHint className="bottom-1 top-0" />
           </div>
         </div>
 
@@ -258,26 +277,29 @@ export default function Calendar({ events }: CalendarProps) {
               </button>
             ) : null}
           </div>
-          <div className="no-scrollbar -mx-4 flex snap-x snap-mandatory gap-2 overflow-x-auto px-4 pb-1 sm:mx-0 sm:flex-wrap sm:snap-none sm:overflow-visible sm:px-0 sm:pb-0">
-            {stores.map((store) => {
-              const active = selectedStore === store;
+          <div className="relative">
+            <div className={filterScrollerClass}>
+              {stores.map((store) => {
+                const active = selectedStore === store;
 
-              return (
-                <button
-                  key={store}
-                  type="button"
-                  aria-pressed={active}
-                  onClick={() => setSelectedStore(store)}
-                  className={`min-h-10 shrink-0 snap-start whitespace-nowrap rounded-full px-4 py-2 text-sm transition ${
-                    active
-                      ? "bg-ink text-white"
-                      : "bg-cream text-stone-700 hover:bg-linen"
-                  }`}
-                >
-                  {store}
-                </button>
-              );
-            })}
+                return (
+                  <button
+                    key={store}
+                    type="button"
+                    aria-pressed={active}
+                    onClick={() => setSelectedStore(store)}
+                    className={`min-h-10 shrink-0 snap-start whitespace-nowrap rounded-full px-4 py-2 text-sm transition ${
+                      active
+                        ? "bg-ink text-white"
+                        : "bg-cream text-stone-700 hover:bg-linen"
+                    }`}
+                  >
+                    {store}
+                  </button>
+                );
+              })}
+            </div>
+            <MobileScrollHint className="bottom-1 top-0" />
           </div>
         </div>
 
