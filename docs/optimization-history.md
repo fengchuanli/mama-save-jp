@@ -1,5 +1,26 @@
 # 优化记录
 
+## 2026-07-19 新生儿清单选店承接优化
+
+- 时间：2026-07-19 03:02 JST
+- 当前优化方向：03:00 攻略内容。
+- 目标：《新生儿准备品先买什么》已经说明第一批刚需和线上线下分工，但用户从清单进入后还缺少“哪些必须摸实物、哪些去西松屋买基础款、哪些确认后再线上复购”的下一步判断。本次只优化这一篇攻略，不触碰优惠数据。
+- 修改文件：
+  - `content/guides/newborn-shopping-list.mdx`
+  - `public/sitemap.xml`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run sitemap`
+  - `npm run validate:content`
+  - `node` 静态检查新生儿攻略阅读时长、更新时间、新增“从清单继续判断去哪家先看”章节、选店攻略内链，以及 sitemap 中新生儿攻略 `lastmod`。
+  - `git diff --check`
+  - `npm run build`
+- 结果：新生儿攻略从 7 分钟扩展为 8 分钟阅读，`updatedAt` 更新为 `2026-07-19`；新增“从清单继续判断去哪家先看”章节，把第一批清单拆成“必须摸实物 / 基础款够用 / 确认后复购”三类，并承接到选店攻略，帮助新手从“买什么”继续判断“去哪家先看”。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run sitemap` 生成 14 个 URL；`npm run validate:content` 通过，当前 10 篇攻略、8 条优惠、14 个日历活动校验通过；`node` 静态检查新生儿攻略选店承接和 sitemap 日期通过；`git diff --check` 通过；`npm run build` 已完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“完善新生儿清单选店承接”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续攻略内容方向可继续检查《在日本买尿不湿怎么买最划算》是否需要承接到新生儿清单，帮助 0-3 个月家庭从第一批纸尿裤过渡到稳定补货节奏。
+
 ## 2026-07-19 值得买筛选结果后续动作优化
 
 - 时间：2026-07-19 00:03 JST
