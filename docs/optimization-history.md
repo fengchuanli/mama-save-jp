@@ -1,5 +1,25 @@
 # 优化记录
 
+## 2026-07-19 值得买筛选结果后续动作优化
+
+- 时间：2026-07-19 00:03 JST
+- 当前优化方向：00:00 内容结构。
+- 目标：`/deals` 已能按当前任务、状态、分类和平台筛选，但筛选结果摘要只提示继续展开卡片，缺少按“现在可确认 / 等下一场 / 暂不可买 / 待确认”继续去日历或攻略的明确承接。本次只优化优惠列表筛选后的下一步入口，不触碰优惠数据。
+- 修改文件：
+  - `pages/deals.tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查优惠列表状态下一步入口文案、链接和渲染绑定。
+  - `git diff --check`
+  - `npm run sitemap`
+  - `npm run build`
+- 结果：优惠列表筛选结果摘要新增随当前状态变化的下一步入口：全部/现在可确认/等下一场承接到省钱日历，暂不可买/待确认承接到攻略列表。用户筛完优惠后能继续判断“去日历核对活动条件、找下一场节点，还是先读攻略避免误买”。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、8 条优惠、14 个日历活动校验通过；`node` 静态检查优惠列表状态下一步入口通过；`git diff --check` 通过；`npm run sitemap` 生成 14 个 URL 且 sitemap 无差异；`npm run build` 已完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“优化值得买筛选后续动作”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续内容结构方向可检查 `/calendar` 或 `/guides` 是否还存在筛选后只显示结果、缺少后续动作的摘要区；网络恢复后继续优先推送本地领先提交。
+
 ## 2026-07-18 07:31 最新母婴省钱消息整理
 
 - 时间：2026-07-18 07:31 JST

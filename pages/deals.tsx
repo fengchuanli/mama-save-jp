@@ -1,5 +1,6 @@
 import type { GetStaticProps } from "next";
 import Head from "next/head";
+import Link from "next/link";
 import { useMemo, useState } from "react";
 import { DealCard } from "@/components/DealCard";
 import { Layout } from "@/components/Layout";
@@ -25,6 +26,35 @@ const statusFilterLabels: Record<DealStatusFilter, string> = {
   expired: "等下一场",
   unavailable: "暂不可买",
   unknown: "待确认"
+};
+
+const statusNextActions: Record<
+  DealStatusFilter,
+  {
+    label: string;
+    href: string;
+  }
+> = {
+  全部: {
+    label: "下一步：去日历核对最近节点",
+    href: "/calendar"
+  },
+  active: {
+    label: "下一步：去日历核对活动条件",
+    href: "/calendar"
+  },
+  expired: {
+    label: "下一步：去日历找下一场节点",
+    href: "/calendar"
+  },
+  unavailable: {
+    label: "下一步：先读攻略找替代买法",
+    href: "/guides"
+  },
+  unknown: {
+    label: "下一步：先读攻略避免误买",
+    href: "/guides"
+  }
 };
 
 const filterScrollerClass =
@@ -180,6 +210,7 @@ export default function Deals({ deals }: DealsProps) {
     filteredDeals.length > 0
       ? `${statusFilterLabels[selectedStatus]} / ${selectedCategoryLabel} / ${selectedPlatformLabel}：当前 ${filteredDeals.length} 条优惠机会`
       : `${statusFilterLabels[selectedStatus]} / ${selectedCategoryLabel} / ${selectedPlatformLabel}：暂时没有匹配的优惠机会`;
+  const selectedStatusAction = statusNextActions[selectedStatus];
 
   return (
     <Layout
@@ -339,10 +370,20 @@ export default function Deals({ deals }: DealsProps) {
         </div>
 
         <div className="mb-5 rounded-lg border border-orange-100 bg-white px-4 py-3 text-sm leading-6 text-stone-600 shadow-soft sm:px-5">
-          <span className="font-semibold text-ink">{resultSummary}</span>
-          <span className="ml-0 block sm:ml-2 sm:inline">
-            先看状态和确定性，再展开卡片核对参加方法、跳过条件和官方来源。
-          </span>
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <p>
+              <span className="font-semibold text-ink">{resultSummary}</span>
+              <span className="ml-0 block sm:ml-2 sm:inline">
+                先看状态和确定性，再展开卡片核对参加方法、跳过条件和官方来源。
+              </span>
+            </p>
+            <Link
+              href={selectedStatusAction.href}
+              className="inline-flex min-h-10 shrink-0 items-center justify-center rounded-full bg-linen px-4 py-2 text-xs font-semibold text-stone-700 transition hover:bg-peach"
+            >
+              {selectedStatusAction.label}
+            </Link>
+          </div>
         </div>
 
         <div className="grid gap-5 md:grid-cols-2">
