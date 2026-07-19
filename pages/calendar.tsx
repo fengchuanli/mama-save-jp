@@ -1,7 +1,8 @@
 import type { GetStaticProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useRouter } from "next/router";
+import { useEffect, useMemo, useState } from "react";
 import { CalendarStoreGroup } from "@/components/CalendarCard";
 import { Layout } from "@/components/Layout";
 import { PaymentRebateSpotlight } from "@/components/PaymentRebateSpotlight";
@@ -21,6 +22,12 @@ type CalendarProps = {
 };
 
 type TimingFilter = "全部" | CalendarEvent["buyingTiming"];
+
+const timingFilterIds: TimingFilter[] = ["全部", "same-day", "prepare", "watch"];
+
+function isTimingFilter(value: unknown): value is TimingFilter {
+  return typeof value === "string" && timingFilterIds.includes(value as TimingFilter);
+}
 
 const timingFilters: Array<{
   id: TimingFilter;
@@ -91,10 +98,24 @@ function MobileScrollHint({ className = "" }: { className?: string }) {
 }
 
 export default function Calendar({ events }: CalendarProps) {
+  const router = useRouter();
   const calendarUrl = getAbsoluteUrl("/calendar");
   const paymentRebateEvents = getPaymentRebateEvents(events);
   const [selectedTiming, setSelectedTiming] = useState<TimingFilter>("全部");
   const [selectedStore, setSelectedStore] = useState("全部");
+  useEffect(() => {
+    if (!router.isReady) {
+      return;
+    }
+
+    const timing = router.query.timing;
+    const nextTiming = Array.isArray(timing) ? timing[0] : timing;
+
+    if (isTimingFilter(nextTiming)) {
+      setSelectedTiming(nextTiming);
+      setSelectedStore("全部");
+    }
+  }, [router.isReady, router.query.timing]);
   const timingFilteredEvents = useMemo(
     () =>
       selectedTiming === "全部"

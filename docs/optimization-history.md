@@ -1,5 +1,26 @@
 # 优化记录
 
+## 2026-07-20 首页省钱节点直达日历筛选优化
+
+- 时间：2026-07-20 00:04 JST
+- 当前优化方向：00:00 内容结构。
+- 目标：首页“最近要关注的省钱节点”已经按“当天确认 / 提前准备 / 先观察”解释行动，但点击每张卡后仍进入完整省钱日历，用户需要再手动选择同一个动作筛选。本次只优化首页省钱节点到 `/calendar` 的承接，不触碰优惠数据。
+- 修改文件：
+  - `pages/index.tsx`
+  - `pages/calendar.tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查首页 3 个 `?timing=` 链接、日历页 `router.query.timing` 初始化和无效参数保护。
+  - `npm run sitemap`
+  - `git diff --check`
+  - `npm run build`
+- 结果：首页省钱节点动作卡分别链接到 `/calendar?timing=same-day`、`/calendar?timing=prepare` 和 `/calendar?timing=watch`；省钱日历读取有效 `timing` 查询参数后自动切换到对应动作筛选，并清空平台筛选，用户从首页进入后能直接看到相同动作下的日历结果。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、8 条优惠、14 个日历活动校验通过；`node` 静态检查首页日历动作链接和日历查询参数初始化通过；`npm run sitemap` 生成 14 个 URL 且 sitemap 无差异；`git diff --check` 通过；`npm run build` 已完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“优化首页省钱节点日历直达”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续内容结构方向可观察首页“本周提醒”和“最近要关注的省钱节点”是否存在重复；网络恢复后继续优先推送本地领先提交。
+
 ## 2026-07-19 07:32 最新母婴省钱消息整理
 
 - 时间：2026-07-19 07:32 JST

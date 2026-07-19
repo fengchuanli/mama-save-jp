@@ -34,19 +34,19 @@ const calendarTimingMeta: Record<
     label: "当天确认",
     title: "今天可能能买",
     description: "适合已经要补货的纸尿裤、湿巾或洗护，先看结算页的券、积分和配送。",
-    href: "/calendar"
+    href: "/calendar?timing=same-day"
   },
   prepare: {
     label: "提前准备",
     title: "先列清单等节点",
     description: "适合大促或规则型活动，先记录平时价，等正式开始后再判断。",
-    href: "/calendar"
+    href: "/calendar?timing=prepare"
   },
   watch: {
     label: "先观察",
     title: "看到具体价格再买",
     description: "适合已结束、只剩入口或规则还不完整的节点，先收藏不急下单。",
-    href: "/calendar"
+    href: "/calendar?timing=watch"
   }
 };
 
