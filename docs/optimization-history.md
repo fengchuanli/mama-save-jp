@@ -1,5 +1,26 @@
 # 优化记录
 
+## 2026-07-20 尿不湿新手补货过渡优化
+
+- 时间：2026-07-20 03:02 JST
+- 当前优化方向：03:00 攻略内容。
+- 目标：《在日本买尿不湿怎么买最划算》已经说明渠道、阶段和好价线配合，但 0-3 个月家庭从新生儿清单进入后，仍容易过早按大促箱购逻辑下单。本次只优化这一篇攻略，补清“出生前少量准备 -> 回家后确认适配 -> 第一次补货 -> 稳定后记录好价线”的过渡，不触碰优惠数据。
+- 修改文件：
+  - `content/guides/buy-diapers-japan.mdx`
+  - `public/sitemap.xml`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run sitemap`
+  - `npm run validate:content`
+  - `node` 静态检查尿不湿攻略阅读时长、更新时间、新增 0-3 个月补货过渡章节、两条内链，以及 sitemap 中尿不湿攻略 `lastmod`。
+  - `git diff --check`
+  - `npm run build`
+- 结果：尿不湿攻略从 8 分钟扩展为 9 分钟阅读，`updatedAt` 更新为 `2026-07-20`；新增“0-3 个月怎么从清单过渡到补货”章节，承接新生儿准备清单和纸尿裤好价线攻略，提醒新手先按宝宝适配和 1-2 周用量补货，再进入稳定好价线判断。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run sitemap` 生成 14 个 URL；`npm run validate:content` 通过，当前 10 篇攻略、8 条优惠、14 个日历活动校验通过；`node` 静态检查尿不湿攻略补货过渡章节、内链和 sitemap 日期通过；`git diff --check` 通过；`npm run build` 已完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“完善尿不湿新手补货过渡”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续攻略内容方向可检查药妆店优惠券攻略是否需要更明确承接到支付返点攻略，帮助线下补货用户区分 App 券、会员积分和支付抽选。
+
 ## 2026-07-20 首页省钱节点直达日历筛选优化
 
 - 时间：2026-07-20 00:04 JST
