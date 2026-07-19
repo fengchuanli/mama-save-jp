@@ -14,6 +14,7 @@ type HorizontalCardSectionProps<T> = {
   getKey: (item: T) => string;
   renderCard: (item: T) => ReactNode;
   className?: string;
+  scrollHintClassName?: string;
 };
 
 export function HorizontalCardSection<T>({
@@ -25,7 +26,8 @@ export function HorizontalCardSection<T>({
   items,
   getKey,
   renderCard,
-  className = ""
+  className = "",
+  scrollHintClassName = "from-cream via-cream/90"
 }: HorizontalCardSectionProps<T>) {
   return (
     <section className={className}>
@@ -52,15 +54,25 @@ export function HorizontalCardSection<T>({
         </Link>
       </div>
 
-      <div className="no-scrollbar -mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 pr-10 md:mx-0 md:grid md:snap-none md:grid-cols-3 md:gap-5 md:overflow-visible md:px-0 md:pb-0 md:pr-0">
-        {items.map((item) => (
-          <div
-            key={getKey(item)}
-            className="w-[82vw] max-w-[22rem] shrink-0 snap-start md:w-auto md:max-w-none md:shrink"
-          >
-            {renderCard(item)}
-          </div>
-        ))}
+      <div className="relative">
+        <div className="no-scrollbar -mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 pr-10 md:mx-0 md:grid md:snap-none md:grid-cols-3 md:gap-5 md:overflow-visible md:px-0 md:pb-0 md:pr-0">
+          {items.map((item) => (
+            <div
+              key={getKey(item)}
+              className="w-[82vw] max-w-[22rem] shrink-0 snap-start md:w-auto md:max-w-none md:shrink"
+            >
+              {renderCard(item)}
+            </div>
+          ))}
+        </div>
+        <div
+          aria-hidden="true"
+          className={`pointer-events-none absolute bottom-2 right-0 top-0 flex w-14 items-center justify-end bg-gradient-to-l ${scrollHintClassName} to-transparent pr-1 md:hidden`}
+        >
+          <span className="flex h-8 w-8 items-center justify-center rounded-full border border-orange-100 bg-white text-lg font-semibold text-tea shadow-soft">
+            ›
+          </span>
+        </div>
       </div>
     </section>
   );

@@ -298,6 +298,7 @@ export default function Home({ deals, calendarEvents, paymentRebateEvents, guide
           items={deals}
           getKey={(deal) => deal.id}
           renderCard={(deal) => <DealShelfCard deal={deal} />}
+          scrollHintClassName="from-[#fff7ed] via-[#fff7ed]/90"
         />
         </div>
       </section>
@@ -315,6 +316,7 @@ export default function Home({ deals, calendarEvents, paymentRebateEvents, guide
             items={paymentRebateEvents}
             getKey={(event) => event.id}
             renderCard={(event) => <PaymentRebateShelfCard event={event} />}
+            scrollHintClassName="from-sky-50 via-sky-50/90"
           />
           <p className="mt-4 text-xs leading-5 text-stone-500">
             活动、返点、库存和适用门店可能变化，购买前请以官方页面、结算页或店头公告为准。
@@ -373,6 +375,7 @@ export default function Home({ deals, calendarEvents, paymentRebateEvents, guide
             items={guides}
             getKey={(guide) => guide.slug}
             renderCard={(guide) => <GuideShelfCard guide={guide} />}
+            scrollHintClassName="from-emerald-50 via-emerald-50/90"
           />
         </div>
       </section>

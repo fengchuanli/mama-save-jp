@@ -1,5 +1,25 @@
 # 优化记录
 
+## 2026-07-20 首页横滑货架移动端提示优化
+
+- 时间：2026-07-20 06:02 JST
+- 当前优化方向：06:00 移动端体验。
+- 目标：首页“本周值得买”“出门前先看支付返点”“新手必读路线”三个横滑货架在手机端隐藏滚动条，用户不一定能发现右侧还有更多卡片。本次只优化复用横滑货架组件的移动端可发现性，不触碰优惠数据。
+- 修改文件：
+  - `components/HorizontalCardSection.tsx`
+  - `pages/index.tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查横滑货架提示属性、`aria-hidden`、`pointer-events-none`、`md:hidden` 和首页三个区块的底色渐隐配置。
+  - `git diff --check`
+  - `npm run build`
+- 结果：`HorizontalCardSection` 新增可选 `scrollHintClassName`，在手机端横滑区域右侧渲染非交互式渐隐层和圆形箭头提示；首页三个横滑货架按各自区块底色传入渐隐颜色，桌面端仍保持三列网格。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、8 条优惠、14 个日历活动校验通过；`node` 静态检查首页横滑货架移动端提示通过；`git diff --check` 通过；`npm run build` 已完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“优化首页横滑货架移动端提示”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续移动端体验方向可检查首页“第一次打开，按现在的状态先走这里”四个入口在窄屏是否需要压缩间距或拆成更适合单手浏览的布局。
+
 ## 2026-07-20 尿不湿新手补货过渡优化
 
 - 时间：2026-07-20 03:02 JST
