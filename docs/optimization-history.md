@@ -1,5 +1,25 @@
 # 优化记录
 
+## 2026-07-21 首页首屏状态入口移动端优化
+
+- 时间：2026-07-21 06:02 JST
+- 当前优化方向：06:00 移动端体验。
+- 目标：首页首屏“第一次打开，按现在的状态先走这里”已有 4 个入口，但手机端单列展示会把首屏拉得过长，用户需要连续下滑才能看到后续“本周提醒”。本次只优化这个首屏入口组的移动端布局，让它变成可横滑的稳定路线卡；桌面端继续保持 2/4 列网格，不触碰优惠数据。
+- 修改文件：
+  - `pages/index.tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查首页首屏状态入口的横滑结构、稳定卡片宽高、桌面网格断点、右侧渐隐提示和下一步文案底部对齐。
+  - `npm run sitemap`
+  - `git diff --check`
+  - `npm run build`
+- 结果：首页首屏 4 个状态入口在手机端改为横滑 snap 卡片，卡片使用稳定宽度和最小高度，下一步文案固定在卡片底部，并增加非交互式右侧渐隐箭头提示；`sm` 及以上仍恢复 2 列，`lg` 及以上保持 4 列。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、8 条优惠、14 个日历活动校验通过；`node` 静态检查首页首屏状态入口移动端布局通过；`npm run sitemap` 生成 14 个 URL 且没有 sitemap 差异；`git diff --check` 通过；`npm run build` 已完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“优化首页首屏状态入口移动端体验”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：网络恢复后继续优先推送本地领先提交；若继续 06:00 移动端体验方向，可检查首页“本周提醒”卡片在窄屏是否需要更紧凑的间距。
+
 ## 2026-07-21 药妆店优惠券支付返点承接优化
 
 - 时间：2026-07-21 03:03 JST

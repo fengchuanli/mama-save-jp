@@ -259,19 +259,31 @@ export default function Home({ deals, calendarEvents, paymentRebateEvents, guide
             </div>
             <div className="mt-8">
               <p className="text-sm font-semibold text-tea">第一次打开，按现在的状态先走这里</p>
-              <div className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-                {quickStartRoutes.map((route) => (
-                  <Link
-                    key={route.label}
-                    href={route.href}
-                    className="rounded-lg border border-orange-100 bg-white/90 p-4 shadow-soft transition hover:border-peach hover:bg-white"
-                  >
-                    <p className="text-xs font-semibold text-tea">{route.label}</p>
-                    <h2 className="mt-2 text-base font-semibold text-ink">{route.title}</h2>
-                    <p className="mt-2 text-sm leading-6 text-stone-600">{route.description}</p>
-                    <p className="mt-3 text-xs font-semibold text-stone-500">{route.nextStep}</p>
-                  </Link>
-                ))}
+              <div className="relative mt-3">
+                <div className="no-scrollbar -mx-5 flex snap-x snap-mandatory gap-3 overflow-x-auto px-5 pb-2 pr-10 sm:mx-0 sm:grid sm:snap-none sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:pb-0 sm:pr-0 lg:grid-cols-4">
+                  {quickStartRoutes.map((route) => (
+                    <Link
+                      key={route.label}
+                      href={route.href}
+                      className="flex min-h-[13rem] w-[74vw] max-w-[18rem] shrink-0 snap-start flex-col rounded-lg border border-orange-100 bg-white/90 p-4 shadow-soft transition hover:border-peach hover:bg-white sm:w-auto sm:max-w-none sm:shrink"
+                    >
+                      <p className="text-xs font-semibold text-tea">{route.label}</p>
+                      <h2 className="mt-2 text-base font-semibold leading-6 text-ink">{route.title}</h2>
+                      <p className="mt-2 text-sm leading-6 text-stone-600">{route.description}</p>
+                      <p className="mt-auto pt-3 text-xs font-semibold leading-5 text-stone-500">
+                        {route.nextStep}
+                      </p>
+                    </Link>
+                  ))}
+                </div>
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute bottom-2 right-0 top-0 flex w-14 items-center justify-end bg-gradient-to-l from-[#fff3e8] via-[#fff3e8]/90 to-[#fff3e8]/0 pr-1 sm:hidden"
+                >
+                  <span className="flex h-8 w-8 items-center justify-center rounded-full border border-orange-100 bg-white text-lg font-semibold text-tea shadow-soft">
+                    ›
+                  </span>
+                </div>
               </div>
             </div>
           </div>
