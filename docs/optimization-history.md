@@ -1,5 +1,25 @@
 # 优化记录
 
+## 2026-07-21 首页亲友试用追问承接优化
+
+- 时间：2026-07-21 00:04 JST
+- 当前优化方向：00:00 内容结构。
+- 目标：首页底部“分享给同在日本的宝妈/宝爸”已经有按场景转发的 3 个入口，但亲友试用发出后还需要更明确的反馈承接。本次只在首页分享区补充 3 个追问提示，让第一次分享后能聚焦第一印象、入口选择和信任问题；不新增表单、后端或追踪，不触碰优惠数据。
+- 修改文件：
+  - `pages/index.tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查首页亲友试用追问文案、3 个追问分类和渲染绑定。
+  - `npm run sitemap`
+  - `git diff --check`
+  - `npm run build`
+- 结果：首页亲友试用分享区新增“30 秒第一印象”“最想点的入口”“信任问题”三条追问卡片，与现有三类转发入口配合，帮助小范围试用时先收集可行动反馈。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、8 条优惠、14 个日历活动校验通过；`node` 静态检查首页亲友试用追问承接通过；`npm run sitemap` 生成 14 个 URL 且 sitemap 无差异；`git diff --check` 通过；`npm run build` 已完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“优化首页亲友试用追问承接”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续增长准备方向可把真实亲友试用收到的原话回填到 `docs/friend-feedback-checklist.md`；网络恢复后继续优先推送本地领先提交。
+
 ## 2026-07-20 07:33 最新母婴省钱消息整理
 
 - 时间：2026-07-20 07:33 JST

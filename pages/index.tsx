@@ -190,6 +190,20 @@ export default function Home({ deals, calendarEvents, paymentRebateEvents, guide
       action: "转发日历"
     }
   ];
+  const shareFollowupPrompts = [
+    {
+      label: "30 秒第一印象",
+      question: "打开后能不能马上看懂这是日本母婴省钱站？"
+    },
+    {
+      label: "最想点的入口",
+      question: "本周值得买、省钱日历、新手攻略里最想先看哪一个？"
+    },
+    {
+      label: "信任问题",
+      question: "哪一句话或哪个字段让你担心价格、库存或活动不准？"
+    }
+  ];
   const weeklyReminderRoutes = [
     {
       label: "今天要补货",
@@ -392,6 +406,17 @@ export default function Home({ deals, calendarEvents, paymentRebateEvents, guide
                 早期先验证“看完能不能判断下一步”，不用一次把首页、优惠和全部攻略都发过去。
                 每次只让对方看 3-5 分钟，再问哪一页有用、哪里不够可信。
               </p>
+              <div className="mt-5 grid gap-3">
+                {shareFollowupPrompts.map((prompt) => (
+                  <div
+                    key={prompt.label}
+                    className="rounded-lg border border-stone-200 bg-white/80 p-3"
+                  >
+                    <p className="text-xs font-semibold text-tea">{prompt.label}</p>
+                    <p className="mt-1 text-sm leading-6 text-stone-600">{prompt.question}</p>
+                  </div>
+                ))}
+              </div>
             </div>
             <div className="grid gap-3">
               {shareTrialRoutes.map((route) => (
