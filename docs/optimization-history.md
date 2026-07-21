@@ -1,5 +1,25 @@
 # 优化记录
 
+## 2026-07-22 攻略分组读后承接优化
+
+- 时间：2026-07-22 00:03 JST
+- 当前优化方向：00:00 内容结构。
+- 目标：`/guides` 已按“先定购物范围、消耗品、平台返点、保育园童装”分组，但每组读完后的行动只有按钮，缺少“为什么去日历或优惠页”的解释。本次只优化攻略列表分组承接，让用户读完一组后知道下一步要核对什么；不触碰优惠数据。
+- 修改文件：
+  - `pages/guides/index.tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查 4 个攻略分组读后承接说明、按钮布局和类型字段。
+  - `npm run sitemap`
+  - `git diff --check`
+  - `npm run build`
+- 结果：攻略列表 4 个问题分组的下一步承接区从单按钮改为“说明 + 按钮”的响应式布局，分别提示读完后去省钱日历分清动作、去优惠列表核对状态/跳过条件、按活动日筛选、或按园方清单控制保育园用品购买量。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、8 条优惠、14 个日历活动校验通过；`node` 静态检查攻略分组承接结构通过；`npm run sitemap` 生成 14 个 URL 且没有 sitemap 差异；`git diff --check` 通过；`npm run build` 已完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“优化攻略分组读后承接”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续内容结构方向可继续检查攻略详情页底部是否能按同一套“读完后去哪里核对”的逻辑承接到 `/deals` 或 `/calendar`；网络恢复后继续优先推送本地领先提交。
+
 ## 2026-07-21 07:33 最新母婴省钱消息整理
 
 - 时间：2026-07-21 07:33 JST

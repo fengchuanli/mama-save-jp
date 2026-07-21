@@ -24,6 +24,7 @@ type GuideProblemGroup = {
   nextAction: {
     label: string;
     href: string;
+    description: string;
   };
   slugs: string[];
   readingOrder: Record<string, string>;
@@ -36,7 +37,8 @@ const guideProblemGroups: GuideProblemGroup[] = [
     description: "还不知道第一批该买什么、去哪家店看时，先用这些攻略把清单收窄。",
     nextAction: {
       label: "下一步：看近期省钱节点",
-      href: "/calendar"
+      href: "/calendar",
+      description: "读完后先把准备清单放到省钱日历里，分清今天能买、提前准备和只观察。"
     },
     slugs: ["newborn-shopping-list", "choose-baby-stores-japan"],
     readingOrder: {
@@ -50,7 +52,8 @@ const guideProblemGroups: GuideProblemGroup[] = [
     description: "尿不湿、纸尿裤和药妆店补货先看单价、尺码风险和是否马上会用。",
     nextAction: {
       label: "下一步：看本周补货机会",
-      href: "/deals"
+      href: "/deals",
+      description: "读完后去优惠列表核对当前状态、跳过条件和官方来源，不直接按标题下单。"
     },
     slugs: ["buy-diapers-japan", "diaper-price-line", "drugstore-coupon"],
     readingOrder: {
@@ -65,7 +68,8 @@ const guideProblemGroups: GuideProblemGroup[] = [
     description: "遇到楽天、5と0のつく日或支付返点时，先确认实付、上限和是否本来就要买。",
     nextAction: {
       label: "下一步：按活动日筛选",
-      href: "/calendar"
+      href: "/calendar",
+      description: "读完后回到日历按活动日筛选，再决定要不要等下一场或当天确认。"
     },
     slugs: [
       "rakuten-points-basics",
@@ -84,7 +88,8 @@ const guideProblemGroups: GuideProblemGroup[] = [
     description: "入园清单、姓名贴和换季童装更容易买多，先按场景和尺码判断。",
     nextAction: {
       label: "下一步：看保育园用品机会",
-      href: "/deals"
+      href: "/deals",
+      description: "读完后只筛保育园用品相关机会，按园方清单和尺码风险控制购买量。"
     },
     slugs: ["nursery-entry-budget-items", "kids-clothes-size-80-90-100"],
     readingOrder: {
@@ -280,10 +285,13 @@ export default function Guides({ guides }: GuidesProps) {
                 </p>
               </div>
 
-              <div className="mb-4 rounded-lg border border-emerald-100 bg-white px-4 py-3 shadow-soft">
+              <div className="mb-4 flex flex-col gap-3 rounded-lg border border-emerald-100 bg-white px-4 py-3 shadow-soft sm:flex-row sm:items-center sm:justify-between">
+                <p className="text-sm leading-6 text-stone-600">
+                  {group.nextAction.description}
+                </p>
                 <Link
                   href={group.nextAction.href}
-                  className="inline-flex min-h-10 items-center justify-center rounded-full bg-linen px-4 py-2 text-sm font-semibold text-stone-700 transition hover:bg-peach"
+                  className="inline-flex min-h-10 shrink-0 items-center justify-center rounded-full bg-linen px-4 py-2 text-sm font-semibold text-stone-700 transition hover:bg-peach"
                 >
                   {group.nextAction.label}
                 </Link>
