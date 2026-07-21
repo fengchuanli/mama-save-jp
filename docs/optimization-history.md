@@ -1,5 +1,25 @@
 # 优化记录
 
+## 2026-07-22 攻略详情横滑提示移动端优化
+
+- 时间：2026-07-22 06:02 JST
+- 当前优化方向：06:00 移动端体验。
+- 目标：攻略详情页已经有顶部“小节跳转”和底部“相关攻略”的横滑区域，但手机端隐藏滚动条，用户不一定能发现右侧还有更多内容。本次只优化攻略详情页的两个横滑区域，增加移动端可发现性提示和稳定卡片高度；不触碰优惠数据。
+- 修改文件：
+  - `pages/guides/[slug].tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `npm run sitemap`
+  - `node` 静态检查攻略详情页 `MobileScrollHint`、`aria-hidden`、`pointer-events-none`、`sm:hidden`、横滑区域右侧留白、相关攻略稳定高度和底部继续阅读文案。
+  - `git diff --check`
+  - `npm run build`
+- 结果：攻略详情页新增本页局部 `MobileScrollHint`，给“小节跳转”和“相关攻略”两个手机横滑区域增加右侧渐隐层和圆形箭头提示；提示层不拦截点击，桌面端保持原本横向标签/三列相关攻略布局。相关攻略卡片在手机端增加稳定最小高度，并把“继续阅读”固定在卡片底部，减少卡片高度跳动。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、8 条优惠、14 个日历活动校验通过；`npm run sitemap` 生成 14 个 URL 且没有 sitemap 差异；`node` 静态检查攻略详情页移动端横滑提示通过；`git diff --check` 通过；`npm run build` 已完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“优化攻略详情移动端横滑提示”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续移动端体验方向可检查攻略正文长列表在窄屏下是否需要更明确的段落间距或列表分组；网络恢复后继续优先推送本地领先提交。
+
 ## 2026-07-22 支付返点攻略药妆店现场承接优化
 
 - 时间：2026-07-22 03:03 JST
