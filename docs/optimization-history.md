@@ -1,5 +1,25 @@
 # 优化记录
 
+## 2026-07-23 首页本周提醒移动端紧凑优化
+
+- 时间：2026-07-23 06:01 JST
+- 当前优化方向：06:00 移动端体验。
+- 目标：首页首屏“本周提醒”在手机端仍使用三张完整卡片，和左侧“第一次打开”入口叠加后会拉长首屏。本次只优化这个提醒区的小屏密度，让用户更快扫到三种动作入口；不触碰优惠数据。
+- 修改文件：
+  - `pages/index.tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `npm run sitemap`
+  - `node` 静态检查首页本周提醒移动端紧凑类名、行动提示小屏/桌面显示分支和链接数据未改。
+  - `git diff --check`
+  - `npm run build`
+- 结果：本周提醒外框在手机端减少内边距，三条提醒从大块堆叠改为更紧凑的行式入口；小屏把行动文案放入右侧胶囊，桌面端仍保留原来的卡片节奏和底部行动文案。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、8 条优惠、14 个日历活动校验通过；`npm run sitemap` 生成 14 个 URL 且没有 sitemap 差异；`node` 静态检查首页本周提醒移动端紧凑结构、行动提示响应式显示和原有链接通过；`git diff --check` 通过；`npm run build` 已完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“优化首页本周提醒移动端密度”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。结束时本地 `main` 领先 `origin/main` 3 个提交。
+- 下一步：后续移动端体验方向可继续检查首页分享区在窄屏是否需要更清晰的反馈入口排序；网络恢复后继续优先推送本地领先提交。
+
 ## 2026-07-23 楽天积分基础与 5/0 日承接优化
 
 - 时间：2026-07-23 03:02 JST

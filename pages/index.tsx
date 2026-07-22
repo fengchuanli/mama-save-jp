@@ -287,23 +287,30 @@ export default function Home({ deals, calendarEvents, paymentRebateEvents, guide
               </div>
             </div>
           </div>
-          <div className="rounded-lg border border-orange-100 bg-white/95 p-5 shadow-soft">
+          <div className="rounded-lg border border-orange-100 bg-white/95 p-4 shadow-soft sm:p-5">
             <p className="text-sm font-semibold text-tea">本周提醒</p>
             <h2 className="mt-2 text-2xl font-semibold text-ink">先按今天的动作走</h2>
             <p className="mt-2 text-sm leading-6 text-stone-600">
               不用一次看完全部信息，先确认是要马上补货、等活动日，还是出门前顺手核对。
             </p>
-            <div className="mt-5 space-y-4">
+            <div className="mt-4 space-y-2 sm:mt-5 sm:space-y-4">
               {weeklyReminderRoutes.map(({ label, title, description, href, action }) => (
                 <Link
                   key={title}
                   href={href}
-                  className="block rounded-lg border border-orange-100 bg-orange-50 p-4 transition hover:border-peach hover:bg-linen"
+                  className="grid gap-2 rounded-lg border border-orange-100 bg-orange-50 p-3 transition hover:border-peach hover:bg-linen sm:block sm:p-4"
                 >
-                  <p className="text-xs font-semibold text-tea">{label}</p>
-                  <p className="font-semibold text-ink">{title}</p>
-                  <p className="mt-1 text-sm leading-6 text-stone-600">{description}</p>
-                  <p className="mt-3 text-xs font-semibold text-tea">{action}</p>
+                  <div className="flex items-start justify-between gap-3">
+                    <div>
+                      <p className="text-xs font-semibold text-tea">{label}</p>
+                      <p className="mt-1 font-semibold leading-6 text-ink sm:mt-0">{title}</p>
+                    </div>
+                    <p className="shrink-0 rounded-full bg-white px-2.5 py-1 text-right text-xs font-semibold leading-5 text-tea sm:hidden">
+                      {action}
+                    </p>
+                  </div>
+                  <p className="text-sm leading-6 text-stone-600 sm:mt-1">{description}</p>
+                  <p className="hidden text-xs font-semibold text-tea sm:mt-3 sm:block">{action}</p>
                 </Link>
               ))}
             </div>
