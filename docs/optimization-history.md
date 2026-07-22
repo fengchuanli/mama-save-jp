@@ -1,5 +1,25 @@
 # 优化记录
 
+## 2026-07-23 攻略详情读后动作承接优化
+
+- 时间：2026-07-23 00:03 JST
+- 当前优化方向：00:00 内容结构。
+- 目标：单篇攻略页正文结束后只有相关攻略横滑区，读者读完后还需要更明确知道该去 `/deals` 核对优惠、去 `/calendar` 看活动日，还是回到攻略分组继续补判断。本次只优化攻略详情页读后承接，不触碰优惠数据。
+- 修改文件：
+  - `pages/guides/[slug].tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `npm run sitemap`
+  - `node` 静态检查攻略详情页 `GuideNextAction`、按分类分支、主次按钮文案和链接。
+  - `git diff --check`
+  - `npm run build`
+- 结果：攻略详情页新增按分类计算的“读完后”动作模块。尿不湿/纸尿裤攻略承接到本周补货机会和日历；平台攻略承接到活动日筛选和当前优惠；保育园/童装攻略承接到保育园用品机会和攻略分组；线下购物攻略承接到出门前活动和本周机会；新生儿等默认场景承接回攻略路线和近期省钱节点。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、8 条优惠、14 个日历活动校验通过；`npm run sitemap` 生成 14 个 URL 且没有 sitemap 差异；`node` 静态检查攻略详情页读后动作结构通过；`git diff --check` 通过；`npm run build` 已完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“优化攻略详情读后动作承接”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。结束时本地 `main...origin/main [ahead 1]`。
+- 下一步：后续内容结构方向可检查首页首屏“第一次打开”和“本周提醒”是否存在重复入口；网络恢复后继续优先推送本地领先提交。
+
 ## 2026-07-22 07:31 最新母婴省钱消息整理
 
 - 时间：2026-07-22 07:31 JST
