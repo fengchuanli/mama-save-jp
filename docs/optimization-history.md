@@ -1,5 +1,26 @@
 # 优化记录
 
+## 2026-07-24 楽天 5/0 日积分使用判断优化
+
+- 时间：2026-07-24 03:03 JST
+- 当前优化方向：03:00 攻略内容。
+- 目标：上次已在楽天积分基础攻略里说明“先理解积分有效期，再看 5/0 日”，但 `rakuten-5-0-mama-shopping.mdx` 本身还缺少正文前段的反向承接和“积分能否被自家用掉”的独立判断。本次只优化这一篇攻略，补清 5/0 日下单前先看积分到账、有效期和使用场景；不触碰优惠数据。
+- 修改文件：
+  - `content/guides/rakuten-5-0-mama-shopping.mdx`
+  - `public/sitemap.xml`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run sitemap`
+  - `npm run validate:content`
+  - `node` 静态检查楽天 5/0 日攻略更新时间、楽天积分基础篇内链、新小节和 sitemap 日期。
+  - `git diff --check`
+  - `npm run build`
+- 结果：楽天 5/0 日攻略 `updatedAt` 更新为 `2026-07-24`；在适合谁部分新增到 `/guides/rakuten-points-basics` 的前置阅读承接；新增“先确认积分能不能被你家用掉”小节，提醒读者先判断通常/期间限定/后日返还积分是否能自然用掉，再把 5/0 日当作付款前复核点。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run sitemap` 生成 14 个 URL；`npm run validate:content` 通过，当前 10 篇攻略、8 条优惠、14 个日历活动校验通过；`node` 静态检查楽天 5/0 日攻略更新时间、楽天积分基础篇内链、新小节和 sitemap 日期通过；`git diff --check` 通过；`npm run build` 已完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“完善楽天5日积分使用判断”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。结束时本地 `main` 领先 `origin/main` 6 个提交。
+- 下一步：后续攻略内容方向可检查 `diaper-price-line.mdx` 和 `buy-diapers-japan.mdx` 是否需要更明确区分“好价线判断”和“新手补货节奏”；网络恢复后继续优先推送本地领先提交。
+
 ## 2026-07-24 首页首屏入口分工优化
 
 - 时间：2026-07-24 00:02 JST
