@@ -111,28 +111,28 @@ export default function Home({ deals, calendarEvents, paymentRebateEvents, guide
     {
       label: "刚开始准备",
       href: "/guides/newborn-shopping-list",
-      title: "先看新手攻略",
+      title: "先确定第一批用品",
       description: "从第一批用品开始，把马上需要、可等等和不急囤分开。",
       nextStep: "下一步：列出第一批清单"
     },
     {
       label: "准备下单",
       href: "/deals",
-      title: "先看本周机会",
-      description: "核对为什么值得买、哪些情况跳过，再去官方页确认。",
+      title: "先判断这单值不值",
+      description: "已经知道要买什么时，核对状态、跳过条件和官方来源。",
       nextStep: "下一步：判断今天能不能买"
     },
     {
       label: "等活动日",
       href: "/calendar",
-      title: "先看省钱日历",
+      title: "先排最近活动节点",
       description: "确认活动规则、适合买什么和注意事项。",
       nextStep: "下一步：挑最近的省钱节点"
     },
     {
       label: "准备出门",
       href: "/calendar",
-      title: "先看支付返点",
+      title: "先确认线下顺手项",
       description: "去药妆店、超市或西松屋前，先确认今天有没有顺手参加的返还。",
       nextStep: "下一步：只买本来要买的用品"
     }
@@ -259,6 +259,9 @@ export default function Home({ deals, calendarEvents, paymentRebateEvents, guide
             </div>
             <div className="mt-8">
               <p className="text-sm font-semibold text-tea">第一次打开，按现在的状态先走这里</p>
+              <p className="mt-2 max-w-2xl text-sm leading-6 text-stone-600">
+                这里按家庭阶段和购物场景选入口；右侧“本周提醒”再按今天要不要买来行动。
+              </p>
               <div className="relative mt-3">
                 <div className="no-scrollbar -mx-5 flex snap-x snap-mandatory gap-3 overflow-x-auto px-5 pb-2 pr-10 sm:mx-0 sm:grid sm:snap-none sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:pb-0 sm:pr-0 lg:grid-cols-4">
                   {quickStartRoutes.map((route) => (
