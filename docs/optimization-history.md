@@ -1,5 +1,25 @@
 # 优化记录
 
+## 2026-07-24 优惠页任务入口移动端稳定优化
+
+- 时间：2026-07-24 06:02 JST
+- 当前优化方向：06:00 移动端体验。
+- 目标：`/deals` 顶部“先按当前任务进入”已支持手机横滑，但 4 张任务入口卡片在窄屏下高度随文案变化，用户横滑时动作入口不够稳定。本次只优化优惠页任务入口卡片的移动端高度和底部动作提示；不触碰优惠数据。
+- 修改文件：
+  - `pages/deals.tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `npm run sitemap`
+  - `node` 静态检查优惠页任务入口稳定高度、纵向布局、底部动作提示和文案。
+  - `git diff --check`
+  - `npm run build`
+- 结果：4 个任务入口新增明确动作提示，并把手机横滑卡片改为 `flex` 纵向布局、稳定最小高度和底部固定动作胶囊，让“马上要补货 / 准备入园 / 出门前顺手确认 / 等下一场活动”在窄屏下更容易扫读和点击。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、8 条优惠、14 个日历活动校验通过；`npm run sitemap` 生成 14 个 URL 且没有 sitemap 差异；`node` 静态检查优惠页任务入口移动端稳定结构通过；`git diff --check` 通过；`npm run build` 已完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“优化优惠页任务入口移动端体验”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。结束时本地 `main` 领先 `origin/main` 7 个提交。
+- 下一步：后续移动端体验方向可继续检查优惠详情卡 `details` 展开后的长列表在窄屏下是否需要更清晰的分组间距；网络恢复后继续优先推送本地领先提交。
+
 ## 2026-07-24 楽天 5/0 日积分使用判断优化
 
 - 时间：2026-07-24 03:03 JST

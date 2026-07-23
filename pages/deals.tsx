@@ -83,6 +83,7 @@ export default function Deals({ deals }: DealsProps) {
       label: "马上要补货",
       title: "先看尿不湿/湿巾",
       description: "适合家里 1-2 周内会用完，先按单片价和库存判断。",
+      action: "筛出可确认机会",
       category: "尿不湿",
       platform: "全部",
       status: "active" as DealStatusFilter
@@ -91,6 +92,7 @@ export default function Deals({ deals }: DealsProps) {
       label: "准备入园",
       title: "先看保育园用品",
       description: "适合按园方清单补小件、备用衣物和姓名贴。",
+      action: "筛出入园用品",
       category: "保育园用品",
       platform: "全部",
       status: "active" as DealStatusFilter
@@ -99,6 +101,7 @@ export default function Deals({ deals }: DealsProps) {
       label: "出门前顺手确认",
       title: "先看支付/门店机会",
       description: "适合去药妆店、超市或西松屋前确认是否值得顺手参加。",
+      action: "筛出支付机会",
       category: "全部",
       platform: "PayPay",
       status: "active" as DealStatusFilter
@@ -107,6 +110,7 @@ export default function Deals({ deals }: DealsProps) {
       label: "等下一场活动",
       title: "先看过期但可准备",
       description: "适合把 5 のつく日等固定节点先记下来，到当天再重新核对。",
+      action: "筛出准备节点",
       category: "全部",
       platform: "全部",
       status: "expired" as DealStatusFilter
@@ -252,11 +256,14 @@ export default function Deals({ deals }: DealsProps) {
                   key={route.label}
                   type="button"
                   onClick={() => applyTaskEntry(route.category, route.platform, route.status)}
-                  className="w-[78vw] min-w-[17rem] shrink-0 snap-start rounded-lg border border-orange-100 bg-orange-50 p-4 text-left transition hover:bg-linen sm:w-auto sm:min-w-0 sm:shrink"
+                  className="flex min-h-[12.5rem] w-[78vw] min-w-[17rem] shrink-0 snap-start flex-col rounded-lg border border-orange-100 bg-orange-50 p-4 text-left transition hover:bg-linen sm:w-auto sm:min-w-0 sm:shrink"
                 >
                   <p className="text-xs font-semibold text-tea">{route.label}</p>
                   <h3 className="mt-2 font-semibold text-ink">{route.title}</h3>
                   <p className="mt-2 text-sm leading-6 text-stone-600">{route.description}</p>
+                  <span className="mt-auto inline-flex min-h-9 w-fit items-center rounded-full bg-white px-3 py-1 text-xs font-semibold text-stone-700 shadow-sm">
+                    {route.action}
+                  </span>
                 </button>
               ))}
             </div>
