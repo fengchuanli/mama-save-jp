@@ -50,6 +50,21 @@ const calendarTimingMeta: Record<
   }
 };
 
+const dealDecisionRoutes = [
+  {
+    label: "现在可确认",
+    description: "打开卡片后先看官方来源、更新时间和购买前确认。"
+  },
+  {
+    label: "等下一场",
+    description: "把它当准备提醒，等活动当天重新核对价格和 Entry。"
+  },
+  {
+    label: "跳过条件",
+    description: "看到不适合自家场景时，直接去日历或攻略找替代买法。"
+  }
+];
+
 function HomeCalendarActionSection({ events }: { events: CalendarEvent[] }) {
   return (
     <section>
@@ -323,19 +338,35 @@ export default function Home({ deals, calendarEvents, paymentRebateEvents, guide
 
       <section className="bg-[#fff7ed]">
         <div className="mx-auto max-w-6xl px-5 py-12">
-        <HorizontalCardSection
-          title="本周值得买"
-          description="先看本周最值得关注的母婴用品和活动线索，点开后再确认详细条件。"
-          nextAction={{
-            label: "看完后：按状态筛选全部优惠",
-            href: "/deals"
-          }}
-          viewAllHref="/deals"
-          items={deals}
-          getKey={(deal) => deal.id}
-          renderCard={(deal) => <DealShelfCard deal={deal} />}
-          scrollHintClassName="from-[#fff7ed] via-[#fff7ed]/90"
-        />
+          <div className="mb-5 grid gap-3 rounded-lg border border-orange-100 bg-white/80 p-4 shadow-soft md:grid-cols-[0.9fr_1.1fr] md:items-center">
+            <div>
+              <p className="text-sm font-semibold text-tea">本周值得买怎么看</p>
+              <h2 className="mt-1 text-xl font-semibold text-ink">
+                先按优惠状态判断，不先研究活动日
+              </h2>
+            </div>
+            <div className="grid gap-2 sm:grid-cols-3">
+              {dealDecisionRoutes.map((route) => (
+                <div key={route.label} className="rounded-lg border border-orange-100 bg-orange-50 p-3">
+                  <p className="text-xs font-semibold text-tea">{route.label}</p>
+                  <p className="mt-1 text-sm leading-6 text-stone-600">{route.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+          <HorizontalCardSection
+            title="本周值得买"
+            description="这里先帮你判断一条优惠现在能不能确认、是否该等下一场、什么情况应该跳过；活动日节奏再去省钱日历核对。"
+            nextAction={{
+              label: "看完后：按状态筛选全部优惠",
+              href: "/deals"
+            }}
+            viewAllHref="/deals"
+            items={deals}
+            getKey={(deal) => deal.id}
+            renderCard={(deal) => <DealShelfCard deal={deal} />}
+            scrollHintClassName="from-[#fff7ed] via-[#fff7ed]/90"
+          />
         </div>
       </section>
 

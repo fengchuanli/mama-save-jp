@@ -1,5 +1,25 @@
 # 优化记录
 
+## 2026-07-25 首页本周值得买分工优化
+
+- 时间：2026-07-25 00:02 JST
+- 当前优化方向：00:00 内容结构。
+- 目标：首页“本周值得买”和“最近要关注的省钱节点”都在承接优惠/活动判断，但前者还缺少明确的读法，容易让新用户分不清优惠列表是按状态判断、日历是按活动节奏判断。本次只优化首页本周值得买区块的分工说明；不触碰优惠数据。
+- 修改文件：
+  - `pages/index.tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `npm run sitemap`
+  - `node` 静态检查首页优惠状态读法、文案和本周值得买/省钱日历分工。
+  - `git diff --check`
+  - `npm run build`
+- 结果：首页“本周值得买”前新增“本周值得买怎么看”提示组，把“现在可确认 / 等下一场 / 跳过条件”三种读卡方式提前说明；同时把区块描述改为先按优惠状态判断，再去省钱日历核对活动日节奏。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、8 条优惠、14 个日历活动校验通过；`npm run sitemap` 生成 14 个 URL；`node` 静态检查首页优惠状态读法和优惠/日历分工文案通过；`git diff --check` 通过；`npm run build` 已完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“优化首页本周值得买分工”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。结束时本地 `main` 领先 `origin/main` 9 个提交。
+- 下一步：后续内容结构方向可检查省钱日历筛选结果区是否需要更明确提示“筛完后去哪里继续判断”；网络恢复后继续优先推送本地领先提交。
+
 ## 2026-07-24 07:32 最新母婴省钱消息整理
 
 - 时间：2026-07-24 07:32 JST
