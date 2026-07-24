@@ -261,7 +261,7 @@ export default function Calendar({ events }: CalendarProps) {
                       setSelectedTiming(filter.id);
                       setSelectedStore("全部");
                     }}
-                    className={`w-[78vw] min-w-[17rem] shrink-0 snap-start rounded-lg border p-4 text-left transition sm:w-auto sm:min-w-0 sm:shrink ${
+                    className={`flex min-h-[13rem] w-[78vw] min-w-[17rem] shrink-0 snap-start flex-col rounded-lg border p-4 text-left transition sm:w-auto sm:min-h-[12rem] sm:min-w-0 sm:shrink ${
                       active
                         ? "border-tea bg-tea/10"
                         : "border-orange-100 bg-orange-50 hover:border-peach hover:bg-linen"
@@ -272,6 +272,9 @@ export default function Calendar({ events }: CalendarProps) {
                     </span>
                     <span className="mt-3 block text-base font-semibold text-ink">{filter.title}</span>
                     <span className="mt-2 block text-sm leading-6 text-stone-600">{filter.description}</span>
+                    <span className="mt-auto block pt-4 text-xs font-semibold text-tea">
+                      {filter.nextAction.label.replace("看完后：", "").replace("下一步：", "")}
+                    </span>
                   </button>
                 );
               })}

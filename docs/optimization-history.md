@@ -1,5 +1,25 @@
 # 优化记录
 
+## 2026-07-25 省钱日历动作筛选移动端稳定优化
+
+- 时间：2026-07-25 06:01 JST
+- 当前优化方向：06:00 移动端体验。
+- 目标：`/calendar` 顶部“先按当前动作进入”在手机端已经可横滑，但 4 张动作筛选卡高度随文案长度变化，且每张卡的读后动作需要先筛选后再看结果区。本次只优化省钱日历动作筛选卡的移动端稳定性和下一步提示；不触碰优惠数据。
+- 修改文件：
+  - `pages/calendar.tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `npm run sitemap`
+  - `node` 静态检查省钱日历动作筛选卡移动端/桌面稳定高度、纵向布局、底部下一步提示和文案前缀处理。
+  - `git diff --check`
+  - `npm run build`
+- 结果：省钱日历 4 张动作筛选卡改为 `flex` 纵向布局，手机端使用稳定 `min-h-[13rem]`，桌面端使用 `sm:min-h-[12rem]`；每张卡底部新增对应下一步动作提示，用户在横滑时就能知道“筛完后去哪里”。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、8 条优惠、14 个日历活动校验通过；`npm run sitemap` 生成 14 个 URL 且没有 sitemap 差异；`node` 静态检查 5 项通过；`git diff --check` 通过；`npm run build` 已完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“优化省钱日历动作筛选移动端体验”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。结束时本地 `main` 领先 `origin/main` 11 个提交。
+- 下一步：后续移动端体验方向可检查省钱日历活动详情展开后的长列表在窄屏下是否需要更清晰的分组间距；网络恢复后继续优先推送本地领先提交。
+
 ## 2026-07-25 纸尿裤好价线阶段判断优化
 
 - 时间：2026-07-25 03:02 JST
