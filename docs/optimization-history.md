@@ -1,5 +1,41 @@
 # 优化记录
 
+## 2026-07-25 07:31 最新母婴省钱消息整理
+
+- 时间：2026-07-25 07:31 JST
+- 当前优化方向：最新日本母婴省钱消息整理。
+- 目标：按自动化要求先复查 `data/deals.json` 中所有 `dataStatus: "verified"` 的优惠，再只同步官方或可靠来源能支撑的信息；重点处理 7/25 当天 Yahoo! 5のつく日和楽天 5と0のつく日是否可作为当天核对点。
+- 已核验优惠复查：
+  - 楽天お買い物マラソン：官方页仍显示活动进行中、全会員対象、エントリー必要、1ショップ 1,000円(税込)以上、買いまわり特典上限 7,000 ポイント和 2026/8/15 頃付与；`rakuten-marathon-diaper-wipes` 保持 `active`。同日楽天 5と0のつく日页面显示 2026/7/25 00:00-23:59 为対象期間、開催日ごとにエントリー必要、楽天カード利用和月間上限 1,000 ポイント。
+  - Yahoo!ショッピング 5のつく日：官方页显示開催期間 2026/7/25 00:00-23:59、要エントリー、エントリー後注文、指定支付 +4%、期间限定 PayPay ポイント和上限 1,000 円相当；`yahoo-5day-diaper-box` 从 `expired` 改为 `active`。
+  - LOHACO パンパース Big 码：商品页仍显示 8,630 円（税込）、64枚×3パック、在庫あり、カート可、20%(1,571pt)、最短翌日お届け、3,780 円以上基本配送料 550 円無料和 1 回订单 2 点まで；`lohaco-pampers-big-super-paypay` 保持 `active`，并提示今天如用 5のつく日需先エントリー后看内訳。
+  - アカチャンホンポ 3/8 日対象カテゴリポイント10倍：官方页仍可访问，显示每月 3/8 结尾日 10:00 至次日 09:59、対象カテゴリ商品ポイント10倍和 Online Shop 限定；今天 7/25 不在窗口，下一场等 7/28 10:00，`akachan-3-8-baby-category` 保持 `active` 规则入口。
+  - アカチャンホンポ おしりナップ厚手 12 包：商品页仍可访问，但 1,199 円限时价已在 7/22 09:59 结束；`akachan-oshirinap-thick-wipes-12pack` 继续保持 `expired`。
+  - 西松屋チラシ・セール入口：官方首页仍显示チラシ/ミミコレ 7/16-7/28、月間奉仕品 7/16-8/11；`nishimatsuya-monthly-nursery-items` 保持 `active`，仍不写具体单品价。
+  - PayPayスクラッチ：官方详情页仍显示 2026/6/19-7/31、200 円以上/回支付、本人确认、抽选返还 100%/5%/0.5% 和付与上限；`paypay-scratch-drugstore-baby-care` 保持 `active`。
+  - 楽天姓名贴搜索页：搜索结果仍显示保育園姓名贴相关商品、送料無料、1,380 円、1,320 円、1,200 円等价格和発送目安；`rakuten-name-sticker-marathon` 保持 `active`，并加入今天 5と0 日需确认エントリー和楽天カード条件。
+- 新增/更新信息：
+  - `data/deals.json` 中 8 条 verified 均更新至 2026-07-25，其中 7 条 active、1 条 expired。
+  - `data/shopping-calendar.json` 刷新楽天买回、楽天 5と0 日、Yahoo! 5のつく日、Yahoo! 超PayPay祭、西松屋、赤ちゃん本舗和 PayPay；楽天 5と0 日和 Yahoo! 5のつく日改为 7/25 当天核对。
+  - マツキヨココカラ、ウエルシア和 Amazon Deals 入口可访问，但未确认到可写入 `verified` 的具体母婴单品价格、券后条件、库存和配送，故只记录到 `docs/latest-signals.md`。
+- 修改文件：
+  - `data/deals.json`
+  - `data/shopping-calendar.json`
+  - `docs/latest-signals.md`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - 官方/平台页面人工核对楽天、楽天 5と0のつく日、Yahoo!ショッピング 5のつく日、Yahoo! 超PayPay祭、LOHACO 商品页、アカチャンホンポ 3/8 日、アカチャンホンポ おしりナップ商品页、西松屋、PayPayスクラッチ、楽天姓名贴搜索结果、マツキヨココカラ、ウエルシア和 Amazon Deals 入口。
+  - `npm run validate:content`
+  - `node` 静态检查 verified 优惠状态、更新时间和重点日历字段。
+  - `git diff --check`
+  - `npm run sitemap`
+  - `npm run build`
+- 当前结果：8 条 verified 优惠均已复查；7 条为 `active`（楽天买回、Yahoo! 5のつく日、LOHACO、赤ちゃん本舗 3/8 日规则入口、西松屋、PayPay、楽天姓名贴），1 条为 `expired`（赤ちゃん本舗 おしりナップ 1,199 円限时价）。未发现需要改为 `unavailable` 的页面失效或商品下架。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、8 条优惠、14 个日历活动校验通过；`node` 静态检查确认 8 条 verified 均更新至 2026-07-25，7 条 active、1 条 expired，Yahoo! 5のつく日已改为 active，楽天 5と0 日和 Yahoo! 5 日日历均为 same-day；`git diff --check` 通过；`npm run sitemap` 生成 14 个 URL 并更新 deals/calendar lastmod；`npm run build` 已完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“复查7月25日母婴优惠状态”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。结束时本地 `main` 领先 `origin/main` 12 个提交。
+- 下一步：7/26 01:59 后复查楽天お買い物マラソン是否结束；7/26 后复查 Yahoo! 5のつく日是否应回到下一场准备/expired；7/28 10:00 后复查赤ちゃん本舗対象カテゴリ积分是否进入窗口。
+
 ## 2026-07-25 省钱日历动作筛选移动端稳定优化
 
 - 时间：2026-07-25 06:01 JST
