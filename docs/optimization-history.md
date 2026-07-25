@@ -1,5 +1,25 @@
 # 优化记录
 
+## 2026-07-26 首页三块内容路线映射优化
+
+- 时间：2026-07-26 00:02 JST
+- 当前优化方向：00:00 内容结构。
+- 目标：首页首屏已经有“第一次打开”和“本周提醒”，下方又依次出现本周值得买、省钱日历和新手攻略，但新用户还需要先理解这三块内容各自负责什么。本次只在首页首屏后补一个“三块内容怎么配合”的路线映射，说明优惠页负责当前状态、日历页负责活动节奏、攻略页负责规则和清单判断；不触碰优惠数据。
+- 修改文件：
+  - `pages/index.tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `npm run sitemap`
+  - `node` 静态检查首页内容路线映射、3 个入口标题和动作文案。
+  - `git diff --check`
+  - `npm run build`
+- 结果：首页首屏后新增“三块内容怎么配合”区块，包含“本周值得买 / 省钱日历 / 新手攻略”三个入口和各自任务说明，让用户先明白该按优惠状态、活动节奏还是问题攻略继续读。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、8 条优惠、14 个日历活动校验通过；`npm run sitemap` 生成 14 个 URL 且没有 sitemap 实质差异；`node` 静态检查首页内容路线映射通过；`git diff --check` 通过；`npm run build` 已完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“优化首页内容路线映射”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。结束时本地 `main` 领先 `origin/main` 13 个提交。
+- 下一步：后续内容结构方向可检查首页底部亲友试用区是否需要和新增三块路线映射保持同一套“发哪一个入口”的口径；网络恢复后继续优先推送本地领先提交。
+
 ## 2026-07-25 07:31 最新母婴省钱消息整理
 
 - 时间：2026-07-25 07:31 JST

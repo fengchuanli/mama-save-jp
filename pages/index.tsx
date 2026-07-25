@@ -65,6 +65,30 @@ const dealDecisionRoutes = [
   }
 ];
 
+const contentRouteMap = [
+  {
+    label: "先看当前能不能买",
+    title: "本周值得买",
+    description: "负责回答某条优惠现在是否可确认、为什么值得看、什么情况应该跳过。",
+    href: "/deals",
+    action: "按优惠状态判断"
+  },
+  {
+    label: "再看什么时候买",
+    title: "省钱日历",
+    description: "负责把楽天、Yahoo!、西松屋、赤ちゃん本舗等活动按当天确认、提前准备和先观察拆开。",
+    href: "/calendar",
+    action: "按活动节奏安排"
+  },
+  {
+    label: "看不懂规则时",
+    title: "新手攻略",
+    description: "负责解释纸尿裤单价、积分有效期、支付返点、保育园和童装尺码这些长期判断。",
+    href: "/guides",
+    action: "按问题补判断"
+  }
+];
+
 function HomeCalendarActionSection({ events }: { events: CalendarEvent[] }) {
   return (
     <section>
@@ -332,6 +356,37 @@ export default function Home({ deals, calendarEvents, paymentRebateEvents, guide
                 </Link>
               ))}
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white">
+        <div className="mx-auto max-w-6xl px-5 py-10">
+          <div className="mb-5 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
+            <div>
+              <p className="text-sm font-semibold text-tea">三块内容怎么配合</p>
+              <h2 className="mt-1 text-2xl font-semibold tracking-normal text-ink md:text-3xl">
+                先判断当前机会，再决定等不等活动日
+              </h2>
+            </div>
+            <p className="max-w-2xl text-sm leading-6 text-stone-600">
+              首页下面的信息按这个顺序读：优惠页看当前状态，日历页看时间节点，攻略页补规则和清单判断。
+            </p>
+          </div>
+
+          <div className="grid gap-3 md:grid-cols-3">
+            {contentRouteMap.map((route) => (
+              <Link
+                key={route.href}
+                href={route.href}
+                className="rounded-lg border border-stone-200 bg-cream p-4 transition hover:border-peach hover:bg-linen"
+              >
+                <p className="text-xs font-semibold text-tea">{route.label}</p>
+                <h3 className="mt-2 text-lg font-semibold text-ink">{route.title}</h3>
+                <p className="mt-2 text-sm leading-6 text-stone-600">{route.description}</p>
+                <p className="mt-3 text-xs font-semibold text-stone-500">{route.action}</p>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
