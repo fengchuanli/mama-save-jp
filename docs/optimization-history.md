@@ -1,5 +1,25 @@
 # 优化记录
 
+## 2026-07-26 省钱日历展开详情移动端分组优化
+
+- 时间：2026-07-26 06:02 JST
+- 当前优化方向：06:00 移动端体验。
+- 目标：`/calendar` 活动卡片展开详情后会出现“活动是什么、怎么参加、省钱示例、下单前确认、注意事项、来源”等多段内容，窄屏下段落之间缺少清晰分隔，扫读成本偏高。本次只优化省钱日历卡片展开详情的移动端分组和间距；不触碰优惠数据。
+- 修改文件：
+  - `components/CalendarCard.tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `npm run sitemap`
+  - `node` 静态检查 `CalendarCard` 的 `DetailSection`、移动端分隔、详情区间距、分组标签和官方链接宽度。
+  - `git diff --check`
+  - `npm run build`
+- 结果：新增 `DetailSection` 小组件，把省钱日历展开详情里的各段内容统一成“先理解 / 再操作 / 看金额 / 看上限 / 下单前 / 容易踩坑 / 最后核对”的移动端扫读结构；手机端各段之间增加分隔线和底部间距，桌面端仍保持两列内容排列。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、8 条优惠、14 个日历活动校验通过；`npm run sitemap` 生成 14 个 URL 且没有 sitemap 实质差异；`node` 静态检查 6 项通过；`git diff --check` 通过；`npm run build` 已完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“优化省钱日历详情移动端分组”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。结束时本地 `main` 领先 `origin/main` 15 个提交。
+- 下一步：后续移动端体验方向可检查优惠详情卡展开后的长列表是否也需要同样的分组结构；网络恢复后继续优先推送本地领先提交。
+
 ## 2026-07-26 保育园清单尺码姓名贴联动优化
 
 - 时间：2026-07-26 03:03 JST

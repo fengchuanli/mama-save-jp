@@ -1,4 +1,5 @@
 import Link from "next/link";
+import type { ReactNode } from "react";
 import type { CalendarEvent } from "@/lib/types";
 import { CardVisual, getCalendarVisual } from "@/components/VisualMotif";
 
@@ -64,6 +65,24 @@ function BulletList({ items }: { items: string[] }) {
         </li>
       ))}
     </ul>
+  );
+}
+
+function DetailSection({
+  label,
+  title,
+  children
+}: {
+  label: string;
+  title: string;
+  children: ReactNode;
+}) {
+  return (
+    <section className="border-b border-stone-200 pb-4 last:border-b-0 last:pb-0 lg:border-b-0 lg:pb-0">
+      <p className="text-xs font-semibold text-tea">{label}</p>
+      <h4 className="mt-1 text-sm font-semibold text-ink">{title}</h4>
+      {children}
+    </section>
   );
 }
 
@@ -158,52 +177,45 @@ export function CalendarCard({ event }: { event: CalendarEvent }) {
           <span className="group-open:hidden">展开详情</span>
           <span className="hidden group-open:inline">收起详情</span>
         </summary>
-        <div className="mt-4 grid gap-4 border-t border-stone-200 pt-4 lg:grid-cols-2">
-          <section>
-            <h4 className="text-sm font-semibold text-ink">活动是什么</h4>
+        <div className="mt-4 grid gap-4 border-t border-stone-200 pt-4 sm:gap-5 lg:grid-cols-2">
+          <DetailSection label="先理解" title="活动是什么">
             <p className="mt-2 text-sm leading-6 text-stone-700">{event.description}</p>
-          </section>
+          </DetailSection>
 
           {event.participationSteps?.length ? (
-            <section>
-              <h4 className="text-sm font-semibold text-ink">怎么参加</h4>
+            <DetailSection label="再操作" title="怎么参加">
               <BulletList items={event.participationSteps} />
-            </section>
+            </DetailSection>
           ) : null}
 
           {event.savingsExample ? (
-            <section>
-              <h4 className="text-sm font-semibold text-ink">省钱示例</h4>
+            <DetailSection label="看金额" title="省钱示例">
               <p className="mt-2 text-sm leading-6 text-stone-700">{event.savingsExample}</p>
-            </section>
+            </DetailSection>
           ) : null}
 
           {event.maxBenefitExample ? (
-            <section>
-              <h4 className="text-sm font-semibold text-ink">最大可省/可返示例</h4>
+            <DetailSection label="看上限" title="最大可省/可返示例">
               <p className="mt-2 text-sm leading-6 text-stone-700">{event.maxBenefitExample}</p>
-            </section>
+            </DetailSection>
           ) : null}
 
-          <section>
-            <h4 className="text-sm font-semibold text-ink">下单前确认</h4>
+          <DetailSection label="下单前" title="确认这些条件">
             <BulletList items={event.checkBeforeBuying} />
-          </section>
+          </DetailSection>
 
-          <section>
-            <h4 className="text-sm font-semibold text-ink">注意事项</h4>
+          <DetailSection label="容易踩坑" title="注意事项">
             <p className="mt-2 text-sm leading-6 text-stone-700">{event.caution}</p>
-          </section>
+          </DetailSection>
 
-          <section>
-            <h4 className="text-sm font-semibold text-ink">来源与更新</h4>
+          <DetailSection label="最后核对" title="来源与更新">
             <p className="mt-2 text-sm leading-6 text-stone-700">更新时间：{event.updatedAt}</p>
             {event.sourceUrl ? (
               <a href={event.sourceUrl} target="_blank" rel="noreferrer" className={`mt-3 w-full sm:w-fit ${linkClass}`}>
                 去官方页面
               </a>
             ) : null}
-          </section>
+          </DetailSection>
         </div>
       </details>
 
