@@ -1,4 +1,5 @@
 import Link from "next/link";
+import type { ReactNode } from "react";
 import type { Deal } from "@/lib/types";
 import { CardVisual, getDealVisual } from "@/components/VisualMotif";
 
@@ -49,6 +50,24 @@ function BulletList({ items }: { items: string[] }) {
         </li>
       ))}
     </ul>
+  );
+}
+
+function DetailSection({
+  label,
+  title,
+  children
+}: {
+  label: string;
+  title: string;
+  children: ReactNode;
+}) {
+  return (
+    <section className="border-b border-stone-200 pb-4 last:border-b-0 last:pb-0 lg:border-b-0 lg:pb-0">
+      <p className="text-xs font-semibold text-tea">{label}</p>
+      <h4 className="mt-1 text-sm font-semibold text-ink">{title}</h4>
+      {children}
+    </section>
   );
 }
 
@@ -160,28 +179,38 @@ export function DealCard({ deal }: { deal: Deal }) {
             <span className="group-open:hidden">展开详情</span>
             <span className="hidden group-open:inline">收起详情</span>
           </summary>
-          <div className="mt-4 grid gap-4 border-t border-stone-200 pt-4 lg:grid-cols-2">
+          <div className="mt-4 grid gap-4 border-t border-stone-200 pt-4 sm:gap-5 lg:grid-cols-2">
+            <DetailSection label="先判断" title="为什么值得看">
+              <p className="mt-2 text-sm leading-6 text-stone-700">{deal.whyWorthBuying}</p>
+            </DetailSection>
+
+            <DetailSection label="先排除" title="什么情况跳过">
+              <p className="mt-2 text-sm leading-6 text-stone-700">{deal.skipWhen}</p>
+            </DetailSection>
+
             {deal.participationSteps?.length ? (
-              <section>
-                <h4 className="text-sm font-semibold text-ink">参加方法</h4>
+              <DetailSection label="再操作" title="参加方法">
                 <BulletList items={deal.participationSteps} />
-              </section>
+              </DetailSection>
             ) : null}
 
-            <section>
-              <h4 className="text-sm font-semibold text-ink">购买前确认</h4>
+            <DetailSection label="下单前" title="购买前确认">
               <BulletList items={deal.checkBeforeBuying} />
-            </section>
+            </DetailSection>
 
             {deal.savingsExample ? (
-              <section>
-                <h4 className="text-sm font-semibold text-ink">省钱示例</h4>
+              <DetailSection label="看金额" title="省钱示例">
                 <p className="mt-2 text-sm leading-6 text-stone-700">{deal.savingsExample}</p>
-              </section>
+              </DetailSection>
             ) : null}
 
-            <section>
-              <h4 className="text-sm font-semibold text-ink">来源与更新</h4>
+            {deal.maxBenefitExample ? (
+              <DetailSection label="看上限" title="最大可省/可返示例">
+                <p className="mt-2 text-sm leading-6 text-stone-700">{deal.maxBenefitExample}</p>
+              </DetailSection>
+            ) : null}
+
+            <DetailSection label="最后核对" title="来源与更新">
               <dl className="mt-2 space-y-2 text-sm leading-6 text-stone-700">
                 <div>
                   <dt className="font-semibold text-ink">更新时间</dt>
@@ -192,7 +221,7 @@ export function DealCard({ deal }: { deal: Deal }) {
                   <dd>{deal.sourceName}</dd>
                 </div>
               </dl>
-            </section>
+            </DetailSection>
           </div>
         </details>
 
