@@ -1,5 +1,26 @@
 # 优化记录
 
+## 2026-07-27 新生儿清单到纸尿裤补货承接优化
+
+- 时间：2026-07-27 03:02 JST
+- 当前优化方向：03:00 攻略内容。
+- 目标：`newborn-shopping-list.mdx` 是新手入口，已经说明“少量试错”，但纸尿裤和湿巾从出生前准备过渡到第一次补货、再过渡到好价线判断的路径还可以更早出现。本次只优化这一篇攻略，补清新生儿阶段不要直接囤箱，以及如何接到纸尿裤购买攻略和好价线攻略；不触碰优惠数据。
+- 修改文件：
+  - `content/guides/newborn-shopping-list.mdx`
+  - `public/sitemap.xml`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run sitemap`
+  - `npm run validate:content`
+  - `node` 静态检查新生儿攻略阅读时长、更新时间、新小节、两条纸尿裤攻略内链、5 步补货顺序和 sitemap 日期。
+  - `git diff --check`
+  - `npm run build`
+- 结果：新生儿准备清单从 8 分钟扩展为 9 分钟阅读，`updatedAt` 更新为 `2026-07-27`；新增“纸尿裤和湿巾先不要直接囤箱”小节，把出生前少量准备、回家后观察用量/漏尿/红屁屁、第一次补货只买 1-2 周用量、稳定后再按好价线箱购的路径写清楚，并内链到 `/guides/buy-diapers-japan` 和 `/guides/diaper-price-line`。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run sitemap` 生成 14 个 URL，并更新首页、攻略列表和新生儿攻略详情页 `lastmod`；`npm run validate:content` 通过，当前 10 篇攻略、8 条优惠、14 个日历活动校验通过；`node` 静态检查 8 项通过；`git diff --check` 通过；`npm run build` 已完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“完善新生儿纸尿裤补货承接”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。结束时本地 `main` 领先 `origin/main` 18 个提交。
+- 下一步：后续攻略内容方向可检查辅食或洗护主题是否需要新增基础攻略；网络恢复后继续优先推送本地领先提交。
+
 ## 2026-07-27 首页亲友试用转发入口结构优化
 
 - 时间：2026-07-27 00:02 JST
