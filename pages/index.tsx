@@ -215,11 +215,11 @@ export default function Home({ deals, calendarEvents, paymentRebateEvents, guide
       action: "转发新手清单"
     },
     {
-      label: "发给最近要补货的朋友",
-      href: "/guides/diaper-price-line",
-      title: "让对方先算纸尿裤好价线",
-      description: "适合正在比较尿不湿、湿巾和箱购活动的人，重点看单片价和跳过条件。",
-      action: "转发好价线"
+      label: "发给今天要买的朋友",
+      href: "/deals",
+      title: "让对方先看本周值得买",
+      description: "适合纸尿裤、湿巾或洗护快用完的人，重点看当前状态、官方来源和跳过条件。",
+      action: "转发优惠页"
     },
     {
       label: "发给等活动日的朋友",
@@ -227,6 +227,13 @@ export default function Home({ deals, calendarEvents, paymentRebateEvents, guide
       title: "让对方先收藏省钱日历",
       description: "适合等楽天、西松屋、PayPay 等活动的人，重点分清当天确认、提前准备和先观察。",
       action: "转发日历"
+    },
+    {
+      label: "发给看不懂规则的朋友",
+      href: "/guides/diaper-price-line",
+      title: "让对方先补一个判断规则",
+      description: "适合正在比较尿不湿、积分或箱购活动的人，重点看单片价、上限和尺码风险。",
+      action: "转发攻略"
     }
   ];
   const shareFollowupPrompts = [
@@ -512,7 +519,7 @@ export default function Home({ deals, calendarEvents, paymentRebateEvents, guide
               </h2>
               <p className="mt-3 max-w-2xl leading-7 text-stone-600">
                 早期先验证“看完能不能判断下一步”，不用一次把首页、优惠和全部攻略都发过去。
-                每次只让对方看 3-5 分钟，再问哪一页有用、哪里不够可信。
+                每次按“今天能不能买、什么时候买、规则看不懂”选一个入口，让对方看 3-5 分钟，再问哪一页有用、哪里不够可信。
               </p>
               <div className="mt-5 grid gap-3">
                 {shareFollowupPrompts.map((prompt) => (
@@ -526,7 +533,7 @@ export default function Home({ deals, calendarEvents, paymentRebateEvents, guide
                 ))}
               </div>
             </div>
-            <div className="grid gap-3">
+            <div className="grid gap-3 sm:grid-cols-2">
               {shareTrialRoutes.map((route) => (
                 <Link
                   key={route.href}

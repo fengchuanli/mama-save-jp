@@ -1,5 +1,25 @@
 # 优化记录
 
+## 2026-07-27 首页亲友试用转发入口结构优化
+
+- 时间：2026-07-27 00:02 JST
+- 当前优化方向：00:00 内容结构。
+- 目标：首页底部“分享给同在日本的宝妈/宝爸”已经有亲友试用话术，但转发入口偏向攻略和日历，缺少对“今天就要买/补货”的 `/deals` 承接。本次只优化首页底部亲友试用区，让分享路线和首页上方“本周值得买 / 省钱日历 / 新手攻略”的三块内容分工保持一致；不触碰优惠数据。
+- 修改文件：
+  - `pages/index.tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `npm run sitemap`
+  - `node` 静态检查亲友试用区包含 `/deals`、`/calendar`、攻略规则入口、分享区任务文案和四卡布局。
+  - `git diff --check`
+  - `npm run build`
+- 结果：亲友试用区从 3 个转发入口调整为 4 个入口：刚开始准备发新手清单，今天要买发 `/deals`，等活动日发 `/calendar`，看不懂规则发纸尿裤好价线攻略；说明文案同步改为按“今天能不能买、什么时候买、规则看不懂”选一个入口，并把右侧卡片在桌面端改为两列布局。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、8 条优惠、14 个日历活动校验通过；`npm run sitemap` 生成 14 个 URL；`node` 静态检查 5 项通过；`git diff --check` 通过；`npm run build` 已完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“优化首页亲友试用转发入口”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。结束时本地 `main` 领先 `origin/main` 17 个提交。
+- 下一步：后续内容结构方向可检查 `docs/friend-trial-message.md` 是否也需要同步成“按对方任务只发一个入口”的具体话术；网络恢复后继续优先推送本地领先提交。
+
 ## 2026-07-26 07:32 最新母婴省钱消息整理
 
 - 时间：2026-07-26 07:32 JST
