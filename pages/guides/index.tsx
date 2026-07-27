@@ -120,24 +120,28 @@ export default function Guides({ guides }: GuidesProps) {
       label: "第一批买什么",
       title: "先收窄清单",
       description: "适合刚开始准备，不确定哪些用品现在就要买。",
+      action: "跳到新手准备组",
       href: "#guide-group-start"
     },
     {
       label: "快要补货",
       title: "先看消耗品",
       description: "适合纸尿裤、湿巾、洗护快用完，想判断能不能囤。",
+      action: "跳到消耗品组",
       href: "#guide-group-essentials"
     },
     {
       label: "活动看不懂",
       title: "先拆平台规则",
       description: "适合遇到楽天积分、5/0 日或支付返点时先核对上限。",
+      action: "跳到平台规则组",
       href: "#guide-group-platforms"
     },
     {
       label: "准备入园换季",
       title: "先按场景买",
       description: "适合保育园清单、姓名贴、备用衣物和童装尺码判断。",
+      action: "跳到入园童装组",
       href: "#guide-group-nursery"
     }
   ];
@@ -207,11 +211,14 @@ export default function Guides({ guides }: GuidesProps) {
                 <Link
                   key={guide.slug}
                   href={`/guides/${guide.slug}`}
-                  className="w-[78vw] min-w-[17rem] shrink-0 snap-start rounded-lg border border-emerald-100 bg-emerald-50 p-4 transition hover:bg-white md:w-auto md:min-w-0"
+                  className="flex min-h-[12.5rem] w-[78vw] min-w-[17rem] shrink-0 snap-start flex-col rounded-lg border border-emerald-100 bg-emerald-50 p-4 transition hover:bg-white md:min-h-[13rem] md:w-auto md:min-w-0"
                 >
                   <p className="text-xs font-semibold text-tea">第 {index + 1} 步</p>
-                  <h3 className="mt-2 font-semibold text-ink">{guide.title}</h3>
+                  <h3 className="mt-2 text-base font-semibold leading-6 text-ink">
+                    {guide.title}
+                  </h3>
                   <p className="mt-2 text-sm leading-6 text-stone-600">{guide.description}</p>
+                  <p className="mt-auto pt-4 text-xs font-semibold text-tea">继续读这一篇</p>
                 </Link>
               ))}
             </div>
@@ -248,11 +255,12 @@ export default function Guides({ guides }: GuidesProps) {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="w-[78vw] min-w-[17rem] shrink-0 snap-start rounded-lg border border-emerald-100 bg-emerald-50 p-4 transition hover:border-emerald-200 hover:bg-white sm:w-auto sm:min-w-0 sm:shrink"
+                  className="flex min-h-[12rem] w-[78vw] min-w-[17rem] shrink-0 snap-start flex-col rounded-lg border border-emerald-100 bg-emerald-50 p-4 transition hover:border-emerald-200 hover:bg-white sm:w-auto sm:min-w-0 sm:shrink lg:min-h-[13rem]"
                 >
                   <p className="text-xs font-semibold text-tea">{link.label}</p>
                   <h3 className="mt-2 text-base font-semibold text-ink">{link.title}</h3>
                   <p className="mt-2 text-sm leading-6 text-stone-600">{link.description}</p>
+                  <p className="mt-auto pt-4 text-xs font-semibold text-tea">{link.action}</p>
                 </Link>
               ))}
             </div>

@@ -1,5 +1,25 @@
 # 优化记录
 
+## 2026-07-28 攻略列表横滑入口移动端稳定优化
+
+- 时间：2026-07-28 06:04 JST
+- 当前优化方向：06:00 移动端体验。
+- 目标：`/guides` 顶部“新手宝妈必读路线”和“按今天的问题直达”在手机端是横滑卡片，但卡片高度主要由标题和描述自然撑开，用户横向扫读时容易出现高度不齐、下一步动作不固定的问题。本次只优化攻略列表页的移动端横滑入口，让卡片高度和底部动作提示更稳定；不触碰优惠数据。
+- 修改文件：
+  - `pages/guides/index.tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `npm run sitemap`
+  - `node` 静态检查攻略列表横滑卡片稳定高度、纵向布局、底部行动提示和 4 个问题入口动作文案。
+  - `git diff --check`
+  - `npm run build`
+- 结果：新手必读路线卡片改为手机端固定最小高度和纵向布局，标题行高更稳定，并把“继续读这一篇”固定到底部；按问题直达卡片也改为固定最小高度和纵向布局，新增“跳到新手准备组 / 消耗品组 / 平台规则组 / 入园童装组”底部动作提示，减少横滑时的高度跳动和读后不确定。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、8 条优惠、14 个日历活动校验通过；`npm run sitemap` 生成 14 个 URL 且没有 sitemap 实质差异；`node` 静态检查 6 项通过；`git diff --check` 通过；`npm run build` 已完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“优化攻略列表移动端入口卡片”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。结束时本地 `main` 领先 `origin/main` 3 个提交。
+- 下一步：后续移动端体验方向可继续检查攻略详情正文段落和列表项在窄屏下是否需要更清晰的段间节奏；网络恢复后继续优先推送本地领先提交。
+
 ## 2026-07-28 线下母婴店活动日前后安排优化
 
 - 时间：2026-07-28 03:02 JST
