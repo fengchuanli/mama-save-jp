@@ -1,5 +1,25 @@
 # 优化记录
 
+## 2026-07-28 亲友试用单入口话术优化
+
+- 时间：2026-07-28 00:02 JST
+- 当前优化方向：00:00 内容结构。
+- 目标：首页底部亲友试用区已经按“刚开始准备 / 今天要买 / 等活动日 / 看不懂规则”拆成 4 个入口，但 `docs/friend-trial-message.md` 仍偏向让亲友先看整站并在多个入口里选择。本次只优化亲友试用发送话术，让人工邀请时能按对方当前任务只发一个入口，减少首次试用认知负担；不触碰优惠数据。
+- 修改文件：
+  - `docs/friend-trial-message.md`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `npm run sitemap`
+  - `node` 静态检查亲友试用话术包含单入口表格、私聊任务、场景首句和关键追问。
+  - `git diff --check`
+  - `npm run build`
+- 结果：新增“先选一个入口”表格，把刚开始准备、今天补货、等活动日、看不懂规则和只想了解站点定位分别映射到 `/guides/newborn-shopping-list`、`/deals`、`/calendar`、`/guides/diaper-price-line` 和首页；私聊和群聊模板改成先发一个最匹配入口，并追问是否能判断买、等或跳过；新增按场景替换首句，方便人工邀请时快速改写。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、8 条优惠、14 个日历活动校验通过；`npm run sitemap` 生成 14 个 URL；`node` 静态检查 8 项通过；`git diff --check` 通过；`npm run build` 已完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“优化亲友试用单入口话术”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。结束时本地 `main` 领先 `origin/main` 1 个提交。
+- 下一步：后续 07:00 增长准备方向可检查 `docs/first-share-checklist.md` 和 `docs/growth-copy-bank.md` 是否也需要同步成“只发一个入口、只问一个反馈点”的发布节奏；网络恢复后继续优先推送本地领先提交。
+
 ## 2026-07-27 07:32 最新母婴省钱消息整理
 
 - 时间：2026-07-27 07:32 JST
