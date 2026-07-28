@@ -1,5 +1,26 @@
 # 优化记录
 
+## 2026-07-29 童装尺码活动价判断优化
+
+- 时间：2026-07-29 03:02 JST
+- 当前优化方向：03:00 攻略内容。
+- 目标：`kids-clothes-size-80-90-100.mdx` 已经说明 80/90/100 尺码和保育园备用衣，但读者看到西松屋、バースデイ、赤ちゃん本舗等活动价时，仍缺少“先买短期会穿的、再排尺码风险、最后核对活动入口”的具体顺序。本次只优化这一篇童装攻略，补强活动日购买判断和站内承接；不触碰优惠数据。
+- 修改文件：
+  - `content/guides/kids-clothes-size-80-90-100.mdx`
+  - `public/sitemap.xml`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run sitemap`
+  - `npm run validate:content`
+  - `node` 静态检查童装尺码攻略阅读时长、更新时间、新小节、三步活动价判断、保育园清单内链、省钱日历内链、本周值得买内链和 sitemap 日期。
+  - `git diff --check`
+  - `npm run build`
+- 结果：童装尺码攻略从 9 分钟扩展为 10 分钟阅读，`updatedAt` 更新为 `2026-07-29`；新增“看到活动价时先买哪一种”小节，把未来 1-2 个月会穿的基础款、半年后才可能穿的高风险品类分开，并用三步顺序说明先筛短期会穿、再排尺码风险、最后看活动入口；新增到 `/guides/nursery-entry-budget-items`、`/calendar` 和 `/deals` 的承接内链。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run sitemap` 生成 14 个 URL，并更新首页、攻略列表和童装尺码攻略详情页 `lastmod`；`npm run validate:content` 通过，当前 10 篇攻略、8 条优惠、14 个日历活动校验通过；`node` 静态检查 8 项通过；`git diff --check` 通过；`npm run build` 已完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“完善童装活动价尺码判断”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。结束时本地 `main` 领先 `origin/main` 6 个提交。
+- 下一步：后续 03:00 攻略内容方向可检查 `drugstore-coupon.mdx` 是否需要补“辅食、洗护、妈妈用品”三类小额补货的活动日前后分工；网络恢复后继续优先推送本地领先提交。
+
 ## 2026-07-29 首次分享单入口决策清单优化
 
 - 时间：2026-07-29 00:02 JST
