@@ -1,5 +1,25 @@
 # 优化记录
 
+## 2026-07-30 增长文案单入口追问结构优化
+
+- 时间：2026-07-30 00:04 JST
+- 当前优化方向：00:00 内容结构。
+- 目标：`docs/friend-trial-message.md` 和 `docs/first-share-checklist.md` 已经形成“每次只发一个入口、只追问一个问题”的执行口径，但 `docs/growth-copy-bank.md` 里的 10 条小红书/朋友圈文案还只有标题、正文和引导页，发布后容易继续收集到分散反馈。本次只优化增长文案库，让每条素材都能直接承接一个入口和一个追问；不触碰优惠数据。
+- 修改文件：
+  - `docs/growth-copy-bank.md`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `node` 静态检查 10 条文案均包含引导页和“发布后只追问”字段，并确认新增单追问原则和发布节奏约束。
+  - `npm run validate:content`
+  - `npm run sitemap`
+  - `git diff --check`
+  - `npm run build`
+- 结果：增长文案库新增“每条文案发布后只追问 1 个问题”的使用原则；10 条文案分别补上对应的单一追问，覆盖新手准备、纸尿裤补货、楽天规则、省钱日历、保育园、店铺选择、童装尺码、药妆券、本周值得买和群友转发；发布节奏新增“连续两次发布之间只换一个变量”的约束，方便判断反馈来自入口、标题还是追问。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`node` 静态检查通过；`npm run validate:content` 通过，当前 10 篇攻略、8 条优惠、14 个日历活动校验通过；`npm run sitemap` 生成 14 个 URL 且没有 sitemap 实质差异；`git diff --check` 通过；`npm run build` 已完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“优化增长文案单入口追问”。
+- 是否推送：失败；三次执行 `git push origin main` 时均无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。结束时本地 `main` 领先 `origin/main` 9 个提交。
+- 下一步：后续 00:00 内容结构方向可检查 `docs/friend-feedback-checklist.md` 是否需要和单入口追问结构对齐；网络恢复后继续优先推送本地领先提交。
+
 ## 2026-07-29 07:32 最新母婴省钱消息整理
 
 - 时间：2026-07-29 07:32 JST
