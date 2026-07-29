@@ -1,5 +1,25 @@
 # 优化记录
 
+## 2026-07-30 攻略详情相关攻略移动端卡片优化
+
+- 时间：2026-07-30 06:00 JST
+- 当前优化方向：06:00 移动端体验。
+- 目标：攻略详情页底部“相关攻略”在手机端横滑时只有分类、标题、描述和“继续阅读”，卡片高度与读后动作不够稳定。本次只优化攻略详情页底部推荐卡片，让窄屏扫读时更清楚每篇推荐读完后该去哪里判断；不触碰优惠数据。
+- 修改文件：
+  - `pages/guides/[slug].tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `npm run sitemap`
+  - `node` 静态检查相关攻略卡片的分类动作文案、稳定最小高度、阅读时长标签、底部固定动作和 hover 状态。
+  - `git diff --check`
+  - `npm run build`
+- 结果：相关攻略卡片新增按分类生成的下一步提示；卡片加入分类和阅读时长标签，移动端最小高度从 `12rem` 调整为 `14.5rem`，底部动作区用 `mt-auto` 固定，横滑时信息顺序和 CTA 位置更稳定。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、8 条优惠、14 个日历活动校验通过；`npm run sitemap` 生成 14 个 URL 且没有 sitemap 实质差异；`node` 静态检查 8 项通过；`git diff --check` 通过；`npm run build` 已完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“优化攻略详情相关卡片移动端体验”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。结束时本地 `main` 领先 `origin/main` 11 个提交。
+- 下一步：后续 06:00 移动端体验方向可检查首页或优惠页底部跨入口 CTA 是否需要同样固定动作区；网络恢复后继续优先推送本地领先提交。
+
 ## 2026-07-30 药妆店券活动日前后分工优化
 
 - 时间：2026-07-30 03:01 JST

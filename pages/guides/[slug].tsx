@@ -138,6 +138,26 @@ function getGuideNextAction(guide: Guide): GuideNextAction {
   };
 }
 
+function getRelatedGuideAction(guide: GuideMeta) {
+  if (["尿不湿", "纸尿裤"].includes(guide.category)) {
+    return "读完后去核对当前补货价";
+  }
+
+  if (guide.category === "平台攻略") {
+    return "读完后回日历看活动窗口";
+  }
+
+  if (["保育园", "童装"].includes(guide.category)) {
+    return "读完后按清单和尺码筛选";
+  }
+
+  if (guide.category === "线下购物") {
+    return "读完后出门前再核对活动";
+  }
+
+  return "读完后继续补齐购买判断";
+}
+
 function MobileScrollHint({ className }: { className: string }) {
   return (
     <div
@@ -294,19 +314,31 @@ export default function GuideDetail({ guide, relatedGuides }: GuideDetailProps) 
           <h2 className="mt-1.5 text-xl font-semibold text-ink sm:mt-2 sm:text-2xl">相关攻略</h2>
         </div>
         <div className="relative">
-          <div className="no-scrollbar -mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 pr-10 md:mx-0 md:grid md:snap-none md:grid-cols-3 md:overflow-visible md:px-0 md:pb-0 md:pr-0">
+          <div className="no-scrollbar -mx-4 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-2 pr-10 sm:gap-4 md:mx-0 md:grid md:snap-none md:grid-cols-3 md:overflow-visible md:px-0 md:pb-0 md:pr-0">
             {relatedGuides.map((item) => (
               <Link
                 key={item.slug}
                 href={`/guides/${item.slug}`}
-                className="flex min-h-[12rem] w-[82vw] max-w-[22rem] shrink-0 snap-start flex-col rounded-lg border border-stone-200 bg-white p-4 shadow-soft sm:p-5 md:w-auto md:max-w-none md:shrink"
+                className="flex min-h-[14.5rem] w-[82vw] max-w-[22rem] shrink-0 snap-start flex-col rounded-lg border border-stone-200 bg-white p-4 shadow-soft transition hover:-translate-y-0.5 hover:border-emerald-200 sm:min-h-[15rem] sm:p-5 md:w-auto md:max-w-none md:shrink"
               >
-                <p className="text-sm text-tea">{item.category}</p>
-                <h3 className="mt-2 font-semibold text-ink">{item.title}</h3>
+                <div className="mb-3 flex flex-wrap gap-1.5">
+                  <span className="rounded-full bg-linen px-2.5 py-1 text-xs text-stone-700">
+                    {item.category}
+                  </span>
+                  <span className="rounded-full bg-mist px-2.5 py-1 text-xs text-stone-700">
+                    {item.readingTime}
+                  </span>
+                </div>
+                <h3 className="text-base font-semibold leading-6 text-ink sm:text-lg sm:leading-7">
+                  {item.title}
+                </h3>
                 <p className="mt-2 text-sm leading-6 text-stone-600 sm:leading-7">
                   {item.description}
                 </p>
-                <p className="mt-auto pt-4 text-xs font-semibold text-stone-500">继续阅读</p>
+                <div className="mt-auto pt-4">
+                  <p className="text-xs leading-5 text-stone-500">{getRelatedGuideAction(item)}</p>
+                  <p className="mt-2 text-xs font-semibold text-tea">继续阅读</p>
+                </div>
               </Link>
             ))}
           </div>
