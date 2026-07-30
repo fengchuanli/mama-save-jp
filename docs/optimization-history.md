@@ -1,5 +1,29 @@
 # 优化记录
 
+## 2026-07-31 首页横滑卡片移动端稳定性优化
+
+- 时间：2026-07-31 06:03 JST
+- 当前优化方向：06:00 移动端体验。
+- 目标：首页多个横滑内容区已经承接本周值得买、省钱日历、支付返点和新手攻略，但在手机端区块头部的“查看全部”容易和较长标题/说明挤在同一行，横滑卡片内 CTA 也会随描述长度上下跳动。本次只优化首页复用横滑区和首页 shelf 卡片的窄屏稳定性；不触碰优惠数据。
+- 修改文件：
+  - `components/HorizontalCardSection.tsx`
+  - `components/DealCard.tsx`
+  - `components/CalendarCard.tsx`
+  - `components/GuideCard.tsx`
+  - `components/PaymentRebateSpotlight.tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `npm run sitemap`
+  - `node` 静态检查横滑区头部响应式排列、4 类 shelf 卡片稳定最小高度、纵向 flex 布局和底部固定 CTA。
+  - `git diff --check`
+  - `npm run build`
+- 结果：`HorizontalCardSection` 头部在手机端改为上下排列，`sm` 以上仍保持标题区和“查看全部”左右对齐；优惠、日历、支付返点和攻略 shelf 卡片改为 `flex` 纵向布局并设置稳定最小高度，CTA 使用 `mt-auto` 固定到底部，减少首页横滑时按钮位置随文案长度跳动。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、8 条优惠、14 个日历活动校验通过；`npm run sitemap` 生成 14 个 URL 且没有 sitemap 实质差异；`node` 静态检查 9 项通过；`git diff --check` 通过；`npm run build` 已完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“优化首页横滑卡片移动端稳定性”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。结束时本地 `main` 领先 `origin/main` 3 个提交。
+- 下一步：后续 06:00 移动端体验方向可检查首页底部亲友试用卡片在窄屏下是否也需要统一高度和底部动作区；网络恢复后继续优先推送本地领先提交。
+
 ## 2026-07-31 新生儿清单分阶段采购优化
 
 - 时间：2026-07-31 03:02 JST

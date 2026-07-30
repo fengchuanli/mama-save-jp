@@ -124,7 +124,7 @@ export function CalendarSummaryCard({ event }: { event: CalendarEvent }) {
 
 export function CalendarShelfCard({ event }: { event: CalendarEvent }) {
   return (
-    <article className="h-full rounded-lg border border-amber-100 bg-white p-4 shadow-soft">
+    <article className="flex h-full min-h-[25rem] flex-col rounded-lg border border-amber-100 bg-white p-4 shadow-soft">
       <CardVisual label={event.platform} tone="yellow" variant={getCalendarVisual(event)} />
       <div className="flex flex-wrap items-center gap-2">
         <p className={`inline-flex rounded-full border px-3 py-1 text-sm font-bold ${priorityClass[event.priority]}`}>
@@ -138,7 +138,7 @@ export function CalendarShelfCard({ event }: { event: CalendarEvent }) {
         适合：{event.targetItems.slice(0, 3).join("、")}
       </p>
       <p className="mt-2 text-sm leading-6 text-stone-600">{event.actionTip}</p>
-      <Link href={event.detailUrl} className={`mt-4 ${linkClass}`}>
+      <Link href={event.detailUrl} className={`mt-auto ${linkClass}`}>
         查看详情
       </Link>
     </article>

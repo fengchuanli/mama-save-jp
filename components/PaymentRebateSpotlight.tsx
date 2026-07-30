@@ -60,14 +60,14 @@ export function PaymentRebateSpotlight({
 
 export function PaymentRebateShelfCard({ event }: { event: CalendarEvent }) {
   return (
-    <article className="h-full rounded-lg border border-sky-100 bg-white p-4 shadow-soft">
+    <article className="flex h-full min-h-[24rem] flex-col rounded-lg border border-sky-100 bg-white p-4 shadow-soft">
       <CardVisual label={event.platform} tone="blue" variant={getCalendarVisual(event)} />
       <p className="text-sm font-semibold text-stone-700">{event.platform}</p>
       <h3 className="mt-2 text-lg font-semibold leading-7 text-ink">{event.title}</h3>
       <p className="mt-2 text-base font-bold leading-6 text-rose-700">{event.highlight}</p>
       <p className="mt-1 text-sm font-semibold leading-6 text-rose-700">{event.period}</p>
       <p className="mt-2 text-sm leading-6 text-stone-700">{event.actionTip}</p>
-      <Link href={event.detailUrl} className={`mt-4 ${linkClass}`}>
+      <Link href={event.detailUrl} className={`mt-auto ${linkClass}`}>
         查看详情
       </Link>
     </article>

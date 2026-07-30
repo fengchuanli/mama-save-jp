@@ -109,7 +109,7 @@ export function DealShelfCard({ deal }: { deal: Deal }) {
   const statusMeta = dealStatusMeta[deal.availabilityStatus];
 
   return (
-    <article className="h-full rounded-lg border border-orange-100 bg-white p-4 shadow-soft">
+    <article className="flex h-full min-h-[25rem] flex-col rounded-lg border border-orange-100 bg-white p-4 shadow-soft">
       <CardVisual label={deal.category} tone="warm" variant={getDealVisual(deal)} />
       <div className="flex flex-wrap gap-2">
         <p className="inline-flex rounded-full border border-rose-200 bg-rose-50 px-3 py-1 text-sm font-bold text-rose-700">
@@ -130,7 +130,7 @@ export function DealShelfCard({ deal }: { deal: Deal }) {
         </span>
         <span className="text-sm leading-6 text-stone-600">{deal.targetSummary}</span>
       </div>
-      <Link href={`/deals#${deal.id}`} className={`mt-4 ${ctaClass}`}>
+      <Link href={`/deals#${deal.id}`} className={`mt-auto ${ctaClass}`}>
         查看详情
       </Link>
     </article>

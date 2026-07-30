@@ -55,7 +55,7 @@ export function GuideShelfCard({ guide }: { guide: GuideMeta }) {
   return (
     <Link
       href={`/guides/${guide.slug}`}
-      className="block h-full rounded-lg border border-emerald-100 bg-white p-4 shadow-soft transition hover:-translate-y-0.5 hover:border-emerald-200"
+      className="flex h-full min-h-[23rem] flex-col rounded-lg border border-emerald-100 bg-white p-4 shadow-soft transition hover:-translate-y-0.5 hover:border-emerald-200"
     >
       <CardVisual label={guide.category} tone="green" variant={getGuideVisual(guide)} />
       <div className="mb-3 flex flex-wrap gap-2">
@@ -68,7 +68,7 @@ export function GuideShelfCard({ guide }: { guide: GuideMeta }) {
       </div>
       <h3 className="text-lg font-semibold leading-7 text-ink">{guide.title}</h3>
       <p className="mt-2 text-sm leading-6 text-stone-600">{guide.description}</p>
-      <span className="mt-4 inline-flex whitespace-nowrap rounded-full bg-linen px-3 py-1 text-xs font-semibold text-stone-700">
+      <span className="mt-auto inline-flex w-fit whitespace-nowrap rounded-full bg-linen px-3 py-1 text-xs font-semibold text-stone-700">
         查看详情
       </span>
     </Link>

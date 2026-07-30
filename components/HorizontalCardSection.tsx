@@ -31,7 +31,7 @@ export function HorizontalCardSection<T>({
 }: HorizontalCardSectionProps<T>) {
   return (
     <section className={className}>
-      <div className="mb-4 flex items-end justify-between gap-4">
+      <div className="mb-4 flex flex-col items-start justify-between gap-3 sm:flex-row sm:items-end sm:gap-4">
         <div>
           <h2 className="text-2xl font-semibold tracking-normal text-ink md:text-3xl">{title}</h2>
           {description ? (
