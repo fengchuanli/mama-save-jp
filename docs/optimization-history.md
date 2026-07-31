@@ -1,5 +1,26 @@
 # 优化记录
 
+## 2026-08-01 楽天积分新手入口优化
+
+- 时间：2026-08-01 03:01 JST
+- 当前优化方向：03:00 攻略内容。
+- 目标：`rakuten-points-basics.mdx` 已经解释了买回、积分类型、5/0 日和活动当天复核，但文章开头缺少给新手的最小判断入口，容易让第一次接触楽天积分的家长直接陷入倍率计算。本次只优化这一篇攻略，补清“先看实付、积分用途、加购理由”的三步入口，并承接到省钱日历和本周值得买；不触碰优惠数据。
+- 修改文件：
+  - `content/guides/rakuten-points-basics.mdx`
+  - `public/sitemap.xml`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run sitemap`
+  - `npm run validate:content`
+  - `node` 静态检查攻略阅读时长、更新时间、新手三件事小节、三问模板、`/calendar` 内链、`/deals` 内链、买/等/跳过判断文案和 sitemap 日期。
+  - `git diff --check`
+  - `npm run build`
+- 结果：楽天积分基础攻略从 8 分钟扩展为 9 分钟阅读，`updatedAt` 更新为 `2026-08-01`；新增“新手先看三件事”小节，用“今天实付、积分用途、加购理由”先筛掉不适合买的场景，并新增到 `/calendar` 和 `/deals` 的承接路径，帮助读者判断今天结算、先看当前可核验机会，还是收藏等下一轮。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run sitemap` 生成 14 个 URL，并更新首页、攻略列表和楽天积分基础攻略详情页 `lastmod`；`npm run validate:content` 通过，当前 10 篇攻略、8 条优惠、14 个日历活动校验通过；`node` 静态检查 8 项通过；`git diff --check` 通过；`npm run build` 已完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“完善楽天积分新手判断入口”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续 03:00 攻略内容方向可检查 `payment-rebates-mama-shopping.mdx` 是否需要补“支付返点先看实际支付方式和上限”的新手入口；网络恢复后继续优先推送本地领先提交。
+
 ## 2026-08-01 README 产品入口和维护原则优化
 
 - 时间：2026-08-01 00:02 JST
