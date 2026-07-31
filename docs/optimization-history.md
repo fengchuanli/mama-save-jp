@@ -1,5 +1,25 @@
 # 优化记录
 
+## 2026-08-01 README 产品入口和维护原则优化
+
+- 时间：2026-08-01 00:02 JST
+- 当前优化方向：00:00 内容结构。
+- 目标：README 原先只说明技术栈、运行方式和数据文件位置，没有把站点当前的三类公开入口、亲友试用的单入口原则，以及优惠/攻略/历史记录的维护边界写清楚。为了让后续人工维护和小范围试用更一致，本次只优化 README 的产品结构说明；不触碰优惠数据。
+- 修改文件：
+  - `README.md`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `npm run sitemap`
+  - `node` 静态检查 README 是否包含 `/deals`、`/calendar`、`/guides` 三个入口、单入口试用原则、verified 优惠复查、latest-signals 线索记录、optimization-history 记录要求和 compliance-rules 合规边界。
+  - `git diff --check`
+  - `npm run build`
+- 结果：README 新增“产品入口”小节，明确 `/deals` 负责当前机会、`/calendar` 负责活动节奏、`/guides` 负责长期判断；同时补充首次分享或亲友试用时每轮只发一个入口、只追问一个问题。README 新增“内容维护原则”小节，写清改优惠数据前先复查已核验优惠、不完整线索只进 `docs/latest-signals.md`、攻略更新优先补适合谁/怎么买/注意事项和内链、每次优化更新历史记录、合规边界以 `docs/compliance-rules.md` 为准。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、8 条优惠、14 个日历活动校验通过；`npm run sitemap` 生成 14 个 URL 且没有 sitemap 实质差异；`node` 静态检查 README 8 项通过；`git diff --check` 通过；`npm run build` 已完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“完善README产品入口说明”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续 00:00 内容结构方向可继续检查 README 是否需要补首发流程链接到 `docs/first-share-checklist.md`；网络恢复后继续优先推送本地提交。
+
 ## 2026-07-31 07:31 最新母婴省钱消息整理
 
 - 时间：2026-07-31 07:31 JST
