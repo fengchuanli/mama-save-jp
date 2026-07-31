@@ -525,7 +525,7 @@ export default function Home({ deals, calendarEvents, paymentRebateEvents, guide
                 {shareFollowupPrompts.map((prompt) => (
                   <div
                     key={prompt.label}
-                    className="rounded-lg border border-stone-200 bg-white/80 p-3"
+                    className="flex min-h-[6.5rem] flex-col rounded-lg border border-stone-200 bg-white/80 p-3"
                   >
                     <p className="text-xs font-semibold text-tea">{prompt.label}</p>
                     <p className="mt-1 text-sm leading-6 text-stone-600">{prompt.question}</p>
@@ -538,12 +538,14 @@ export default function Home({ deals, calendarEvents, paymentRebateEvents, guide
                 <Link
                   key={route.href}
                   href={route.href}
-                  className="rounded-lg border border-stone-200 bg-white p-4 shadow-soft transition hover:border-peach hover:bg-white/90"
+                  className="flex min-h-[12.5rem] flex-col rounded-lg border border-stone-200 bg-white p-4 shadow-soft transition hover:border-peach hover:bg-white/90"
                 >
                   <p className="text-xs font-semibold text-tea">{route.label}</p>
                   <h3 className="mt-2 text-base font-semibold text-ink">{route.title}</h3>
                   <p className="mt-2 text-sm leading-6 text-stone-600">{route.description}</p>
-                  <p className="mt-3 text-xs font-semibold text-stone-500">{route.action}</p>
+                  <p className="mt-auto pt-3 text-xs font-semibold leading-5 text-stone-500">
+                    {route.action}
+                  </p>
                 </Link>
               ))}
             </div>
