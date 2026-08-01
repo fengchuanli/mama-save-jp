@@ -12,6 +12,16 @@
 
 首次分享或亲友试用时，每轮只发一个最匹配入口，并只追问一个关键问题；不要同时丢首页、优惠页、日历和多篇攻略。
 
+## 首次分享流程
+
+准备把站点发给亲友、小红书、朋友圈或群聊前，先按下面顺序走一遍：
+
+1. 用 `docs/first-share-checklist.md` 选定目标用户、唯一入口和唯一追问。
+2. 从 `docs/growth-copy-bank.md` 里挑 1 条匹配这个入口的文案，不临时混用多个场景。
+3. 私聊或群聊试用时，用 `docs/friend-trial-message.md` 的模板，只发这 1 个入口。
+4. 收到回复后，把原话记录到 `docs/friend-feedback-checklist.md`，先判断入口是否选对，再决定是否改页面。
+5. 如果根据反馈做了产品优化，同步写入 `docs/optimization-history.md`。
+
 ## 技术栈
 
 - Next.js

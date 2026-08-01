@@ -1,5 +1,25 @@
 # 优化记录
 
+## 2026-08-02 README 首次分享流程优化
+
+- 时间：2026-08-02 00:02 JST
+- 当前优化方向：00:00 内容结构。
+- 目标：README 已经说明站点三类公开入口和内容维护原则，但首次分享时还需要在项目入口文档里明确执行顺序，避免后续把入口选择、增长文案、亲友话术和反馈记录分散使用。本次只优化 README 的首次分享流程说明；不触碰优惠数据。
+- 修改文件：
+  - `README.md`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `npm run sitemap`
+  - `node` 静态检查 README 是否包含首次分享流程、唯一入口、唯一追问、增长文案库、亲友话术、反馈清单和优化记录链接。
+  - `git diff --check`
+  - `npm run build`
+- 结果：README 新增“首次分享流程”小节，把 `docs/first-share-checklist.md`、`docs/growth-copy-bank.md`、`docs/friend-trial-message.md`、`docs/friend-feedback-checklist.md` 和 `docs/optimization-history.md` 串成 5 步执行顺序。后续小范围分享时可以先从 README 进入流程，再按场景只发一个入口、只追问一个问题。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、8 条优惠、14 个日历活动校验通过；`npm run sitemap` 生成 14 个 URL 且没有 sitemap 实质差异；`node` 静态检查 README 8 项通过；`git diff --check` 通过；`npm run build` 已完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“完善README首次分享流程”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。结束时本地 `main` 领先 `origin/main` 5 个提交。
+- 下一步：后续 00:00 内容结构方向可检查 README 是否需要补“每周更新节奏”入口；网络恢复后继续优先推送本地领先提交。
+
 ## 2026-08-01 07:32 最新母婴省钱消息整理
 
 - 时间：2026-08-01 07:32 JST
