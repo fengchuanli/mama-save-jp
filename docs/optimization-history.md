@@ -1,5 +1,26 @@
 # 优化记录
 
+## 2026-08-02 支付返点新手判断入口优化
+
+- 时间：2026-08-02 03:02 JST
+- 当前优化方向：03:00 攻略内容。
+- 目标：`payment-rebates-mama-shopping.mdx` 已经解释支付返点、店铺券顺序、药妆店现场判断和到账后使用，但文章开头缺少给新手的最小判断入口，容易让第一次看到 PayPay、楽天ペイ、d払い、au PAY 活动的家长先被“最高返还”带着走。本次只优化这一篇攻略，补清“支付方式是否熟悉、返还上限是否看得懂、到账后是否能用于下一次刚需”的三步入口，并承接到省钱日历和本周值得买；不触碰优惠数据。
+- 修改文件：
+  - `content/guides/payment-rebates-mama-shopping.mdx`
+  - `public/sitemap.xml`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run sitemap`
+  - `npm run validate:content`
+  - `node` 静态检查攻略阅读时长、更新时间、新手三件事小节、支付方式熟悉判断、上限门槛判断、`/calendar` 承接、`/deals` 承接和 sitemap 日期。
+  - `git diff --check`
+  - `npm run build`
+- 结果：支付返点攻略从 9 分钟扩展为 10 分钟阅读，`updatedAt` 更新为 `2026-08-02`；新增“新手先看三件事”小节，用“支付方式是否熟悉、返还上限是否看得懂、返点到账后准备用在哪里”先排除不适合追返点的场景，并新增到 `/calendar` 和 `/deals` 的承接路径，帮助读者判断继续算、只看实付价，还是先回到活动解释/比价入口。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run sitemap` 生成 14 个 URL，并更新首页、攻略列表和支付返点攻略详情页 `lastmod`；`npm run validate:content` 通过，当前 10 篇攻略、8 条优惠、14 个日历活动校验通过；`node` 静态检查 8 项通过；`git diff --check` 通过；`npm run build` 已完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“完善支付返点新手判断入口”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续 03:00 攻略内容方向可检查 `drugstore-coupon.mdx` 是否需要补“先看券适用范围和当场实付”的新手入口；网络恢复后继续优先推送本地领先提交。
+
 ## 2026-08-02 README 首次分享流程优化
 
 - 时间：2026-08-02 00:02 JST
