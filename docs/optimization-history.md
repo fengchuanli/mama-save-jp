@@ -1,5 +1,25 @@
 # 优化记录
 
+## 2026-08-02 首页入口卡片移动端稳定性优化
+
+- 时间：2026-08-02 06:03 JST
+- 当前优化方向：06:00 移动端体验。
+- 目标：首页“三块内容怎么配合”和“新手攻略”问题入口卡片在移动端单列时可读，但动作文字仍跟随描述长度自然下落；在桌面多列时不同卡片的 CTA 位置也不完全一致。本次只优化这两组首页入口卡片的稳定高度和底部动作区；不触碰优惠数据。
+- 修改文件：
+  - `pages/index.tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `npm run sitemap`
+  - `node` 静态检查内容路线卡和攻略问题卡的 flex 纵向布局、稳定最小高度、桌面高度约束和底部动作文案。
+  - `git diff --check`
+  - `npm run build`
+- 结果：首页“三块内容怎么配合”3 张入口卡改为纵向 flex 布局，并设置手机端和桌面端稳定最小高度；首页“新手攻略”4 张问题入口卡也改为纵向 flex 布局，并把下一步动作固定到底部，减少手机端扫读和桌面多列比较时的按钮位置跳动。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、8 条优惠、14 个日历活动校验通过；`npm run sitemap` 生成 14 个 URL 且没有 sitemap 实质差异；`node` 静态检查 6 项通过；`git diff --check` 通过；`npm run build` 已完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“优化首页入口卡片移动端稳定性”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续 06:00 移动端体验方向可检查 `/deals` 和 `/calendar` 筛选结果提示条在窄屏下的按钮位置是否需要进一步统一；网络恢复后继续优先推送本地领先提交。
+
 ## 2026-08-02 支付返点新手判断入口优化
 
 - 时间：2026-08-02 03:02 JST

@@ -386,12 +386,14 @@ export default function Home({ deals, calendarEvents, paymentRebateEvents, guide
               <Link
                 key={route.href}
                 href={route.href}
-                className="rounded-lg border border-stone-200 bg-cream p-4 transition hover:border-peach hover:bg-linen"
+                className="flex min-h-[11.5rem] flex-col rounded-lg border border-stone-200 bg-cream p-4 transition hover:border-peach hover:bg-linen md:min-h-[13rem]"
               >
                 <p className="text-xs font-semibold text-tea">{route.label}</p>
                 <h3 className="mt-2 text-lg font-semibold text-ink">{route.title}</h3>
                 <p className="mt-2 text-sm leading-6 text-stone-600">{route.description}</p>
-                <p className="mt-3 text-xs font-semibold text-stone-500">{route.action}</p>
+                <p className="mt-auto pt-3 text-xs font-semibold leading-5 text-stone-500">
+                  {route.action}
+                </p>
               </Link>
             ))}
           </div>
@@ -482,12 +484,14 @@ export default function Home({ deals, calendarEvents, paymentRebateEvents, guide
                 <Link
                   key={route.href}
                   href={route.href}
-                  className="rounded-lg border border-emerald-100 bg-white p-4 shadow-soft transition hover:border-emerald-200 hover:bg-emerald-50"
+                  className="flex min-h-[12rem] flex-col rounded-lg border border-emerald-100 bg-white p-4 shadow-soft transition hover:border-emerald-200 hover:bg-emerald-50 lg:min-h-[13rem]"
                 >
                   <p className="text-xs font-semibold text-tea">{route.label}</p>
                   <h3 className="mt-2 text-base font-semibold text-ink">{route.title}</h3>
                   <p className="mt-2 text-sm leading-6 text-stone-600">{route.description}</p>
-                  <p className="mt-3 text-xs font-semibold text-stone-500">{route.nextStep}</p>
+                  <p className="mt-auto pt-3 text-xs font-semibold leading-5 text-stone-500">
+                    {route.nextStep}
+                  </p>
                 </Link>
               ))}
             </div>
