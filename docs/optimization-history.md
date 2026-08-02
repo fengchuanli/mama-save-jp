@@ -1,5 +1,25 @@
 # 优化记录
 
+## 2026-08-03 优惠和日历结果提示条移动端优化
+
+- 时间：2026-08-03 06:01 JST
+- 当前优化方向：06:00 移动端体验。
+- 目标：`/deals` 和 `/calendar` 的筛选结果提示条在手机端会同时展示较长结果摘要、说明文案和下一步链接，窄屏下容易让行动按钮被长文本挤压。本次只优化这两个结果提示条的响应式布局，让手机端按钮独占一行、桌面端仍保持右侧动作入口；不触碰优惠数据。
+- 修改文件：
+  - `pages/deals.tsx`
+  - `pages/calendar.tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查 `/deals` 和 `/calendar` 结果摘要文本可收缩、行动按钮手机端全宽、桌面端恢复自动宽度。
+  - `git diff --check`
+  - `npm run build`
+- 结果：两个页面的结果摘要段落新增 `min-w-0`，下一步链接新增手机端 `w-full` 和 `text-center`，并在 `sm` 以上恢复 `w-auto`，减少筛选摘要较长时按钮被挤压或文本贴边的情况。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、8 条优惠、14 个日历活动校验通过；`node` 静态检查 6 项通过；`git diff --check` 通过；`npm run build` 已完成 sitemap、lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“优化优惠日历提示条移动端布局”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续 06:00 移动端体验方向可继续检查 `/deals` 和 `/calendar` 空状态按钮在极窄屏下是否需要统一全宽；网络恢复后继续优先推送本地领先提交。
+
 ## 2026-08-03 尿不湿购买攻略新手入口优化
 
 - 时间：2026-08-03 03:02 JST

@@ -378,7 +378,7 @@ export default function Deals({ deals }: DealsProps) {
 
         <div className="mb-5 rounded-lg border border-orange-100 bg-white px-4 py-3 text-sm leading-6 text-stone-600 shadow-soft sm:px-5">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <p>
+            <p className="min-w-0">
               <span className="font-semibold text-ink">{resultSummary}</span>
               <span className="ml-0 block sm:ml-2 sm:inline">
                 先看状态和确定性，再展开卡片核对参加方法、跳过条件和官方来源。
@@ -386,7 +386,7 @@ export default function Deals({ deals }: DealsProps) {
             </p>
             <Link
               href={selectedStatusAction.href}
-              className="inline-flex min-h-10 shrink-0 items-center justify-center rounded-full bg-linen px-4 py-2 text-xs font-semibold text-stone-700 transition hover:bg-peach"
+              className="inline-flex min-h-10 w-full shrink-0 items-center justify-center rounded-full bg-linen px-4 py-2 text-center text-xs font-semibold text-stone-700 transition hover:bg-peach sm:w-auto"
             >
               {selectedStatusAction.label}
             </Link>
