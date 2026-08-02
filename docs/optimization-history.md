@@ -1,5 +1,26 @@
 # 优化记录
 
+## 2026-08-03 尿不湿购买攻略新手入口优化
+
+- 时间：2026-08-03 03:02 JST
+- 当前优化方向：03:00 攻略内容。
+- 目标：`buy-diapers-japan.mdx` 是首页新手必读路线里的核心攻略，但开头直接进入渠道和单片价判断，新手还缺少“宝宝尺码是否稳定、库存还能撑多久、这次是试用还是复购”的最小判断入口。本次只优化这一篇攻略，补清进入比价和囤货前的三问；不触碰优惠数据。
+- 修改文件：
+  - `content/guides/buy-diapers-japan.mdx`
+  - `public/sitemap.xml`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run sitemap`
+  - `npm run validate:content`
+  - `node` 静态检查攻略阅读时长、更新时间、新手三件事小节、尺码稳定判断、库存判断、试用/复购判断、到 `/guides/diaper-price-line` 和 `/deals` 的内链，以及 sitemap 日期。
+  - `git diff --check`
+  - `npm run build`
+- 结果：尿不湿购买攻略从 9 分钟扩展为 10 分钟阅读，`updatedAt` 更新为 `2026-08-03`；新增“新手先看三件事”小节，用尺码稳定、库存天数和试用/复购三问，帮助读者先判断是小包试用、及时补 1-2 周用量，还是进入单片价和活动条件核对。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run sitemap` 生成 14 个 URL，并更新首页、攻略列表和尿不湿购买攻略详情页 `lastmod`；`npm run validate:content` 通过，当前 10 篇攻略、8 条优惠、14 个日历活动校验通过；`node` 静态检查 9 项通过；`git diff --check` 通过；`npm run build` 已完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“完善尿不湿购买新手判断入口”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续 03:00 攻略内容方向可检查 `rakuten-5-0-mama-shopping.mdx` 是否需要补“今天是否真的适合结算”的更短判断入口；网络恢复后继续优先推送本地领先提交。
+
 ## 2026-08-03 README 每周更新节奏优化
 
 - 时间：2026-08-03 00:02 JST
