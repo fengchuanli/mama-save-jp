@@ -59,6 +59,16 @@ https://fengchuanli.github.io/mama-save-jp/
 - `data/shopping-calendar.json`
 - `content/guides/*.mdx`
 
+## 每周更新节奏
+
+每周维护时先保证用户信任，再补内容厚度，最后处理分享反馈：
+
+1. 优惠：每周至少 3 次复查 `data/deals.json` 中 `dataStatus: "verified"` 的条目，先处理过期、下架、变价或活动结束，再考虑新增优惠。
+2. 日历：每周复查 `data/shopping-calendar.json` 的近期活动，把已结束、当天确认、提前准备和先观察分清楚。
+3. 攻略：每周至少优化 1-2 篇 `content/guides/*.mdx`，优先补“适合谁、怎么买、注意事项”和到 `/deals`、`/calendar`、相关攻略的内链。
+4. 增长反馈：每轮分享后把原话记到 `docs/friend-feedback-checklist.md`，只在 3 条以上相似反馈出现时再改页面结构。
+5. 记录：每次实际优化都写入 `docs/optimization-history.md`，说明本次只做了哪一项、如何验证、是否提交和是否推送。
+
 ## 内容维护原则
 
 - 改优惠数据前，先复查已有 `dataStatus: "verified"` 的优惠是否仍有效。

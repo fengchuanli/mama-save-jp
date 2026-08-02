@@ -1,5 +1,24 @@
 # 优化记录
 
+## 2026-08-03 README 每周更新节奏优化
+
+- 时间：2026-08-03 00:02 JST
+- 当前优化方向：00:00 内容结构。
+- 目标：README 已经说明产品入口、首次分享流程和内容维护原则，但缺少“每周先做什么、后做什么”的维护节奏，容易让优惠复查、日历更新、攻略优化和反馈处理分散执行。本次只在 README 补齐每周更新顺序；不触碰优惠数据。
+- 修改文件：
+  - `README.md`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `npm run sitemap`
+  - `node` 静态检查 README 是否包含每周更新节奏、verified 优惠复查、日历状态拆分、攻略内链、3 条以上反馈阈值和优化记录要求。
+  - `git diff --check`
+- 结果：README 新增“每周更新节奏”小节，把优惠、日历、攻略、增长反馈和记录顺序整理为 5 步，强调每周先处理 `verified` 优惠有效性，再复查日历近期活动，随后补攻略厚度，最后根据 3 条以上相似反馈再改页面结构。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、8 条优惠、14 个日历活动校验通过；`npm run sitemap` 生成 14 个 URL 且没有 sitemap 实质差异；`node` 静态检查 README 7 项通过；`git diff --check` 通过；`npm run build` 已完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“完善README每周更新节奏”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续 00:00 内容结构方向可检查首页或 README 是否需要补“月底复盘/下一轮 30 天计划”的执行入口；网络恢复后继续优先推送本地领先提交。
+
 ## 2026-08-02 07:32 最新母婴省钱消息整理
 
 - 时间：2026-08-02 07:32 JST
