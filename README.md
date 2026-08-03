@@ -69,6 +69,16 @@ https://fengchuanli.github.io/mama-save-jp/
 4. 增长反馈：每轮分享后把原话记到 `docs/friend-feedback-checklist.md`，只在 3 条以上相似反馈出现时再改页面结构。
 5. 记录：每次实际优化都写入 `docs/optimization-history.md`，说明本次只做了哪一项、如何验证、是否提交和是否推送。
 
+## 月底复盘入口
+
+每跑完一轮 30 天优化后，先复盘再进入下一轮计划，避免一边补内容一边随意改方向：
+
+1. 回看 `docs/optimization-history.md`，按优惠数据、日历、攻略、移动端、SEO、增长准备归类本轮完成项。
+2. 对照 `docs/30-day-optimization-plan.md`，标出已经完成、只做了一半和本轮不再适合继续做的任务。
+3. 检查 `docs/latest-signals.md`，把仍未核实的优惠或活动线索留在观察区，不直接写进页面。
+4. 汇总 `docs/friend-feedback-checklist.md` 中 3 条以上重复反馈，只把高频问题写入下一轮优先级。
+5. 下一轮仍保持“每次只做一项”的节奏，先处理会影响用户信任的过期优惠、错误活动和入口误解。
+
 ## 内容维护原则
 
 - 改优惠数据前，先复查已有 `dataStatus: "verified"` 的优惠是否仍有效。

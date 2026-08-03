@@ -1,5 +1,24 @@
 # 优化记录
 
+## 2026-08-04 README 月底复盘入口优化
+
+- 时间：2026-08-04 00:01 JST
+- 当前优化方向：00:00 内容结构。
+- 目标：README 已经有产品入口、首次分享流程和每周更新节奏，但缺少“30 天跑完后如何复盘、如何进入下一轮”的入口。本次只补 README 的月底复盘结构，让历史记录、30 天计划、最新信号和亲友反馈能形成下一轮优先级；不触碰优惠数据。
+- 修改文件：
+  - `README.md`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查 README 是否包含月底复盘入口、优化历史归类、30 天计划对照、latest signals 观察区、3 条以上反馈阈值和“每次只做一项”节奏。
+  - `git diff --check`
+  - `npm run build`
+- 结果：README 新增“月底复盘入口”小节，明确 30 天结束后先按方向归类优化历史，再对照 30 天计划判断完成/半完成/不再适合的任务，未核实优惠继续留在 latest signals，高频亲友反馈才进入下一轮优先级。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、8 条优惠、14 个日历活动校验通过；`node` 静态检查 6 项通过；`git diff --check` 通过；`npm run build` 已完成 sitemap、lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“完善README月底复盘入口”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续 00:00 内容结构方向可把月底复盘执行结果沉淀成下一轮 30 天计划；网络恢复后继续优先推送本地领先提交。
+
 ## 2026-08-03 07:31 最新母婴省钱消息整理
 
 - 时间：2026-08-03 07:31 JST
