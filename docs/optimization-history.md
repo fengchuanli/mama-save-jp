@@ -1,5 +1,25 @@
 # 优化记录
 
+## 2026-08-04 优惠和日历空状态按钮移动端优化
+
+- 时间：2026-08-04 06:01 JST
+- 当前优化方向：06:00 移动端体验。
+- 目标：`/deals` 和 `/calendar` 的筛选空状态已经能提示用户清除筛选，但按钮在极窄屏下仍按内容宽度排列，点击目标和视觉稳定性不如结果提示条。本次只优化两个空状态动作区，让手机端按钮全宽、桌面端保持紧凑；不触碰优惠数据。
+- 修改文件：
+  - `pages/deals.tsx`
+  - `pages/calendar.tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查 `/deals` 和 `/calendar` 空状态按钮是否包含手机端 `w-full`、`text-center` 与桌面端 `sm:w-auto`。
+  - `git diff --check`
+  - `npm run build`
+- 结果：`/deals` 空状态的“清除全部筛选”按钮新增居中容器，按钮手机端全宽、桌面端恢复自动宽度；`/calendar` 空状态的“清除平台筛选”和“查看全部节点”按钮同步改为手机端全宽，减少筛选无结果时小屏按钮过窄或排列不稳的问题。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、8 条优惠、14 个日历活动校验通过；`node` 静态检查 8 项通过；`git diff --check` 通过；`npm run build` 已完成 sitemap、lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“优化优惠日历空状态移动端按钮”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：网络恢复后继续优先推送本地领先提交；后续 06:00 移动端体验方向可检查攻略列表页筛选/分组入口在窄屏下是否需要统一触控宽度。
+
 ## 2026-08-04 楽天 5と0 日攻略结算判断优化
 
 - 时间：2026-08-04 03:01 JST

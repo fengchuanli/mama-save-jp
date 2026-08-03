@@ -405,13 +405,15 @@ export default function Deals({ deals }: DealsProps) {
             <p className="mt-2 text-sm leading-6">
               可以先清除状态、分类和平台筛选，再从“马上要补货”或“等下一场活动”重新进入。
             </p>
-            <button
-              type="button"
-              onClick={resetFilters}
-              className="mt-4 inline-flex min-h-10 items-center justify-center rounded-full bg-ink px-4 py-2 text-sm font-semibold text-white transition hover:bg-stone-800"
-            >
-              清除全部筛选
-            </button>
+            <div className="mt-4 flex justify-center">
+              <button
+                type="button"
+                onClick={resetFilters}
+                className="inline-flex min-h-10 w-full items-center justify-center rounded-full bg-ink px-4 py-2 text-center text-sm font-semibold text-white transition hover:bg-stone-800 sm:w-auto"
+              >
+                清除全部筛选
+              </button>
+            </div>
           </div>
         ) : null}
         </div>

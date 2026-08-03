@@ -360,7 +360,7 @@ export default function Calendar({ events }: CalendarProps) {
                   <button
                     type="button"
                     onClick={() => setSelectedStore("全部")}
-                    className="inline-flex min-h-10 items-center justify-center rounded-full bg-linen px-4 py-2 text-sm font-semibold text-stone-700 transition hover:bg-peach"
+                    className="inline-flex min-h-10 w-full items-center justify-center rounded-full bg-linen px-4 py-2 text-center text-sm font-semibold text-stone-700 transition hover:bg-peach sm:w-auto"
                   >
                     清除平台筛选
                   </button>
@@ -368,7 +368,7 @@ export default function Calendar({ events }: CalendarProps) {
                 <button
                   type="button"
                   onClick={resetFilters}
-                  className="inline-flex min-h-10 items-center justify-center rounded-full bg-ink px-4 py-2 text-sm font-semibold text-white transition hover:bg-stone-800"
+                  className="inline-flex min-h-10 w-full items-center justify-center rounded-full bg-ink px-4 py-2 text-center text-sm font-semibold text-white transition hover:bg-stone-800 sm:w-auto"
                 >
                   查看全部节点
                 </button>
