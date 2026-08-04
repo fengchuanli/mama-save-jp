@@ -1,5 +1,24 @@
 # 优化记录
 
+## 2026-08-05 README 入口选择顺序优化
+
+- 时间：2026-08-05 00:02 JST
+- 当前优化方向：00:00 内容结构。
+- 目标：README 已经有产品入口、首次分享流程、每周更新节奏和月底复盘入口，但首次分享前“用户状态 -> 唯一入口 -> 本轮只验证什么”的选择口径分散在多个文档里。本次只补 README 的入口选择顺序，让后续分享、文案选择和反馈记录先按同一张表执行；不触碰优惠数据。
+- 修改文件：
+  - `README.md`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查 README 是否包含入口选择顺序、6 个用户状态、唯一入口、不优先发什么、本轮只验证、增长文案库和反馈清单承接。
+  - `git diff --check`
+  - `npm run build`
+- 结果：README 新增“入口选择顺序”小节，用 6 个常见用户状态把首页、优惠页、日历页和重点攻略映射到唯一入口，并明确每轮不优先发什么、只验证什么。选完入口后再去 `docs/growth-copy-bank.md` 匹配文案，反馈统一写入 `docs/friend-feedback-checklist.md`。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、8 条优惠、14 个日历活动校验通过；`node` 静态检查 README 入口选择 11 项通过；`git diff --check` 通过；`npm run build` 已完成 sitemap、lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“完善README入口选择顺序”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续 00:00 内容结构方向可根据首轮亲友反馈，检查首页首屏的入口选择文案是否需要和这张 README 表进一步对齐；网络恢复后继续优先推送本地提交。
+
 ## 2026-08-04 07:32 最新母婴省钱消息整理
 
 - 时间：2026-08-04 07:32 JST
