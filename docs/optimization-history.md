@@ -1,5 +1,24 @@
 # 优化记录
 
+## 2026-08-05 攻略分组动作条移动端优化
+
+- 时间：2026-08-05 06:03 JST
+- 当前优化方向：06:00 移动端体验。
+- 目标：`/guides` 攻略列表页已有“新手宝妈必读路线”和“按今天的问题直达”横滑区，分组下方的下一步动作条也承担承接作用；但手机端按钮仍按内容宽度展示，较长说明文案和动作按钮在窄屏下不如 `/deals`、`/calendar` 的结果提示条稳定。本次只优化攻略分组动作条，让手机端按钮全宽、桌面端保持紧凑；不触碰优惠数据。
+- 修改文件：
+  - `pages/guides/index.tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查攻略分组动作说明是否可收缩，动作按钮是否包含手机端 `w-full`、`text-center` 与桌面端 `sm:w-auto`。
+  - `git diff --check`
+  - `npm run build`
+- 结果：攻略列表页每个问题分组下方的下一步动作说明新增 `min-w-0`，动作按钮新增手机端全宽和居中文本，`sm` 以上恢复自动宽度，减少窄屏下按钮过窄或被长说明挤压的问题。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、8 条优惠、14 个日历活动校验通过；`node` 静态检查 4 项通过；`git diff --check` 通过；`npm run build` 已完成 sitemap、lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“优化攻略分组动作条移动端布局”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续 06:00 移动端体验方向可检查攻略详情页顶部摘要和目录/承接链接在手机端的触控宽度是否需要统一；网络恢复后继续优先推送本地领先提交。
+
 ## 2026-08-05 店铺选择攻略决策入口优化
 
 - 时间：2026-08-05 03:02 JST

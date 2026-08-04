@@ -294,12 +294,12 @@ export default function Guides({ guides }: GuidesProps) {
               </div>
 
               <div className="mb-4 flex flex-col gap-3 rounded-lg border border-emerald-100 bg-white px-4 py-3 shadow-soft sm:flex-row sm:items-center sm:justify-between">
-                <p className="text-sm leading-6 text-stone-600">
+                <p className="min-w-0 text-sm leading-6 text-stone-600">
                   {group.nextAction.description}
                 </p>
                 <Link
                   href={group.nextAction.href}
-                  className="inline-flex min-h-10 shrink-0 items-center justify-center rounded-full bg-linen px-4 py-2 text-sm font-semibold text-stone-700 transition hover:bg-peach"
+                  className="inline-flex min-h-10 w-full shrink-0 items-center justify-center rounded-full bg-linen px-4 py-2 text-center text-sm font-semibold text-stone-700 transition hover:bg-peach sm:w-auto"
                 >
                   {group.nextAction.label}
                 </Link>
