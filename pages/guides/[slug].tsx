@@ -221,7 +221,10 @@ export default function GuideDetail({ guide, relatedGuides }: GuideDetailProps) 
         />
       </Head>
       <article className="mx-auto max-w-3xl px-4 py-8 sm:px-5 sm:py-12">
-        <Link href="/guides" className="text-sm font-semibold text-tea">
+        <Link
+          href="/guides"
+          className="inline-flex min-h-10 items-center rounded-full border border-emerald-100 bg-white px-4 py-2 text-sm font-semibold text-tea shadow-soft transition hover:bg-emerald-50"
+        >
           返回攻略列表
         </Link>
         <div className="mt-5 rounded-lg border border-stone-200 bg-white p-4 shadow-soft sm:mt-6 sm:p-6">
@@ -294,13 +297,13 @@ export default function GuideDetail({ guide, relatedGuides }: GuideDetailProps) 
           <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:flex-wrap">
             <Link
               href={nextAction.primary.href}
-              className="inline-flex min-h-10 items-center justify-center rounded-full bg-ink px-4 py-2 text-sm font-semibold text-white transition hover:bg-stone-700"
+              className="inline-flex min-h-10 w-full items-center justify-center rounded-full bg-ink px-4 py-2 text-center text-sm font-semibold text-white transition hover:bg-stone-700 sm:w-auto"
             >
               {nextAction.primary.label}
             </Link>
             <Link
               href={nextAction.secondary.href}
-              className="inline-flex min-h-10 items-center justify-center rounded-full border border-amber-200 bg-white px-4 py-2 text-sm font-semibold text-stone-700 transition hover:bg-linen"
+              className="inline-flex min-h-10 w-full items-center justify-center rounded-full border border-amber-200 bg-white px-4 py-2 text-center text-sm font-semibold text-stone-700 transition hover:bg-linen sm:w-auto"
             >
               {nextAction.secondary.label}
             </Link>

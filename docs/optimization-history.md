@@ -1,5 +1,24 @@
 # 优化记录
 
+## 2026-08-06 攻略详情页动作入口移动端优化
+
+- 时间：2026-08-06 06:03 JST
+- 当前优化方向：06:00 移动端体验。
+- 目标：攻略详情页顶部“返回攻略列表”仍是普通文字链接，手机端触控面积偏小；读完后的两个承接链接虽然位于纵向布局中，但没有显式全宽和文本居中。本次只优化攻略详情页的返回入口和读后承接按钮，让手机端触控目标更稳定，桌面端继续保持紧凑；不触碰优惠数据。
+- 修改文件：
+  - `pages/guides/[slug].tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查返回链接最小触控高度、按钮式边框/背景、主副承接按钮手机端 `w-full`、桌面端 `sm:w-auto` 和文本居中。
+  - `git diff --check`
+  - `npm run build`
+- 结果：攻略详情页顶部返回入口改为带边框、背景和 `min-h-10` 的按钮式链接；读完后的主/副承接按钮在手机端显式全宽并居中，`sm` 以上恢复自动宽度，减少窄屏下动作入口偏小或宽度不稳定的问题。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、8 条优惠、14 个日历活动校验通过；`node` 静态检查 5 项通过；`git diff --check` 通过；`npm run build` 已完成 sitemap、lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“优化攻略详情动作入口移动端布局”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续 06:00 移动端体验方向可检查攻略正文表格在手机端的横滑提示是否足够明显；网络恢复后继续优先推送本地领先提交。
+
 ## 2026-08-06 药妆店优惠券新手判断入口优化
 
 - 时间：2026-08-06 03:01 JST
