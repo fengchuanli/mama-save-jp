@@ -1,5 +1,24 @@
 # 优化记录
 
+## 2026-08-06 首页首屏入口选择结构优化
+
+- 时间：2026-08-06 00:03 JST
+- 当前优化方向：00:00 内容结构。
+- 目标：README 已经整理出“入口选择顺序”，但首页首屏 quick-start 仍只覆盖 4 个场景，缺少“看不懂规则”“准备保育园或童装换季”和“只想了解本站”的明确承接。本次只优化首页首屏入口选择，让第一次访问或亲友试用时能按用户当下状态选择唯一入口；不触碰优惠数据。
+- 修改文件：
+  - `pages/index.tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查首页 quick-start 是否包含 6 个入口、关键路径、桌面 3 列布局和“选唯一入口”文案。
+  - `git diff --check`
+  - `npm run build`
+- 结果：首页“第一次打开，按现在的状态先走这里”从 4 个入口扩展为 6 个入口，覆盖刚开始准备、准备下单、等活动日、看不懂规则、准备入园和只想了解本站；入口分别承接 `/guides/newborn-shopping-list`、`/deals`、`/calendar`、`/guides/diaper-price-line`、`/guides/nursery-entry-budget-items` 和首页下方内容分工。桌面端 quick-start 改为 3 列，卡片最小高度略收紧，减少新增入口后的首屏拥挤。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、8 条优惠、14 个日历活动校验通过；`node` 静态检查 6 个 quick-start 入口通过；`git diff --check` 通过；`npm run build` 已完成 sitemap、lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“优化首页首屏入口选择结构”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续 00:00 内容结构方向可检查首页“本周提醒”和底部亲友试用入口是否也需要与同一张入口选择表统一；网络恢复后继续优先推送本地领先提交。
+
 ## 2026-08-05 07:32 最新母婴省钱消息整理
 
 - 时间：2026-08-05 07:32 JST

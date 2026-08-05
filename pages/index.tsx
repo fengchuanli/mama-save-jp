@@ -157,23 +157,37 @@ export default function Home({ deals, calendarEvents, paymentRebateEvents, guide
     {
       label: "准备下单",
       href: "/deals",
-      title: "先判断这单值不值",
-      description: "已经知道要买什么时，核对状态、跳过条件和官方来源。",
+      title: "先判断今天买不买",
+      description: "纸尿裤、湿巾或洗护快用完时，核对状态、跳过条件和官方来源。",
       nextStep: "下一步：判断今天能不能买"
     },
     {
       label: "等活动日",
       href: "/calendar",
       title: "先排最近活动节点",
-      description: "确认活动规则、适合买什么和注意事项。",
-      nextStep: "下一步：挑最近的省钱节点"
+      description: "不急着买时，确认活动规则、适合买什么和注意事项。",
+      nextStep: "下一步：记住回来核对日期"
     },
     {
-      label: "准备出门",
-      href: "/calendar",
-      title: "先确认线下顺手项",
-      description: "去药妆店、超市或西松屋前，先确认今天有没有顺手参加的返还。",
-      nextStep: "下一步：只买本来要买的用品"
+      label: "看不懂规则",
+      href: "/guides/diaper-price-line",
+      title: "先补一个判断字段",
+      description: "遇到积分、单片价或支付返点时，先看懂实付、上限和尺码风险。",
+      nextStep: "下一步：先看单片价好价线"
+    },
+    {
+      label: "准备入园",
+      href: "/guides/nursery-entry-budget-items",
+      title: "先按清单和场景买",
+      description: "准备保育园或童装换季时，先筛掉可能买早、买错或尺码不稳的东西。",
+      nextStep: "下一步：看入园准备清单"
+    },
+    {
+      label: "只想了解本站",
+      href: "/",
+      title: "先看三块内容分工",
+      description: "先确认本周值得买、省钱日历和新手攻略分别解决什么问题。",
+      nextStep: "下一步：再选一个具体入口"
     }
   ];
   const guideProblemRoutes = [
@@ -306,15 +320,15 @@ export default function Home({ deals, calendarEvents, paymentRebateEvents, guide
             <div className="mt-8">
               <p className="text-sm font-semibold text-tea">第一次打开，按现在的状态先走这里</p>
               <p className="mt-2 max-w-2xl text-sm leading-6 text-stone-600">
-                这里按家庭阶段和购物场景选入口；右侧“本周提醒”再按今天要不要买来行动。
+                这里按家庭阶段和购物场景选唯一入口；右侧“本周提醒”再按今天要不要买来行动。
               </p>
               <div className="relative mt-3">
-                <div className="no-scrollbar -mx-5 flex snap-x snap-mandatory gap-3 overflow-x-auto px-5 pb-2 pr-10 sm:mx-0 sm:grid sm:snap-none sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:pb-0 sm:pr-0 lg:grid-cols-4">
+                <div className="no-scrollbar -mx-5 flex snap-x snap-mandatory gap-3 overflow-x-auto px-5 pb-2 pr-10 sm:mx-0 sm:grid sm:snap-none sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:pb-0 sm:pr-0 lg:grid-cols-3">
                   {quickStartRoutes.map((route) => (
                     <Link
                       key={route.label}
                       href={route.href}
-                      className="flex min-h-[13rem] w-[74vw] max-w-[18rem] shrink-0 snap-start flex-col rounded-lg border border-orange-100 bg-white/90 p-4 shadow-soft transition hover:border-peach hover:bg-white sm:w-auto sm:max-w-none sm:shrink"
+                      className="flex min-h-[12rem] w-[74vw] max-w-[18rem] shrink-0 snap-start flex-col rounded-lg border border-orange-100 bg-white/90 p-4 shadow-soft transition hover:border-peach hover:bg-white sm:w-auto sm:max-w-none sm:shrink"
                     >
                       <p className="text-xs font-semibold text-tea">{route.label}</p>
                       <h2 className="mt-2 text-base font-semibold leading-6 text-ink">{route.title}</h2>
