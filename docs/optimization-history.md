@@ -1,5 +1,26 @@
 # 优化记录
 
+## 2026-08-06 药妆店优惠券新手判断入口优化
+
+- 时间：2026-08-06 03:01 JST
+- 当前优化方向：03:00 攻略内容。
+- 目标：`drugstore-coupon.mdx` 已经覆盖药妆店 App 券适合买什么、怎么买、券型和叠加顺序，但开头缺少给新手的最小判断入口，容易让第一次打开药妆店 App 的家长先被折扣率或满额券带着走。本次只优化这一篇攻略，补清“先看券适用范围、当场实付、1-2 周内是否会用”的三步入口，并承接到省钱日历和本周值得买；不触碰优惠数据。
+- 修改文件：
+  - `content/guides/drugstore-coupon.mdx`
+  - `public/sitemap.xml`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run sitemap`
+  - `npm run validate:content`
+  - `node` 静态检查攻略阅读时长、更新时间、“新手先看券还是实付”小节、券适用范围、当场实付、1-2 周使用窗口，以及到 `/calendar` 和 `/deals` 的内链。
+  - `git diff --check`
+  - `npm run build`
+- 结果：药妆店优惠券攻略从 10 分钟扩展为 11 分钟阅读，`updatedAt` 更新为 `2026-08-06`；新增“新手先看券还是实付”小节，用券是否适用于眼前品类、今天收银时实际少付多少钱、商品是否 1-2 周内确定会用三问，帮助读者先排除纸尿裤/粉ミルク/食品等可能被排除的券、只看当场扣减后的实付价，并避免为满额券临时加购未试过的宝宝用品。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run sitemap` 生成 14 个 URL，并更新首页、攻略列表和药妆店优惠券攻略详情页 `lastmod`；`npm run validate:content` 通过，当前 10 篇攻略、8 条优惠、14 个日历活动校验通过；`node` 静态检查 8 项通过；`git diff --check` 通过；`npm run build` 已完成 sitemap、lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“完善药妆店优惠券新手判断入口”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续 03:00 攻略内容方向可检查 `kids-clothes-size-80-90-100.mdx` 是否需要补“先看季节、尺码增长和保育园备用量”的新手入口；网络恢复后继续优先推送本地领先提交。
+
 ## 2026-08-06 首页首屏入口选择结构优化
 
 - 时间：2026-08-06 00:03 JST
