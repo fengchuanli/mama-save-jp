@@ -103,35 +103,44 @@ export function MarkdownContent({ content }: { content: string }) {
 
         if (item.kind === "table") {
           return (
-            <div key={item.index} className="-mx-1 my-5 overflow-x-auto pb-1 sm:mx-0">
-              <table className="min-w-[40rem] border-collapse text-left text-sm leading-6 text-stone-700">
-                <thead>
-                  <tr>
-                    {item.headers.map((header, headerIndex) => (
-                      <th
-                        key={`${item.index}-header-${headerIndex}`}
-                        className="border-b border-stone-200 bg-cream px-3 py-2 font-semibold text-ink"
-                      >
-                        {header}
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {item.rows.map((row, rowIndex) => (
-                    <tr key={`${item.index}-row-${rowIndex}`}>
-                      {item.headers.map((_, cellIndex) => (
-                        <td
-                          key={`${item.index}-cell-${rowIndex}-${cellIndex}`}
-                          className="border-b border-stone-100 px-3 py-2 align-top"
+            <div key={item.index} className="relative -mx-1 my-5 sm:mx-0">
+              <p className="mb-2 text-xs font-semibold text-tea sm:hidden">
+                横向滑动查看完整表格
+              </p>
+              <div className="overflow-x-auto pb-1">
+                <table className="min-w-[40rem] border-collapse text-left text-sm leading-6 text-stone-700">
+                  <thead>
+                    <tr>
+                      {item.headers.map((header, headerIndex) => (
+                        <th
+                          key={`${item.index}-header-${headerIndex}`}
+                          className="border-b border-stone-200 bg-cream px-3 py-2 font-semibold text-ink"
                         >
-                          {row[cellIndex] || ""}
-                        </td>
+                          {header}
+                        </th>
                       ))}
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    {item.rows.map((row, rowIndex) => (
+                      <tr key={`${item.index}-row-${rowIndex}`}>
+                        {item.headers.map((_, cellIndex) => (
+                          <td
+                            key={`${item.index}-cell-${rowIndex}-${cellIndex}`}
+                            className="border-b border-stone-100 px-3 py-2 align-top"
+                          >
+                            {row[cellIndex] || ""}
+                          </td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute bottom-1 right-0 top-7 w-10 bg-gradient-to-l from-white via-white/90 to-white/0 sm:hidden"
+              />
             </div>
           );
         }

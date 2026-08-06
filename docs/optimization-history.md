@@ -1,5 +1,24 @@
 # 优化记录
 
+## 2026-08-07 攻略表格移动端滑动提示优化
+
+- 时间：2026-08-07 06:02 JST
+- 当前优化方向：06:00 移动端体验。
+- 目标：攻略正文表格已经支持横向滚动，但手机端缺少明确提示，读者容易以为右侧列被截断。本次只优化 `MarkdownContent` 的表格渲染，在不改变 MDX 内容和桌面端布局的前提下，给移动端表格增加滑动提示和右侧渐隐边缘；不触碰优惠数据。
+- 修改文件：
+  - `components/MarkdownContent.tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查表格移动端提示文案、`sm:hidden`、横向滚动容器、表格最小宽度、右侧渐隐边缘和装饰层 `aria-hidden`。
+  - `git diff --check`
+  - `npm run build`
+- 结果：攻略正文表格在手机端会显示“横向滑动查看完整表格”，并在右侧保留渐隐提示；表格仍保留 `overflow-x-auto` 和 `min-w-[40rem]`，桌面端不显示额外提示。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、8 条优惠、14 个日历活动校验通过；`node` 静态检查 7 项通过；`git diff --check` 通过；`npm run build` 已完成 sitemap、lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“优化攻略表格移动端滑动提示”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续 06:00 移动端体验方向可检查首页和攻略横滑卡片的移动端滑动提示是否需要统一；网络恢复后继续优先推送本地领先提交。
+
 ## 2026-08-07 童装尺码新手判断入口优化
 
 - 时间：2026-08-07 03:01 JST
