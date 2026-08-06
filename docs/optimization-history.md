@@ -1,5 +1,26 @@
 # 优化记录
 
+## 2026-08-07 童装尺码新手判断入口优化
+
+- 时间：2026-08-07 03:01 JST
+- 当前优化方向：03:00 攻略内容。
+- 目标：`kids-clothes-size-80-90-100.mdx` 已经覆盖 80/90/100 尺码、衣服类型、保育园备用衣和换季清仓，但开头缺少“先看季节、尺码和备用量”的短判断入口，容易让新手先被清仓折扣带着囤。本次只优化这一篇攻略，补清未来 1-2 个月是否会穿、当前尺码是否接近下一码、家里和保育园备用量是否足够三问，并承接到保育园清单、省钱日历和本周值得买；不触碰优惠数据。
+- 修改文件：
+  - `content/guides/kids-clothes-size-80-90-100.mdx`
+  - `public/sitemap.xml`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run sitemap`
+  - `npm run validate:content`
+  - `node` 静态检查攻略阅读时长、更新时间、“新手先看季节、尺码和备用量”小节、季节/尺码/备用量三问、到 `/guides/nursery-entry-budget-items`、`/calendar` 和 `/deals` 的内链，以及 sitemap 日期。
+  - `git diff --check`
+  - `npm run build`
+- 结果：童装尺码攻略从 10 分钟扩展为 11 分钟阅读，`updatedAt` 更新为 `2026-08-07`；新增“新手先看季节、尺码和备用量”小节，用未来 1-2 个月是否会穿、宝宝当前尺码状态、家里和保育园备用衣是否够换洗三问，帮助读者先把基础款、少量试买和不适合提前囤的品类分开。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run sitemap` 生成 14 个 URL，并更新首页、攻略列表和童装尺码攻略详情页 `lastmod`；`npm run validate:content` 通过，当前 10 篇攻略、8 条优惠、14 个日历活动校验通过；`node` 静态检查 10 项通过；`git diff --check` 通过；`npm run build` 已完成 sitemap、lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“完善童装尺码新手判断入口”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续 03:00 攻略内容方向可检查 `newborn-shopping-list.mdx` 是否需要补“先买刚需、延后观望、收到反馈再补”的短判断入口；网络恢复后继续优先推送本地领先提交。
+
 ## 2026-08-07 首页亲友试用入口结构优化
 
 - 时间：2026-08-07 00:02 JST
