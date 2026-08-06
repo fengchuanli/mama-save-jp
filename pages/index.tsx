@@ -248,6 +248,20 @@ export default function Home({ deals, calendarEvents, paymentRebateEvents, guide
       title: "让对方先补一个判断规则",
       description: "适合正在比较尿不湿、积分或箱购活动的人，重点看单片价、上限和尺码风险。",
       action: "转发攻略"
+    },
+    {
+      label: "发给准备入园的朋友",
+      href: "/guides/nursery-entry-budget-items",
+      title: "让对方先按园方清单买",
+      description: "适合开始准备保育园用品、姓名贴或备用衣物的人，重点少买早、少买错。",
+      action: "转发入园清单"
+    },
+    {
+      label: "发给只想了解本站的朋友",
+      href: "/",
+      title: "让对方先看三块内容分工",
+      description: "适合第一次介绍 Mama Save JP，重点验证 30 秒内是否知道先点哪里。",
+      action: "转发首页"
     }
   ];
   const shareFollowupPrompts = [
@@ -537,7 +551,7 @@ export default function Home({ deals, calendarEvents, paymentRebateEvents, guide
               </h2>
               <p className="mt-3 max-w-2xl leading-7 text-stone-600">
                 早期先验证“看完能不能判断下一步”，不用一次把首页、优惠和全部攻略都发过去。
-                每次按“今天能不能买、什么时候买、规则看不懂”选一个入口，让对方看 3-5 分钟，再问哪一页有用、哪里不够可信。
+                每次按“刚开始准备、今天要买、等活动日、规则看不懂、准备入园、只想了解本站”选一个入口，让对方看 3-5 分钟，再问哪一页有用、哪里不够可信。
               </p>
               <div className="mt-5 grid gap-3">
                 {shareFollowupPrompts.map((prompt) => (
@@ -551,7 +565,7 @@ export default function Home({ deals, calendarEvents, paymentRebateEvents, guide
                 ))}
               </div>
             </div>
-            <div className="grid gap-3 sm:grid-cols-2">
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {shareTrialRoutes.map((route) => (
                 <Link
                   key={route.href}
