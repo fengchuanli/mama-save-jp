@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { GetStaticProps } from "next";
+import { useId } from "react";
 import { CalendarShelfCard } from "@/components/CalendarCard";
 import { DealShelfCard } from "@/components/DealCard";
 import { GuideShelfCard } from "@/components/GuideCard";
@@ -90,6 +91,8 @@ const contentRouteMap = [
 ];
 
 function HomeCalendarActionSection({ events }: { events: CalendarEvent[] }) {
+  const scrollHintId = useId();
+
   return (
     <section>
       <div className="mb-4 flex flex-col items-start justify-between gap-3 sm:flex-row sm:items-end sm:gap-4">
@@ -110,7 +113,13 @@ function HomeCalendarActionSection({ events }: { events: CalendarEvent[] }) {
       </div>
 
       <div className="relative">
-        <div className="no-scrollbar -mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 pr-10 md:mx-0 md:grid md:snap-none md:grid-cols-3 md:gap-5 md:overflow-visible md:px-0 md:pb-0 md:pr-0">
+        <p id={scrollHintId} className="sr-only">
+          手机端可横向滑动查看更多省钱节点。
+        </p>
+        <div
+          aria-describedby={scrollHintId}
+          className="no-scrollbar -mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 pr-10 md:mx-0 md:grid md:snap-none md:grid-cols-3 md:gap-5 md:overflow-visible md:px-0 md:pb-0 md:pr-0"
+        >
           {events.map((event) => {
             const meta = calendarTimingMeta[event.buyingTiming];
 
@@ -146,6 +155,7 @@ function HomeCalendarActionSection({ events }: { events: CalendarEvent[] }) {
 }
 
 export default function Home({ deals, calendarEvents, paymentRebateEvents, guides }: HomeProps) {
+  const quickStartScrollHintId = useId();
   const quickStartRoutes = [
     {
       label: "刚开始准备",
@@ -337,7 +347,13 @@ export default function Home({ deals, calendarEvents, paymentRebateEvents, guide
                 这里按家庭阶段和购物场景选唯一入口；右侧“本周提醒”再按今天要不要买来行动。
               </p>
               <div className="relative mt-3">
-                <div className="no-scrollbar -mx-5 flex snap-x snap-mandatory gap-3 overflow-x-auto px-5 pb-2 pr-10 sm:mx-0 sm:grid sm:snap-none sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:pb-0 sm:pr-0 lg:grid-cols-3">
+                <p id={quickStartScrollHintId} className="sr-only">
+                  手机端可横向滑动查看更多入口。
+                </p>
+                <div
+                  aria-describedby={quickStartScrollHintId}
+                  className="no-scrollbar -mx-5 flex snap-x snap-mandatory gap-3 overflow-x-auto px-5 pb-2 pr-10 sm:mx-0 sm:grid sm:snap-none sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:pb-0 sm:pr-0 lg:grid-cols-3"
+                >
                   {quickStartRoutes.map((route) => (
                     <Link
                       key={route.label}

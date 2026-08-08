@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Head from "next/head";
 import type { GetStaticProps } from "next";
+import { useId } from "react";
 import { GuideCard } from "@/components/GuideCard";
 import { Layout } from "@/components/Layout";
 import { SectionHeader } from "@/components/SectionHeader";
@@ -100,6 +101,8 @@ const guideProblemGroups: GuideProblemGroup[] = [
 ];
 
 export default function Guides({ guides }: GuidesProps) {
+  const beginnerScrollHintId = useId();
+  const problemScrollHintId = useId();
   const guidesUrl = getAbsoluteUrl("/guides");
   const beginnerGuideSlugs = [
     "newborn-shopping-list",
@@ -203,8 +206,12 @@ export default function Guides({ guides }: GuidesProps) {
           </div>
 
           <div className="relative">
+            <p id={beginnerScrollHintId} className="sr-only">
+              手机端可横向滑动查看更多必读路线。
+            </p>
             <div
               aria-label="新手宝妈必读路线"
+              aria-describedby={beginnerScrollHintId}
               className="no-scrollbar -mx-5 mt-5 flex snap-x snap-mandatory gap-3 overflow-x-auto px-5 pb-1 md:mx-0 md:grid md:snap-none md:grid-cols-3 md:overflow-visible md:px-0 md:pb-0"
             >
               {beginnerGuides.map((guide, index) => (
@@ -247,8 +254,12 @@ export default function Guides({ guides }: GuidesProps) {
           </div>
 
           <div className="relative">
+            <p id={problemScrollHintId} className="sr-only">
+              手机端可横向滑动查看更多问题入口。
+            </p>
             <div
               aria-label="按今天的问题直达"
+              aria-describedby={problemScrollHintId}
               className="no-scrollbar -mx-5 mt-5 flex snap-x snap-mandatory gap-3 overflow-x-auto px-5 pb-1 sm:mx-0 sm:grid sm:snap-none sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-4"
             >
               {quickProblemLinks.map((link) => (

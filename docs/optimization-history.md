@@ -1,5 +1,26 @@
 # 优化记录
 
+## 2026-08-09 横滑卡片读屏提示优化
+
+- 时间：2026-08-09 06:02 JST
+- 当前优化方向：06:00 移动端体验。
+- 目标：首页和攻略列表已有多个手机端横向滑动卡片区，并通过右侧渐隐箭头提示可继续滑动，但这些提示是装饰层，读屏用户或隐藏滚动条场景下不容易知道该区域还能横向浏览。本次只优化横滑卡片区的可访问提示，不改变视觉布局、不触碰优惠数据。
+- 修改文件：
+  - `components/HorizontalCardSection.tsx`
+  - `pages/index.tsx`
+  - `pages/guides/index.tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查首页、省钱节点、攻略列表和复用横滑组件是否包含 `sr-only` 横滑提示与 `aria-describedby` 关联。
+  - `git diff --check`
+  - `npm run build`
+- 结果：复用的 `HorizontalCardSection` 新增 `useId`、隐藏说明和 `aria-describedby`，覆盖首页“本周值得买”“支付返点”“新手必读路线”等横滑卡片区；首页首屏入口和“最近要关注的省钱节点”也补充对应隐藏说明；攻略列表的“新手宝妈必读路线”和“按今天的问题直达”同样关联隐藏横滑提示。视觉层仍保留原有箭头和渐隐边缘。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、8 条优惠、14 个日历活动校验通过；`node` 静态检查横滑可访问提示 17 项通过；`git diff --check` 通过；`npm run build` 已完成 sitemap、lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“优化横滑卡片读屏提示”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续 06:00 移动端体验方向可用浏览器检查首页和攻略列表在 375px 宽度下的横滑卡片高度、箭头位置和首屏拥挤度；网络恢复后继续优先推送本地领先提交。
+
 ## 2026-08-09 新生儿清单新手判断入口优化
 
 - 时间：2026-08-09 03:02 JST

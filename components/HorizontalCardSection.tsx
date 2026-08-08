@@ -1,5 +1,5 @@
 import Link from "next/link";
-import type { ReactNode } from "react";
+import { useId, type ReactNode } from "react";
 
 type HorizontalCardSectionProps<T> = {
   title: string;
@@ -29,6 +29,8 @@ export function HorizontalCardSection<T>({
   className = "",
   scrollHintClassName = "from-cream via-cream/90"
 }: HorizontalCardSectionProps<T>) {
+  const scrollHintId = useId();
+
   return (
     <section className={className}>
       <div className="mb-4 flex flex-col items-start justify-between gap-3 sm:flex-row sm:items-end sm:gap-4">
@@ -55,7 +57,13 @@ export function HorizontalCardSection<T>({
       </div>
 
       <div className="relative">
-        <div className="no-scrollbar -mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 pr-10 md:mx-0 md:grid md:snap-none md:grid-cols-3 md:gap-5 md:overflow-visible md:px-0 md:pb-0 md:pr-0">
+        <p id={scrollHintId} className="sr-only">
+          手机端可横向滑动查看更多卡片。
+        </p>
+        <div
+          aria-describedby={scrollHintId}
+          className="no-scrollbar -mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 pr-10 md:mx-0 md:grid md:snap-none md:grid-cols-3 md:gap-5 md:overflow-visible md:px-0 md:pb-0 md:pr-0"
+        >
           {items.map((item) => (
             <div
               key={getKey(item)}
