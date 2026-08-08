@@ -1,5 +1,24 @@
 # 优化记录
 
+## 2026-08-09 分享文案入口映射优化
+
+- 时间：2026-08-09 00:02 JST
+- 当前优化方向：00:00 内容结构。
+- 目标：README、首页首屏和首页底部亲友试用已统一为 6 类入口，但 `docs/growth-copy-bank.md` 仍只有逐条文案，缺少“用户当下状态 -> 唯一入口 -> 推荐文案 -> 唯一追问”的直接映射。本次只优化增长文案结构，让首次分享时能按同一套入口选择顺序挑文案；不触碰优惠数据。
+- 修改文件：
+  - `docs/growth-copy-bank.md`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查文案库是否包含 6 类入口映射、关键路径、推荐文案编号和 30 秒首页追问。
+  - `git diff --check`
+  - `npm run build`
+- 结果：文案库新增“按入口选择文案”小节，把刚开始准备、今天要补货、等活动日、看不懂规则、准备入园/童装换季、只想了解本站 6 类场景，分别对齐唯一入口、推荐文案编号和本轮只追问的问题。后续亲友试用或群聊转发可以先选场景，再选文案，减少一条消息里混多个入口。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、8 条优惠、14 个日历活动校验通过；`node` 静态检查 9 个关键标记和 8 行表格结构通过；`git diff --check` 通过；`npm run build` 已完成 sitemap、lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“完善分享文案入口映射”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续 00:00 内容结构方向可检查 `docs/first-share-checklist.md` 和 `docs/friend-trial-message.md` 是否也需要和 6 类入口选择表完全对齐；网络恢复后继续优先推送本地领先提交。
+
 ## 2026-08-07 07:33 最新母婴省钱消息整理
 
 - 时间：2026-08-07 07:33 JST
