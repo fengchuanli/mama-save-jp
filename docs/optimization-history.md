@@ -1,5 +1,24 @@
 # 优化记录
 
+## 2026-08-10 首次分享入口文档对齐优化
+
+- 时间：2026-08-10 00:02 JST
+- 当前优化方向：00:00 内容结构。
+- 目标：README、首页和 `docs/growth-copy-bank.md` 已统一为 6 类首次分享入口，但 `docs/first-share-checklist.md` 的“入口和文案匹配”仍停留在旧 5 类表，`docs/friend-trial-message.md` 也缺少“准备保育园或童装换季”场景。本次只对齐首次分享相关文档，降低亲友试用时入口、文案和追问不一致的风险；不触碰优惠数据。
+- 修改文件：
+  - `docs/first-share-checklist.md`
+  - `docs/friend-trial-message.md`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查首次分享清单和亲友试用话术是否包含 6 类入口、推荐文案编号、保育园入口和对应追问。
+  - `git diff --check`
+- 结果：`docs/first-share-checklist.md` 的“入口和文案匹配”改为和 README、首页、文案库一致的 6 类入口，并明确该表只用于和文案库选文案时对齐；`docs/friend-trial-message.md` 的入口选择表新增“准备保育园或童装换季”，并补充可替换首句，方便私聊时只发保育园准备入口。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、8 条优惠、14 个日历活动校验通过；`node` 静态检查 3 组关键标记通过；`git diff --check` 通过。
+- 是否提交：是，提交说明为“统一首次分享入口文档”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：网络恢复后继续优先推送本地领先提交；后续 00:00 内容结构方向可检查 `docs/friend-feedback-checklist.md` 是否需要按同一套 6 类入口增加反馈归类字段。
+
 ## 2026-08-09 07:32 最新母婴省钱消息整理
 
 - 时间：2026-08-09 07:32 JST
