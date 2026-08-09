@@ -15,6 +15,7 @@ type HorizontalCardSectionProps<T> = {
   renderCard: (item: T) => ReactNode;
   className?: string;
   scrollHintClassName?: string;
+  itemClassName?: string;
 };
 
 export function HorizontalCardSection<T>({
@@ -27,7 +28,8 @@ export function HorizontalCardSection<T>({
   getKey,
   renderCard,
   className = "",
-  scrollHintClassName = "from-cream via-cream/90"
+  scrollHintClassName = "from-cream via-cream/90",
+  itemClassName = "w-[calc(100vw-5.5rem)] max-w-[21rem] shrink-0 snap-start md:w-auto md:max-w-none md:shrink"
 }: HorizontalCardSectionProps<T>) {
   const scrollHintId = useId();
 
@@ -62,12 +64,12 @@ export function HorizontalCardSection<T>({
         </p>
         <div
           aria-describedby={scrollHintId}
-          className="no-scrollbar -mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 pr-10 md:mx-0 md:grid md:snap-none md:grid-cols-3 md:gap-5 md:overflow-visible md:px-0 md:pb-0 md:pr-0"
+          className="no-scrollbar -mx-5 flex snap-x snap-mandatory scroll-px-5 gap-4 overflow-x-auto px-5 pb-2 pr-16 md:mx-0 md:grid md:snap-none md:grid-cols-3 md:gap-5 md:overflow-visible md:px-0 md:pb-0 md:pr-0"
         >
           {items.map((item) => (
             <div
               key={getKey(item)}
-              className="w-[82vw] max-w-[22rem] shrink-0 snap-start md:w-auto md:max-w-none md:shrink"
+              className={itemClassName}
             >
               {renderCard(item)}
             </div>

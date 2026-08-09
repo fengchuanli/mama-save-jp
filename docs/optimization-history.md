@@ -1,5 +1,26 @@
 # 优化记录
 
+## 2026-08-10 横滑卡片移动端留白优化
+
+- 时间：2026-08-10 06:03 JST
+- 当前优化方向：06:00 移动端体验。
+- 目标：首页和攻略列表的横滑卡片区已经有视觉箭头和读屏提示，但手机端右侧留白偏紧，部分区域的第一屏卡片宽度也不一致，容易让右侧渐隐箭头压到卡片末端文字。本次只优化横滑卡片的移动端宽度、滚动吸附留白和右侧提示空间，不改内容结构、不触碰优惠数据。
+- 修改文件：
+  - `components/HorizontalCardSection.tsx`
+  - `pages/index.tsx`
+  - `pages/guides/index.tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查复用横滑组件、首页 quick-start、首页省钱节点和攻略列表两个横滑区是否包含统一的右侧留白、滚动吸附留白和移动端卡片宽度。
+  - `git diff --check`
+  - `npm run build`
+- 结果：复用的 `HorizontalCardSection` 增加可覆盖的 `itemClassName`，默认移动端卡片宽度统一为 `calc(100vw - 5.5rem)`、最大 `21rem`，横滑容器增加 `scroll-px-5` 和 `pr-16`，给右侧箭头/渐隐层留出更稳定空间。首页“最近要关注的省钱节点”“第一次打开”以及攻略列表“新手宝妈必读路线”“按今天的问题直达”同步采用同一套移动端留白和卡片宽度。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、8 条优惠、14 个日历活动校验通过；`node` 静态检查 8 项通过；`git diff --check` 通过；`npm run build` 已完成 sitemap、lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“优化横滑卡片移动端留白”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续 06:00 移动端体验方向可用浏览器在 375px 宽度下继续检查横滑卡片实际首屏露出比例和箭头遮挡情况；网络恢复后继续优先推送本地领先提交。
+
 ## 2026-08-10 保育园入园购买时机判断入口优化
 
 - 时间：2026-08-10 03:03 JST

@@ -118,7 +118,7 @@ function HomeCalendarActionSection({ events }: { events: CalendarEvent[] }) {
         </p>
         <div
           aria-describedby={scrollHintId}
-          className="no-scrollbar -mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 pr-10 md:mx-0 md:grid md:snap-none md:grid-cols-3 md:gap-5 md:overflow-visible md:px-0 md:pb-0 md:pr-0"
+          className="no-scrollbar -mx-5 flex snap-x snap-mandatory scroll-px-5 gap-4 overflow-x-auto px-5 pb-2 pr-16 md:mx-0 md:grid md:snap-none md:grid-cols-3 md:gap-5 md:overflow-visible md:px-0 md:pb-0 md:pr-0"
         >
           {events.map((event) => {
             const meta = calendarTimingMeta[event.buyingTiming];
@@ -126,7 +126,7 @@ function HomeCalendarActionSection({ events }: { events: CalendarEvent[] }) {
             return (
               <div
                 key={event.id}
-                className="w-[82vw] max-w-[22rem] shrink-0 snap-start md:w-auto md:max-w-none md:shrink"
+                className="w-[calc(100vw-5.5rem)] max-w-[21rem] shrink-0 snap-start md:w-auto md:max-w-none md:shrink"
               >
                 <Link
                   href={meta.href}
@@ -352,13 +352,13 @@ export default function Home({ deals, calendarEvents, paymentRebateEvents, guide
                 </p>
                 <div
                   aria-describedby={quickStartScrollHintId}
-                  className="no-scrollbar -mx-5 flex snap-x snap-mandatory gap-3 overflow-x-auto px-5 pb-2 pr-10 sm:mx-0 sm:grid sm:snap-none sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:pb-0 sm:pr-0 lg:grid-cols-3"
+                  className="no-scrollbar -mx-5 flex snap-x snap-mandatory scroll-px-5 gap-3 overflow-x-auto px-5 pb-2 pr-16 sm:mx-0 sm:grid sm:snap-none sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:pb-0 sm:pr-0 lg:grid-cols-3"
                 >
                   {quickStartRoutes.map((route) => (
                     <Link
                       key={route.label}
                       href={route.href}
-                      className="flex min-h-[12rem] w-[74vw] max-w-[18rem] shrink-0 snap-start flex-col rounded-lg border border-orange-100 bg-white/90 p-4 shadow-soft transition hover:border-peach hover:bg-white sm:w-auto sm:max-w-none sm:shrink"
+                      className="flex min-h-[12rem] w-[calc(100vw-5.5rem)] max-w-[21rem] shrink-0 snap-start flex-col rounded-lg border border-orange-100 bg-white/90 p-4 shadow-soft transition hover:border-peach hover:bg-white sm:w-auto sm:max-w-none sm:shrink"
                     >
                       <p className="text-xs font-semibold text-tea">{route.label}</p>
                       <h2 className="mt-2 text-base font-semibold leading-6 text-ink">{route.title}</h2>
