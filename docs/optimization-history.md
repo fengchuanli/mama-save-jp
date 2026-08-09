@@ -1,5 +1,25 @@
 # 优化记录
 
+## 2026-08-10 保育园入园购买时机判断入口优化
+
+- 时间：2026-08-10 03:03 JST
+- 当前优化方向：03:00 攻略内容。
+- 目标：`nursery-entry-budget-items.mdx` 已经覆盖保育园用品分层、姓名贴、备用衣和推荐购买顺序，但开头缺少“现在能不能买”的第一轮判断，读者容易在还没拿到园方清单时被活动价带着下单。本次只优化这一篇攻略，补清等说明会、可以先买、需要量尺寸或定制三类购买时机，并承接到既有保育园用品分层；不触碰优惠数据。
+- 修改文件：
+  - `content/guides/nursery-entry-budget-items.mdx`
+  - `public/sitemap.xml`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run sitemap`
+  - `npm run validate:content`
+  - `node` 静态检查攻略阅读时长、更新时间、“新手先决定现在买不买”小节、三类购买时机、活动日不替代清单确认口径，以及 sitemap 日期。
+  - `git diff --check`
+- 结果：保育园入园准备攻略从 10 分钟扩展为 11 分钟阅读，`updatedAt` 更新为 `2026-08-10`；新增“新手先决定现在买不买”小节，用等说明会、可以先买、需要量尺寸或定制三类，帮助读者先判断哪些只能收藏候选、哪些可先备少量通用品、哪些要在说明会后尽快确认规格。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run sitemap` 生成 14 个 URL，并更新首页、攻略列表和保育园入园准备攻略详情页 `lastmod`；`npm run validate:content` 通过，当前 10 篇攻略、8 条优惠、14 个日历活动校验通过；`node` 静态检查 9 项通过；`git diff --check` 通过；`npm run build` 已完成 sitemap、lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“完善保育园入园购买时机判断”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续 03:00 攻略内容方向可检查 `diaper-price-line.mdx` 是否需要补“从当前库存、换码风险和好价线决定今天买不买”的更短入口；网络恢复后继续优先推送本地领先提交。
+
 ## 2026-08-10 首次分享入口文档对齐优化
 
 - 时间：2026-08-10 00:02 JST
