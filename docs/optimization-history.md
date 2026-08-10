@@ -1,5 +1,24 @@
 # 优化记录
 
+## 2026-08-11 亲友反馈入口归类优化
+
+- 时间：2026-08-11 00:03 JST
+- 当前优化方向：00:00 内容结构。
+- 目标：README、首页、增长文案库、首次分享清单和亲友发送话术已经统一为 6 类入口，但 `docs/friend-feedback-checklist.md` 的反馈模板仍缺少同一套入口归类字段，后续容易把“入口选错”的反馈误判成页面问题。本次只优化亲友反馈清单，补清用户当下状态、推荐入口、实际入口和入口是否选对，避免一条反馈触发不必要的页面改动；不触碰优惠数据。
+- 修改文件：
+  - `docs/friend-feedback-checklist.md`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查反馈清单是否包含 6 类入口归类、推荐入口、入口是否选对字段和入口选对后再改页面的判断规则。
+  - `git diff --check`
+  - `npm run build`
+- 结果：亲友反馈清单新增“反馈归类字段”小节，用同一套 6 类入口标记用户当下状态、推荐入口、记录重点和不直接改页面的情况；反馈记录模板新增“用户当下状态”“本轮推荐入口”“入口是否选对”；优先级判断把“入口不匹配”放到找不到入口和决策不足之前。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、8 条优惠、14 个日历活动校验通过；`node` 静态检查 12 项通过；`git diff --check` 通过；`npm run build` 已完成 sitemap、lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“完善亲友反馈入口归类”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续 00:00 内容结构方向可在收到首批亲友反馈后，按“入口是否选对”汇总 3 条以上相似问题，再决定是否改首页入口、攻略分类或具体页面文案。
+
 ## 2026-08-10 07:35 最新母婴省钱消息整理
 
 - 时间：2026-08-10 07:35 JST
