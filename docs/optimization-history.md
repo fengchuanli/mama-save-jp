@@ -1,5 +1,26 @@
 # 优化记录
 
+## 2026-08-11 支付返点判断入口优化
+
+- 时间：2026-08-11 03:02 JST
+- 当前优化方向：03:00 攻略内容。
+- 目标：`payment-rebates-mama-shopping.mdx` 已经解释支付返点、店铺券和返还类型，但开头缺少“今天这单按实付、保守返点还是直接跳过”的第一层判断，读者容易先被最高返还吸引再倒推是否购买。本次只优化这一篇攻略，补清是否本来就要买、返点是否确定、支付方式是否适合自家的决策入口；不触碰优惠数据。
+- 修改文件：
+  - `content/guides/payment-rebates-mama-shopping.mdx`
+  - `public/sitemap.xml`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run sitemap`
+  - `npm run validate:content`
+  - `node` 静态检查攻略阅读时长、更新时间、“先决定今天按哪种价格判断”小节、三种判断方式、到 `/calendar` 的规则承接，以及 sitemap 日期。
+  - `git diff --check`
+  - `npm run build`
+- 结果：支付返点攻略从 10 分钟扩展为 11 分钟阅读，`updatedAt` 更新为 `2026-08-11`；新增“先决定今天按哪种价格判断”小节，把本单拆成只看今天实付、实付加保守返点、继续跳过三种判断方式，并用表格说明本来不在清单、返点条件看不懂、支付方式熟悉、需要凑单或临时换 App 时的下一步。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run sitemap` 生成 14 个 URL，并更新首页、攻略列表和支付返点攻略详情页 `lastmod`；`npm run validate:content` 通过，当前 10 篇攻略、8 条优惠、14 个日历活动校验通过；`node` 静态检查 9 项通过；`git diff --check` 通过；`npm run build` 已完成 sitemap、lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“完善支付返点判断入口”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续 03:00 攻略内容方向可检查 `diaper-price-line.mdx` 是否需要补“从当前库存、换码风险和好价线决定今天买不买”的更短入口；网络恢复后继续优先推送本地领先提交。
+
 ## 2026-08-11 亲友反馈入口归类优化
 
 - 时间：2026-08-11 00:03 JST
