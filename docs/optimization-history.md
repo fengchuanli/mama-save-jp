@@ -1,5 +1,25 @@
 # 优化记录
 
+## 2026-08-11 筛选条移动端可访问提示优化
+
+- 时间：2026-08-11 06:03 JST
+- 当前优化方向：06:00 移动端体验。
+- 目标：`/deals` 和 `/calendar` 的手机端入口卡片、状态/分类/平台筛选条都依赖横向滑动，但此前主要靠右侧视觉箭头提示，读屏用户和键盘用户不容易知道这些区域还能横向浏览。本次只优化两个筛选页的横向滚动区域可访问提示，不改筛选逻辑、不触碰优惠数据。
+- 修改文件：
+  - `pages/deals.tsx`
+  - `pages/calendar.tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查 `/deals` 和 `/calendar` 是否为横向入口/筛选区域增加 `useId`、`sr-only` 说明、`aria-describedby`、`aria-label` 和 `tabIndex={0}`。
+  - `git diff --check`
+  - `npm run build`
+- 结果：`/deals` 的当前任务入口、优惠状态、分类和平台筛选条新增隐藏横滑说明，并把说明关联到可滚动容器；`/calendar` 的日历动作入口和平台筛选条也新增同类说明。手机端视觉布局和筛选结果逻辑保持不变。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、8 条优惠、14 个日历活动校验通过；`node` 静态检查 14 项通过；`git diff --check` 通过；`npm run build` 已生成 sitemap、完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“优化筛选条移动端可访问提示”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续 06:00 移动端体验方向可用浏览器在 375px 宽度下检查 `/deals` 和 `/calendar` 的筛选条焦点样式、滑动提示位置和卡片高度；网络恢复后继续优先推送本地领先提交。
+
 ## 2026-08-11 支付返点判断入口优化
 
 - 时间：2026-08-11 03:02 JST

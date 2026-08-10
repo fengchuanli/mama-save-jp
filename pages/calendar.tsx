@@ -2,7 +2,7 @@ import type { GetStaticProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useId, useMemo, useState } from "react";
 import { CalendarStoreGroup } from "@/components/CalendarCard";
 import { Layout } from "@/components/Layout";
 import { PaymentRebateSpotlight } from "@/components/PaymentRebateSpotlight";
@@ -101,6 +101,8 @@ export default function Calendar({ events }: CalendarProps) {
   const router = useRouter();
   const calendarUrl = getAbsoluteUrl("/calendar");
   const paymentRebateEvents = getPaymentRebateEvents(events);
+  const timingFilterHintId = useId();
+  const storeFilterHintId = useId();
   const [selectedTiming, setSelectedTiming] = useState<TimingFilter>("全部");
   const [selectedStore, setSelectedStore] = useState("全部");
   useEffect(() => {
@@ -244,7 +246,15 @@ export default function Calendar({ events }: CalendarProps) {
             </h2>
           </div>
           <div className="relative">
-            <div className="no-scrollbar -mx-4 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-1 pr-10 sm:mx-0 sm:grid sm:snap-none sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:pb-0 sm:pr-0 lg:grid-cols-4">
+            <p id={timingFilterHintId} className="sr-only">
+              横向滑动查看更多日历动作入口，选择后会更新下方省钱节点。
+            </p>
+            <div
+              aria-describedby={timingFilterHintId}
+              aria-label="日历动作入口"
+              tabIndex={0}
+              className="no-scrollbar -mx-4 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-1 pr-10 sm:mx-0 sm:grid sm:snap-none sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:pb-0 sm:pr-0 lg:grid-cols-4"
+            >
               {timingFilters.map((filter) => {
                 const active = selectedTiming === filter.id;
                 const count =
@@ -302,7 +312,15 @@ export default function Calendar({ events }: CalendarProps) {
             ) : null}
           </div>
           <div className="relative">
-            <div className={filterScrollerClass}>
+            <p id={storeFilterHintId} className="sr-only">
+              横向滑动查看更多平台筛选，选择后会更新当前省钱节点。
+            </p>
+            <div
+              aria-describedby={storeFilterHintId}
+              aria-label="省钱日历平台筛选"
+              tabIndex={0}
+              className={filterScrollerClass}
+            >
               {stores.map((store) => {
                 const active = selectedStore === store;
 

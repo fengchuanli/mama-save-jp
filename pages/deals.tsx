@@ -1,7 +1,7 @@
 import type { GetStaticProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useId, useMemo, useState } from "react";
 import { DealCard } from "@/components/DealCard";
 import { Layout } from "@/components/Layout";
 import { SectionHeader } from "@/components/SectionHeader";
@@ -75,6 +75,10 @@ function MobileScrollHint({ className = "" }: { className?: string }) {
 
 export default function Deals({ deals }: DealsProps) {
   const dealsUrl = getAbsoluteUrl("/deals");
+  const taskEntryHintId = useId();
+  const statusFilterHintId = useId();
+  const categoryFilterHintId = useId();
+  const platformFilterHintId = useId();
   const [selectedCategory, setSelectedCategory] = useState("全部");
   const [selectedPlatform, setSelectedPlatform] = useState("全部");
   const [selectedStatus, setSelectedStatus] = useState<DealStatusFilter>("全部");
@@ -250,7 +254,15 @@ export default function Deals({ deals }: DealsProps) {
           </div>
 
           <div className="relative">
-            <div className="no-scrollbar -mx-4 mt-5 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-1 pr-10 sm:mx-0 sm:grid sm:snap-none sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:pb-0 sm:pr-0 lg:grid-cols-4">
+            <p id={taskEntryHintId} className="sr-only">
+              横向滑动查看更多任务入口，选择后会更新下方优惠筛选结果。
+            </p>
+            <div
+              aria-describedby={taskEntryHintId}
+              aria-label="当前任务入口"
+              tabIndex={0}
+              className="no-scrollbar -mx-4 mt-5 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-1 pr-10 sm:mx-0 sm:grid sm:snap-none sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:pb-0 sm:pr-0 lg:grid-cols-4"
+            >
               {taskEntryRoutes.map((route) => (
                 <button
                   key={route.label}
@@ -280,7 +292,15 @@ export default function Deals({ deals }: DealsProps) {
               </p>
             </div>
             <div className="relative">
-              <div className={filterScrollerClass}>
+              <p id={statusFilterHintId} className="sr-only">
+                横向滑动查看更多优惠状态筛选，选择后会更新当前优惠列表。
+              </p>
+              <div
+                aria-describedby={statusFilterHintId}
+                aria-label="优惠状态筛选"
+                tabIndex={0}
+                className={filterScrollerClass}
+              >
                 {statusFilters.map((status) => {
                   const active = selectedStatus === status;
 
@@ -322,7 +342,15 @@ export default function Deals({ deals }: DealsProps) {
               </div>
             </div>
             <div className="relative">
-              <div className={filterScrollerClass}>
+              <p id={categoryFilterHintId} className="sr-only">
+                横向滑动查看更多母婴用品分类，选择后会更新当前优惠列表。
+              </p>
+              <div
+                aria-describedby={categoryFilterHintId}
+                aria-label="优惠分类筛选"
+                tabIndex={0}
+                className={filterScrollerClass}
+              >
                 {categories.map((category) => {
                   const active = selectedCategory === category;
 
@@ -350,7 +378,15 @@ export default function Deals({ deals }: DealsProps) {
           <div>
             <p className="mb-3 text-sm font-semibold text-ink">按平台筛选</p>
             <div className="relative">
-              <div className={filterScrollerClass}>
+              <p id={platformFilterHintId} className="sr-only">
+                横向滑动查看更多平台筛选，选择后会更新当前优惠列表。
+              </p>
+              <div
+                aria-describedby={platformFilterHintId}
+                aria-label="优惠平台筛选"
+                tabIndex={0}
+                className={filterScrollerClass}
+              >
                 {platforms.map((platform) => {
                   const active = selectedPlatform === platform;
 
