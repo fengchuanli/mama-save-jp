@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Head from "next/head";
 import type { GetStaticPaths, GetStaticProps } from "next";
+import { useId } from "react";
 import { Layout } from "@/components/Layout";
 import { MarkdownContent } from "@/components/MarkdownContent";
 import { getAllGuides, getGuideBySlug, getGuideSlugs } from "@/lib/guides";
@@ -172,6 +173,8 @@ function MobileScrollHint({ className }: { className: string }) {
 }
 
 export default function GuideDetail({ guide, relatedGuides }: GuideDetailProps) {
+  const sectionScrollHintId = useId();
+  const relatedScrollHintId = useId();
   const guidePath = `/guides/${guide.slug}`;
   const guideUrl = getAbsoluteUrl(guidePath);
   const detailTags = guide.tags.length ? guide.tags : [guide.babyAge];
@@ -268,7 +271,15 @@ export default function GuideDetail({ guide, relatedGuides }: GuideDetailProps) 
           >
             <p className="px-1 text-xs font-semibold text-tea">快速跳到小节</p>
             <div className="relative">
-              <div className="no-scrollbar -mx-1 mt-2 flex snap-x snap-mandatory gap-2 overflow-x-auto px-1 pb-1 pr-9 sm:snap-none sm:pr-1">
+              <p id={sectionScrollHintId} className="sr-only">
+                手机端可横向滑动查看更多攻略小节。
+              </p>
+              <div
+                aria-label="攻略小节快捷跳转"
+                aria-describedby={sectionScrollHintId}
+                tabIndex={0}
+                className="no-scrollbar -mx-1 mt-2 flex snap-x snap-mandatory gap-2 overflow-x-auto px-1 pb-1 pr-9 sm:snap-none sm:pr-1"
+              >
                 {sectionLinks.map((section) => (
                   <a
                     key={section.id}
@@ -317,7 +328,15 @@ export default function GuideDetail({ guide, relatedGuides }: GuideDetailProps) 
           <h2 className="mt-1.5 text-xl font-semibold text-ink sm:mt-2 sm:text-2xl">相关攻略</h2>
         </div>
         <div className="relative">
-          <div className="no-scrollbar -mx-4 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-2 pr-10 sm:gap-4 md:mx-0 md:grid md:snap-none md:grid-cols-3 md:overflow-visible md:px-0 md:pb-0 md:pr-0">
+          <p id={relatedScrollHintId} className="sr-only">
+            手机端可横向滑动查看更多相关攻略。
+          </p>
+          <div
+            aria-label="相关攻略"
+            aria-describedby={relatedScrollHintId}
+            tabIndex={0}
+            className="no-scrollbar -mx-4 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-2 pr-10 sm:gap-4 md:mx-0 md:grid md:snap-none md:grid-cols-3 md:overflow-visible md:px-0 md:pb-0 md:pr-0"
+          >
             {relatedGuides.map((item) => (
               <Link
                 key={item.slug}

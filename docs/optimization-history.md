@@ -1,5 +1,24 @@
 # 优化记录
 
+## 2026-08-12 攻略详情横滑区可访问提示优化
+
+- 时间：2026-08-12 06:02 JST
+- 当前优化方向：06:00 移动端体验。
+- 目标：攻略详情页的“小节快捷跳转”和“相关攻略”在手机端依赖横向滑动，已有视觉箭头，但滚动容器本身缺少和 `/deals`、`/calendar` 筛选条一致的读屏说明与键盘焦点入口。本次只优化攻略详情页这两处横滑区域，不改攻略内容、不触碰优惠数据。
+- 修改文件：
+  - `pages/guides/[slug].tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查攻略详情页是否引入 `useId`，并为“小节快捷跳转”和“相关攻略”横滑容器增加 `sr-only` 说明、`aria-label`、`aria-describedby` 和 `tabIndex={0}`。
+  - `git diff --check`
+  - `npm run build`
+- 结果：攻略详情页两处手机端横滑区域新增隐藏滑动说明，并把说明关联到可横向滚动容器；容器可通过键盘聚焦，读屏用户能知道这些区域可以继续横向浏览。视觉布局、卡片内容、关联攻略排序和路由不变。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、8 条优惠、14 个日历活动校验通过；`node` 静态检查 10 项通过，确认两处攻略详情横滑容器均有关联说明和键盘焦点入口；`git diff --check` 通过；`npm run build` 已生成 sitemap、完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“优化攻略详情横滑可访问提示”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续 06:00 移动端体验方向可用浏览器在 375px 宽度检查攻略详情页的小节跳转焦点样式、相关攻略横滑提示和卡片宽度。
+
 ## 2026-08-12 纸尿裤好价线下单判断优化
 
 - 时间：2026-08-12 03:01 JST
