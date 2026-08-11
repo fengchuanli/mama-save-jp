@@ -1,5 +1,26 @@
 # 优化记录
 
+## 2026-08-12 首页分享转接规则优化
+
+- 时间：2026-08-12 00:03 JST
+- 当前优化方向：00:00 内容结构。
+- 目标：README、首页和亲友分享体系已经统一到 6 类入口，但“只发首页介绍本站”后如何把反馈转成下一轮唯一深链接还不够明确，容易把首页定位反馈和具体优惠/攻略页面反馈混在一起。本次只优化首次分享、亲友话术和反馈记录文档，补清首页只用于定位验证，下一轮再按对方回复选择一个深链接；不触碰优惠数据。
+- 修改文件：
+  - `docs/first-share-checklist.md`
+  - `docs/friend-trial-message.md`
+  - `docs/friend-feedback-checklist.md`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查首次分享清单、亲友发送话术和反馈清单是否包含首页转接规则、下一轮唯一入口和首页反馈不直接改页面的判断。
+  - `git diff --check`
+  - `npm run build`
+- 结果：首次分享清单新增“只发首页时的转接规则”，把首页反馈分别转到新手清单、优惠页、省钱日历、规则攻略、保育园入口或继续记录首页定位反馈；亲友发送话术新增“只想了解本站”首句和首页转接表；反馈模板新增“如果本轮发首页，下一轮唯一入口”，并补充首页反馈的优先级判断。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、8 条优惠、14 个日历活动校验通过；`node` 静态检查 13 项通过，确认首页转接规则、下一轮唯一入口和首页反馈处理规则都已写入；`git diff --check` 通过；`npm run build` 已生成 sitemap、完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“完善首页分享转接规则”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续收到首页试用反馈时，先记录下一轮唯一入口；只有 3 条以上都说首页看不出适合谁、做什么或先点哪里时，再回到首页首屏和入口文案调整。
+
 ## 2026-08-11 07:31 最新母婴省钱消息整理
 
 - 时间：2026-08-11 07:31 JST
