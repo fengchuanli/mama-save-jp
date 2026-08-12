@@ -212,6 +212,7 @@ export default function Guides({ guides }: GuidesProps) {
             <div
               aria-label="新手宝妈必读路线"
               aria-describedby={beginnerScrollHintId}
+              tabIndex={0}
               className="no-scrollbar -mx-5 mt-5 flex snap-x snap-mandatory scroll-px-5 gap-3 overflow-x-auto px-5 pb-1 pr-16 md:mx-0 md:grid md:snap-none md:grid-cols-3 md:overflow-visible md:px-0 md:pb-0 md:pr-0"
             >
               {beginnerGuides.map((guide, index) => (
@@ -260,6 +261,7 @@ export default function Guides({ guides }: GuidesProps) {
             <div
               aria-label="按今天的问题直达"
               aria-describedby={problemScrollHintId}
+              tabIndex={0}
               className="no-scrollbar -mx-5 mt-5 flex snap-x snap-mandatory scroll-px-5 gap-3 overflow-x-auto px-5 pb-1 pr-16 sm:mx-0 sm:grid sm:snap-none sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:pb-0 sm:pr-0 lg:grid-cols-4"
             >
               {quickProblemLinks.map((link) => (

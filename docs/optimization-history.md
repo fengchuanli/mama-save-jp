@@ -1,5 +1,26 @@
 # 优化记录
 
+## 2026-08-13 首页和攻略横滑区域可访问入口优化
+
+- 时间：2026-08-13 06:03 JST
+- 当前优化方向：06:00 移动端体验。
+- 目标：近期已经为多个手机端横滑区域补充视觉箭头和隐藏滑动说明，但首页手写横滑区、攻略列表横滑区和复用横滑组件的滚动容器本身还缺少统一的区域标签与键盘焦点入口。本次只补齐这些横滑容器的 `aria-label`、`aria-describedby` 和 `tabIndex`，不调整卡片内容、筛选逻辑或优惠数据。
+- 修改文件：
+  - `components/HorizontalCardSection.tsx`
+  - `pages/index.tsx`
+  - `pages/guides/index.tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查复用横滑组件、首页第一次打开入口、首页省钱节点、首页三处复用横滑卡片、攻略列表两处横滑入口的标签和键盘焦点属性。
+  - `git diff --check`
+  - `npm run build`
+- 结果：`HorizontalCardSection` 新增可覆盖的 `scrollContainerLabel`，默认使用区块标题作为横滑容器标签，并为容器补充 `tabIndex={0}`；首页“第一次打开状态入口”“最近要关注的省钱节点”和三处复用横滑卡片补充明确标签；攻略列表“新手宝妈必读路线”“按今天的问题直达”补充键盘焦点入口。视觉布局、链接目标和卡片数据保持不变。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、8 条优惠、14 个日历活动校验通过；`node` 静态检查 10 项通过；`git diff --check` 通过；`npm run build` 已生成 sitemap、完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“优化首页攻略横滑区域可访问入口”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续 06:00 移动端体验方向可用浏览器在 375px 宽度下检查首页和攻略列表横滑区域聚焦样式是否足够明显；网络恢复后继续优先推送本地领先提交。
+
 ## 2026-08-13 尿不湿购买渠道判断优化
 
 - 时间：2026-08-13 03:02 JST

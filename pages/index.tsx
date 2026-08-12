@@ -117,7 +117,9 @@ function HomeCalendarActionSection({ events }: { events: CalendarEvent[] }) {
           手机端可横向滑动查看更多省钱节点。
         </p>
         <div
+          aria-label="首页省钱节点"
           aria-describedby={scrollHintId}
+          tabIndex={0}
           className="no-scrollbar -mx-5 flex snap-x snap-mandatory scroll-px-5 gap-4 overflow-x-auto px-5 pb-2 pr-16 md:mx-0 md:grid md:snap-none md:grid-cols-3 md:gap-5 md:overflow-visible md:px-0 md:pb-0 md:pr-0"
         >
           {events.map((event) => {
@@ -351,7 +353,9 @@ export default function Home({ deals, calendarEvents, paymentRebateEvents, guide
                   手机端可横向滑动查看更多入口。
                 </p>
                 <div
+                  aria-label="第一次打开状态入口"
                   aria-describedby={quickStartScrollHintId}
+                  tabIndex={0}
                   className="no-scrollbar -mx-5 flex snap-x snap-mandatory scroll-px-5 gap-3 overflow-x-auto px-5 pb-2 pr-16 sm:mx-0 sm:grid sm:snap-none sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:pb-0 sm:pr-0 lg:grid-cols-3"
                 >
                   {quickStartRoutes.map((route) => (
@@ -474,6 +478,7 @@ export default function Home({ deals, calendarEvents, paymentRebateEvents, guide
             getKey={(deal) => deal.id}
             renderCard={(deal) => <DealShelfCard deal={deal} />}
             scrollHintClassName="from-[#fff7ed] via-[#fff7ed]/90"
+            scrollContainerLabel="首页本周值得买卡片"
           />
         </div>
       </section>
@@ -492,6 +497,7 @@ export default function Home({ deals, calendarEvents, paymentRebateEvents, guide
             getKey={(event) => event.id}
             renderCard={(event) => <PaymentRebateShelfCard event={event} />}
             scrollHintClassName="from-sky-50 via-sky-50/90"
+            scrollContainerLabel="首页支付返点卡片"
           />
           <p className="mt-4 text-xs leading-5 text-stone-500">
             活动、返点、库存和适用门店可能变化，购买前请以官方页面、结算页或店头公告为准。
@@ -553,6 +559,7 @@ export default function Home({ deals, calendarEvents, paymentRebateEvents, guide
             getKey={(guide) => guide.slug}
             renderCard={(guide) => <GuideShelfCard guide={guide} />}
             scrollHintClassName="from-emerald-50 via-emerald-50/90"
+            scrollContainerLabel="首页新手必读攻略卡片"
           />
         </div>
       </section>
