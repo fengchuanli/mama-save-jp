@@ -1,5 +1,24 @@
 # 优化记录
 
+## 2026-08-13 README 入口结构说明优化
+
+- 时间：2026-08-13 00:02 JST
+- 当前优化方向：00:00 内容结构。
+- 目标：首页、亲友试用文档和首次分享清单已经统一为 6 类状态入口，但 README 顶部仍把产品入口概括成 3 个公开入口，容易让后续维护者忽略“首页先选状态，再进入功能页承接”的结构。本次只优化 README 的入口结构说明和维护检查，不改页面代码、不触碰优惠数据。
+- 修改文件：
+  - `README.md`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查 README、首次分享清单、亲友试用话术和首页源码是否包含 6 类入口结构关键标记。
+  - `git diff --check`
+  - `npm run build`
+- 结果：README 的“产品入口”改为“产品入口结构”，新增首页首屏 6 类状态入口和承接页面表，并保留 `/deals`、`/calendar`、`/guides` 作为 3 个公开功能页说明；新增“入口结构维护检查”，要求调整首页入口、README 或亲友话术时同步检查首页、README、首次分享清单和亲友试用话术，避免入口体系再次分裂。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、8 条优惠、14 个日历活动校验通过；`node` 静态检查 7 项通过，确认 README 和现有分享/首页入口文档仍覆盖同一套结构；`git diff --check` 通过；`npm run build` 已生成 sitemap、完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“完善README入口结构说明”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续 00:00 内容结构方向可继续检查 `README.md` 的每周维护节奏是否需要和近期 7:30/16:30 消息整理任务拆得更清楚；网络恢复后继续优先推送本地领先提交。
+
 ## 2026-08-12 07:36 最新母婴省钱消息整理
 
 - 时间：2026-08-12 07:36 JST
