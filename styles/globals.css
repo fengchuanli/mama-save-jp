@@ -32,6 +32,12 @@ a {
   scrollbar-width: none;
 }
 
+.no-scrollbar:focus-visible {
+  outline: 3px solid #2f7d6b;
+  outline-offset: 4px;
+  border-radius: 0.75rem;
+}
+
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
