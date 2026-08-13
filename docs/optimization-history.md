@@ -1,5 +1,24 @@
 # 优化记录
 
+## 2026-08-14 README 日常自动化分工优化
+
+- 时间：2026-08-14 00:02 JST
+- 当前优化方向：00:00 内容结构。
+- 目标：README 已说明产品入口结构和每周更新节奏，但还没有把 00:00-07:00 产品优化、7:30/16:30 消息整理、优惠数据维护和亲友反馈整理的边界拆清，容易让日常自动化在一次运行里同时改结构、改数据和改增长文案。本次只补 README 的日常自动化分工，不改页面代码、不触碰优惠数据。
+- 修改文件：
+  - `README.md`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查 README 是否包含日常自动化分工、00:00-07:00、07:30/16:30、`data/deals.json` 复查边界和单条反馈不改首页导航的说明。
+  - `git diff --check`
+  - `npm run build`
+- 结果：README 新增“日常自动化分工”小节，用表格区分产品优化、消息整理、优惠数据维护和分享反馈整理，并明确非 7:30/16:30 消息整理任务默认优先选择不依赖实时价格和库存的改进；除非明确触碰 `data/deals.json`，否则不顺手触发优惠数据复查。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、8 条优惠、14 个日历活动校验通过；`node` 静态检查 7 项通过；`git diff --check` 通过；`npm run build` 已生成 sitemap、完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“明确日常自动化分工边界”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续 00:00 内容结构方向可检查 `docs/30-day-optimization-plan.md` 是否需要把“整点优化”和“消息整理”边界同步得更清楚；网络恢复后继续优先推送本地领先提交。
+
 ## 2026-08-13 07:33 最新母婴省钱消息整理
 
 - 时间：2026-08-13 07:33 JST
