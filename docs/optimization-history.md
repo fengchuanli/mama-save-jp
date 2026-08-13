@@ -1,5 +1,26 @@
 # 优化记录
 
+## 2026-08-14 母婴店选择平台判断优化
+
+- 时间：2026-08-14 03:02 JST
+- 当前优化方向：03:00 攻略内容。
+- 目标：`choose-baby-stores-japan.mdx` 已经解释西松屋、バースデイ、赤ちゃん本舗的分工和活动日前后安排，但读者仍可能先被店铺促销带着走，再倒推要买什么。本次只优化这一篇攻略，补一个“先按本次任务选择平台”的短判断入口，帮助新手先区分看实物、紧急补货、线上比价、少量买童装和只观察活动日；不触碰优惠数据。
+- 修改文件：
+  - `content/guides/choose-baby-stores-japan.mdx`
+  - `public/sitemap.xml`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run sitemap`
+  - `npm run validate:content`
+  - `node` 静态检查攻略阅读时长、更新时间、“先按本次任务选择平台”小节、赤ちゃん本舗/西松屋/线上比价/省钱日历判断行，以及 sitemap 日期。
+  - `git diff --check`
+  - `npm run build`
+- 结果：母婴店选择攻略从 11 分钟扩展为 12 分钟阅读，`updatedAt` 更新为 `2026-08-14`；新增“先按本次任务选择平台”小节，用 5 行表格把第一次确认实物、保育园紧急补货、已知品牌尺码线上比价、当前季节少量童装和只是看到活动日分别导向线下实物店、西松屋、线上平台/优惠页、バースデイ或省钱日历观察。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run sitemap` 生成 14 个 URL，并更新首页、攻略列表和母婴店选择攻略详情页 `lastmod`；`npm run validate:content` 通过，当前 10 篇攻略、8 条优惠、14 个日历活动校验通过；`node` 静态检查 8 项通过；`git diff --check` 通过；`npm run build` 已生成 sitemap、完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“完善母婴店选择平台判断”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续 03:00 攻略内容方向可检查 `drugstore-coupon.mdx` 是否需要补“先确认商品本来要买，再看优惠券和积分”的短判断入口；网络恢复后继续优先推送本地领先提交。
+
 ## 2026-08-14 README 日常自动化分工优化
 
 - 时间：2026-08-14 00:02 JST
