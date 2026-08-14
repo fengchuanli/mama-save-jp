@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import type { ReactNode } from "react";
+import { useId, type ReactNode } from "react";
 import { siteConfig } from "@/lib/site";
 
 const navItems = [
@@ -25,6 +25,7 @@ export function Layout({
   children
 }: LayoutProps) {
   const router = useRouter();
+  const navScrollHintId = useId();
   const pageTitle = title.includes(siteConfig.siteName) ? title : `${title} - ${siteConfig.siteName}`;
   const canonicalPath = router.asPath === "/" ? "" : router.asPath.split("?")[0];
   const canonicalUrl = `${siteConfig.siteUrl}${canonicalPath}`;
@@ -55,8 +56,13 @@ export function Layout({
                 <span className="block text-xs text-stone-500">日本生活 · 0-3 岁宝宝家庭</span>
               </span>
             </Link>
+            <p id={navScrollHintId} className="sr-only">
+              手机端主要导航可以左右滑动查看全部入口。
+            </p>
             <nav
               aria-label="主要导航"
+              aria-describedby={navScrollHintId}
+              tabIndex={0}
               className="no-scrollbar -mx-5 flex snap-x snap-mandatory gap-2 overflow-x-auto px-5 pb-1 sm:mx-0 sm:flex-wrap sm:snap-none sm:overflow-visible sm:px-0 sm:pb-0"
             >
               {navItems.map((item) => {

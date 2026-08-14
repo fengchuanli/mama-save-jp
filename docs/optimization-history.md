@@ -1,5 +1,24 @@
 # 优化记录
 
+## 2026-08-15 顶部导航移动端可访问入口优化
+
+- 时间：2026-08-15 06:02 JST
+- 当前优化方向：06:00 移动端体验。
+- 目标：近期已经为首页、优惠页、日历页和攻略页的横滑区域补充键盘焦点与读屏提示，但全站顶部导航在手机端同样横向滚动，却只依赖链接本身，没有给滚动容器提供明确提示和聚焦入口。本次只优化 `Layout` 里的主要导航横滑容器，不调整页面结构、视觉风格或优惠数据。
+- 修改文件：
+  - `components/Layout.tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查 `Layout` 是否引入 `useId`、生成导航提示 ID、包含手机端左右滑动提示、给 `nav` 关联 `aria-describedby` 并补充 `tabIndex={0}`。
+  - `git diff --check`
+  - `npm run build`
+- 结果：顶部主要导航新增 `useId` 生成的隐藏说明“手机端主要导航可以左右滑动查看全部入口”，并通过 `aria-describedby` 关联到 `nav`；横滑导航容器补充 `tabIndex={0}`，可以复用 `.no-scrollbar:focus-visible` 的统一焦点样式。页面入口、链接目标和卡片内容保持不变。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、8 条优惠、14 个日历活动校验通过；`node` 静态检查 6 项通过；`git diff --check` 通过；`npm run build` 已生成 sitemap、完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“优化顶部导航移动端可访问入口”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续 06:00 移动端体验方向可用浏览器在 375px 宽度检查顶部导航聚焦轮廓是否被 header 边界裁切；网络恢复后继续优先推送本地领先提交。
+
 ## 2026-08-15 药妆店优惠券购买判断优化
 
 - 时间：2026-08-15 03:02 JST
