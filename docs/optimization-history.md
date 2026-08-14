@@ -1,5 +1,26 @@
 # 优化记录
 
+## 2026-08-15 药妆店优惠券购买判断优化
+
+- 时间：2026-08-15 03:02 JST
+- 当前优化方向：03:00 攻略内容。
+- 目标：`drugstore-coupon.mdx` 已经解释药妆店券的限制、实付价和适用品类，但开头缺少“这件东西本来要不要买”的第一层判断，读者仍可能因为满额券或积分临时凑单。本次只优化这一篇攻略，补一个“先确认本来要买，再看优惠”的短判断入口；不触碰优惠数据。
+- 修改文件：
+  - `content/guides/drugstore-coupon.mdx`
+  - `public/sitemap.xml`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run sitemap`
+  - `npm run validate:content`
+  - `node` 静态检查攻略阅读时长、更新时间、“先确认本来要买，再看优惠”小节、满额券不硬凑、后日积分不救高门店价、小量补到不断货，以及 sitemap 日期。
+  - `git diff --check`
+  - `npm run build`
+- 结果：药妆店优惠券攻略从 11 分钟扩展为 12 分钟阅读，`updatedAt` 更新为 `2026-08-15`；新增“先确认本来要买，再看优惠”小节，用 5 行表格把 1-2 周内刚需、满额券临期、宝宝未试用商品、线上常价明显更低、今晚或明天急用分别导向清单购买、放弃硬凑、先小包装或跳过、等线上/活动日、小量补到不断货。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run sitemap` 生成 14 个 URL，并更新首页、攻略列表和药妆店优惠券攻略详情页 `lastmod`；`npm run validate:content` 通过，当前 10 篇攻略、8 条优惠、14 个日历活动校验通过；`node` 静态检查 7 项通过；`git diff --check` 通过；`npm run build` 已生成 sitemap、完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“完善药妆店优惠券购买判断”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续 03:00 攻略内容方向可检查 `rakuten-5-0-mama-shopping.mdx` 是否需要补“当天是否值得为了 5と0 日改变购买计划”的短判断入口；网络恢复后继续优先推送本地领先提交。
+
 ## 2026-08-15 整点任务选择规则优化
 
 - 时间：2026-08-15 00:02 JST
