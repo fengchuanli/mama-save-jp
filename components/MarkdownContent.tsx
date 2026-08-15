@@ -102,12 +102,19 @@ export function MarkdownContent({ content }: { content: string }) {
         }
 
         if (item.kind === "table") {
+          const tableHintId = `markdown-table-hint-${item.index}`;
+
           return (
             <div key={item.index} className="relative -mx-1 my-5 sm:mx-0">
-              <p className="mb-2 text-xs font-semibold text-tea sm:hidden">
+              <p id={tableHintId} className="mb-2 text-xs font-semibold text-tea sm:hidden">
                 横向滑动查看完整表格
               </p>
-              <div className="overflow-x-auto pb-1">
+              <div
+                aria-describedby={tableHintId}
+                aria-label="攻略正文表格"
+                tabIndex={0}
+                className="no-scrollbar overflow-x-auto pb-1"
+              >
                 <table className="min-w-[40rem] border-collapse text-left text-sm leading-6 text-stone-700">
                   <thead>
                     <tr>

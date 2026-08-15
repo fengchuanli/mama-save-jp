@@ -1,5 +1,24 @@
 # 优化记录
 
+## 2026-08-16 攻略正文表格移动端横滑体验优化
+
+- 时间：2026-08-16 06:01 JST
+- 当前优化方向：06:00 移动端体验。
+- 目标：近期已经补齐主要页面横滑卡片、筛选条和顶部导航的移动端可访问入口，但攻略正文里的 Markdown 表格仍只是普通横向溢出容器。多篇攻略都有“今天买、等、跳过”表格，手机端读者需要更明确的横滑提示、键盘焦点入口和统一焦点样式。本次只优化攻略正文表格渲染组件，不调整表格内容、不触碰优惠数据。
+- 修改文件：
+  - `components/MarkdownContent.tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查 Markdown 表格是否生成说明 ID、移动端提示是否关联到滚动容器、是否补充 `aria-label`、`aria-describedby`、`tabIndex={0}`、是否复用 `.no-scrollbar` 焦点样式，并确认表格最小宽度仍保留。
+  - `git diff --check`
+  - `npm run build`
+- 结果：攻略正文表格的横向滚动容器新增可聚焦入口和读屏说明，移动端仍显示“横向滑动查看完整表格”提示，同时复用全站 `.no-scrollbar:focus-visible` 的统一焦点样式。表格列宽、文字内容、MDX 解析逻辑和视觉结构保持不变。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、9 条优惠、14 个日历活动校验通过；`node` 静态检查 9 项通过；`git diff --check` 通过；`npm run build` 已生成 sitemap、完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“优化攻略表格移动端横滑体验”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续 06:00 移动端体验方向可用浏览器在 375px 宽度检查攻略详情页表格聚焦轮廓、右侧渐隐遮罩和表格首列是否仍清晰。
+
 ## 2026-08-16 楽天 5/0 日购买计划判断优化
 
 - 时间：2026-08-16 03:01 JST
