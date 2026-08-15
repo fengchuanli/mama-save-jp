@@ -1,5 +1,24 @@
 # 优化记录
 
+## 2026-08-16 30 天复盘交接规则优化
+
+- 时间：2026-08-16 00:00 JST
+- 当前优化方向：00:00 内容结构。
+- 目标：README 已经有“月底复盘入口”，但 `docs/30-day-optimization-plan.md` 仍只在第 4 周用一条任务提到复盘，缺少从优化历史、最新信号和亲友反馈进入下一轮计划的具体交接规则。本次只同步 30 天计划里的复盘口径，不改页面代码、不触碰优惠数据。
+- 修改文件：
+  - `docs/30-day-optimization-plan.md`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查 30 天计划是否包含复盘交接规则、优化历史归类、latest signals 观察区、亲友反馈 3 条阈值、下一轮先处理信任问题，以及复盘时不同步改数据或页面的大改边界。
+  - `git diff --check`
+  - `npm run build`
+- 结果：30 天计划新增“30 天复盘交接规则”，把一轮结束后的复盘顺序明确为先汇总优化历史，再对照 4 周计划、整理未核实信号、归类 3 条以上重复反馈，最后写下一轮计划；同时明确复盘不在同一次运行里改优惠数据、重写首页或新增复杂功能。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、9 条优惠、14 个日历活动校验通过；`node` 静态检查 6 项通过；`git diff --check` 通过；`npm run build` 已生成 sitemap、完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“补充30天复盘交接规则”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续 00:00 内容结构方向可等一轮复盘真正发生后，把下一轮 30 天计划单独沉淀出来；网络恢复后继续优先推送本地领先提交。
+
 ## 2026-08-15 07:31 最新母婴省钱消息整理
 
 - 时间：2026-08-15 07:31 JST
