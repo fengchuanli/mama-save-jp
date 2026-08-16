@@ -1,5 +1,26 @@
 # 优化记录
 
+## 2026-08-17 优惠日历筛选条移动端焦点优化
+
+- 时间：2026-08-17 06:03 JST
+- 当前优化方向：06:00 移动端体验。
+- 目标：近期已经补齐顶部导航、攻略页横滑区和攻略正文表格的移动端可访问入口，但 `/deals` 与 `/calendar` 的任务入口和筛选条在手机端仍容易出现焦点轮廓贴边、右侧渐隐提示压住末尾内容的问题。本次只优化优惠页和日历页的横向筛选操作，不调整数据、页面结构或视觉风格。
+- 修改文件：
+  - `pages/deals.tsx`
+  - `pages/calendar.tsx`
+  - `styles/globals.css`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查两个页面的筛选条滚动留白、右侧留白、筛选按钮焦点类、任务入口焦点类，以及全局 `.no-scrollbar` 聚焦层级。
+  - `git diff --check`
+  - `npm run build`
+- 结果：`/deals` 的当前任务入口、状态筛选、分类筛选、平台筛选，以及 `/calendar` 的动作入口和平台筛选，都增加了手机端 `scroll-px-4`、上下留白和更宽的右侧滚动留白；筛选按钮和任务入口按钮补充统一的 `focus-visible` 轮廓；全局 `.no-scrollbar:focus-visible` 聚焦时提高层级，减少被右侧渐隐提示遮挡的风险。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、9 条优惠、14 个日历活动校验通过；`node` 静态检查 9 个移动端筛选焦点与滚动留白标记通过；`git diff --check` 通过；`npm run build` 已生成 sitemap、完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“优化筛选条移动端焦点体验”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续 06:00 移动端体验方向可用浏览器在 375px 宽度检查 `/deals` 和 `/calendar` 筛选条末尾按钮、右侧渐隐提示和键盘焦点轮廓是否都清晰；网络恢复后继续优先推送本地领先提交。
+
 ## 2026-08-17 童装尺码购买判断优化
 
 - 时间：2026-08-17 03:01 JST

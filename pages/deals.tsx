@@ -58,7 +58,11 @@ const statusNextActions: Record<
 };
 
 const filterScrollerClass =
-  "no-scrollbar -mx-4 flex snap-x snap-mandatory gap-2 overflow-x-auto px-4 pb-1 pr-10 sm:mx-0 sm:flex-wrap sm:snap-none sm:overflow-visible sm:px-0 sm:pb-0 sm:pr-0";
+  "no-scrollbar -mx-4 flex snap-x snap-mandatory scroll-px-4 gap-2 overflow-x-auto px-4 pb-2 pt-1 pr-14 sm:mx-0 sm:flex-wrap sm:snap-none sm:overflow-visible sm:px-0 sm:pb-0 sm:pt-0 sm:pr-0";
+const filterButtonClass =
+  "min-h-10 shrink-0 snap-start whitespace-nowrap rounded-full px-4 py-2 text-sm transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-tea";
+const taskEntryButtonClass =
+  "flex min-h-[12.5rem] w-[78vw] min-w-[17rem] shrink-0 snap-start flex-col rounded-lg border border-orange-100 bg-orange-50 p-4 text-left transition hover:bg-linen focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-tea sm:w-auto sm:min-w-0 sm:shrink";
 
 function MobileScrollHint({ className = "" }: { className?: string }) {
   return (
@@ -261,14 +265,14 @@ export default function Deals({ deals }: DealsProps) {
               aria-describedby={taskEntryHintId}
               aria-label="当前任务入口"
               tabIndex={0}
-              className="no-scrollbar -mx-4 mt-5 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-1 pr-10 sm:mx-0 sm:grid sm:snap-none sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:pb-0 sm:pr-0 lg:grid-cols-4"
+              className="no-scrollbar -mx-4 mt-5 flex snap-x snap-mandatory scroll-px-4 gap-3 overflow-x-auto px-4 pb-2 pt-1 pr-14 sm:mx-0 sm:grid sm:snap-none sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:pb-0 sm:pt-0 sm:pr-0 lg:grid-cols-4"
             >
               {taskEntryRoutes.map((route) => (
                 <button
                   key={route.label}
                   type="button"
                   onClick={() => applyTaskEntry(route.category, route.platform, route.status)}
-                  className="flex min-h-[12.5rem] w-[78vw] min-w-[17rem] shrink-0 snap-start flex-col rounded-lg border border-orange-100 bg-orange-50 p-4 text-left transition hover:bg-linen sm:w-auto sm:min-w-0 sm:shrink"
+                  className={taskEntryButtonClass}
                 >
                   <p className="text-xs font-semibold text-tea">{route.label}</p>
                   <h3 className="mt-2 font-semibold text-ink">{route.title}</h3>
@@ -310,7 +314,7 @@ export default function Deals({ deals }: DealsProps) {
                       type="button"
                       aria-pressed={active}
                       onClick={() => setSelectedStatus(status)}
-                      className={`min-h-10 shrink-0 snap-start whitespace-nowrap rounded-full px-4 py-2 text-sm transition ${
+                      className={`${filterButtonClass} ${
                         active
                           ? "bg-ink text-white"
                           : "bg-cream text-stone-700 hover:bg-linen"
@@ -360,7 +364,7 @@ export default function Deals({ deals }: DealsProps) {
                       type="button"
                       aria-pressed={active}
                       onClick={() => setSelectedCategory(category)}
-                      className={`min-h-10 shrink-0 snap-start whitespace-nowrap rounded-full px-4 py-2 text-sm transition ${
+                      className={`${filterButtonClass} ${
                         active
                           ? "bg-ink text-white"
                           : "bg-cream text-stone-700 hover:bg-linen"
@@ -396,7 +400,7 @@ export default function Deals({ deals }: DealsProps) {
                       type="button"
                       aria-pressed={active}
                       onClick={() => setSelectedPlatform(platform)}
-                      className={`min-h-10 shrink-0 snap-start whitespace-nowrap rounded-full px-4 py-2 text-sm transition ${
+                      className={`${filterButtonClass} ${
                         active
                           ? "bg-tea text-white"
                           : "bg-cream text-stone-700 hover:bg-linen"

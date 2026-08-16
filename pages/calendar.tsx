@@ -82,7 +82,11 @@ const timingFilters: Array<{
 ];
 
 const filterScrollerClass =
-  "no-scrollbar -mx-4 flex snap-x snap-mandatory gap-2 overflow-x-auto px-4 pb-1 pr-10 sm:mx-0 sm:flex-wrap sm:snap-none sm:overflow-visible sm:px-0 sm:pb-0 sm:pr-0";
+  "no-scrollbar -mx-4 flex snap-x snap-mandatory scroll-px-4 gap-2 overflow-x-auto px-4 pb-2 pt-1 pr-14 sm:mx-0 sm:flex-wrap sm:snap-none sm:overflow-visible sm:px-0 sm:pb-0 sm:pt-0 sm:pr-0";
+const filterButtonClass =
+  "min-h-10 shrink-0 snap-start whitespace-nowrap rounded-full px-4 py-2 text-sm transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-tea";
+const timingButtonClass =
+  "flex min-h-[13rem] w-[78vw] min-w-[17rem] shrink-0 snap-start flex-col rounded-lg border p-4 text-left transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-tea sm:w-auto sm:min-h-[12rem] sm:min-w-0 sm:shrink";
 
 function MobileScrollHint({ className = "" }: { className?: string }) {
   return (
@@ -253,7 +257,7 @@ export default function Calendar({ events }: CalendarProps) {
               aria-describedby={timingFilterHintId}
               aria-label="日历动作入口"
               tabIndex={0}
-              className="no-scrollbar -mx-4 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-1 pr-10 sm:mx-0 sm:grid sm:snap-none sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:pb-0 sm:pr-0 lg:grid-cols-4"
+              className="no-scrollbar -mx-4 flex snap-x snap-mandatory scroll-px-4 gap-3 overflow-x-auto px-4 pb-2 pt-1 pr-14 sm:mx-0 sm:grid sm:snap-none sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:pb-0 sm:pt-0 sm:pr-0 lg:grid-cols-4"
             >
               {timingFilters.map((filter) => {
                 const active = selectedTiming === filter.id;
@@ -271,7 +275,7 @@ export default function Calendar({ events }: CalendarProps) {
                       setSelectedTiming(filter.id);
                       setSelectedStore("全部");
                     }}
-                    className={`flex min-h-[13rem] w-[78vw] min-w-[17rem] shrink-0 snap-start flex-col rounded-lg border p-4 text-left transition sm:w-auto sm:min-h-[12rem] sm:min-w-0 sm:shrink ${
+                    className={`${timingButtonClass} ${
                       active
                         ? "border-tea bg-tea/10"
                         : "border-orange-100 bg-orange-50 hover:border-peach hover:bg-linen"
@@ -330,7 +334,7 @@ export default function Calendar({ events }: CalendarProps) {
                     type="button"
                     aria-pressed={active}
                     onClick={() => setSelectedStore(store)}
-                    className={`min-h-10 shrink-0 snap-start whitespace-nowrap rounded-full px-4 py-2 text-sm transition ${
+                    className={`${filterButtonClass} ${
                       active
                         ? "bg-ink text-white"
                         : "bg-cream text-stone-700 hover:bg-linen"
