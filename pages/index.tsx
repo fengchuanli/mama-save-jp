@@ -276,18 +276,18 @@ export default function Home({ deals, calendarEvents, paymentRebateEvents, guide
       action: "转发首页"
     }
   ];
-  const shareFollowupPrompts = [
+  const shareTrialSteps = [
     {
-      label: "30 秒第一印象",
-      question: "打开后能不能马上看懂这是日本母婴省钱站？"
+      label: "1. 先选入口",
+      question: "按对方这周正在烦恼的事，只发首页、优惠页、日历或一篇攻略中的一个。"
     },
     {
-      label: "最想点的入口",
-      question: "本周值得买、省钱日历、新手攻略里最想先看哪一个？"
+      label: "2. 只问一句",
+      question: "发首页就问 30 秒内是否看懂定位；发深链接就问能不能判断买、等或跳过。"
     },
     {
-      label: "信任问题",
-      question: "哪一句话或哪个字段让你担心价格、库存或活动不准？"
+      label: "3. 记录原话",
+      question: "先判断入口是否选对；同类反馈累计 3 条以上，再考虑改首页或导航。"
     }
   ];
   const weeklyReminderRoutes = [
@@ -577,13 +577,13 @@ export default function Home({ deals, calendarEvents, paymentRebateEvents, guide
                 每次按“刚开始准备、今天要买、等活动日、规则看不懂、准备入园、只想了解本站”选一个入口，让对方看 3-5 分钟，再问哪一页有用、哪里不够可信。
               </p>
               <div className="mt-5 grid gap-3">
-                {shareFollowupPrompts.map((prompt) => (
+                {shareTrialSteps.map((step) => (
                   <div
-                    key={prompt.label}
+                    key={step.label}
                     className="flex min-h-[6.5rem] flex-col rounded-lg border border-stone-200 bg-white/80 p-3"
                   >
-                    <p className="text-xs font-semibold text-tea">{prompt.label}</p>
-                    <p className="mt-1 text-sm leading-6 text-stone-600">{prompt.question}</p>
+                    <p className="text-xs font-semibold text-tea">{step.label}</p>
+                    <p className="mt-1 text-sm leading-6 text-stone-600">{step.question}</p>
                   </div>
                 ))}
               </div>
