@@ -1,5 +1,25 @@
 # 优化记录
 
+## 2026-08-18 增长文案入口结构对齐
+
+- 时间：2026-08-18 00:03 JST
+- 当前优化方向：00:00 内容结构。
+- 目标：README、首页、首次分享清单和亲友试用话术已经统一为“6 类状态 + 单入口 + 单追问”，但 `docs/growth-copy-bank.md` 中“看不懂积分、单片价或支付返点”场景推荐的第 2 条文案仍叫“尿不湿补货”，并指向 `/guides/buy-diapers-japan`，和主入口 `/guides/diaper-price-line` 不完全一致。本次只收束增长文案和首次分享文案匹配，不改页面结构、不触碰优惠数据。
+- 修改文件：
+  - `docs/growth-copy-bank.md`
+  - `docs/first-share-checklist.md`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查增长文案库与首次分享清单是否都使用“纸尿裤好价线”、第 2 条是否指向 `/guides/diaper-price-line`、是否移除第 2 条对 `/guides/buy-diapers-japan` 的引导，以及平台活动当天文案是否保留未核验活动不写成当前优惠的边界。
+  - `git diff --check`
+  - `npm run build`
+- 结果：增长文案库第 2 条从“尿不湿补货”改为“纸尿裤好价线”，引导页收束到 `/guides/diaper-price-line`，追问改为判断“买、少买，还是先跳过”；首次分享清单的入口和文案匹配表同步改名，避免发布前从单片价场景跳到泛补货攻略。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、9 条优惠、14 个日历活动校验通过；`node` 静态检查 6 项通过；`git diff --check` 通过；`npm run build` 已生成 sitemap、完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“对齐增长文案入口结构”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续 00:00 内容结构方向可继续检查 README、首页、首次分享清单和增长文案库里的 6 类入口是否还有命名或追问不一致；网络恢复后继续优先推送本地领先提交。
+
 ## 2026-08-17 07:31 最新母婴省钱消息整理
 
 - 时间：2026-08-17 07:31 JST

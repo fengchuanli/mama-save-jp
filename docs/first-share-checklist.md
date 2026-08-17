@@ -66,7 +66,7 @@
 | 刚开始准备，不知道第一批买什么 | `/guides/newborn-shopping-list` | 1. 新手准备清单 | 是否能收窄第一批清单 |
 | 纸尿裤、湿巾或洗护快用完 | `/deals` | 9. 本周值得买 | 是否能判断今天买、等下一场或跳过 |
 | 不急着买，想等活动日 | `/calendar` | 4. 省钱日历收藏 | 是否能记住下次回来核对的日期 |
-| 看不懂积分、单片价或支付返点 | `/guides/diaper-price-line` 或 `/guides/rakuten-5-0-mama-shopping` | 2. 尿不湿补货 或 3. 楽天规则解释 | 是否能看懂一个具体判断字段 |
+| 看不懂积分、单片价或支付返点 | `/guides/diaper-price-line` 或 `/guides/rakuten-5-0-mama-shopping` | 2. 纸尿裤好价线 或 3. 楽天规则解释 | 是否能看懂一个具体判断字段 |
 | 准备保育园或童装换季 | `/guides/nursery-entry-budget-items` | 5. 保育园准备 | 是否少买一种可能买早或买错的东西 |
 | 只是介绍 Mama Save JP 是什么 | `/` | 10. 给群友转发 | 是否 30 秒内看懂适合谁、先点哪里 |
 
