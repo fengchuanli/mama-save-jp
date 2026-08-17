@@ -278,7 +278,7 @@ export default function GuideDetail({ guide, relatedGuides }: GuideDetailProps) 
                 aria-label="攻略小节快捷跳转"
                 aria-describedby={sectionScrollHintId}
                 tabIndex={0}
-                className="no-scrollbar -mx-1 mt-2 flex snap-x snap-mandatory gap-2 overflow-x-auto px-1 pb-1 pr-9 sm:snap-none sm:pr-1"
+                className="no-scrollbar -mx-2 mt-2 flex snap-x snap-mandatory scroll-px-2 gap-2 overflow-x-auto px-2 pb-2 pt-1 pr-12 sm:-mx-1 sm:snap-none sm:px-1 sm:pb-1 sm:pt-0 sm:pr-1"
               >
                 {sectionLinks.map((section) => (
                   <a
@@ -335,7 +335,7 @@ export default function GuideDetail({ guide, relatedGuides }: GuideDetailProps) 
             aria-label="相关攻略"
             aria-describedby={relatedScrollHintId}
             tabIndex={0}
-            className="no-scrollbar -mx-4 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-2 pr-10 sm:gap-4 md:mx-0 md:grid md:snap-none md:grid-cols-3 md:overflow-visible md:px-0 md:pb-0 md:pr-0"
+            className="no-scrollbar -mx-4 flex snap-x snap-mandatory scroll-px-4 gap-3 overflow-x-auto px-4 pb-2 pt-1 pr-14 sm:gap-4 md:mx-0 md:grid md:snap-none md:grid-cols-3 md:overflow-visible md:px-0 md:pb-0 md:pt-0 md:pr-0"
           >
             {relatedGuides.map((item) => (
               <Link

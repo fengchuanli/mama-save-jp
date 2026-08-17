@@ -1,5 +1,24 @@
 # 优化记录
 
+## 2026-08-18 攻略详情页横滑留白优化
+
+- 时间：2026-08-18 06:03 JST
+- 当前优化方向：06:00 移动端体验。
+- 目标：近期已优化 `/deals`、`/calendar`、首页、攻略列表和攻略正文表格的移动端横滑与焦点体验，但攻略详情页的小节快捷跳转和相关攻略横滑区仍缺少与其他页面一致的 `scroll-px`、顶部焦点留白和右侧尾部留白。本次只优化攻略详情页两个横滑容器，不调整内容结构、不触碰优惠数据。
+- 修改文件：
+  - `pages/guides/[slug].tsx`
+  - `docs/optimization-history.md`
+- 验证方式：
+  - `npm run validate:content`
+  - `node` 静态检查攻略详情页小节快捷跳转和相关攻略横滑区是否具备滚动留白、顶部焦点留白、桌面端间距重置和可聚焦入口。
+  - `git diff --check`
+  - `npm run build`
+- 结果：攻略详情页的小节快捷跳转新增 `scroll-px-2`、顶部焦点留白和更宽右侧尾部留白；相关攻略横滑区新增 `scroll-px-4`、顶部焦点留白和更宽右侧尾部留白，并在桌面网格布局恢复原有间距。本次未修改 `data/deals.json`，因此不触发已核验优惠复查流程。
+- 构建结果：`npm run validate:content` 通过，当前 10 篇攻略、9 条优惠、14 个日历活动校验通过；`node` 静态检查 7 项通过；`git diff --check` 通过；`npm run build` 已生成 sitemap、完成 lint/type check 和 production compile，但在 Collecting page data 阶段因当前沙箱禁止监听 `0.0.0.0` 失败，报 `listen EPERM: operation not permitted 0.0.0.0`。npm 日志写入用户目录仍因权限受限失败。
+- 是否提交：是，提交说明为“优化攻略详情横滑留白”。
+- 是否推送：失败；执行 `git push origin main` 时无法解析 `github.com`，报 `Could not resolve hostname github.com: -65563`。
+- 下一步：后续 06:00 移动端体验方向可用浏览器在 375px 宽度检查攻略详情页小节快捷跳转和相关攻略滑到末尾时，焦点轮廓是否不被右侧渐隐提示遮挡；网络恢复后继续优先推送本地领先提交。
+
 ## 2026-08-18 支付返点购买计划判断优化
 
 - 时间：2026-08-18 03:01 JST
